@@ -25,8 +25,3 @@ begin
     AddMessage('This is the master record');
 end;
 ```
-
-## See Also
-
-- [IwbMainRecord - Interface](Interface_IwbMainRecord.md)
-- [TConflictThis - Enum](Enum_TConflictThis.md)

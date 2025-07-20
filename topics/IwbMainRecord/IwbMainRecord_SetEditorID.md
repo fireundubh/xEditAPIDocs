@@ -24,4 +24,4 @@ if not SameText(sEditorID, 'NewID') then
 
 - [EditorID - IwbMainRecord](IwbMainRecord_EditorID.md)
 - [SetEditValue - IwbElement](IwbElement_SetEditValue.md)
-- [SetElementEditValues - IwbElement](IwbElement_SetElementEditValues.md)
+- [SetElementEditValues - IwbContianer](IwbContainer_SetElementEditValues.md)

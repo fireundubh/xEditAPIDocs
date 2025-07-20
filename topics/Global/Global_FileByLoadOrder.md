@@ -22,5 +22,4 @@ r := RecordByFormID(f, StrToInt('$' + AHexFormID), True);
 
 ## See Also
 
-- [FileByLoadOrder - Global](Global_FileByLoadOrder.md)
 - [FileByName - Global](Global_FileByName.md)

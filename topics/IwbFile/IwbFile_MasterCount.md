@@ -26,5 +26,4 @@ for i := 0 to Pred(MasterCount(e)) do
 - [HasMaster - IwbFile](IwbFile_HasMaster.md)
 - [Master - IwbMainRecord](IwbMainRecord_Master.md)
 - [MasterOrSelf - IwbMainRecord](IwbMainRecord_MasterOrSelf.md)
-- [MasterCount - IwbFile](IwbFile_MasterCount.md)
 - [SortMasters - IwbFile](IwbFile_SortMasters.md)

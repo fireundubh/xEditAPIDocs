@@ -25,8 +25,3 @@ begin
     AddMessage('Record is overridden');
 end;
 ```
-
-## See Also
-
-- [IwbMainRecord - Interface](Interface_IwbMainRecord.md)
-- [TConflictAll - Enum](Enum_TConflictAll.md)

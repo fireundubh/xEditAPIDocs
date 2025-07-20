@@ -6,12 +6,4 @@
         <accepts>page.html</accepts>
     </rule>
     -->
-    <rule id="667f743b">
-        <description>Created after removal of "Types" from xEdit Scripting API</description>
-        <accepts>Global_Constants.html</accepts>
-    </rule>
-    <rule id="7a5fb1ff">
-        <description>Created after removal of "API Home" from xEdit Scripting API</description>
-        <accepts>Home.html</accepts>
-    </rule>
 </rules>
