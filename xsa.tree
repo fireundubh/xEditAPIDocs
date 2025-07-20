@@ -5,6 +5,7 @@
 <instance-profile id="xsa"
                   name="xEdit Scripting API" start-page="Home.md">
 
+    <toc-element topic="Home.md"/>
     <toc-element toc-title="Globals">
         <toc-element topic="Global_AddMessage.md"/>
         <toc-element topic="Global_AddNewFile.md"/>
@@ -187,5 +188,4 @@
     </toc-element>
     <toc-element topic="Glossary.md"/>
     <toc-element topic="TODO.md"/>
-    <toc-element topic="Home.md"/>
 </instance-profile>
