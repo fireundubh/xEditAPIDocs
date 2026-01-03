@@ -20,6 +20,6 @@ AddMessage(sFileName);  // --> 'Skyrim.esm'
 
 ## See Also
 
-- [FileByIndex](Global_FileByIndex.md)
-- [FileByName](Global_FileByName.md)
-- [GetFile](IwbElement_GetFile.md)
+- [FileByIndex](../Global/Global_FileByIndex.md)
+- [FileByName](../Global/Global_FileByName.md)
+- [GetFile](../IwbElement/IwbElement_GetFile.md)

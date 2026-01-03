@@ -20,8 +20,8 @@ for i := 0 to Pred(ElementCount(grup)) do
 
 ## See Also
 
-- [ChildrenOf - IwbGroupRecord](IwbGroupRecord_ChildrenOf.md)
-- [FindChildGroup - IwbGroupRecord](IwbGroupRecord_FindChildGroup.md)
-- [GroupBySignature - IwbFile](IwbFile_GroupBySignature.md)
-- [GroupLabel - IwbGroupRecord](IwbGroupRecord_GroupLabel.md)
-- [GroupType - IwbGroupRecord](IwbGroupRecord_GroupType.md)
+- [ChildrenOf](../IwbGroupRecord/IwbGroupRecord_ChildrenOf.md)
+- [FindChildGroup](../IwbGroupRecord/IwbGroupRecord_FindChildGroup.md)
+- [GroupBySignature](../IwbFile/IwbFile_GroupBySignature.md)
+- [GroupLabel](../IwbGroupRecord/IwbGroupRecord_GroupLabel.md)
+- [GroupType](../IwbGroupRecord/IwbGroupRecord_GroupType.md)

@@ -24,6 +24,6 @@ else
 
 ## See Also
 
-- [IsMaster - IwbMainRecord](IwbMainRecord_IsMaster.md)
-- [IsWinningOverride - IwbMainRecord](IwbMainRecord_IsWinningOverride.md)
-- [Master - IwbMainRecord](IwbMainRecord_Master.md)
+- [IsMaster](IwbMainRecord_IsMaster.md)
+- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
+- [Master](IwbMainRecord_Master.md)

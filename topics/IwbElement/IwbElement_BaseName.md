@@ -25,6 +25,6 @@ end;
 
 ## See Also
 
-- [Name - IwbElement](IwbElement_Name.md)
-- [DisplayName - IwbElement](IwbElement_DisplayName.md)
-- [ShortName - IwbElement](IwbElement_ShortName.md)
+- [Name](IwbElement_Name.md)
+- [DisplayName](IwbElement_DisplayName.md)
+- [ShortName](IwbElement_ShortName.md)

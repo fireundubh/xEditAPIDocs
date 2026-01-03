@@ -22,4 +22,4 @@ end;
 
 ## See Also
 
-- [GetElementEditValues - IwbContainer](IwbContainer_GetElementEditValues.md)
+- [GetElementEditValues](IwbContainer_GetElementEditValues.md)

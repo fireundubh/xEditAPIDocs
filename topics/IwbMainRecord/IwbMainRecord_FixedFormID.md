@@ -28,6 +28,6 @@ end;
 
 ## See Also
 
-- [FileFormIDtoLoadOrderFormID](IwbFile_FileFormIDtoLoadOrderFormID.md)
+- [FileFormIDtoLoadOrderFormID](../IwbFile/IwbFile_FileFormIDtoLoadOrderFormID.md)
 - [FormID](IwbMainRecord_FormID.md)
 - [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)

@@ -19,4 +19,4 @@ if HasPrecombinedMesh(e) then
 
 ## See Also
 
-- [HasPrecombinedMesh - IwbMainRecord](IwbMainRecord_HasPrecombinedMesh.md)
+- [HasPrecombinedMesh](IwbMainRecord_HasPrecombinedMesh.md)

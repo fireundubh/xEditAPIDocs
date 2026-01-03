@@ -38,4 +38,4 @@ end;
 
 ## See Also
 
-- [ClearMessages - Global](Global_ClearMessages.md)
+- [ClearMessages](Global_ClearMessages.md)

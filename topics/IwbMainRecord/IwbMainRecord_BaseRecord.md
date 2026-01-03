@@ -24,4 +24,4 @@ if Signature(BaseRecord(e)) <> 'DOOR' then
 
 ## See Also
 
-- [BaseRecordID - IwbMainRecord](IwbMainRecord_BaseRecordID.md)
+- [BaseRecordID](IwbMainRecord_BaseRecordID.md)

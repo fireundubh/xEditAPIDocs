@@ -22,4 +22,4 @@ end;
 
 ## See Also
 
-- [IsEditable - IwbElement](IwbElement_IsEditable.md)
+- [IsEditable](IwbElement_IsEditable.md)

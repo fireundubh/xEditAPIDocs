@@ -27,4 +27,4 @@ end;
 
 ## See Also
 
-- [LinksTo - IwbElement](IwbElement_LinksTo.md)
+- [LinksTo](IwbElement_LinksTo.md)

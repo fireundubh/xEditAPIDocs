@@ -23,4 +23,4 @@ end;
 
 ## See Also
 
-- [AddMessage - Global](Global_AddMessage.md)
+- [AddMessage](Global_AddMessage.md)

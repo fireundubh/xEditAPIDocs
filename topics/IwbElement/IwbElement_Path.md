@@ -24,4 +24,4 @@ end;
 
 ## See Also
 
-- [ElementAssign - IwbElement](IwbElement_ElementAssign.md)
+- [ElementAssign](IwbElement_ElementAssign.md)

@@ -19,5 +19,5 @@ for i := 0 to Pred(FileCount) do
 
 ## See Also
 
-- [FileByLoadOrder - Global](Global_FileByLoadOrder.md)
-- [FileByName - Global](Global_FileByName.md)
+- [FileByLoadOrder](Global_FileByLoadOrder.md)
+- [FileByName](Global_FileByName.md)

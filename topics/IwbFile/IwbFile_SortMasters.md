@@ -19,6 +19,6 @@ SortMasters(f);
 
 ## See Also
 
-- [CleanMasters - IwbFile](IwbFile_CleanMasters.md)
-- [GetMasters - IwbFile](IwbFile_GetMasters.md)
-- [MasterByIndex - IwbFile](IwbFile_MasterByIndex.md)
+- [CleanMasters](IwbFile_CleanMasters.md)
+- [GetMasters](IwbFile_GetMasters.md)
+- [MasterByIndex](IwbFile_MasterByIndex.md)

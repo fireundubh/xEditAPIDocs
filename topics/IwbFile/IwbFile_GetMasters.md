@@ -20,5 +20,5 @@ GetMasters(f, l);
 
 ## See Also
 
-- [AddMasterIfMissing - IwbFile](IwbFile_AddMasterIfMissing.md)
-- [AddMasters - IwbFile](IwbFile_AddMasters.md)
+- [AddMasterIfMissing](../IwbFile/IwbFile_AddMasterIfMissing.md)
+- [AddMasters](../IwbFile/IwbFile_AddMasters.md)

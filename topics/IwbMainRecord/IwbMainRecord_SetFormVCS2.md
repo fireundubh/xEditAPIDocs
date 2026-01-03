@@ -22,6 +22,6 @@ if Assigned(r) then
 
 ## See Also
 
-- [GetFormVCS1 - IwbMainRecord](IwbMainRecord_GetFormVCS1.md)
-- [GetFormVCS2 - IwbMainRecord](IwbMainRecord_GetFormVCS2.md)
-- [SetFormVCS1 - IwbMainRecord](IwbMainRecord_SetFormVCS1.md)
+- [GetFormVCS1](IwbMainRecord_GetFormVCS1.md)
+- [GetFormVCS2](IwbMainRecord_GetFormVCS2.md)
+- [SetFormVCS1](IwbMainRecord_SetFormVCS1.md)

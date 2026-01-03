@@ -19,6 +19,6 @@ if ContainsStr('ACHR REFR', Signature(e)) then
 
 ## See Also
 
-- [ChangeFormSignature - IwbMainRecord](IwbMainRecord_ChangeFormSignature.md)
-- [ElementBySignature - IwbContainer](IwbContainer_ElementBySignature.md)
-- [GroupBySignature - IwbFile](IwbFile_GroupBySignature.md)
+- [ChangeFormSignature](IwbMainRecord_ChangeFormSignature.md)
+- [ElementBySignature](../IwbContainer/IwbContainer_ElementBySignature.md)
+- [GroupBySignature](../IwbFile/IwbFile_GroupBySignature.md)

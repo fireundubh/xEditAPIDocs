@@ -22,4 +22,4 @@ UpdateRefs(e);  // `e` must be an IwbMainRecord, unlike BuildRef
 
 ## See Also
 
-- [BuildRef - IwbElement](IwbElement_BuildRef.md)
+- [BuildRef](../IwbElement/IwbElement_BuildRef.md)

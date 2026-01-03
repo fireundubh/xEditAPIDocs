@@ -29,6 +29,6 @@ end;
 
 ## See Also
 
-- [FileByIndex - Global](Global_FileByIndex.md)
-- [FileByName - Global](Global_FileByName.md)
-- [GetFileName - IwbFile](IwbFile_GetFileName.md)
+- [FileByIndex](Global_FileByIndex.md)
+- [FileByName](Global_FileByName.md)
+- [GetFileName](../IwbFile/IwbFile_GetFileName.md)

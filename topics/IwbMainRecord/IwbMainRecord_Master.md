@@ -20,6 +20,6 @@ if not Assigned(mr) then
 
 ## See Also
 
-- [IsMaster - IwbMainRecord](IwbMainRecord_IsMaster.md)
-- [IsWinningOverride - IwbMainRecord](IwbMainRecord_IsWinningOverride.md)
-- [MasterOrSelf - IwbMainRecord](IwbMainRecord_MasterOrSelf.md)
+- [IsMaster](IwbMainRecord_IsMaster.md)
+- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
+- [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)

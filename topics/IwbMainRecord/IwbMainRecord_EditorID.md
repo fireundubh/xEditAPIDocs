@@ -21,9 +21,9 @@ if Assigned(sEditorID) then
 ## See Also
 
 - [BaseRecordID](IwbMainRecord_BaseRecordID.md)
-- [GetFileName](IwbFile_GetFileName.md)
-- [Name](IwbElement_Name.md)
+- [GetFileName](../IwbFile/IwbFile_GetFileName.md)
+- [Name](../IwbElement/IwbElement_Name.md)
 - [SetEditorID](IwbMainRecord_SetEditorID.md)
-- [SetEditValue](IwbElement_SetEditValue.md)
-- [ShortName](IwbElement_ShortName.md)
+- [SetEditValue](../IwbElement/IwbElement_SetEditValue.md)
+- [ShortName](../IwbElement/IwbElement_ShortName.md)
 - [Signature](IwbMainRecord_Signature.md)

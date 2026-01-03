@@ -29,9 +29,9 @@ AddMessage(sLoadOrderFormID);  // Output: 06022DC0
 
 ## See Also
 
-- [FileFormIDtoLoadOrderFormID - IwbFile](IwbFile_FileFormIDtoLoadOrderFormID.md)
-- [FixedFormID - IwbMainRecord](IwbMainRecord_FixedFormID.md)
-- [FormID - IwbMainRecord](IwbMainRecord_FormID.md)
-- [LoadOrderFormIDtoFileFormID - IwbFile](IwbFile_LoadOrderFormIDtoFileFormID.md)
-- [RecordByFormID - IwbMainRecord](IwbMainRecord_RecordByFormID.md)
-- [SetLoadOrderFormID - IwbMainRecord](IwbMainRecord_SetLoadOrderFormID.md)
+- [FileFormIDtoLoadOrderFormID](../IwbFile/IwbFile_FileFormIDtoLoadOrderFormID.md)
+- [FixedFormID](IwbMainRecord_FixedFormID.md)
+- [FormID](IwbMainRecord_FormID.md)
+- [LoadOrderFormIDtoFileFormID](../IwbFile/IwbFile_LoadOrderFormIDtoFileFormID.md)
+- [RecordByFormID](../IwbFile/IwbFile_RecordByFormID.md)
+- [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md)

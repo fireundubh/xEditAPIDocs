@@ -34,7 +34,7 @@ end;
 
 ## See Also
 
-- [HasMaster - IwbFile](IwbFile_HasMaster.md)
-- [IsMaster - IwbMainRecord](IwbMainRecord_IsMaster.md)
-- [Master - IwbMainRecord](IwbMainRecord_Master.md)
-- [MasterOrSelf - IwbMainRecord](IwbMainRecord_MasterOrSelf.md)
+- [HasMaster](../IwbFile/IwbFile_HasMaster.md)
+- [IsMaster](../IwbMainRecord/IwbMainRecord_IsMaster.md)
+- [Master](../IwbMainRecord/IwbMainRecord_Master.md)
+- [MasterOrSelf](../IwbMainRecord/IwbMainRecord_MasterOrSelf.md)

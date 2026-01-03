@@ -20,8 +20,8 @@ y := location.y;
 
 ## See Also
 
-- [wbBlockFromSubBlock - TwbGridCell](TwbGridCell_wbBlockFromSubBlock.md)
-- [wbGridCellToGroupLabel - TwbGridCell](TwbGridCell_wbGridCellToGroupLabel.md)
-- [wbIsInGridCell - TwbGridCell_](TwbGridCell_wbIsInGridCell.md)
-- [wbPositionToGridCell - TwbGridCell_](TwbGridCell_wbPositionToGridCell.md)
-- [wbSubBlockFromGridCell - TwbGridCell](TwbGridCell_wbSubBlockFromGridCell.md)
+- [wbBlockFromSubBlock - TwbGridCell](../TwbGridCell/TwbGridCell_wbBlockFromSubBlock.md)
+- [wbGridCellToGroupLabel - TwbGridCell](../TwbGridCell/TwbGridCell_wbGridCellToGroupLabel.md)
+- [wbIsInGridCell - TwbGridCell_](../TwbGridCell/TwbGridCell_wbIsInGridCell.md)
+- [wbPositionToGridCell - TwbGridCell_](../TwbGridCell/TwbGridCell_wbPositionToGridCell.md)
+- [wbSubBlockFromGridCell - TwbGridCell](../TwbGridCell/TwbGridCell_wbSubBlockFromGridCell.md)

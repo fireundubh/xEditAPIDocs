@@ -36,5 +36,5 @@ end;
 
 ## See Also
 
-- [ChildGroup - IwbMainRecord](IwbMainRecord_ChildGroup.md)
-- [FindChildGroup - IwbGroupRecord](IwbGroupRecord_FindChildGroup.md)
+- [ChildGroup](../IwbMainRecord/IwbMainRecord_ChildGroup.md)
+- [FindChildGroup](IwbGroupRecord_FindChildGroup.md)

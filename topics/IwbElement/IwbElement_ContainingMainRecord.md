@@ -27,4 +27,4 @@ end;
 
 ## See Also
 
-- [GetContainer - IwbElement](IwbElement_GetContainer.md)
+- [GetContainer](IwbElement_GetContainer.md)

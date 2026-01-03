@@ -23,4 +23,4 @@ z := vec3.z;
 
 ## See Also
 
-- [GetPosition - IwbMainRecord](IwbMainRecord_GetPosition.md)
+- [GetPosition](IwbMainRecord_GetPosition.md)

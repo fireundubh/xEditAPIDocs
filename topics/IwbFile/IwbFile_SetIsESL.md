@@ -19,6 +19,6 @@ SetIsESL(f, True);
 
 ## See Also
 
-- [GetIsESL - IwbFile](IwbFile_GetIsESL.md)
-- [GetIsESM - IwbFile](IwbFile_GetIsESM.md)
-- [SetIsESM - IwbFile](IwbFile_SetIsESM.md)
+- [GetIsESL](IwbFile_GetIsESL.md)
+- [GetIsESM](IwbFile_GetIsESM.md)
+- [SetIsESM](IwbFile_SetIsESM.md)

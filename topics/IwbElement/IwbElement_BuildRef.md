@@ -34,4 +34,4 @@ end;
 
 ## See Also
 
-- [UpdateRefs - IwbMainRecord](IwbMainRecord_UpdateRefs.md)
+- [UpdateRefs](IwbMainRecord_UpdateRefs.md)

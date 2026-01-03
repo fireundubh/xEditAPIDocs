@@ -26,6 +26,6 @@ end;
 
 ## See Also
 
-- [SetEditValue - IwbElement](IwbElement_SetEditValue.md)
-- [GetElementEditValues - IwbContainer](IwbContainer_GetElementEditValues.md)
-- [SetElementEditValues - IwbContainer](IwbContainer_SetElementEditValues.md)
+- [SetEditValue](IwbElement_SetEditValue.md)
+- [GetElementEditValues](../IwbContainer/IwbContainer_GetElementEditValues.md)
+- [SetElementEditValues](../IwbContainer/IwbContainer_SetElementEditValues.md)

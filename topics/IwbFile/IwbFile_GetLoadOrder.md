@@ -32,5 +32,5 @@ end;
 
 ## See Also
 
-- [FileByLoadOrder - Global](Global_FileByLoadOrder.md)
-- [GetLoadOrderFormID - IwbMainRecord](IwbMainRecord_GetLoadOrderFormID.md)
+- [FileByLoadOrder](../Global/Global_FileByLoadOrder.md)
+- [GetLoadOrderFormID](../IwbMainRecord/IwbMainRecord_GetLoadOrderFormID.md)

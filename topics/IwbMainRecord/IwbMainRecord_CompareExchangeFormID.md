@@ -26,7 +26,7 @@ SetLoadOrderFormID(e, NewFormID);
 
 ## See Also
 
-- [FileFormIDtoLoadOrderFormID](IwbFile_FileFormIDtoLoadOrderFormID.md)
+- [FileFormIDtoLoadOrderFormID](../IwbFile/IwbFile_FileFormIDtoLoadOrderFormID.md)
 - [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)
-- [LoadOrderFormIDtoFileFormID](IwbFile_LoadOrderFormIDtoFileFormID.md)
+- [LoadOrderFormIDtoFileFormID](../IwbFile/IwbFile_LoadOrderFormIDtoFileFormID.md)
 - [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md)

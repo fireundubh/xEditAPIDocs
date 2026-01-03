@@ -27,4 +27,4 @@ end;
 
 ## See Also
 
-- [GroupType - IwbGroupRecord_](IwbGroupRecord_GroupType.md)
+- [GroupType](IwbGroupRecord_GroupType.md)

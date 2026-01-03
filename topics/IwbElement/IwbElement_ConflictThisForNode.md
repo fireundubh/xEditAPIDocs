@@ -24,4 +24,4 @@ end;
 
 ## See Also
 
-- [ConflictAllForNode - IwbElement](IwbElement_ConflictAllForNode.md)
+- [ConflictAllForNode](IwbElement_ConflictAllForNode.md)

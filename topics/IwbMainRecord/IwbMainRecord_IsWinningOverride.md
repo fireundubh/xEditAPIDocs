@@ -19,5 +19,5 @@ if IsWinningOverride(e) then
 
 ## See Also
 
-- [Master - IwbMainRecord](IwbMainRecord_Master.md)
-- [MasterOrSelf - IwbMainRecord](IwbMainRecord_MasterOrSelf.md)
+- [Master](IwbMainRecord_Master.md)
+- [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)

@@ -26,4 +26,4 @@ end;
 
 ## See Also
 
-- [ElementType - IwbElement](IwbElement_ElementType.md)
+- [ElementType](IwbElement_ElementType.md)

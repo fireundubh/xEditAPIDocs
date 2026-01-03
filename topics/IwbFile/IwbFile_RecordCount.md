@@ -20,6 +20,6 @@ for i := 0 to Pred(RecordCount(f)) do
 
 ## See Also
 
-- [RecordByEditorID - IwbFile](IwbFile_RecordByEditorID.md)
-- [RecordByFormID - IwbFile](IwbFile_RecordByFormID.md)
-- [RecordByIndex - IwbFile](IwbFile_RecordByIndex.md)
+- [RecordByEditorID](IwbFile_RecordByEditorID.md)
+- [RecordByFormID](IwbFile_RecordByFormID.md)
+- [RecordByIndex](IwbFile_RecordByIndex.md)

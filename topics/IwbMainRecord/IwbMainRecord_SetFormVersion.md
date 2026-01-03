@@ -25,4 +25,4 @@ end;
 
 ## See Also
 
-- [GetFormVersion - IwbMainRecord](IwbMainRecord_GetFormVersion.md)
+- [GetFormVersion](IwbMainRecord_GetFormVersion.md)

@@ -21,8 +21,8 @@ if Signature(e) = 'REFR' then
 
 ## See Also
 
-- [BaseRecord - IwbMainRecord](IwbMainRecord_BaseRecord.md)
-- [FixedFormID - IwbMainRecord](IwbMainRecord_FixedFormID.md)
-- [FormID - IwbMainRecord](IwbMainRecord_FormID.md)
-- [GetLoadOrderFormID - IwbMainRecord](IwbMainRecord_GetLoadOrderFormID.md)
-- [SetLoadOrderFormID - IwbMainRecord](IwbMainRecord_SetLoadOrderFormID.md)
+- [BaseRecord](IwbMainRecord_BaseRecord.md)
+- [FixedFormID](IwbMainRecord_FixedFormID.md)
+- [FormID](IwbMainRecord_FormID.md)
+- [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)
+- [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md)

@@ -25,4 +25,4 @@ end;
 
 ## See Also
 
-- [Signature - IwbMainRecord](IwbMainRecord_Signature.md)
+- [Signature](IwbMainRecord_Signature.md)

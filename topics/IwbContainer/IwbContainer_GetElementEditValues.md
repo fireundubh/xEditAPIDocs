@@ -22,4 +22,4 @@ end;
 
 ## See Also
 
-- [GetElementNativeValues - IwbContainer](IwbContainer_GetElementNativeValues.md)
+- [GetElementNativeValues](IwbContainer_GetElementNativeValues.md)

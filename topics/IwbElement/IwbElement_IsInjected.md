@@ -25,5 +25,5 @@ end;
 
 ## See Also
 
-- [IsMaster](IwbMainRecord_IsMaster.md)
-- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
+- [IsMaster](../IwbMainRecord/IwbMainRecord_IsMaster.md)
+- [IsWinningOverride](../IwbMainRecord/IwbMainRecord_IsWinningOverride.md)

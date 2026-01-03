@@ -19,6 +19,6 @@ r := RecordByEditorID(f, 'ActionIdle');  // --> ActionIdle [AACT:00013002]
 
 ## See Also
 
-- [RecordByFormID - IwbFile](IwbFile_RecordByFormID.md)
-- [RecordByIndex - IwbFile](IwbFile_RecordByIndex.md)
-- [RecordCount - IwbFile](IwbFile_RecordCount.md)
+- [RecordByFormID](IwbFile_RecordByFormID.md)
+- [RecordByIndex](IwbFile_RecordByIndex.md)
+- [RecordCount](IwbFile_RecordCount.md)

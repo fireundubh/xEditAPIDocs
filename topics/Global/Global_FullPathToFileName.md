@@ -25,4 +25,4 @@ end;
 
 ## See Also
 
-- [FileByName - Global](Global_FileByName.md)
+- [FileByName](Global_FileByName.md)

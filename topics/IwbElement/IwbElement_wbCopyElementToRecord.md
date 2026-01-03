@@ -33,5 +33,5 @@ end;
 
 ## See Also
 
-- [wbCopyElementToFile - IwbElement](IwbElement_wbCopyElementToFile.md)
-- [wbCopyElementToFileWithPrefix - IwbElement](IwbElement_wbCopyElementToFileWithPrefix.md)
+- [wbCopyElementToFile](IwbElement_wbCopyElementToFile.md)
+- [wbCopyElementToFileWithPrefix](IwbElement_wbCopyElementToFileWithPrefix.md)

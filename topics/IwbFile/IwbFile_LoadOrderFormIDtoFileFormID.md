@@ -21,5 +21,5 @@ r := RecordByFormID(f, fid, False);
 
 ## See Also
 
-- [FixedFormID - IwbMainRecord](IwbMainRecord_FixedFormID.md)
-- [FormID - IwbMainRecord](IwbMainRecord_FormID.md)
+- [FixedFormID](../IwbMainRecord/IwbMainRecord_FixedFormID.md)
+- [FormID](../IwbMainRecord/IwbMainRecord_FormID.md)

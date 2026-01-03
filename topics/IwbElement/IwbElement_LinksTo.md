@@ -27,4 +27,4 @@ end;
 
 ## See Also
 
-- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
+- [ReferencedByCount](../IwbMainRecord/IwbMainRecord_ReferencedByCount.md)

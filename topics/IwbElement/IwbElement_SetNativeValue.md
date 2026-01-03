@@ -27,5 +27,5 @@ end;
 
 ## See Also
 
-- [GetNativeValue - IwbElement](IwbElement_GetNativeValue.md)
-- [SetEditValue - IwbElement](IwbElement_SetEditValue.md)
+- [GetNativeValue](IwbElement_GetNativeValue.md)
+- [SetEditValue](IwbElement_SetEditValue.md)

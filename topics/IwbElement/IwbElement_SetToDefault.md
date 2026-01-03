@@ -24,4 +24,4 @@ end;
 
 ## See Also
 
-- [Check - IwbElement](IwbElement_Check.md)
+- [Check](IwbElement_Check.md)

@@ -19,11 +19,11 @@ for i := 0 to Pred(MasterCount(e)) do
 
 ## See Also
 
-- [AddMasterIfMissing - IwbFile](IwbFile_AddMasterIfMissing.md)
-- [AddMasters - IwbFile](IwbFile_AddMasters.md)
-- [CleanMasters - IwbFile](IwbFile_CleanMasters.md)
-- [GetMasters - IwbFile](IwbFile_GetMasters.md)
-- [HasMaster - IwbFile](IwbFile_HasMaster.md)
-- [Master - IwbMainRecord](IwbMainRecord_Master.md)
-- [MasterOrSelf - IwbMainRecord](IwbMainRecord_MasterOrSelf.md)
-- [SortMasters - IwbFile](IwbFile_SortMasters.md)
+- [AddMasterIfMissing](IwbFile_AddMasterIfMissing.md)
+- [AddMasters](IwbFile_AddMasters.md)
+- [CleanMasters](IwbFile_CleanMasters.md)
+- [GetMasters](IwbFile_GetMasters.md)
+- [HasMaster](IwbFile_HasMaster.md)
+- [Master](../IwbMainRecord/IwbMainRecord_Master.md)
+- [MasterOrSelf](../IwbMainRecord/IwbMainRecord_MasterOrSelf.md)
+- [SortMasters](IwbFile_SortMasters.md)

@@ -22,6 +22,6 @@ if not SameText(sEditorID, 'NewID') then
 
 ## See Also
 
-- [EditorID - IwbMainRecord](IwbMainRecord_EditorID.md)
-- [SetEditValue - IwbElement](IwbElement_SetEditValue.md)
-- [SetElementEditValues - IwbContianer](IwbContainer_SetElementEditValues.md)
+- [EditorID](IwbMainRecord_EditorID.md)
+- [SetEditValue](../IwbElement/IwbElement_SetEditValue.md)
+- [SetElementEditValues](../IwbContainer/IwbContainer_SetElementEditValues.md)

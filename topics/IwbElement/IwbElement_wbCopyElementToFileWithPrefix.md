@@ -34,5 +34,5 @@ end;
 
 ## See Also
 
-- [wbCopyElementToFile - IwbElement](IwbElement_wbCopyElementToFile.md)
-- [wbCopyElementToRecord - IwbElement](IwbElement_wbCopyElementToRecord.md)
+- [wbCopyElementToFile](IwbElement_wbCopyElementToFile.md)
+- [wbCopyElementToRecord](IwbElement_wbCopyElementToRecord.md)

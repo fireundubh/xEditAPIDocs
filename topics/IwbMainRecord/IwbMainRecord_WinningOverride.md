@@ -21,4 +21,4 @@ AddMessage(GetFileName(GetFile(o)));  // Output: [09] MyPlugin.esp
 
 ## See Also
 
-- [HighestOverrideOrSelf - IwbMainRecord](IwbMainRecord_HighestOverrideOrSelf.md)
+- [HighestOverrideOrSelf](IwbMainRecord_HighestOverrideOrSelf.md)

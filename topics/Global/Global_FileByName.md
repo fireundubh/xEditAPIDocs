@@ -46,5 +46,5 @@ r := RecordByIndex(f, 0);   // --> DoorMarker [STAT:00000001]
 
 ## See Also
 
-- [FileByIndex - Global](Global_FileByIndex.md)
-- [FileByLoadOrder - Global](Global_FileByLoadOrder.md)
+- [FileByIndex](Global_FileByIndex.md)
+- [FileByLoadOrder](Global_FileByLoadOrder.md)

@@ -26,7 +26,7 @@ end;
 
 ## See Also
 
-- [Name - IwbElement](IwbElement_Name.md)
-- [BaseName - IwbElement](IwbElement_BaseName.md)
-- [DisplayName - IwbElement](IwbElement_DisplayName.md)
-- [PathName - IwbElement](IwbElement_PathName.md)
+- [Name](IwbElement_Name.md)
+- [BaseName](IwbElement_BaseName.md)
+- [DisplayName](IwbElement_DisplayName.md)
+- [PathName](IwbElement_PathName.md)

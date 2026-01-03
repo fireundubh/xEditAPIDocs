@@ -25,4 +25,4 @@ end;
 
 ## See Also
 
-- [CanMoveDown - IwbElement](IwbElement_CanMoveDown.md)
+- [CanMoveDown](IwbElement_CanMoveDown.md)

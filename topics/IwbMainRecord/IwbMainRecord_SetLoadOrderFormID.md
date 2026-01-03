@@ -28,6 +28,6 @@ AddMessage(IntToHex(GetLoadOrderFormID(e), 8));  // Output: 060FFFFF
 
 ## See Also
 
-- [FileFormIDtoLoadOrderFormID - IwbFile](IwbFile_FileFormIDtoLoadOrderFormID.md)
-- [GetLoadOrderFormID - IwbMainRecord](IwbMainRecord_GetLoadOrderFormID.md)
-- [wbCopyElementToFile - IwbElement](IwbElement_wbCopyElementToFile.md)
+- [FileFormIDtoLoadOrderFormID](../IwbFile/IwbFile_FileFormIDtoLoadOrderFormID.md)
+- [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)
+- [wbCopyElementToFile](../IwbElement/IwbElement_wbCopyElementToFile.md)

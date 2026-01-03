@@ -19,10 +19,10 @@ for i := 0 to Pred(OverrideCount(e)) do
 
 ## See Also
 
-- [ElementByIndex - IwbContainer](IwbContainer_ElementByIndex.md)
-- [FileByIndex](Global_FileByIndex.md)
-- [OverrideCount - IwbMainRecord](IwbMainRecord_OverrideCount.md)
-- [MasterByIndex - IwbFile](IwbFile_MasterByIndex.md)
-- [RecordByIndex - IwbFile](IwbFile_RecordByIndex.md)
-- [ReferencedByIndex - IwbMainRecord](IwbMainRecord_ReferencedByIndex.md)
-- [ReferencesByIndex - IwbMainRecord](IwbMainRecord_ReferencesByIndex.md)
+- [ElementByIndex](../IwbContainer/IwbContainer_ElementByIndex.md)
+- [FileByIndex](../Global/Global_FileByIndex.md)
+- [OverrideCount](IwbMainRecord_OverrideCount.md)
+- [MasterByIndex](../IwbFile/IwbFile_MasterByIndex.md)
+- [RecordByIndex](../IwbFile/IwbFile_RecordByIndex.md)
+- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
+- [ReferencesByIndex](IwbMainRecord_ReferencesByIndex.md)

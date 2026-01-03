@@ -26,6 +26,6 @@ end;
 
 ## See Also
 
-- [Path - IwbElement](IwbElement_Path.md)
-- [Name - IwbElement](IwbElement_Name.md)
-- [FullPath - IwbElement](IwbElement_FullPath.md)
+- [Path](IwbElement_Path.md)
+- [Name](IwbElement_Name.md)
+- [FullPath](IwbElement_FullPath.md)

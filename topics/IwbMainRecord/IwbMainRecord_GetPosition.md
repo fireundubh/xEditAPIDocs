@@ -23,4 +23,4 @@ z := vec3.z;
 
 ## See Also
 
-- [GetRotation - IwbMainRecord](IwbMainRecord_GetRotation.md)
+- [GetRotation](IwbMainRecord_GetRotation.md)

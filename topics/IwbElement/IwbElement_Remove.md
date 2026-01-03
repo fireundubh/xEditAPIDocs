@@ -24,5 +24,5 @@ end;
 
 ## See Also
 
-- [RemoveByIndex - IwbContainer](IwbContainer_RemoveByIndex.md)
-- [RemoveElement - IwbContainer](IwbContainer_RemoveElement.md)
+- [RemoveByIndex](../IwbContainer/IwbContainer_RemoveByIndex.md)
+- [RemoveElement](../IwbContainer/IwbContainer_RemoveElement.md)

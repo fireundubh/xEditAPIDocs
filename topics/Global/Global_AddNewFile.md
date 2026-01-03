@@ -27,4 +27,4 @@ AddMessage('File created with name: ' + GetFileName(f));
 
 ## See Also
 
-- [AddNewFileName - Global](Global_AddNewFileName.md)
+- [AddNewFileName](Global_AddNewFileName.md)

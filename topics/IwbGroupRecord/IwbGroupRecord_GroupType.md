@@ -42,5 +42,5 @@ end;
 
 ## See Also
 
-- [FindChildGroup - IwbGroupRecord](IwbGroupRecord_FindChildGroup.md)
-- [GroupLabel - IwbGroupRecord](IwbGroupRecord_GroupLabel.md)
+- [FindChildGroup](IwbGroupRecord_FindChildGroup.md)
+- [GroupLabel](IwbGroupRecord_GroupLabel.md)

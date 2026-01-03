@@ -30,5 +30,5 @@ end;
 
 ## See Also
 
-- [EditorID - IwbMainRecord](IwbMainRecord_EditorID.md)
-- [RecordByEditorID - IwbFile](IwbFile_RecordByEditorID.md)
+- [EditorID](IwbMainRecord_EditorID.md)
+- [RecordByEditorID](IwbFile_RecordByEditorID.md)
