@@ -1,3 +1,0 @@
-# wbIsInGridCell
-
-Start typing here...

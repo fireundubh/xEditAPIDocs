@@ -1,3 +1,0 @@
-# wbBlockFromSubBlock
-
-Start typing here...

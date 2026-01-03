@@ -21,3 +21,4 @@
 | `wbTempPath`            | Read Only | `wbTempPath: String`             | Returns the full path to the xEdit temp folder                        |
 | `wbTrackAllEditorID`    | Read Only | `wbTrackAllEditorID: Boolean`    | Returns whether Track All Editor IDs is enabled                       |
 | `wbVersionNumber`       | Read Only | `wbVersionNumber: Cardinal`      | Returns the xEdit version number                                      |
+

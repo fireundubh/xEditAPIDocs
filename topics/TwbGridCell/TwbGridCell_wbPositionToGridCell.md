@@ -1,3 +1,0 @@
-# wbPositionToGridCell
-
-Start typing here...

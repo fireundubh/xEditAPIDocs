@@ -1,3 +1,0 @@
-# wbGridCellToGroupLabel
-
-Start typing here...

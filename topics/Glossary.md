@@ -144,3 +144,4 @@ An uppercase 4-character identifier that uniquely identifies a [record](#record)
 ### Subrecord
 
 An [element](#element) with a [signature](#signature) that exists as data in the plugin itself
+

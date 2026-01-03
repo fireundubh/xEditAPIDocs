@@ -1,3 +1,0 @@
-# wbSubBlockFromGridCell
-
-Start typing here...

@@ -40,3 +40,4 @@ Move these variables to their own topics.
 ## Glossary
 
 Create a glossary of terms.
+
