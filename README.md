@@ -187,6 +187,12 @@
     - [LerpUnclamped](Math_LerpUnclamped.md)
   - **StrUtils**
     - [IfThen](StrUtils_IfThen.md)
+  - **TStringList**
+    - [CaseSensitive](TStringList_CaseSensitive.md)
+    - [Difference](TStringList_Difference.md)
+    - [Intersection](TStringList_Intersection.md)
+    - [SymmetricDifference](TStringList_SymmetricDifference.md)
+    - [Union](TStringList_Union.md)
   - **TwbGridCell**
     - [wbBlockFromSubBlock](TwbGridCell_wbBlockFromSubBlock.md)
     - [wbGridCellToGroupLabel](TwbGridCell_wbGridCellToGroupLabel.md)
