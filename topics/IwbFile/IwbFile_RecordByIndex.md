@@ -21,4 +21,5 @@ r := RecordByIndex(f, 0);   // --> DoorMarker [STAT:00000001]
 
 - [RecordByEditorID](IwbFile_RecordByEditorID.md)
 - [RecordByFormID](IwbFile_RecordByFormID.md)
+- [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md)
 - [RecordCount](IwbFile_RecordCount.md)

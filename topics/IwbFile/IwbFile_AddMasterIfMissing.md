@@ -15,8 +15,12 @@ If `ASortMasters` is `True`, after appending the specified master file, **AddMas
 ## Example
 
 ```pascal
-f := FileByName('Dawnguard.esm');
-AddMasterIfMissing(f, 'Skyrim.esm');
+var
+  targetFile: IwbFile;
+begin
+  AddMasterIfMissing(targetFile, 'Skyrim.esm');
+  AddMasterIfMissing(targetFile, 'Skyrim.esm', True, True);
+end;
 ```
 
 ## See Also
