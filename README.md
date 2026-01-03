@@ -179,6 +179,14 @@
     - [ResourceExists](IwbResource_ResourceExists.md)
     - [ResourceList](IwbResource_ResourceList.md)
     - [ResourceOpenData](IwbResource_ResourceOpenData.md)
+  - **Math**
+    - [IfThen](Math_IfThen.md)
+    - [InRange](Math_InRange.md)
+    - [InverseLerp](Math_InverseLerp.md)
+    - [Lerp](Math_Lerp.md)
+    - [LerpUnclamped](Math_LerpUnclamped.md)
+  - **StrUtils**
+    - [IfThen](StrUtils_IfThen.md)
   - **TwbGridCell**
     - [wbBlockFromSubBlock](TwbGridCell_wbBlockFromSubBlock.md)
     - [wbGridCellToGroupLabel](TwbGridCell_wbGridCellToGroupLabel.md)
