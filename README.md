@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Home](Home.md)
+- [Home](README.md)
   - **Globals**
     - [AddMessage](Global_AddMessage.md)
     - [AddNewFile](Global_AddNewFile.md)
