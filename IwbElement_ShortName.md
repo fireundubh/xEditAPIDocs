@@ -8,9 +8,9 @@ function ShortName(AElement: IwbElement): string;
 
 ## Description
 
-Returns a shortened version of the element's name.
+Returns a compact name representation optimized for display in limited space.
 
-This function returns a concise name for the element, typically shorter than the standard `Name` function. Useful for display in space-constrained UI elements.
+This function retrieves the ShortName property, which provides an abbreviated element identifier. The exact abbreviation strategy varies by element type but typically omits verbose prefixes or truncates long names. Useful for UI elements like tree views where space is limited. Returns an empty string for invalid elements. Generally shorter than Name but may be identical for simple elements.
 
 ## Parameters
 

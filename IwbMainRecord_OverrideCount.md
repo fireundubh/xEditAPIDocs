@@ -8,7 +8,9 @@ function OverrideCount(ARecord: IwbMainRecord): integer;
 
 ## Description
 
-Returns the number of overriding records for `ARecord`
+Returns the total number of records overriding this record.
+
+This function retrieves the OverrideCount property, which counts all records in lower-priority files that modify the same FormID. Returns 0 for records with no overrides or invalid inputs. Use with OverrideByIndex to iterate through all overrides. The count includes all overrides regardless of load order, but the master record must have been loaded first.
 
 ## Parameters
 
@@ -29,13 +31,9 @@ for i := 0 to Pred(OverrideCount(e)) do
 
 ## See Also
 
-- [AdditionalElementCount - IwbContainer](IwbContainer_AdditionalElementCount.md)
-- [ElementCount - IwbElement](IwbContainer_ElementCount.md)
-- [FileCount](Global_FileCount.md)
-- [MasterCount - IwbFile](IwbFile_MasterCount.md)
 - [OverrideByIndex - IwbMainRecord](IwbMainRecord_OverrideByIndex.md)
-- [RecordCount - IwbFile](IwbFile_RecordCount.md)
-- [ReferencedByCount - IwbMainRecord](IwbMainRecord_ReferencedByCount.md)
-- [ReferencesCount - IwbMainRecord](IwbMainRecord_ReferencesCount.md)
+- [Master](IwbMainRecord_Master.md)
+- [WinningOverride](IwbMainRecord_WinningOverride.md)
+- [HighestOverrideOrSelf](IwbMainRecord_HighestOverrideOrSelf.md)
 
 

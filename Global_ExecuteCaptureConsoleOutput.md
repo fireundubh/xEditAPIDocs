@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function ExecuteCaptureConsoleOutput(aCommandLine: string): string;
+function ExecuteCaptureConsoleOutput(ACommandLine: string): string;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Executes a command-line application and captures its console output. This functi
 
 | Name | Type | Description |
 |------|------|-------------|
-| aCommandLine | string | The command line to execute, including program path and arguments |
+| ACommandLine | string | The command line to execute, including program path and arguments |
 
 ## Returns
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function NifTextureListUVRange(aData: TBytes; aUVRange: Single; aList: TStrings): Boolean;
+function NifTextureListUVRange(AData: TBytes; AUVRange: Single; AList: TStrings): Boolean;
 ```
 
 ## Description
@@ -14,9 +14,9 @@ Extracts texture file paths from a NIF mesh file that have UV coordinates exceed
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The raw binary data of the NIF file |
-| aUVRange | Single | The UV range threshold to check against |
-| aList | TStrings | The string list to receive the texture paths that exceed the UV range |
+| AData | TBytes | The raw binary data of the NIF file |
+| AUVRange | Single | The UV range threshold to check against |
+| AList | TStrings | The string list to receive the texture paths that exceed the UV range |
 
 ## Returns
 

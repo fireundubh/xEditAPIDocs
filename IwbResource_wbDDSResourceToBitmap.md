@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbDDSResourceToBitmap(aResourceName: string; aBitmap: TBitmap): Boolean;
+function wbDDSResourceToBitmap(AResourceName: string; ABitmap: TBitmap): Boolean;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Converts a DDS texture stored in a BSA or BA2 archive directly to a Windows bitm
 
 | Name | Type | Description |
 |------|------|-------------|
-| aResourceName | string | The path to the DDS file within archives |
-| aBitmap | TBitmap | The target bitmap object to receive the decoded image |
+| AResourceName | string | The path to the DDS file within archives |
+| ABitmap | TBitmap | The target bitmap object to receive the decoded image |
 
 ## Returns
 

@@ -8,11 +8,9 @@ function GetLoadOrder(aeFile: IwbFile): integer;
 
 ## Description
 
-Returns the load order index of a plugin file.
+Returns the zero-based load order position of the plugin file.
 
-The function takes an IwbFile interface as input and returns its index in the load order. If the passed parameter is not a valid IwbFile interface, returns -1.
-
-The load order index represents the position of the plugin in the overall load order, with master files typically having lower indices than dependent files.
+This function retrieves the LoadOrder property, which indicates the file's position in the current plugin load order. Index 0 is the first file loaded (typically the main game master). The load order determines file priority and FormID resolution. Returns -1 for invalid file references. Note that load order can change between sessions if the plugin list is modified.
 
 ## Parameters
 

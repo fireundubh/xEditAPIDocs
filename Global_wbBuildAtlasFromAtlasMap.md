@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbBuildAtlasFromAtlasMap(aAtlasMap: TStrings; aBrightness: Single; aGammaR: Single; aGammaG: Single; aGammaB: Single);
+procedure wbBuildAtlasFromAtlasMap(AAtlasMap: TStrings; ABrightness: Single; AGammaR: Single; AGammaG: Single; AGammaB: Single);
 ```
 
 ## Description
@@ -14,11 +14,11 @@ Builds a texture atlas from an atlas map specification, applying brightness and 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aAtlasMap | TStrings | String list containing the atlas map specification |
-| aBrightness | Single | Brightness adjustment value to apply |
-| aGammaR | Single | Gamma correction value for the red channel |
-| aGammaG | Single | Gamma correction value for the green channel |
-| aGammaB | Single | Gamma correction value for the blue channel |
+| AAtlasMap | TStrings | String list containing the atlas map specification |
+| ABrightness | Single | Brightness adjustment value to apply |
+| AGammaR | Single | Gamma correction value for the red channel |
+| AGammaG | Single | Gamma correction value for the green channel |
+| AGammaB | Single | Gamma correction value for the blue channel |
 
 ## Returns
 

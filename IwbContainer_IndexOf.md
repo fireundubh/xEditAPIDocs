@@ -8,7 +8,9 @@ function IndexOf(AContainer: IwbContainer; AElement: IwbElement): integer;
 
 ## Description
 
-Returns the index of the specified element in the container. Returns `-1` if the element is not found.
+Searches for an element within the container and returns its zero-based index position.
+
+This function calls the container's IndexOf method with the element to search for. Returns the index (0 to ElementCount-1) if found, or -1 if the element is not a child of this container. Useful for determining element position before operations like MoveUp/MoveDown, or for checking container membership. The search is by element identity (same instance), not by value comparison.
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns the index of the specified element in the container. Returns `-1` if the
 
 Returns the zero-based index of the element, or -1 if not found.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -36,5 +38,8 @@ end;
 ## See Also
 
 - [ElementByIndex](IwbContainer_ElementByIndex.md)
+- [ElementExists](IwbContainer_ElementExists.md)
+- [ElementByName](IwbContainer_ElementByName.md)
+- [ElementCount](IwbContainer_ElementCount.md)
 
 

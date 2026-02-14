@@ -8,7 +8,9 @@ procedure SortMasters(AFile: IwbFile);
 
 ## Description
 
-Sorts the master file list in `AFile`'s file header by the current load order. When the list is sorted, references to the affected masters are updated and affected records are marked as modified.
+Reorders the master file list to match the current load order sequence.
+
+This function calls the file's SortMasters method, which sorts the master list entries based on their current load order positions. After sorting, all FormID references are updated to reflect the new master indices, and affected records are marked as modified. Essential after adding masters or when load order has changed. The operation ensures FormID references remain valid after the master list is reordered. May be slow for files with many records.
 
 ## Parameters
 

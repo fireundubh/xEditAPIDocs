@@ -35,6 +35,8 @@ end;
 
 ## See Also
 
+- [GetElementState](IwbElement_GetElementState.md)
+- [ClearElementState](IwbElement_ClearElementState.md)
 - [IsEditable](IwbElement_IsEditable.md)
 
 

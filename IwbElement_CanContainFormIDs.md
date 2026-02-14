@@ -8,9 +8,9 @@ function CanContainFormIDs(AElement: IwbElement): boolean;
 
 ## Description
 
-Determines if an element can contain form IDs.
+Checks whether the element's definition allows it to contain FormID references.
 
-This function accesses an internal property `CanContainFormIDs` which the internal implementation of BuildRef uses to skip processing certain descendant elements. While it will always return `True` if the element can contain form IDs, it's not guaranteed to return `False` if it can't.
+This function retrieves the CanContainFormIDs property, which returns true if the element's structure can include FormID fields (either directly or in descendant elements). This is an optimization hint used by BuildRef to skip branches that cannot contain references. Returns false for simple value types (integers, strings, etc.) but may return false negatively (false when it actually can). Returns false for invalid elements.
 
 ## Parameters
 
@@ -38,5 +38,7 @@ end;
 ## See Also
 
 - [LinksTo](IwbElement_LinksTo.md)
+- [BuildRef](IwbElement_BuildRef.md)
+- [FormID](IwbMainRecord_FormID.md)
 
 

@@ -8,9 +8,9 @@ function GetNativeValue(AElement: IwbElement): Variant;
 
 ## Description
 
-Returns the element's value in its native type.
+Returns the element's value in its native data type as a Variant.
 
-This function returns the element's value as a Variant containing the native data type (integer, float, string, etc.) rather than a string representation. This is useful when you need to perform calculations or comparisons with the actual value.
+This function retrieves the NativeValue property, which returns the element's internal value without string formatting. The Variant type depends on the element definition (e.g., integers for numeric fields, floats for real numbers, strings for text). Returns an empty string (as Variant) if the element is invalid. Prefer this over GetEditValue for programmatic comparisons and calculations.
 
 ## Parameters
 
@@ -40,5 +40,8 @@ end;
 
 - [SetNativeValue](IwbElement_SetNativeValue.md)
 - [GetEditValue](IwbElement_GetEditValue.md)
+- [SetEditValue](IwbElement_SetEditValue.md)
+- [GetValue](IwbElement_GetValue.md)
+- [GetElementNativeValues](IwbContainer_GetElementNativeValues.md)
 
 

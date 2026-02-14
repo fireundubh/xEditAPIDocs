@@ -3,14 +3,14 @@
 ## Syntax
 
 ```pascal
-function SetNativeValue(AElement: IwbElement; AValue: Variant): boolean;
+procedure SetNativeValue(AElement: IwbElement; AValue: Variant);
 ```
 
 ## Description
 
-Sets the element's value using its native data type.
+Sets the element's value directly using its native data type.
 
-This function attempts to set the element's value using a Variant containing the appropriate native data type. Returns `true` if the value was successfully set, `false` otherwise. This is more efficient than `SetEditValue` when working with native data types.
+This function assigns to the NativeValue property, which accepts a Variant containing the value in the appropriate type (integer, float, string, etc.). No string parsing or conversion is performed. The element must be editable and the Variant type must be compatible with the element's definition. This is more efficient than SetEditValue when you already have the value in its native type.
 
 ## Parameters
 
@@ -21,7 +21,7 @@ This function attempts to set the element's value using a Variant containing the
 
 ## Returns
 
-Returns true if the value was successfully set, false otherwise.
+This procedure does not return a value.
 
 ## Example
 
@@ -40,5 +40,7 @@ end;
 
 - [GetNativeValue](IwbElement_GetNativeValue.md)
 - [SetEditValue](IwbElement_SetEditValue.md)
+- [GetEditValue](IwbElement_GetEditValue.md)
+- [SetElementNativeValues](IwbContainer_SetElementNativeValues.md)
 
 

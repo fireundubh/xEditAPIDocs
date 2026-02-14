@@ -8,9 +8,9 @@ function LinksTo(AElement: IwbElement): IwbElement;
 
 ## Description
 
-Returns the element that this element references.
+Resolves and returns the element or record that this element references.
 
-For elements that contain references to other records (like FormIDs), this function returns the referenced element. Returns nil if the element doesn't reference anything or if the reference is invalid.
+This function retrieves the LinksTo property, which resolves FormID references to their target records or elements. For FormID fields, it returns the IwbMainRecord being referenced. For other reference types, it may return the appropriate target element. Returns nil (unassigned) if the element is not a reference type, the reference is invalid, or the target cannot be found.
 
 ## Parameters
 
@@ -26,17 +26,24 @@ Returns the referenced element as an IwbElement interface, or nil if no referenc
 
 ```pascal
 var
-  element: IwbElement;
-  linkedElement: IwbElement;
+  baseElement, referencedBase: IwbElement;
+  baseRecord: IwbMainRecord;
 begin
-  linkedElement := LinksTo(element);
-  if Assigned(linkedElement) then
-    // Work with the referenced element
+  // Get the base object reference from a placed object
+  baseElement := ElementByPath(e, 'NAME');
+  if Assigned(baseElement) then begin
+    baseRecord := LinksTo(baseElement) as IwbMainRecord;
+    if Assigned(baseRecord) then
+      AddMessage('References: ' + EditorID(baseRecord));
+  end;
 end;
 ```
 
 ## See Also
 
+- [CanContainFormIDs](IwbElement_CanContainFormIDs.md)
+- [BuildRef](IwbElement_BuildRef.md)
 - [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
+- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
 
 

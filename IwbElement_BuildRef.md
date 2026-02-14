@@ -8,18 +8,9 @@ procedure BuildRef(AElement: IwbElement);
 
 ## Description
 
-Updates the reference information for `AElement`, regardless of whether references are updating
+Rebuilds the FormID reference tracking information for the element and its descendants.
 
-Unlike `UpdateRefs`, this function will accept any of these argument types:
-
-- `IwbContainer`
-- `IwbFile`
-- `IwbGroupRecord`
-- `IwbMainRecord`
-- `IwbSubRecord`
-- `TwbValueBase`
-
-If references are updating for an `IwbFile` and references are not out-of-date, or if the plugin is a delta patch, the procedure will abort.
+This function calls the element's BuildRef method, which scans the element tree for FormID fields and updates the internal reference tracking (used by ReferencedBy/ReferencesBy). Accepts any element type (files, records, containers, subrecords). Essential for populating reference counts before using ReferencedByCount or similar functions. May be slow for large files or heavily-referenced records. Some optimizations skip processing if references are already current or the file is a delta patch.
 
 ## Parameters
 
@@ -40,6 +31,9 @@ end;
 
 ## See Also
 
+- [LinksTo](IwbElement_LinksTo.md)
+- [CanContainFormIDs](IwbElement_CanContainFormIDs.md)
+- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
 - [UpdateRefs](IwbMainRecord_UpdateRefs.md)
 
 

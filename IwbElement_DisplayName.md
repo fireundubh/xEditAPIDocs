@@ -8,9 +8,9 @@ function DisplayName(AElement: IwbElement): string;
 
 ## Description
 
-Returns the display name of the element.
+Returns a user-friendly name suitable for display in interfaces.
 
-If the element has a specific display name, it returns that name. Otherwise, this function behaves identically to Name. This is useful for getting user-friendly names for elements in the interface.
+This function retrieves the DisplayName property with the True parameter (extended format), which provides a formatted name optimized for UI presentation. For simple elements this may be identical to Name, but for complex elements it may include additional context like values or indices. Returns an empty string for invalid elements. Commonly used in xEdit's tree view and other UI components where clarity is more important than brevity.
 
 ## Parameters
 
@@ -39,5 +39,6 @@ end;
 - [Name](IwbElement_Name.md)
 - [BaseName](IwbElement_BaseName.md)
 - [ShortName](IwbElement_ShortName.md)
+- [PathName](IwbElement_PathName.md)
 
 

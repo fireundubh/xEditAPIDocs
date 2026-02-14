@@ -8,7 +8,9 @@ function EditorID(ARecord: IwbMainRecord): string;
 
 ## Description
 
-Returns the edit value of the `EDID` element of `ARecord`
+Returns the Editor ID of the record as a string.
+
+This function retrieves the EditorID property, which provides direct access to the record's unique identifier string from the EDID subrecord. Editor IDs are human-readable names used for identifying records (e.g., "ArmorIronCuirass"). Returns an empty string if the record is invalid or has no EDID subrecord. More efficient than using ElementByPath to access the EDID element.
 
 ## Parameters
 
@@ -30,12 +32,10 @@ if Assigned(sEditorID) then
 
 ## See Also
 
-- [BaseRecordID](IwbMainRecord_BaseRecordID.md)
-- [GetFileName](IwbFile_GetFileName.md)
-- [Name](IwbElement_Name.md)
 - [SetEditorID](IwbMainRecord_SetEditorID.md)
-- [SetEditValue](IwbElement_SetEditValue.md)
-- [ShortName](IwbElement_ShortName.md)
+- [FormID](IwbMainRecord_FormID.md)
 - [Signature](IwbMainRecord_Signature.md)
+- [BaseRecordID](IwbMainRecord_BaseRecordID.md)
+- [Name](IwbElement_Name.md)
 
 

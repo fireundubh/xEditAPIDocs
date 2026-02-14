@@ -31,3 +31,5 @@ AddMessage(IndexedPath(e, True));
 
 - [Path](IwbElement_Path.md)
 - [FullPath](IwbElement_FullPath.md)
+- [PathName](IwbElement_PathName.md)
+- [Name](IwbElement_Name.md)

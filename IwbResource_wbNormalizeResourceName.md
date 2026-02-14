@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbNormalizeResourceName(aResourceName: string; aResourceType: TGameResourceType): string;
+function wbNormalizeResourceName(AResourceName: string; AResourceType: TGameResourceType): string;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Normalizes a resource name according to game-specific conventions. This function
 
 | Name | Type | Description |
 |------|------|-------------|
-| aResourceName | string | The resource name to normalize |
-| aResourceType | TGameResourceType | The type of resource (resMesh, resTexture, resSound, resMusic, resMaterial) |
+| AResourceName | string | The resource name to normalize |
+| AResourceType | TGameResourceType | The type of resource (resMesh, resTexture, resSound, resMusic, resMaterial) |
 
 ## Returns
 

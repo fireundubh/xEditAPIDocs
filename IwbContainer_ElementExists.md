@@ -8,7 +8,9 @@ function ElementExists(AContainer: IwbContainer; APath: string): boolean;
 
 ## Description
 
-Returns whether an element at the specified path exists in the container.
+Checks whether an element exists at the specified path within the container.
+
+This function accesses the ElementExists property, which performs a path lookup without returning the element itself. More efficient than ElementByPath when you only need to check existence. The path uses backslash separators for nested elements. Returns false if any part of the path doesn't exist or for invalid inputs. Useful for conditional logic before accessing potentially missing elements.
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns whether an element at the specified path exists in the container.
 
 Returns true if the element exists at the specified path, false otherwise.
 
-## Examples
+## Example
 
 ```pascal
 begin
@@ -33,5 +35,7 @@ end;
 ## See Also
 
 - [ElementByPath](IwbContainer_ElementByPath.md)
+- [ElementByName](IwbContainer_ElementByName.md)
+- [IndexOf](IwbContainer_IndexOf.md)
 
 

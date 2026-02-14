@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function NifTextureListResource(aContainerName: string; aResourceName: string; aList: TStrings): Boolean;
+function NifTextureListResource(AContainerName: string; AResourceName: string; AList: TStrings): Boolean;
 ```
 
 ## Description
@@ -14,9 +14,9 @@ Extracts all texture file paths from a NIF mesh file stored in a BSA or BA2 arch
 
 | Name | Type | Description |
 |------|------|-------------|
-| aContainerName | string | The name of the BSA/BA2 archive containing the mesh (empty string searches all) |
-| aResourceName | string | The path to the NIF file within the archive |
-| aList | TStrings | The string list to receive the texture paths |
+| AContainerName | string | The name of the BSA/BA2 archive containing the mesh (empty string searches all) |
+| AResourceName | string | The path to the NIF file within the archive |
+| AList | TStrings | The string list to receive the texture paths |
 
 ## Returns
 

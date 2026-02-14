@@ -8,9 +8,9 @@ function IsInjected(AElement: IwbElement): boolean;
 
 ## Description
 
-Determines if the element was injected by another plugin.
+Checks whether the element was created programmatically rather than loaded from disk.
 
-Returns `true` if the element was injected by another plugin rather than being part of the original plugin file. This is useful for identifying elements that were added through script or other external means.
+This function retrieves the IsInjected property, which returns true if the element was created at runtime by scripts, xEdit operations, or other programmatic means, rather than being read from the plugin file. Injected elements exist only in memory until the file is saved. Returns false for elements loaded from disk or invalid inputs. Useful for distinguishing between original and runtime-created content.
 
 ## Parameters
 

@@ -18,7 +18,7 @@ This function takes no parameters.
 
 Returns the number of loaded files as an integer.
 
-## Examples
+## Example
 
 ```pascal
 var

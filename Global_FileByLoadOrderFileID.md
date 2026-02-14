@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function FileByLoadOrderFileID(aLoadOrderFileID: string): IwbFile;
+function FileByLoadOrderFileID(ALoadOrderFileID: string): IwbFile;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Retrieves a file by its load order file ID string. The load order file ID is the
 
 | Name | Type | Description |
 |------|------|-------------|
-| aLoadOrderFileID | string | The load order file ID as a hexadecimal string (e.g., 'FE000ABC' or '05') |
+| ALoadOrderFileID | string | The load order file ID as a hexadecimal string (e.g., 'FE000ABC' or '05') |
 
 ## Returns
 

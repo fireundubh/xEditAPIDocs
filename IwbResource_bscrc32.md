@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function bscrc32(aString: string): Cardinal;
+function bscrc32(AString: string): Cardinal;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates a Bethesda-specific CRC32 checksum for a given string. This hash func
 
 | Name | Type | Description |
 |------|------|-------------|
-| aString | string | The string to calculate the CRC32 hash for |
+| AString | string | The string to calculate the CRC32 hash for |
 
 ## Returns
 

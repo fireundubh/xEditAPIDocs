@@ -23,5 +23,18 @@ Returns a summary string describing the element.
 ## Example
 
 ```pascal
-AddMessage(GetSummary(e));
+var
+  element: IwbElement;
+  summary: string;
+begin
+  element := ElementByPath(e, 'EDID');
+  summary := GetSummary(element);
+  AddMessage('Element summary: ' + summary);
+end;
 ```
+
+## See Also
+
+- [Name](IwbElement_Name.md)
+- [DisplayName](IwbElement_DisplayName.md)
+- [GetValue](IwbElement_GetValue.md)

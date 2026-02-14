@@ -8,16 +8,9 @@ procedure SetLoadOrderFormID(ARecord: IwbMainRecord; ALoadOrderFormID: Cardinal)
 
 ## Description
 
-Changes the Form ID of `ARecord` to `ALoadOrderFormID`
+Changes the record's FormID to a new value specified in load order format.
 
-If the load order Form ID of an overriding record is changed to a Form ID with a load order prefix inside the containing file, that record will become a new record.
-
-If the load order Form ID of any record is changed to a Form ID with a load order prefix outside the containing file, that record will become an injected record.
-
-An exception will be raised when one of the following conditions is met:
-
-- when `ALoadOrderFormID` refers to an existing Form ID; or
-- when `ALoadOrderFormID` refers to a Form ID that cannot be mapped to a master file.
+This function assigns to the LoadOrderFormID property, converting the load order FormID to file-local format before storing. The upper byte of the FormID determines the owning file. Changing an override's FormID to use the current file's index converts it to a new master record. Changing any record's FormID to use another file's index makes it an injected record. Raises an exception if the new FormID already exists or cannot be mapped to a valid master.
 
 ## Parameters
 

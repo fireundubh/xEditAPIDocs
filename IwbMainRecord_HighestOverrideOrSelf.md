@@ -37,5 +37,8 @@ AddMessage(GetFileName(GetFile(mr)));  // Output: [07] Unofficial Fallout 4 Patc
 ## See Also
 
 - [WinningOverride](IwbMainRecord_WinningOverride.md)
+- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
+- [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
+- [OverrideByIndex](IwbMainRecord_OverrideByIndex.md)
 
 

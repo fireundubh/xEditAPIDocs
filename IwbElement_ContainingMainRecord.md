@@ -8,9 +8,9 @@ function ContainingMainRecord(AElement: IwbElement): IwbMainRecord;
 
 ## Description
 
-Retrieves the main record that contains the specified element.
+Returns the IwbMainRecord that owns this element in the record hierarchy.
 
-Returns the parent main record that contains the given element. This is useful when working with sub-records or other nested elements and you need to access their containing record.
+This function retrieves the ContainingMainRecord property, which traverses up the element tree to find the nearest IwbMainRecord ancestor. For subrecords and nested elements, this returns the record they belong to. For main records, this returns the record itself. Returns nil for elements not part of a main record (like file headers or groups). Useful for navigating from field-level elements to their owning record.
 
 ## Parameters
 
@@ -38,5 +38,8 @@ end;
 ## See Also
 
 - [GetContainer](IwbElement_GetContainer.md)
+- [GetFile](IwbElement_GetFile.md)
+- [EditorID](IwbMainRecord_EditorID.md)
+- [FormID](IwbMainRecord_FormID.md)
 
 

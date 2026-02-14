@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbFlipBitmap(aBitmap: TBitmap; aDirection: Integer);
+procedure wbFlipBitmap(ABitmap: TBitmap; ADirection: Integer);
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Flips a bitmap image horizontally or vertically. This function modifies the bitm
 
 | Name | Type | Description |
 |------|------|-------------|
-| aBitmap | TBitmap | The bitmap to flip |
-| aDirection | Integer | Direction to flip: 0=horizontal, 1=vertical |
+| ABitmap | TBitmap | The bitmap to flip |
+| ADirection | Integer | Direction to flip: 0=horizontal, 1=vertical |
 
 ## Returns
 

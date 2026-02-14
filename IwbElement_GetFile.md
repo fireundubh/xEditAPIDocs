@@ -8,9 +8,9 @@ function GetFile(AElement: IwbElement): IwbFile;
 
 ## Description
 
-Returns the file that contains the element.
+Returns the plugin file that contains this element.
 
-This function retrieves the plugin file (esp/esm/esl) that contains the specified element.
+This function retrieves the _File property, which provides access to the IwbFile interface representing the plugin (esp/esm/esl) that owns this element. All elements within a file hierarchy return the same file reference. Returns nil if the element is invalid or detached from a file.
 
 ## Parameters
 
@@ -38,5 +38,7 @@ end;
 ## See Also
 
 - [ContainingMainRecord](IwbElement_ContainingMainRecord.md)
+- [GetContainer](IwbElement_GetContainer.md)
+- [GetFileName](IwbFile_GetFileName.md)
 
 

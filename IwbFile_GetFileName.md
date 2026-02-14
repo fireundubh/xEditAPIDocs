@@ -8,7 +8,9 @@ function GetFileName(AFile: IwbFile): String;
 
 ## Description
 
-Returns the file name and extension for `AFile`
+Returns the plugin filename with extension (e.g., "Skyrim.esm", "MyMod.esp").
+
+This function retrieves the FileName property from either an IwbFile or IwbElement interface. For IwbFile, it returns the file's own name. For IwbElement, it traverses to the containing file and returns that file's name. Returns an empty string for invalid inputs. The filename does not include the directory path, only the base name and extension.
 
 ## Parameters
 

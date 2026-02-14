@@ -20,7 +20,7 @@ Returns the last element in the container, or nil if there are no children.
 
 Returns the last element as an IwbElement interface, or nil if the container is empty.
 
-## Examples
+## Example
 
 ```pascal
 var

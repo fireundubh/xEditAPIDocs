@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbCRC32File(aFileName: string): Cardinal;
+function wbCRC32File(AFileName: string): Cardinal;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates a standard CRC32 checksum for a file on disk. This function reads the
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The full path to the file to calculate the CRC32 checksum for |
+| AFileName | string | The full path to the file to calculate the CRC32 checksum for |
 
 ## Returns
 

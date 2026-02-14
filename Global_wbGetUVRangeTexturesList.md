@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbGetUVRangeTexturesList(aMeshes: TStrings; aTextures: TStrings; aUVRange: Single);
+procedure wbGetUVRangeTexturesList(AMeshes: TStrings; ATextures: TStrings; AUVRange: Single);
 ```
 
 ## Description
@@ -14,9 +14,9 @@ Analyzes a list of mesh files and builds a list of textures that use UV coordina
 
 | Name | Type | Description |
 |------|------|-------------|
-| aMeshes | TStrings | String list containing paths to mesh files to analyze |
-| aTextures | TStrings | Output string list to receive texture paths that exceed the UV range |
-| aUVRange | Single | The UV range threshold to check against |
+| AMeshes | TStrings | String list containing paths to mesh files to analyze |
+| ATextures | TStrings | Output string list to receive texture paths that exceed the UV range |
+| AUVRange | Single | The UV range threshold to check against |
 
 ## Returns
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function CreateHashFO4(aFileName: string): UInt64;
+function CreateHashFO4(AFileName: string): UInt64;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Creates a Fallout 4-specific hash value for a given filename. This hash function
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The filename to calculate the hash for |
+| AFileName | string | The filename to calculate the hash for |
 
 ## Returns
 

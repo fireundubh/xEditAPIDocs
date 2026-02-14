@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbSHA1File(aFileName: string): string;
+function wbSHA1File(AFileName: string): string;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates a SHA-1 hash for a file on disk and returns it as a hexadecimal strin
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The full path to the file to calculate the SHA-1 hash for |
+| AFileName | string | The full path to the file to calculate the SHA-1 hash for |
 
 ## Returns
 

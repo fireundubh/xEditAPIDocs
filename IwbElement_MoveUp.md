@@ -8,9 +8,9 @@ procedure MoveUp(AElement: IwbElement);
 
 ## Description
 
-Moves an element up by one slot in an array.
+Moves the element up one position (toward a lower index) within its parent container.
 
-Only works if the element is part of an array. Should be used after checking if the movement is possible.
+This function calls the element's MoveUp method, which swaps the element with the previous element in the container. Only works for elements in arrays or sorted containers. The element must not already be at the first position. Use CanMoveUp first to verify the operation is valid, otherwise the method may have no effect or raise an exception.
 
 ## Parameters
 
@@ -32,5 +32,7 @@ end;
 ## See Also
 
 - [CanMoveUp](IwbElement_CanMoveUp.md)
+- [MoveDown](IwbElement_MoveDown.md)
+- [CanMoveDown](IwbElement_CanMoveDown.md)
 
 

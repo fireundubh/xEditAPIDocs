@@ -8,7 +8,9 @@ function RecordByEditorID(AFile: IwbFile; AEditorID: String): IwbMainRecord;
 
 ## Description
 
-Returns the record, whose Editor ID matches `AEditorID`, from `AFile`
+Searches the file for a main record with the specified Editor ID.
+
+This function accesses the RecordByEditorID property, which performs a case-sensitive lookup for records with matching EDID values. Only searches within the specified file, not in masters or other plugins. Returns nil if no record with that Editor ID exists in the file. More efficient than iterating through all records manually.
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns the record, whose Editor ID matches `AEditorID`, from `AFile`
 
 Returns the IwbMainRecord with the matching Editor ID, or nil if not found.
 
-## Examples
+## Example
 
 ```pascal
 f := FileByName('Skyrim.esm');

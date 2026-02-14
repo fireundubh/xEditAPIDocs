@@ -29,5 +29,8 @@ UpdateRefs(e);  // `e` must be an IwbMainRecord, unlike BuildRef
 ## See Also
 
 - [BuildRef](IwbElement_BuildRef.md)
+- [ReferencesCount](IwbMainRecord_ReferencesCount.md)
+- [ReferencesByIndex](IwbMainRecord_ReferencesByIndex.md)
+- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
 
 

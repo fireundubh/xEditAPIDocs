@@ -21,7 +21,7 @@ Returns an element by its signature (record type) from the container. The signat
 
 Returns the element with the specified signature as an IwbElement interface.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -33,7 +33,9 @@ end;
 
 ## See Also
 
+- [ElementByIndex](IwbContainer_ElementByIndex.md)
 - [ElementByName](IwbContainer_ElementByName.md)
 - [ElementByPath](IwbContainer_ElementByPath.md)
+- [GroupBySignature](IwbFile_GroupBySignature.md)
 
 

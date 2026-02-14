@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function RemoveNode(aElement: IwbElement): Boolean;
+function RemoveNode(AElement: IwbElement): Boolean;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Removes an element and its corresponding node from the navigation tree view. Thi
 
 | Name | Type | Description |
 |------|------|-------------|
-| aElement | IwbElement | The element to remove from the tree view |
+| AElement | IwbElement | The element to remove from the tree view |
 
 ## Returns
 

@@ -8,7 +8,9 @@ procedure SetIsDeleted(ARecord: IwbMainRecord; AFlag: boolean);
 
 ## Description
 
-Flags `ARecord` as Deleted when `AFlag` is `True` and otherwise when `AFlag` is `False`
+Sets or clears the Deleted flag in the record's header.
+
+This function assigns to the IsDeleted property, which modifies a flag bit in the record header. Setting this to true marks the record as deleted (ignored by the game but preserved for reference tracking). Setting to false undeletes the record. The change takes effect immediately in memory but must be saved to persist. Prefer this over Remove when you want to preserve the record structure for dependency tracking.
 
 ## Parameters
 
@@ -32,5 +34,8 @@ if GetIsDeleted(e) then
 ## See Also
 
 - [GetIsDeleted](IwbMainRecord_GetIsDeleted.md)
+- [SetIsInitiallyDisabled](IwbMainRecord_SetIsInitiallyDisabled.md)
+- [SetIsPersistent](IwbMainRecord_SetIsPersistent.md)
+- [SetIsVisibleWhenDistant](IwbMainRecord_SetIsVisibleWhenDistant.md)
 
 

@@ -8,9 +8,9 @@ function CanMoveUp(AElement: IwbElement): boolean;
 
 ## Description
 
-Determines if an element can be moved up within its array.
+Checks whether the element can be moved up (toward lower indices) within its parent container.
 
-Returns `true` if the element is part of an array and can be moved further up using `MoveUp`. This function is used to verify if an element's position can be changed within its containing array.
+This function retrieves the CanMoveUp property, which returns true if the element is part of an array or sorted container and is not already at the first position. Returns false if the element is invalid, not in a moveable container, or already at the beginning. Always check this before calling MoveUp to avoid errors.
 
 ## Parameters
 
@@ -36,5 +36,7 @@ end;
 ## See Also
 
 - [CanMoveDown](IwbElement_CanMoveDown.md)
+- [MoveUp](IwbElement_MoveUp.md)
+- [MoveDown](IwbElement_MoveDown.md)
 
 

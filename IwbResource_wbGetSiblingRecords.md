@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbGetSiblingRecords(aElement: IwbElement; aSignatures: string; aIncludeOverrides: Boolean; aList: TList);
+procedure wbGetSiblingRecords(AElement: IwbElement; ASignatures: string; AIncludeOverrides: Boolean; AList: TList);
 ```
 
 ## Description
@@ -14,10 +14,10 @@ Finds all sibling records (records in the same group) matching the specified sig
 
 | Name | Type | Description |
 |------|------|-------------|
-| aElement | IwbElement | The element whose siblings to search |
-| aSignatures | string | String containing the record signatures to match (e.g., 'NPC_CREA') |
-| aIncludeOverrides | Boolean | Whether to include override records in the results |
-| aList | TList | The list to receive matching sibling records as IwbMainRecord pointers |
+| AElement | IwbElement | The element whose siblings to search |
+| ASignatures | string | String containing the record signatures to match (e.g., 'NPC_CREA') |
+| AIncludeOverrides | Boolean | Whether to include override records in the results |
+| AList | TList | The list to receive matching sibling records as IwbMainRecord pointers |
 
 ## Returns
 

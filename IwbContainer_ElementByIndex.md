@@ -8,7 +8,9 @@ function ElementByIndex(AContainer: IwbContainer; AIndex: integer): IwbElement;
 
 ## Description
 
-Returns the element at the specified index in the container.
+Returns the element at the specified zero-based index within the container.
+
+This function accesses the Elements property by index, which provides direct array-style access to child elements. Index 0 returns the first element, index 1 the second, and so on. Returns nil if the index is out of bounds (negative or >= ElementCount). No exception is raised for invalid indices.
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns the element at the specified index in the container.
 
 Returns the element at the specified index as an IwbElement interface.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -34,6 +36,9 @@ end;
 ## See Also
 
 - [ElementCount](IwbContainer_ElementCount.md)
+- [ElementByName](IwbContainer_ElementByName.md)
+- [ElementByPath](IwbContainer_ElementByPath.md)
+- [ElementBySignature](IwbContainer_ElementBySignature.md)
 - [IndexOf](IwbContainer_IndexOf.md)
 - [LastElement](IwbContainer_LastElement.md)
 

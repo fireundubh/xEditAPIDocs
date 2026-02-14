@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbStringListInString(aStringList: TStringList; aString: string): Integer;
+function wbStringListInString(AStringList: TStringList; AString: string): Integer;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Searches for the first occurrence of any string from a string list within a targ
 
 | Name | Type | Description |
 |------|------|-------------|
-| aStringList | TStringList | The list of strings to search for |
-| aString | string | The target string to search within |
+| AStringList | TStringList | The list of strings to search for |
+| AString | string | The target string to search within |
 
 ## Returns
 

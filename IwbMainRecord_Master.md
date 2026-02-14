@@ -8,7 +8,9 @@ function Master(ARecord: IwbMainRecord): IwbMainRecord;
 
 ## Description
 
-Returns the master record overridden by `ARecord`, or `Nil` otherwise
+Returns the master record that this record directly overrides.
+
+This function retrieves the Master property, which returns the immediate parent record in the override chain (the record from a higher-priority file that this record modifies). Returns nil if this record is itself a master (not an override of anything). For records with multiple levels of overrides, this returns only the direct parent, not the original master.
 
 ## Parameters
 
@@ -30,8 +32,10 @@ if not Assigned(mr) then
 
 ## See Also
 
-- [IsMaster](IwbMainRecord_IsMaster.md)
-- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
 - [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
+- [IsMaster](IwbMainRecord_IsMaster.md)
+- [WinningOverride](IwbMainRecord_WinningOverride.md)
+- [OverrideCount](IwbMainRecord_OverrideCount.md)
+- [OverrideByIndex](IwbMainRecord_OverrideByIndex.md)
 
 

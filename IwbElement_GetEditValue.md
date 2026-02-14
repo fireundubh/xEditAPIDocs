@@ -8,9 +8,9 @@ function GetEditValue(AElement: IwbElement): string;
 
 ## Description
 
-Returns a string representation of the element's value.
+Returns the element's value as a human-readable and editable string representation.
 
-This function provides the editable value of an element as a string, which is useful for displaying or modifying element values through user interfaces.
+This function retrieves the EditValue property, which provides a formatted string suitable for display and editing in user interfaces. The format depends on the element's definition type (e.g., integers as decimal strings, FormIDs as hex strings, enums as their names). Returns an empty string if the element is invalid.
 
 ## Parameters
 
@@ -37,6 +37,9 @@ end;
 ## See Also
 
 - [SetEditValue](IwbElement_SetEditValue.md)
+- [GetNativeValue](IwbElement_GetNativeValue.md)
+- [SetNativeValue](IwbElement_SetNativeValue.md)
+- [GetValue](IwbElement_GetValue.md)
 - [GetElementEditValues](IwbContainer_GetElementEditValues.md)
 - [SetElementEditValues](IwbContainer_SetElementEditValues.md)
 

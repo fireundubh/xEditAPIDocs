@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbBuildAtlasFromTexturesList(aTextures: TStrings; aMaxTextureSize: Integer; aMaxTileSize: Integer; aAtlasWidth: Integer; aAtlasHeight: Integer; aAtlasFileName: string; aAtlasMapFileName: string);
+procedure wbBuildAtlasFromTexturesList(ATextures: TStrings; AMaxTextureSize: Integer; AMaxTileSize: Integer; AAtlasWidth: Integer; AAtlasHeight: Integer; AAtlasFileName: string; AAtlasMapFileName: string);
 ```
 
 ## Description
@@ -14,13 +14,13 @@ Builds a texture atlas from a list of texture files, combining multiple textures
 
 | Name | Type | Description |
 |------|------|-------------|
-| aTextures | TStrings | String list containing paths to the textures to include in the atlas |
-| aMaxTextureSize | Integer | Maximum size for individual textures before downscaling |
-| aMaxTileSize | Integer | Maximum size for individual tiles in the atlas |
-| aAtlasWidth | Integer | Width of the output atlas texture |
-| aAtlasHeight | Integer | Height of the output atlas texture |
-| aAtlasFileName | string | Output filename for the atlas texture |
-| aAtlasMapFileName | string | Output filename for the atlas mapping file |
+| ATextures | TStrings | String list containing paths to the textures to include in the atlas |
+| AMaxTextureSize | Integer | Maximum size for individual textures before downscaling |
+| AMaxTileSize | Integer | Maximum size for individual tiles in the atlas |
+| AAtlasWidth | Integer | Width of the output atlas texture |
+| AAtlasHeight | Integer | Height of the output atlas texture |
+| AAtlasFileName | string | Output filename for the atlas texture |
+| AAtlasMapFileName | string | Output filename for the atlas mapping file |
 
 ## Returns
 

@@ -8,9 +8,9 @@ function CanMoveDown(AElement: IwbElement): boolean;
 
 ## Description
 
-Determines if an element can be moved down within its array.
+Checks whether the element can be moved down (toward higher indices) within its parent container.
 
-Returns `true` if the element is part of an array and can be moved further down using `MoveDown`. This is typically used to check if an element's position can be changed within its containing array.
+This function retrieves the CanMoveDown property, which returns true if the element is part of an array or sorted container and is not already at the last position. Returns false if the element is invalid, not in a moveable container, or already at the end. Always check this before calling MoveDown to avoid errors.
 
 ## Parameters
 
@@ -36,5 +36,7 @@ end;
 ## See Also
 
 - [CanMoveUp](IwbElement_CanMoveUp.md)
+- [MoveDown](IwbElement_MoveDown.md)
+- [MoveUp](IwbElement_MoveUp.md)
 
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbMD5File(aFileName: string): string;
+function wbMD5File(AFileName: string): string;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates an MD5 hash for a file on disk and returns it as a hexadecimal string
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The full path to the file to calculate the MD5 hash for |
+| AFileName | string | The full path to the file to calculate the MD5 hash for |
 
 ## Returns
 

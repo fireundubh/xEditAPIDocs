@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure GenerateLODTES4(aMainRecord: IwbMainRecord);
+procedure GenerateLODTES4(AMainRecord: IwbMainRecord);
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Generates Level of Detail (LOD) data for Oblivion (TES4) worldspaces. This funct
 
 | Name | Type | Description |
 |------|------|-------------|
-| aMainRecord | IwbMainRecord | The worldspace main record to generate LOD for |
+| AMainRecord | IwbMainRecord | The worldspace main record to generate LOD for |
 
 ## Returns
 

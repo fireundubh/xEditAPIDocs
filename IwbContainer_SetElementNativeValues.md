@@ -20,7 +20,7 @@ This procedure modifies the internal native value of an element. The path parame
 | APath | string | The element path to the value |
 | AValue | Variant | The new native value to set |
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -32,6 +32,8 @@ end
 
 ## See Also
 
+- [GetElementNativeValues](IwbContainer_GetElementNativeValues.md)
 - [SetElementEditValues](IwbContainer_SetElementEditValues.md)
+- [SetNativeValue](IwbElement_SetNativeValue.md)
 
 

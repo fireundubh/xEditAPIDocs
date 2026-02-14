@@ -8,7 +8,9 @@ procedure BeginUpdate(AElement: IwbElement);
 
 ## Description
 
-Starts a bulk update for `AElement`. This can improve performance when making many changes to an element.
+Begins an update batch for the element to defer notifications and improve performance.
+
+This function calls the element's BeginUpdate method, which increments an internal update counter. While in update mode, the element defers change notifications and UI updates. Multiple BeginUpdate calls can be nested, and each must be matched with a corresponding EndUpdate. Always use in a try-finally block to ensure EndUpdate is called. Returns the new update counter value.
 
 ## Parameters
 

@@ -23,7 +23,7 @@ If `ASilent` is `True`, **AddMastersIfMissing** will not display any message not
 | ASortMasters | boolean | If true, sorts the master files list by load order after adding (defaults to true) |
 | ASilent | boolean | If true, suppresses message notifications (defaults to false) |
 
-## Examples
+## Example
 
 ```pascal
 var

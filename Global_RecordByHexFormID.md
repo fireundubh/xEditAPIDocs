@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function RecordByHexFormID(aFormID: string): IwbMainRecord;
+function RecordByHexFormID(AFormID: string): IwbMainRecord;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Retrieves a main record by its complete FormID in hexadecimal string format. The
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFormID | string | The FormID as a hexadecimal string (e.g., '05001234' or 'FE000ABC') |
+| AFormID | string | The FormID as a hexadecimal string (e.g., '05001234' or 'FE000ABC') |
 
 ## Returns
 

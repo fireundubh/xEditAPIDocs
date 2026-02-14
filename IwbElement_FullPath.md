@@ -8,9 +8,9 @@ function FullPath(AElement: IwbElement): string;
 
 ## Description
 
-Returns the complete path to the element, including its containing file.
+Returns the complete hierarchical path from the file root to this element.
 
-This function provides the full hierarchical path to the element, starting from its containing file and including all parent elements. This is different from Path which returns only a single path component.
+This function retrieves the FullPath property, which builds the full path string by traversing from the element up through all parent containers to the file. The path uses backslash separators and includes the filename at the start (e.g., "Skyrim.esm\WEAP\[00012345]\EDID"). Useful for logging, debugging, and uniquely identifying elements. Returns an empty string for invalid elements.
 
 ## Parameters
 
@@ -37,6 +37,8 @@ end;
 ## See Also
 
 - [Path](IwbElement_Path.md)
+- [IndexedPath](IwbElement_IndexedPath.md)
 - [PathName](IwbElement_PathName.md)
+- [Name](IwbElement_Name.md)
 
 

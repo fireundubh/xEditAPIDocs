@@ -33,8 +33,9 @@ end;
 
 ## See Also
 
-- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
-- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
 - [ReferencesCount](IwbMainRecord_ReferencesCount.md)
+- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
+- [UpdateRefs](IwbMainRecord_UpdateRefs.md)
+- [LinksTo](IwbElement_LinksTo.md)
 
 

@@ -38,8 +38,9 @@ end;
 
 ## See Also
 
-- [FileFormIDtoLoadOrderFormID](IwbFile_FileFormIDtoLoadOrderFormID.md)
 - [FormID](IwbMainRecord_FormID.md)
 - [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)
+- [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md)
+- [FileFormIDtoLoadOrderFormID](IwbFile_FileFormIDtoLoadOrderFormID.md)
 
 

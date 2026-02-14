@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure wbSelectedFilesToFileNames(aFileNames: TStrings);
+procedure wbSelectedFilesToFileNames(AFileNames: TStrings);
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Retrieves the filenames of all currently selected files and main records in the 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileNames | TStrings | The string list to receive the unique filenames |
+| AFileNames | TStrings | The string list to receive the unique filenames |
 
 ## Returns
 

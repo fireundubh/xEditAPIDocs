@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbMD5Data(aData: TBytes): string;
+function wbMD5Data(AData: TBytes): string;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates an MD5 hash for the provided binary data and returns it as a hexadeci
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The binary data to calculate the MD5 hash for |
+| AData | TBytes | The binary data to calculate the MD5 hash for |
 
 ## Returns
 

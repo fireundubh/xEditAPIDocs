@@ -8,9 +8,9 @@ function GetContainer(AElement: IwbElement): IwbContainer;
 
 ## Description
 
-Retrieves the element's immediate container.
+Returns the immediate parent container that holds this element.
 
-Returns the container element that directly holds the specified element. This is useful for navigating the element hierarchy upwards.
+This function retrieves the Container property, which provides access to the element's direct parent in the record hierarchy. For a field in a struct, this returns the struct. For a record, this returns the group. Returns nil if the element is at the top level or is invalid. Useful for navigating upward through the element tree.
 
 ## Parameters
 
@@ -38,5 +38,8 @@ end;
 ## See Also
 
 - [ContainingMainRecord](IwbElement_ContainingMainRecord.md)
+- [GetFile](IwbElement_GetFile.md)
+- [ElementByIndex](IwbContainer_ElementByIndex.md)
+- [ElementByName](IwbContainer_ElementByName.md)
 
 

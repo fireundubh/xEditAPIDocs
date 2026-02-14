@@ -8,9 +8,9 @@ function GetLoadOrderFormID(ARecord: IwbMainRecord): Cardinal;
 
 ## Description
 
-Returns the Form ID of `ARecord` relative to the current load order
+Returns the FormID adjusted for the current runtime load order.
 
-`FixedFormID`, `FormID`, and `GetLoadOrderFormID` will return different Form ID values when `ARecord` is overridden but not when `ARecord` is the overriding record.
+This function retrieves the LoadOrderFormID property and converts it to a Cardinal. The returned value has the file index updated to reflect the current load order position (not the saved file index). This is the FormID the game engine uses at runtime. Returns 0 for invalid records. Use this when you need the FormID that will actually work in the game, especially when load order has changed since the file was saved.
 
 ## Parameters
 

@@ -22,7 +22,7 @@ Removes and returns the element at the specified index in the container.
 
 Returns the removed element as an IwbElement interface.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -36,5 +36,6 @@ end;
 
 - [RemoveElement](IwbContainer_RemoveElement.md)
 - [ElementByIndex](IwbContainer_ElementByIndex.md)
+- [Remove](IwbElement_Remove.md)
 
 

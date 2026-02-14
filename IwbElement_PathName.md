@@ -8,9 +8,9 @@ function PathName(AElement: IwbElement): string;
 
 ## Description
 
-Returns the path and name of the element combined.
+Returns the element's path name, combining structural and display information.
 
-This function combines the element's path and name into a single string, providing a more complete identifier for the element than either Path or Name alone.
+This function retrieves the PathName property, which provides a hybrid identifier combining path and name information. The exact format depends on the element type but generally includes the element's position and identifier within its parent. More descriptive than Path alone but not as comprehensive as FullPath. Returns an empty string for invalid elements.
 
 ## Parameters
 
@@ -37,7 +37,9 @@ end;
 ## See Also
 
 - [Path](IwbElement_Path.md)
-- [Name](IwbElement_Name.md)
 - [FullPath](IwbElement_FullPath.md)
+- [IndexedPath](IwbElement_IndexedPath.md)
+- [Name](IwbElement_Name.md)
+- [DisplayName](IwbElement_DisplayName.md)
 
 

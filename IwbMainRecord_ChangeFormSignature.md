@@ -33,5 +33,7 @@ end;
 ## See Also
 
 - [Signature](IwbMainRecord_Signature.md)
+- [FormID](IwbMainRecord_FormID.md)
+- [EditorID](IwbMainRecord_EditorID.md)
 
 

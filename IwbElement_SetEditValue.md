@@ -3,14 +3,14 @@
 ## Syntax
 
 ```pascal
-function SetEditValue(AElement: IwbElement; AValue: string): string;
+procedure SetEditValue(AElement: IwbElement; AValue: string);
 ```
 
 ## Description
 
-Sets an element's value using a string representation.
+Sets the element's value using a human-readable string representation.
 
-Allows setting the value of an element using a string format. The function handles the conversion from string to the appropriate internal format for the element type.
+This function assigns to the EditValue property, which parses the string and converts it to the appropriate internal format based on the element's definition type. The element must be editable for this operation to succeed. Invalid strings may raise an exception or fail silently depending on the element type.
 
 ## Parameters
 
@@ -21,18 +21,29 @@ Allows setting the value of an element using a string format. The function handl
 
 ## Returns
 
-Returns the set value as a string.
+This procedure does not return a value.
 
 ## Example
 
 ```pascal
+var
+  element: IwbElement;
+  oldValue, newValue: string;
 begin
-  SetEditValue(element, '42');
+  element := ElementByPath(e, 'EDID');
+  oldValue := GetEditValue(element);
+  newValue := SetEditValue(element, 'MyNewEditorID');
+  AddMessage('Changed value from "' + oldValue + '" to "' + newValue + '"');
 end;
 ```
 
 ## See Also
 
+- [GetEditValue](IwbElement_GetEditValue.md)
+- [SetNativeValue](IwbElement_SetNativeValue.md)
+- [GetNativeValue](IwbElement_GetNativeValue.md)
+- [GetValue](IwbElement_GetValue.md)
+- [SetElementEditValues](IwbContainer_SetElementEditValues.md)
 - [IsEditable](IwbElement_IsEditable.md)
 
 

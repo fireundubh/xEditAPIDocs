@@ -8,9 +8,9 @@ procedure AddMasterIfMissing(AFile: IwbFile; AFileName: String; ASortMasters: Bo
 
 ## Description
 
-Adds the master file whose file name matches `AFileName` to `AFile`, if that master file does not exist in `AFile`'s master files list
+Adds a master file dependency to the file's header if not already present.
 
-If `ASortMasters` is `True`, after appending the specified master file, **AddMasterIfMissing** sorts `AFile`'s master files list by the current load order; otherwise, the list will not be sorted.
+This function calls the AddMasterIfMissing method, which checks if the specified filename exists in the master list and adds it if missing. Optional parameters control sorting and additional behavior. The ASortMasters parameter (default true) determines whether to sort the master list by load order after adding. Adding masters is necessary before creating records that reference another file's content. The master file must be loaded in the current session.
 
 ## Parameters
 

@@ -20,7 +20,7 @@ This procedure modifies the human-readable edit value of an element. The path pa
 | APath | string | The element path to the value |
 | AValue | string | The new edit value to set |
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -32,6 +32,8 @@ end
 
 ## See Also
 
+- [GetElementEditValues](IwbContainer_GetElementEditValues.md)
 - [SetElementNativeValues](IwbContainer_SetElementNativeValues.md)
+- [SetEditValue](IwbElement_SetEditValue.md)
 
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbDDSStreamToBitmap(aStream: TStream; aBitmap: TBitmap): Boolean;
+function wbDDSStreamToBitmap(AStream: TStream; ABitmap: TBitmap): Boolean;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Converts DDS texture data from a stream to a Windows bitmap. This function reads
 
 | Name | Type | Description |
 |------|------|-------------|
-| aStream | TStream | The stream containing the DDS data |
-| aBitmap | TBitmap | The target bitmap object to receive the decoded image |
+| AStream | TStream | The stream containing the DDS data |
+| ABitmap | TBitmap | The target bitmap object to receive the decoded image |
 
 ## Returns
 

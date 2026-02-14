@@ -8,9 +8,9 @@ function DefType(AElement: IwbElement): TwbDefType;
 
 ## Description
 
-Returns the definition type of the element.
+Returns the definition type enumeration value for the element's value definition.
 
-This function returns the def-type of the element, which describes the fundamental type of the element's definition in the record structure.
+This function retrieves the element's ValueDef and returns its DefType property, which categorizes the data type (e.g., dtInteger, dtFloat, dtString, dtFormID, dtStruct, dtArray). Returns -1 if the element is invalid or has no ValueDef. The DefType determines how the element's data is interpreted and stored. More granular than ElementType, which describes the element's structural role.
 
 ## Parameters
 
@@ -36,6 +36,8 @@ end;
 
 ## See Also
 
+- [DefTypeAsText](IwbElement_DefTypeAsText.md)
 - [ElementType](IwbElement_ElementType.md)
+- [ElementTypeAsText](IwbElement_ElementTypeAsText.md)
 
 

@@ -8,9 +8,9 @@ function RecordByFormID(AFile: IwbFile; AFormID: Integer; AAllowInjected: Boolea
 
 ## Description
 
-Returns a record, whose Form ID matches `AFormID`, from `AFile`
+Searches the file for a main record with the specified FormID.
 
-If `AAllowInjected` is `True`, **RecordByFormID** will also match against injected records.
+This function accesses the RecordByFormID property, which performs a lookup for records matching the provided FormID. The FormID should be in load order format. The AAllowInjected parameter controls whether injected records (records added programmatically, not from disk) are included in the search. Returns nil if no matching record is found. Always performs full FormID resolution.
 
 ## Parameters
 

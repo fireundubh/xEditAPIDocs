@@ -8,9 +8,9 @@ function FormID(ARecord: IwbMainRecord): Cardinal;
 
 ## Description
 
-Returns the Form ID of `ARecord`
+Returns the record's FormID as it appears in the file (file-local FormID).
 
-**Note:** The Form ID returned by this function is not relative to file load order.
+This function retrieves the FormID property and converts it to a Cardinal. The returned value is the file-local FormID, which includes the file index in the upper byte (load order position at the time the file was saved). This is NOT the same as the current load order FormID. For runtime load order FormIDs, use GetLoadOrderFormID instead. Returns 0 for invalid records.
 
 ## Parameters
 

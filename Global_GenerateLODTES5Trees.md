@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure GenerateLODTES5Trees(aMainRecord: IwbMainRecord);
+procedure GenerateLODTES5Trees(AMainRecord: IwbMainRecord);
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Generates tree Level of Detail (LOD) data for Skyrim (TES5) worldspaces. This fu
 
 | Name | Type | Description |
 |------|------|-------------|
-| aMainRecord | IwbMainRecord | The worldspace main record to generate tree LOD for |
+| AMainRecord | IwbMainRecord | The worldspace main record to generate tree LOD for |
 
 ## Returns
 

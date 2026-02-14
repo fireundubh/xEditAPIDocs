@@ -8,9 +8,9 @@ function Add(AContainer: IwbContainer; ANameOrSignature: string; ASilent: boolea
 
 ## Description
 
-Adds and returns a new child element to the container.
+Creates and adds a new child element to the container by name or signature.
 
-Creates a new element as a child of this container and returns the newly created element. The exact type of element created depends on the container type.
+This function calls the container's Add method, which creates a new element based on the provided name or signature string and appends it to the container. The ASilent parameter controls whether change notifications are suppressed. Returns the newly created IwbElement. The element type created depends on the container's definition and the provided name/signature. Commonly used for adding new array elements or optional fields.
 
 ## Parameters
 
@@ -24,7 +24,7 @@ Creates a new element as a child of this container and returns the newly created
 
 Returns the newly created element as an IwbElement interface.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -37,7 +37,10 @@ end;
 
 ## See Also
 
-- [ElementCount](IwbContainer_ElementCount.md)
+- [AddElement](IwbContainer_AddElement.md)
+- [InsertElement](IwbContainer_InsertElement.md)
 - [RemoveElement](IwbContainer_RemoveElement.md)
+- [RemoveByIndex](IwbContainer_RemoveByIndex.md)
+- [ElementCount](IwbContainer_ElementCount.md)
 
 

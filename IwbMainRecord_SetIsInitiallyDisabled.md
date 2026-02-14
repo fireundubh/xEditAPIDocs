@@ -32,5 +32,8 @@ if GetIsInitiallyDisabled(e) then
 ## See Also
 
 - [GetIsInitiallyDisabled](IwbMainRecord_GetIsInitiallyDisabled.md)
+- [SetIsDeleted](IwbMainRecord_SetIsDeleted.md)
+- [SetIsPersistent](IwbMainRecord_SetIsPersistent.md)
+- [SetIsVisibleWhenDistant](IwbMainRecord_SetIsVisibleWhenDistant.md)
 
 

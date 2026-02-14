@@ -29,7 +29,8 @@ if IsWinningOverride(e) then
 
 ## See Also
 
-- [Master](IwbMainRecord_Master.md)
-- [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
+- [WinningOverride](IwbMainRecord_WinningOverride.md)
+- [IsMaster](IwbMainRecord_IsMaster.md)
+- [HighestOverrideOrSelf](IwbMainRecord_HighestOverrideOrSelf.md)
 
 

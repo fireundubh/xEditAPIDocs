@@ -21,7 +21,7 @@ Returns the edit value of an element in the container by path as a string. This 
 
 Returns the edit value as a string.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -33,6 +33,9 @@ end;
 
 ## See Also
 
+- [SetElementEditValues](IwbContainer_SetElementEditValues.md)
 - [GetElementNativeValues](IwbContainer_GetElementNativeValues.md)
+- [GetElementValues](IwbContainer_GetElementValues.md)
+- [GetEditValue](IwbElement_GetEditValue.md)
 
 

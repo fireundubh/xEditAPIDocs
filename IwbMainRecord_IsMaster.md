@@ -8,9 +8,9 @@ function IsMaster(ARecord: IwbMainRecord): boolean;
 
 ## Description
 
-Returns `True` when `ARecord` is a master record and `False` otherwise
+Checks whether the record is a master (original) record rather than an override.
 
-If provided an argument of an incompatible type, this function will also return `False`.
+This function retrieves the IsMaster property, which returns true if the record is the original definition (not overriding another record from a master file). Master records are the first in their override chain. Returns false for override records or invalid inputs. Note: This refers to the record's position in the override chain, not whether it's in a master file (.esm).
 
 ## Parameters
 
@@ -33,5 +33,7 @@ if IsMaster(e) then
 
 - [Master](IwbMainRecord_Master.md)
 - [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
+- [IsWinningOverride](IwbMainRecord_IsWinningOverride.md)
+- [WinningOverride](IwbMainRecord_WinningOverride.md)
 
 

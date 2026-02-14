@@ -18,7 +18,7 @@ This procedure modifies the container in-place, changing the order of elements t
 |------|------|-------------|
 | AContainer | IwbContainer | The container whose elements to reverse |
 
-## Examples
+## Example
 
 ```pascal
 var

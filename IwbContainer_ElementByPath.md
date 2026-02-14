@@ -8,7 +8,9 @@ function ElementByPath(AContainer: IwbContainer; APath: string): IwbElement;
 
 ## Description
 
-Returns an element by its path from the container. The path is a string representing the hierarchical location of the element, using backslash (`\`) as the path separator for nested elements.
+Navigates through nested containers to find an element at the specified path.
+
+This function accesses the ElementByPath property, which parses the path string and traverses the element hierarchy. Use backslash (\) as the separator for nested elements (e.g., "Model\MODL" finds the MODL element inside the Model struct). The path is resolved relative to the container. Returns nil if any part of the path doesn't exist. More flexible than ElementByName for accessing deeply nested elements.
 
 ## Parameters
 

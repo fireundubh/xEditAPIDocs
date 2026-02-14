@@ -8,9 +8,9 @@ function BaseName(AElement: IwbElement): string;
 
 ## Description
 
-Returns the base name of an element without load order index prefixes.
+Returns the element's name without load order prefixes or other decorations.
 
-This function is identical to `Name` except for how it handles IwbFiles. While `Name` will prepend a load order index (i.e. [02] PluginName.esp), `BaseName` will not include this prefix.
+This function retrieves the BaseName property, which provides the undecorated element identifier. For files, this returns just the filename without the load order index prefix (e.g., "Plugin.esp" instead of "[02] Plugin.esp"). For other elements, behavior is similar to Name. Useful when you need the clean identifier for comparisons or when building user-facing strings. Returns an empty string for invalid elements.
 
 ## Parameters
 

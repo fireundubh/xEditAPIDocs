@@ -8,9 +8,9 @@ function Check(AElement: IwbElement): string;
 
 ## Description
 
-Performs an error check on the specified element.
+Validates the element and returns any error message found.
 
-Returns the error message produced when the "Check for Errors" functionality is run on the element. If no error is found, returns an empty string.
+This function calls the element's Check method, which performs validation based on the element's definition rules (required fields, value constraints, reference validity, etc.). This is the same validation used by xEdit's "Check for Errors" feature. Returns an empty string if the element is valid or if validation is not applicable. Returns a descriptive error message if validation fails. Use this to verify record integrity before saving.
 
 ## Parameters
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function NifBlockList(aData: TBytes; aList: TStrings): Boolean;
+function NifBlockList(AData: TBytes; AList: TStrings): Boolean;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Extracts all block type names from a NIF (NetImmerse File Format) mesh file and 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The raw binary data of the NIF file |
-| aList | TStrings | The string list to receive the block type names |
+| AData | TBytes | The raw binary data of the NIF file |
+| AList | TStrings | The string list to receive the block type names |
 
 ## Returns
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbDDSDataToBitmap(aData: TBytes; aBitmap: TBitmap): Boolean;
+function wbDDSDataToBitmap(AData: TBytes; ABitmap: TBitmap): Boolean;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Converts DDS (DirectDraw Surface) texture data to a standard Windows bitmap. Thi
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The raw binary data of the DDS file |
-| aBitmap | TBitmap | The target bitmap object to receive the decoded image |
+| AData | TBytes | The raw binary data of the DDS file |
+| ABitmap | TBitmap | The target bitmap object to receive the decoded image |
 
 ## Returns
 

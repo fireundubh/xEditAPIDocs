@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbCRC32Data(aData: TBytes): Cardinal;
+function wbCRC32Data(AData: TBytes): Cardinal;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates a standard CRC32 checksum for the provided binary data. This is a gen
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The binary data to calculate the CRC32 checksum for |
+| AData | TBytes | The binary data to calculate the CRC32 checksum for |
 
 ## Returns
 

@@ -21,7 +21,7 @@ Returns the native value of an element in the container by path. The return type
 
 Returns the native value as a Variant type.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -33,6 +33,8 @@ end;
 
 ## See Also
 
+- [SetElementNativeValues](IwbContainer_SetElementNativeValues.md)
 - [GetElementEditValues](IwbContainer_GetElementEditValues.md)
+- [GetNativeValue](IwbElement_GetNativeValue.md)
 
 

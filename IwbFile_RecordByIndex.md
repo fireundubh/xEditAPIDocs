@@ -8,7 +8,9 @@ function RecordByIndex(AFile: IwbFile; AIndex: Integer): IwbMainRecord;
 
 ## Description
 
-Returns the record at `AIndex` in `AFile`
+Returns the main record at the specified zero-based index within the file.
+
+This function accesses the Records property by index, providing array-style access to all main records in the file. The implementation includes a bounds check and returns nil if the index is >= RecordCount. Index order is determined by the file's internal record organization. Use RecordCount to get the valid index range (0 to RecordCount-1).
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns the record at `AIndex` in `AFile`
 
 Returns the IwbMainRecord at the specified index.
 
-## Examples
+## Example
 
 ```pascal
 f := FileByName('Skyrim.esm');

@@ -3,8 +3,8 @@
 ## Syntax
 
 ```pascal
-function CreateHashTES4(aFileName: string): UInt64;
-function CreateHashTES4(aFileName: string; aExt: string): UInt64;
+function CreateHashTES4(AFileName: string): UInt64;
+function CreateHashTES4(AFileName: string; AExt: string): UInt64;
 ```
 
 ## Description
@@ -15,8 +15,8 @@ Creates a TES4-specific hash value for a given filename. This hash function is u
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The filename to calculate the hash for |
-| aExt | string | Optional. The file extension to use separately in hash calculation |
+| AFileName | string | The filename to calculate the hash for |
+| AExt | string | Optional. The file extension to use separately in hash calculation |
 
 ## Returns
 

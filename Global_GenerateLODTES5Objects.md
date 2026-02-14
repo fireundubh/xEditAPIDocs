@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure GenerateLODTES5Objects(aMainRecord: IwbMainRecord);
+procedure GenerateLODTES5Objects(AMainRecord: IwbMainRecord);
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Generates object Level of Detail (LOD) data for Skyrim (TES5) worldspaces. This 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aMainRecord | IwbMainRecord | The worldspace main record to generate object LOD for |
+| AMainRecord | IwbMainRecord | The worldspace main record to generate object LOD for |
 
 ## Returns
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-procedure LocalizationGetStringsFromFile(aFileName: string; aStrings: TStrings);
+procedure LocalizationGetStringsFromFile(AFileName: string; AStrings: TStrings);
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Extracts all localized strings from a localization file (.STRINGS, .DLSTRINGS, o
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The name of the localization file to read (without path) |
-| aStrings | TStrings | The string list to receive the extracted strings |
+| AFileName | string | The name of the localization file to read (without path) |
+| AStrings | TStrings | The string list to receive the extracted strings |
 
 ## Returns
 

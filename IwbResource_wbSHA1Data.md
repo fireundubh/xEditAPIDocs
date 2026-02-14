@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbSHA1Data(aData: TBytes): string;
+function wbSHA1Data(AData: TBytes): string;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Calculates a SHA-1 hash for the provided binary data and returns it as a hexadec
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The binary data to calculate the SHA-1 hash for |
+| AData | TBytes | The binary data to calculate the SHA-1 hash for |
 
 ## Returns
 

@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function AddRequiredElementMasters(aElement: IwbElement; aFile: IwbFile; aAsNew: Boolean; aSilent: Boolean = False): Boolean;
+function AddRequiredElementMasters(AElement: IwbElement; AFile: IwbFile; AAsNew: Boolean; ASilent: Boolean = False): Boolean;
 ```
 
 ## Description
@@ -14,10 +14,10 @@ Adds all master files required by an element to a target file. This function ana
 
 | Name | Type | Description |
 |------|------|-------------|
-| aElement | IwbElement | The element whose required masters will be analyzed |
-| aFile | IwbFile | The target file that will receive the master references |
-| aAsNew | Boolean | Whether to add masters as new entries |
-| aSilent | Boolean | Optional. If True, suppresses confirmation dialogs. Defaults to False |
+| AElement | IwbElement | The element whose required masters will be analyzed |
+| AFile | IwbFile | The target file that will receive the master references |
+| AAsNew | Boolean | Whether to add masters as new entries |
+| ASilent | Boolean | Optional. If True, suppresses confirmation dialogs. Defaults to False |
 
 ## Returns
 

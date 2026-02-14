@@ -8,9 +8,11 @@ procedure Remove(AElement: IwbElement);
 
 ## Description
 
-Removes the element from its file. This operation permanently removes the element from its containing file.
+Removes the element from its parent container.
 
-Use with caution as this operation cannot be undone.
+This function calls the element's Remove method, which detaches it from its parent container and marks it for deletion. The element is removed from memory immediately, but the change is not persisted to disk until the file is saved. This operation is irreversible once the file is saved.
+
+Use with caution. Removing critical elements may corrupt the record structure or make the file invalid.
 
 ## Parameters
 

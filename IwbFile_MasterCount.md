@@ -8,7 +8,9 @@ function MasterCount(AFile: IwbFile): Integer;
 
 ## Description
 
-Returns the number of master files required by `AFile`
+Returns the total number of master files that this file depends on.
+
+This function retrieves the MasterCount property with the True parameter (including self), which counts all master file entries in the file header. These are plugins that must be loaded before this file for FormID references to resolve correctly. Returns 0 for files with no masters or invalid inputs. Use with MasterByIndex to iterate through all masters. The master list order matters for FormID resolution.
 
 ## Parameters
 

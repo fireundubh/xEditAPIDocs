@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbCRC32Resource(aContainerName: string; aResourceName: string): Cardinal;
+function wbCRC32Resource(AContainerName: string; AResourceName: string): Cardinal;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Calculates a standard CRC32 checksum for a resource file stored in a BSA or BA2 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aContainerName | string | The name of the BSA/BA2 archive containing the resource (empty string searches all) |
-| aResourceName | string | The path to the resource within the archive |
+| AContainerName | string | The name of the BSA/BA2 archive containing the resource (empty string searches all) |
+| AResourceName | string | The path to the resource within the archive |
 
 ## Returns
 

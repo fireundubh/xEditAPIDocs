@@ -8,7 +8,9 @@ function OverrideByIndex(ARecord: IwbMainRecord; AIndex: integer): IwbMainRecord
 
 ## Description
 
-Returns the overriding record for `ARecord` at `AIndex` in the array of overriding records for that record
+Returns the override record at the specified index in the override list.
+
+This function accesses the Overrides property by index, providing array-style access to all records overriding this record. Overrides are ordered by load order (lowest to highest). Index 0 is the first override, not the master. Use OverrideCount to get the valid index range. Returns nil for invalid indices. Useful for iterating through the entire override chain.
 
 ## Parameters
 
@@ -30,12 +32,9 @@ for i := 0 to Pred(OverrideCount(e)) do
 
 ## See Also
 
-- [ElementByIndex](IwbContainer_ElementByIndex.md)
-- [FileByIndex](Global_FileByIndex.md)
 - [OverrideCount](IwbMainRecord_OverrideCount.md)
-- [MasterByIndex](IwbFile_MasterByIndex.md)
-- [RecordByIndex](IwbFile_RecordByIndex.md)
-- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
-- [ReferencesByIndex](IwbMainRecord_ReferencesByIndex.md)
+- [Master](IwbMainRecord_Master.md)
+- [WinningOverride](IwbMainRecord_WinningOverride.md)
+- [HighestOverrideOrSelf](IwbMainRecord_HighestOverrideOrSelf.md)
 
 

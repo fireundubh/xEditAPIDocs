@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function CreateHashTES3(aFileName: string): Cardinal;
+function CreateHashTES3(AFileName: string): Cardinal;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Creates a Morrowind (TES3)-specific hash value for a given filename. This hash f
 
 | Name | Type | Description |
 |------|------|-------------|
-| aFileName | string | The filename to calculate the hash for |
+| AFileName | string | The filename to calculate the hash for |
 
 ## Returns
 

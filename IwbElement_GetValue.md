@@ -37,6 +37,8 @@ end;
 
 - [GetEditValue](IwbElement_GetEditValue.md)
 - [GetNativeValue](IwbElement_GetNativeValue.md)
+- [SetEditValue](IwbElement_SetEditValue.md)
+- [SetNativeValue](IwbElement_SetNativeValue.md)
 - [GetElementValues](IwbContainer_GetElementValues.md)
 
 

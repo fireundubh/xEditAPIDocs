@@ -29,8 +29,9 @@ for i := 0 to Pred(ReferencesCount(e)) do
 
 ## See Also
 
-- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
-- [ReferencedByIndex](IwbMainRecord_ReferencedByIndex.md)
 - [ReferencesByIndex](IwbMainRecord_ReferencesByIndex.md)
+- [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
+- [UpdateRefs](IwbMainRecord_UpdateRefs.md)
+- [BuildRef](IwbElement_BuildRef.md)
 
 

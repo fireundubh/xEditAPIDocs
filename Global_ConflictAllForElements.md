@@ -3,9 +3,9 @@
 ## Syntax
 
 ```pascal
-function ConflictAllForElements(aElements: TList; aSiblingCompare: Boolean; aQuickCheck: Boolean): TConflictAll;
+function ConflictAllForElements(AElements: TList; ASiblingCompare: Boolean; AQuickCheck: Boolean): TConflictAll;
 // or
-function ConflictAllForElements(aElement1: IwbElement; aElement2: IwbElement; aSiblingCompare: Boolean; aQuickCheck: Boolean): TConflictAll;
+function ConflictAllForElements(AElement1: IwbElement; AElement2: IwbElement; ASiblingCompare: Boolean; AQuickCheck: Boolean): TConflictAll;
 ```
 
 ## Description
@@ -16,11 +16,11 @@ Calculates the overall conflict level for a collection of elements or a pair of 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aElements | TList | A list of IwbElement interfaces to check for conflicts (3-parameter variant) |
-| aElement1 | IwbElement | First element to compare (4-parameter variant) |
-| aElement2 | IwbElement | Second element to compare (4-parameter variant) |
-| aSiblingCompare | Boolean | Whether to compare elements as siblings |
-| aQuickCheck | Boolean | If True, performs a faster but less thorough conflict check |
+| AElements | TList | A list of IwbElement interfaces to check for conflicts (3-parameter variant) |
+| AElement1 | IwbElement | First element to compare (4-parameter variant) |
+| AElement2 | IwbElement | Second element to compare (4-parameter variant) |
+| ASiblingCompare | Boolean | Whether to compare elements as siblings |
+| AQuickCheck | Boolean | If True, performs a faster but less thorough conflict check |
 
 ## Returns
 

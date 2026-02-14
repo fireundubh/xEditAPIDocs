@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function NifTextureList(aData: TBytes; aList: TStrings): Boolean;
+function NifTextureList(AData: TBytes; AList: TStrings): Boolean;
 ```
 
 ## Description
@@ -14,8 +14,8 @@ Extracts all texture file paths referenced by a NIF (NetImmerse File Format) mes
 
 | Name | Type | Description |
 |------|------|-------------|
-| aData | TBytes | The raw binary data of the NIF file |
-| aList | TStrings | The string list to receive the texture paths |
+| AData | TBytes | The raw binary data of the NIF file |
+| AList | TStrings | The string list to receive the texture paths |
 
 ## Returns
 

@@ -25,7 +25,7 @@ The module's ID prefix will be corrected internally to accommodate for small or 
 
 Returns the IwbMainRecord with the matching Form ID, or nil if not found.
 
-## Examples
+## Example
 
 ```pascal
 var

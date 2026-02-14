@@ -8,7 +8,9 @@ function ElementByName(AContainer: IwbContainer; AName: string): IwbElement;
 
 ## Description
 
-Returns an element by its name from the container.
+Searches the container for a child element with the specified name.
+
+This function accesses the ElementByName property, which searches for an element whose Name property matches the provided string. The search is typically case-sensitive and looks at the element's definition name (e.g., "EDID", "DATA"). Returns nil if no element with that name exists in the container. For nested paths, use ElementByPath instead.
 
 ## Parameters
 
@@ -21,7 +23,7 @@ Returns an element by its name from the container.
 
 Returns the element with the specified name as an IwbElement interface.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -33,7 +35,10 @@ end;
 
 ## See Also
 
+- [ElementByIndex](IwbContainer_ElementByIndex.md)
 - [ElementByPath](IwbContainer_ElementByPath.md)
 - [ElementBySignature](IwbContainer_ElementBySignature.md)
+- [ElementExists](IwbContainer_ElementExists.md)
+- [IndexOf](IwbContainer_IndexOf.md)
 
 

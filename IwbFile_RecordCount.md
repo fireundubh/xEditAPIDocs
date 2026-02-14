@@ -8,7 +8,9 @@ function RecordCount(AFile: IwbFile): Integer;
 
 ## Description
 
-Returns the number of records in `AFile`
+Returns the total number of main records contained in the file.
+
+This function retrieves the RecordCount property, which counts all IwbMainRecord instances in the file (excluding groups and file headers). Returns 0 for empty files or invalid inputs. Use with RecordByIndex to iterate through all records in the file. This count includes all record types (WEAP, NPC_, etc.) but not group records.
 
 ## Parameters
 

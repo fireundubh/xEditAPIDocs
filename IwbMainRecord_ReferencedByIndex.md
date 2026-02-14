@@ -8,7 +8,9 @@ function ReferencedByIndex(ARecord: IwbMainRecord; AIndex: integer): IwbMainReco
 
 ## Description
 
-Returns record at `AIndex` in array of records linking to `ARecord`
+Returns the record at the specified index in the list of records referencing this record.
+
+This function accesses the ReferencedBy property by index, providing array-style access to all records that contain FormID fields pointing to this record. The order is determined internally and may not be meaningful. Use ReferencedByCount to get the valid index range. Returns nil for invalid indices. Ensure BuildRef has been called to populate the reference tracking.
 
 ## Parameters
 
@@ -34,7 +36,8 @@ end;
 ## See Also
 
 - [ReferencedByCount](IwbMainRecord_ReferencedByCount.md)
-- [ReferencesCount](IwbMainRecord_ReferencesCount.md)
 - [ReferencesByIndex](IwbMainRecord_ReferencesByIndex.md)
+- [BuildRef](IwbElement_BuildRef.md)
+- [LinksTo](IwbElement_LinksTo.md)
 
 

@@ -8,7 +8,9 @@ function MasterByIndex(AFile: IwbFile; AIndex: Integer): IwbFile;
 
 ## Description
 
-Returns the master file at `AIndex` in the list of master files required by `AFile`
+Returns the master file at the specified zero-based index in the master list.
+
+This function accesses the Masters property by index with bounds checking. Returns the IwbFile interface for the master at that position in the file header's master list. Returns nil if the index is >= MasterCount. The order of masters in the list is significant for FormID reference resolution. Master 0 is always the first dependency.
 
 ## Parameters
 

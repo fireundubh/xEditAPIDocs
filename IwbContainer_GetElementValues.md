@@ -21,7 +21,7 @@ Returns the string display value of an element in the container by path. Useful 
 
 Returns the display value as a string.
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -33,6 +33,8 @@ end;
 
 ## See Also
 
+- [GetElementEditValues](IwbContainer_GetElementEditValues.md)
+- [GetElementNativeValues](IwbContainer_GetElementNativeValues.md)
 - [GetValue](IwbElement_GetValue.md)
 
 

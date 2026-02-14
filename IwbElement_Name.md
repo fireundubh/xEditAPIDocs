@@ -8,9 +8,9 @@ function Name(AElement: IwbElement): string;
 
 ## Description
 
-Returns the basic name of the element.
+Returns the element's standard name as defined in its element definition.
 
-This function returns the standard name of the element. This is the most commonly used name function and returns a basic identifier for the element.
+This function retrieves the Name property, which returns the element's identifier from the record structure definition. For fields, this is typically the 4-character signature (e.g., "EDID", "DATA"). For array elements, it may include an index. Returns an empty string if the element is invalid. This is the most commonly used name function for element identification.
 
 ## Parameters
 
@@ -39,5 +39,7 @@ end;
 - [BaseName](IwbElement_BaseName.md)
 - [ShortName](IwbElement_ShortName.md)
 - [DisplayName](IwbElement_DisplayName.md)
+- [PathName](IwbElement_PathName.md)
+- [Path](IwbElement_Path.md)
 
 

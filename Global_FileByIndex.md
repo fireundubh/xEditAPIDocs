@@ -23,8 +23,16 @@ Returns the file at the specified index as an IwbFile interface.
 ## Example
 
 ```pascal
-for i := 0 to Pred(FileCount) do
-	f := FileByIndex(i);
+var
+  i: integer;
+  f: IwbFile;
+begin
+  // Iterate through all loaded files
+  for i := 0 to Pred(FileCount) do begin
+    f := FileByIndex(i);
+    AddMessage('[' + IntToStr(i) + '] ' + GetFileName(f));
+  end;
+end;
 ```
 
 ## See Also

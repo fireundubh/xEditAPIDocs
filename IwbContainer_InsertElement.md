@@ -20,7 +20,7 @@ This procedure creates a new element with the given signature and inserts it at 
 | AIndex | Integer | The zero-based index position to insert at |
 | AElement | IwbElement | The element to insert |
 
-## Examples
+## Example
 
 ```pascal
 var
@@ -32,6 +32,9 @@ end
 
 ## See Also
 
+- [Add](IwbContainer_Add.md)
 - [AddElement](IwbContainer_AddElement.md)
+- [RemoveElement](IwbContainer_RemoveElement.md)
+- [ElementByIndex](IwbContainer_ElementByIndex.md)
 
 

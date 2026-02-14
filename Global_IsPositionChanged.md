@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function IsPositionChanged(aMainRecord: IwbMainRecord): Boolean;
+function IsPositionChanged(AMainRecord: IwbMainRecord): Boolean;
 ```
 
 ## Description
@@ -14,7 +14,7 @@ Checks whether the position data of a reference (REFR) record has been modified 
 
 | Name | Type | Description |
 |------|------|-------------|
-| aMainRecord | IwbMainRecord | The reference record to check for position changes |
+| AMainRecord | IwbMainRecord | The reference record to check for position changes |
 
 ## Returns
 

@@ -36,7 +36,7 @@ Possible values:
 
 Returns the group type as an integer value (0-10).
 
-## Examples
+## Example
 
 ```pascal
 var
