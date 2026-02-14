@@ -14,6 +14,12 @@ The operation is `Self := Self - AList2`.
 
 The list is automatically sorted and duplicates are set to ignore before the operation.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AList2 | TStringList | The string list to subtract from the current list |
+
 ## Example
 
 ```pascal

@@ -12,6 +12,18 @@ Linearly interpolates between `A` and `B` by the factor `AValue`.
 
 `AValue` is clamped between 0 and 1.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| A | Double | The start value for interpolation |
+| B | Double | The end value for interpolation |
+| AValue | Double | The interpolation factor (clamped to 0-1) |
+
+## Returns
+
+Returns the interpolated value between A and B.
+
 ## Example
 
 ```pascal

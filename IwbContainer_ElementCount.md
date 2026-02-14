@@ -10,6 +10,16 @@ function ElementCount(AContainer: IwbContainer): integer;
 
 Returns the total number of elements in the container.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to count elements in |
+
+## Returns
+
+Returns the total number of elements as an integer.
+
 ## Examples
 
 ```pascal

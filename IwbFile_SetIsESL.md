@@ -10,6 +10,13 @@ procedure SetIsESL(AFile: IwbFile; AIsESL: Boolean);
 
 Sets the ESL flag in `AFile` if `AIsESL` is `True`; otherwise, **SetIsESL** clears the flag.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to set the ESL flag on |
+| AIsESL | Boolean | Whether to set (True) or clear (False) the ESL flag |
+
 ## Example
 
 ```pascal

@@ -12,6 +12,14 @@ Adds the master file whose file name matches `AFileName` to `AFile`, if that mas
 
 If `ASortMasters` is `True`, after appending the specified master file, **AddMasterIfMissing** sorts `AFile`'s master files list by the current load order; otherwise, the list will not be sorted.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to add the master to |
+| AFileName | String | The name of the master file to add |
+| ASortMasters | Boolean | If true, sorts the master files list by load order after adding (defaults to true) |
+
 ## Example
 
 ```pascal

@@ -12,6 +12,13 @@ Adds a new element to the specified container using the provided element signatu
 
 This procedure creates and appends a new element to the end of the container. The element signature determines the type of element to create. Returns the newly created element.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to add the element to |
+| AElement | IwbElement | The element to add to the container |
+
 ## Examples
 
 ```pascal

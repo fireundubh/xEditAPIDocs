@@ -10,6 +10,17 @@ function IntToHex64(AValue: Int64; ADigits: integer): string;
 
 Returns a hexadecimal representation of `AValue` at least `ADigits` wide
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AValue | Int64 | The 64-bit integer value to convert to hexadecimal |
+| ADigits | integer | The minimum width of the hexadecimal string output |
+
+## Returns
+
+Returns a hexadecimal string representation of the value.
+
 ## Example
 
 ```pascal

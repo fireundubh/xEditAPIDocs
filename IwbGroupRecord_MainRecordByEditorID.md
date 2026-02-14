@@ -14,6 +14,17 @@ The function performs a search through the specified group to find a main record
 
 Note: This function is not optimized for performance and should be used sparingly, especially with large groups.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AGroup | IwbGroupRecord | The group to search within |
+| AEditorID | string | The Editor ID of the record to find |
+
+## Returns
+
+Returns the IwbMainRecord with the matching Editor ID, or nil if not found.
+
 ## Example
 
 ```pascal

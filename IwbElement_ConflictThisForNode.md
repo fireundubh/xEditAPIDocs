@@ -12,6 +12,16 @@ Gets the specific conflict status for a node.
 
 Returns a `TConflictThis` enumeration value representing the conflict state for the specified element itself, without considering child elements.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the specific conflict status for |
+
+## Returns
+
+Returns a TConflictThis enumeration value representing the conflict status.
+
 ## Example
 
 ```pascal

@@ -12,6 +12,16 @@ Returns the path and name of the element combined.
 
 This function combines the element's path and name into a single string, providing a more complete identifier for the element than either Path or Name alone.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the combined path and name for |
+
+## Returns
+
+Returns the combined path and name as a string.
+
 ## Example
 
 ```pascal

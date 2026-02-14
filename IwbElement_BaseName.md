@@ -12,6 +12,16 @@ Returns the base name of an element without load order index prefixes.
 
 This function is identical to `Name` except for how it handles IwbFiles. While `Name` will prepend a load order index (i.e. [02] PluginName.esp), `BaseName` will not include this prefix.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element whose base name to retrieve |
+
+## Returns
+
+Returns the base name of the element as a string, without load order prefixes for file elements.
+
 ## Example
 
 ```pascal

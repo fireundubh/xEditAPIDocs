@@ -10,6 +10,13 @@ procedure SetIsMedium(AFile: IwbFile; AValue: Boolean);
 
 Sets whether `AFile` is a Medium file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to set the Medium flag on |
+| AValue | Boolean | Whether to set (True) or clear (False) the Medium flag |
+
 ## Example
 
 ```pascal

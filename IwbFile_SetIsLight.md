@@ -10,6 +10,13 @@ procedure SetIsLight(AFile: IwbFile; AValue: Boolean);
 
 Sets whether `AFile` is a Light file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to set the Light flag on |
+| AValue | Boolean | Whether to set (True) or clear (False) the Light flag |
+
 ## Example
 
 ```pascal

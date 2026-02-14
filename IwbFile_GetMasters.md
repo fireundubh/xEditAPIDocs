@@ -10,6 +10,13 @@ procedure GetMasters(AFile: IwbFile; AFileNames: TStrings);
 
 Populates `AFileNames` with master file names from `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to retrieve master file names from |
+| AFileNames | TStrings | The string list to populate with master file names |
+
 ## Example
 
 ```pascal

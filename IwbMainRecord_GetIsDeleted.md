@@ -10,6 +10,16 @@ function GetIsDeleted(ARecord: IwbMainRecord): boolean;
 
 Returns whether `ARecord` is flagged as Deleted
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to check the Deleted flag on |
+
+## Returns
+
+Returns `True` if the record is flagged as Deleted, `False` otherwise.
+
 ## Example
 
 ```pascal

@@ -10,6 +10,16 @@ function GetFormVCS1(ARecord: IwbMainRecord): Cardinal;
 
 Returns the native value of the `Version Control Info 1` element
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the version control info from |
+
+## Returns
+
+Returns the Version Control Info 1 value as a Cardinal.
+
 ## Example
 
 ```pascal

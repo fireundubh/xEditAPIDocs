@@ -10,6 +10,17 @@ function HasMaster(AFile: IwbFile; AFileName: String): Boolean;
 
 Returns `True` if `AFile` depends on a master file named `AFileName`, and `False` otherwise
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check for master dependencies |
+| AFileName | String | The name of the master file to look for |
+
+## Returns
+
+Returns `True` if `AFile` depends on a master file named `AFileName`, and `False` otherwise.
+
 ## Example
 
 ```pascal

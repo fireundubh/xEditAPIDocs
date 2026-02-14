@@ -12,6 +12,12 @@ Marks the element and all of its descendants as modified.
 
 This forces xEdit to serialize the marked elements. Useful when you've made changes to an element's hierarchy and need to ensure all changes are saved.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to mark as modified recursively |
+
 ## Example
 
 ```pascal

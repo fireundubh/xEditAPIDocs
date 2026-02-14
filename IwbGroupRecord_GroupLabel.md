@@ -12,6 +12,16 @@ Returns the raw group label value for a group record.
 
 The function retrieves the group label as specified in the file format, returned as a cardinal (32-bit unsigned integer) value. The label's meaning depends on the group type.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| aeGroup | IwbGroupRecord | The group record to get the label from |
+
+## Returns
+
+Returns the group label as a cardinal value.
+
 ## Example
 
 ```pascal

@@ -10,6 +10,16 @@ function EditorID(ARecord: IwbMainRecord): string;
 
 Returns the edit value of the `EDID` element of `ARecord`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the Editor ID from |
+
+## Returns
+
+Returns the Editor ID of the record as a string.
+
 ## Example
 
 ```pascal

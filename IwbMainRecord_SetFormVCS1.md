@@ -12,6 +12,13 @@ Changes the native value of the `VCS1` property of `ARecord` to `AValue`
 
 The `VCS1` property corresponds to the `Version Control Info 1` element in the Record Header.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to set the version control info on |
+| AValue | Cardinal | The new Version Control Info 1 value |
+
 ## Example
 
 ```pascal

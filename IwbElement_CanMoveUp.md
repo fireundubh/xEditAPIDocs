@@ -12,6 +12,16 @@ Determines if an element can be moved up within its array.
 
 Returns `true` if the element is part of an array and can be moved further up using `MoveUp`. This function is used to verify if an element's position can be changed within its containing array.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to check if it can be moved up |
+
+## Returns
+
+Returns true if the element can be moved up in its array, false otherwise.
+
 ## Example
 
 ```pascal

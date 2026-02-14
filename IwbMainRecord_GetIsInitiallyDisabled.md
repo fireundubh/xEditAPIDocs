@@ -10,6 +10,16 @@ function GetIsInitiallyDisabled(ARecord: IwbMainRecord): boolean;
 
 Returns whether `ARecord` is flagged as Initially Disabled
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to check the Initially Disabled flag on |
+
+## Returns
+
+Returns `True` if the record is flagged as Initially Disabled, `False` otherwise.
+
 ## Example
 
 ```pascal

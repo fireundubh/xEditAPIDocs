@@ -12,6 +12,16 @@ Returns the last loaded overriding record for `ARecord`, or the record itself
 
 Unlike [HighestOverrideOrSelf](IwbMainRecord_HighestOverrideOrSelf.md), the return value of this function cannot be constrained to a specific load order index. This function will always return the *last* loaded overriding record for the current load order, or the record itself.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the winning override from |
+
+## Returns
+
+Returns the last loaded overriding IwbMainRecord, or the record itself if no overrides exist.
+
 ## Example
 
 ```pascal

@@ -12,6 +12,12 @@ Removes the element from its file. This operation permanently removes the elemen
 
 Use with caution as this operation cannot be undone.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to remove from its file |
+
 ## Example
 
 ```pascal

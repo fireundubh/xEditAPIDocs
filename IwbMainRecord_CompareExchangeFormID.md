@@ -12,6 +12,18 @@ Attempts to change the Form ID of `ARecord` from `AOldFormID` to `ANewFormID`
 
 Returns `True` if the attempt was successful and `False` otherwise
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The record to change the Form ID on |
+| AOldFormID | TwbFormID | The expected current Form ID to compare against |
+| ANewFormID | TwbFormID | The new Form ID to assign if the comparison matches |
+
+## Returns
+
+Returns `True` if the Form ID was successfully changed, `False` otherwise.
+
 ## Example
 
 ```pascal

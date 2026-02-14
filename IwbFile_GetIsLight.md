@@ -10,6 +10,16 @@ function GetIsLight(AFile: IwbFile): Boolean;
 
 Returns whether `AFile` is a Light file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check if it is Light |
+
+## Returns
+
+Returns `True` if the file is Light, `False` otherwise.
+
 ## Example
 
 ```pascal

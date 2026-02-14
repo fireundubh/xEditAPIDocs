@@ -10,6 +10,17 @@ function ReferencesByIndex(ARecord: IwbMainRecord; AIndex: integer): IwbMainReco
 
 Returns record at `AIndex` in array of records linked to by `ARecord`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The record to get outgoing references from |
+| AIndex | integer | The zero-based index in the array of referenced records |
+
+## Returns
+
+Returns the IwbMainRecord at the specified index that this record references.
+
 ## Example
 
 ```pascal

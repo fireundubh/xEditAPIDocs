@@ -10,6 +10,16 @@ function PrecombinedMesh(ARecord: IwbMainRecord): string;
 
 Returns the precombined mesh file path for `ARecord` if record is a Fallout 4 reference but not a placed actor
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The Fallout 4 reference record to get the precombined mesh path from |
+
+## Returns
+
+Returns the file path to the precombined mesh as a string.
+
 ## Example
 
 ```pascal

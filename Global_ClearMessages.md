@@ -12,6 +12,10 @@ Clears all messages from the messages window.
 
 This procedure removes all previously displayed messages from the xEdit messages pane, providing a clean slate for new messages.
 
+## Parameters
+
+This procedure takes no parameters.
+
 ## Example
 
 ```pascal

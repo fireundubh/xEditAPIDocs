@@ -10,6 +10,16 @@ function RecordCount(AFile: IwbFile): Integer;
 
 Returns the number of records in `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to count records in |
+
+## Returns
+
+Returns the number of records in the file.
+
 ## Example
 
 ```pascal

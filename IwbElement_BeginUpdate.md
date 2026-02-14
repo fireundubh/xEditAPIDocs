@@ -10,6 +10,12 @@ procedure BeginUpdate(AElement: IwbElement);
 
 Starts a bulk update for `AElement`. This can improve performance when making many changes to an element.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to begin bulk updates on |
+
 ## Example
 
 ```pascal

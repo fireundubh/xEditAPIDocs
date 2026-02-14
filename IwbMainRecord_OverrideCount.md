@@ -10,6 +10,16 @@ function OverrideCount(ARecord: IwbMainRecord): integer;
 
 Returns the number of overriding records for `ARecord`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The master record to count overrides for |
+
+## Returns
+
+Returns the number of overriding records as an integer.
+
 ## Example
 
 ```pascal

@@ -12,6 +12,16 @@ Returns the complete path to the element, including its containing file.
 
 This function provides the full hierarchical path to the element, starting from its containing file and including all parent elements. This is different from Path which returns only a single path component.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the full path for |
+
+## Returns
+
+Returns the complete hierarchical path as a string.
+
 ## Example
 
 ```pascal

@@ -14,6 +14,16 @@ Appends a blank plugin to the tree view, prompts the user for a file name, and r
 
 **Note:** The new plugin will not exist in the file system until the plugin is saved.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AIsESL | Boolean | Optional. If true, creates an ESL-flagged plugin with .esl extension (defaults to false) |
+
+## Returns
+
+Returns the newly created file as an IwbFile interface, or Nil if the user cancels the prompt.
+
 ## Example
 
 ```pascal

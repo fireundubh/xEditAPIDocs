@@ -14,6 +14,12 @@ If reference information is already updating, the procedure will abort.
 
 Unlike [BuildRef](IwbElement_BuildRef.md), only an `IwbMainRecord` can be passed as an argument to this function.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to update reference information for |
+
 ## Example
 
 ```pascal

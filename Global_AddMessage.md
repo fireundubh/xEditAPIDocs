@@ -16,6 +16,12 @@ To pass variables in `AText`, convert non-string variables to strings with funct
 
 To pass special characters in `AText`, concatenate the string with character literals such as `#9` for `\t` (TAB).
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AText | string | The text message to display in the Messages pane |
+
 ## Example
 
 ```pascal

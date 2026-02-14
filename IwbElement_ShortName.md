@@ -12,6 +12,16 @@ Returns a shortened version of the element's name.
 
 This function returns a concise name for the element, typically shorter than the standard `Name` function. Useful for display in space-constrained UI elements.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element whose short name to retrieve |
+
+## Returns
+
+Returns a shortened version of the element's name as a string.
+
 ## Example
 
 ```pascal

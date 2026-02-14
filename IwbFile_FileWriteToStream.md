@@ -18,6 +18,14 @@ If `AResetModified` is...
 | `1` | `rmYes`         |
 | `2` | `rmSetInternal` |
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to write to the stream |
+| AStream | TStream | The stream to write the file contents to |
+| AResetModified | Integer | Reset modified flag (0=rmNo, 1=rmYes, 2=rmSetInternal, defaults to 1) |
+
 ## Example
 
 ```pascal

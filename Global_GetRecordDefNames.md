@@ -10,6 +10,12 @@ procedure GetRecordDefNames(AList: TStrings);
 
 Populates `AList` with names of all record definitions for the current game mode
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AList | TStrings | The string list to populate with record definition names |
+
 ## Example
 
 ```pascal

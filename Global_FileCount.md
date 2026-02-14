@@ -10,6 +10,14 @@ function FileCount: integer;
 
 Returns the length of the array of loaded files in the active session
 
+## Parameters
+
+This function takes no parameters.
+
+## Returns
+
+Returns the number of loaded files as an integer.
+
 ## Examples
 
 ```pascal

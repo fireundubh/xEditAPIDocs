@@ -14,6 +14,12 @@ The operation is `Self := (Self - AList2) ∪ (AList2 - Self)`.
 
 The list is automatically sorted and duplicates are set to ignore before the operation.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AList2 | TStringList | The string list to compute symmetric difference with |
+
 ## Example
 
 ```pascal

@@ -12,6 +12,13 @@ Changes the native value of the `EditorID` property of `ARecord` to `AEditorID`
 
 The `EditorID` property corresponds to the `EDID` element.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to set the Editor ID on |
+| AEditorID | string | The new Editor ID value to assign |
+
 ## Example
 
 ```pascal

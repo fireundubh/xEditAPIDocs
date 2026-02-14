@@ -12,6 +12,16 @@ Returns the load order Form ID of the main record linked to the `NAME` subrecord
 
 **Note:** `AReference` must be a main record with the signature `ACHR` (Placed NPC) or `REFR` (Placed Object).
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AReference | IwbMainRecord | The reference record (ACHR or REFR) to get the base record ID from |
+
+## Returns
+
+Returns the load order Form ID of the base record as a Cardinal value.
+
 ## Example
 
 ```pascal

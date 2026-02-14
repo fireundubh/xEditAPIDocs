@@ -12,6 +12,17 @@ Modifies the internal state flags of an element.
 
 Returns the previous state value before modification. Used to manipulate internal element states.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element whose state to modify |
+| AState | TwbElementState | The new state to set |
+
+## Returns
+
+Returns the previous state value as a TwbElementState enumeration value.
+
 ## Example
 
 ```pascal

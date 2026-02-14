@@ -16,8 +16,15 @@ If the load order Form ID of any record is changed to a Form ID with a load orde
 
 An exception will be raised when one of the following conditions is met:
 
-- when `ALoadOrderFormID` refers to an existing Form ID; or 
+- when `ALoadOrderFormID` refers to an existing Form ID; or
 - when `ALoadOrderFormID` refers to a Form ID that cannot be mapped to a master file.
+
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to change the Form ID on |
+| ALoadOrderFormID | Cardinal | The new load order Form ID to assign |
 
 ## Example
 

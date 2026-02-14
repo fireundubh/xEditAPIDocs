@@ -10,6 +10,12 @@ procedure EndUpdate(AElement: IwbElement);
 
 Ends a bulk update for `AElement`.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to end bulk updates on |
+
 ## Example
 
 ```pascal

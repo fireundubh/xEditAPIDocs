@@ -14,6 +14,18 @@ The function searches for a child group based on its type and associated main re
 
 Warning: Make sure the aiType value matches the expected group type for the given context.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AGroup | IwbGroupRecord | The parent group to search within |
+| AType | integer | The group type to search for |
+| AMainRecord | IwbMainRecord | The main record associated with the child group |
+
+## Returns
+
+Returns the matching IwbGroupRecord, or nil if no matching group is found.
+
 ## Example
 
 ```pascal

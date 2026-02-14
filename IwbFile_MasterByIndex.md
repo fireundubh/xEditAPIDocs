@@ -10,6 +10,17 @@ function MasterByIndex(AFile: IwbFile; AIndex: Integer): IwbFile;
 
 Returns the master file at `AIndex` in the list of master files required by `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to retrieve the master from |
+| AIndex | Integer | The zero-based index of the master file in the master list |
+
+## Returns
+
+Returns the IwbFile interface for the master file at the specified index.
+
 ## Example
 
 ```pascal

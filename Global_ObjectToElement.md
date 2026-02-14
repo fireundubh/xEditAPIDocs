@@ -19,6 +19,16 @@ To avoid dangling pointer faults, follow these guidelines when populating a `TLi
 
 Using a `TList` is not recommended for any elements other than main records.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AObject | Variant | The variant object containing an element pointer |
+
+## Returns
+
+Returns the element as an IwbElement interface if the object pointer is compatible.
+
 ## Example
 
 ```pascal

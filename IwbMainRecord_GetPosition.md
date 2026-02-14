@@ -12,6 +12,16 @@ Returns the positional vector for `ARecord` when the record is a reference
 
 The `x`, `y`, and `z` members of the return type can be accessed as [Single](http:__docwiki.embarcadero.com_Libraries_Rio_en_System.Single.md) fields.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The reference record to get the position from |
+
+## Returns
+
+Returns a TwbVector containing the X, Y, and Z coordinates.
+
 ## Example
 
 ```pascal

@@ -14,6 +14,17 @@ Appends a blank plugin to the tree view named `AFileName` and returns the file. 
 
 **Note:** The new plugin will not exist in the file system until the plugin is saved.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFileName | string | The name for the new plugin file |
+| AIsESL | Boolean | Optional. If true, creates an ESL-flagged plugin with .esl extension (defaults to false) |
+
+## Returns
+
+Returns the newly created file as an IwbFile interface, or Nil if the user cancels the prompt.
+
 ## Example
 
 ```pascal

@@ -14,6 +14,17 @@ Returns the record, whose Form ID matches `AFormID`, from `AFile`.
 
 The module's ID prefix will be corrected internally to accommodate for small or medium flags in files that support it. Leading zeroes in the hex string for `AFormID` are not mandatory.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile or string | The file to search, specified as IwbFile interface or filename string |
+| AFormID | integer or string | The Form ID to find, specified as Integer or hex string |
+
+## Returns
+
+Returns the IwbMainRecord with the matching Form ID, or nil if not found.
+
 ## Examples
 
 ```pascal

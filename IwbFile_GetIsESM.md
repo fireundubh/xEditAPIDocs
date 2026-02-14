@@ -10,6 +10,16 @@ function GetIsESM(AFile: IwbFile): Boolean;
 
 Returns `True` if `AFile` is an ESM plugin, and `False` otherwise
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check if it's an ESM |
+
+## Returns
+
+Returns true if the file is an ESM plugin, false otherwise.
+
 ## Example
 
 ```pascal

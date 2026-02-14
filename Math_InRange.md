@@ -12,6 +12,18 @@ function InRange(AValue, AMin, AMax: Double): Boolean;
 
 Returns `True` if `AValue` is within the range specified by `AMin` and `AMax` (inclusive).
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AValue | Integer/Single/Double | The value to check |
+| AMin | Integer/Single/Double | The minimum value of the range (inclusive) |
+| AMax | Integer/Single/Double | The maximum value of the range (inclusive) |
+
+## Returns
+
+Returns `True` if AValue is within the range [AMin, AMax], `False` otherwise.
+
 ## Example
 
 ```pascal

@@ -10,6 +10,16 @@ function GetIsSmall(AFile: IwbFile): Boolean;
 
 Returns whether `AFile` is a Small file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check if it is Small |
+
+## Returns
+
+Returns `True` if the file is Small, `False` otherwise.
+
 ## Example
 
 ```pascal

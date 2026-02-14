@@ -12,14 +12,18 @@ Copies an element to another record.
 
 Useful for copying specific elements like "Conditions" or faction entries between records.
 
-Parameters:
+## Parameters
 
-- `AElement`: Source element to copy
-- `ARecord`: Destination record
-- `AAsNew`: When true, creates new record instead of override
-- `ADeepCopy`: When true, performs deep copy
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The source element to copy |
+| ARecord | IwbMainRecord | The destination record |
+| AAsNew | boolean | When true, creates new record instead of override |
+| ADeepCopy | boolean | When true, performs deep copy |
 
-Returns the copied element.
+## Returns
+
+Returns the copied element as an IwbElement interface.
 
 ## Example
 

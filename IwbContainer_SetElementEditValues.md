@@ -12,6 +12,14 @@ Changes the edit value of an element in the container identified by the specifie
 
 This procedure modifies the human-readable edit value of an element. The path parameter uses slash notation to navigate to nested elements. The value is converted from string to the appropriate type for the target element.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container containing the element to modify |
+| APath | string | The element path to the value |
+| AValue | string | The new edit value to set |
+
 ## Examples
 
 ```pascal

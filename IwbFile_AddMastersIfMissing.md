@@ -14,6 +14,15 @@ If `ASortMasters` is `True`, after appending the specified master files, **AddMa
 
 If `ASilent` is `True`, **AddMastersIfMissing** will not display any message notifications during the process.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to add the masters to |
+| AMasters | TStrings | The list of master file names to add |
+| ASortMasters | boolean | If true, sorts the master files list by load order after adding (defaults to true) |
+| ASilent | boolean | If true, suppresses message notifications (defaults to false) |
+
 ## Examples
 
 ```pascal

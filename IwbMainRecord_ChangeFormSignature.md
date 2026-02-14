@@ -12,6 +12,13 @@ Changes the signature (record type) of a main record to a new value.
 
 The procedure modifies only the 4-character signature of the record while preserving all other record data. This should be used with caution as changing record signatures can break references and functionality if not done correctly.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to change the signature of |
+| ANewSignature | string | The new 4-character signature to assign to the record |
+
 ## Example
 
 ```pascal

@@ -10,10 +10,16 @@ function TemplateAssign(AElement: IwbElement; ATemplateName: string): IwbElement
 
 Assigns a template by name to an element and returns that new element
 
-Parameters:
+## Parameters
 
-- `AElement`: the element that will receive the template
-- `ATemplateName`: the name of the template (assumed to be unique)
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element that will receive the template |
+| ATemplateName | string | The name of the template (assumed to be unique) |
+
+## Returns
+
+Returns the newly created element as an IwbElement interface.
 
 ## Example
 

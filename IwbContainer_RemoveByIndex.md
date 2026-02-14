@@ -10,6 +10,18 @@ function RemoveByIndex(AContainer: IwbContainer; AIndex: integer; AMarkModified:
 
 Removes and returns the element at the specified index in the container.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to remove the element from |
+| AIndex | integer | The zero-based index of the element to remove |
+| AMarkModified | boolean | If true, marks the container as modified |
+
+## Returns
+
+Returns the removed element as an IwbElement interface.
+
 ## Examples
 
 ```pascal

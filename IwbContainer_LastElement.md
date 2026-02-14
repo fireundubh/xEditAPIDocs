@@ -10,6 +10,16 @@ function LastElement(AContainer: IwbContainer): IwbElement;
 
 Returns the last element in the container, or nil if there are no children.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to get the last element from |
+
+## Returns
+
+Returns the last element as an IwbElement interface, or nil if the container is empty.
+
 ## Examples
 
 ```pascal

@@ -10,6 +10,13 @@ procedure ResourceList(AContainerName: String; AContainerNames: TStrings);
 
 Populates `AContainerNames` with all file names in the container matching `AContainerName`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainerName | String | The name of the resource container to list files from |
+| AContainerNames | TStrings | The string list to populate with file names from the container |
+
 ## Example
 
 ```pascal

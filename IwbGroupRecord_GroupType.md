@@ -26,6 +26,16 @@ Possible values:
 |     9 | Cell Temporary Children                           |
 |    10 | Cell Visible Distant Children<br />Quest Children |
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AGroup | IwbGroupRecord | The group record to get the type from |
+
+## Returns
+
+Returns the group type as an integer value (0-10).
+
 ## Examples
 
 ```pascal

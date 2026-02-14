@@ -10,12 +10,14 @@ procedure ReportRequiredMasters(AElement: IwbElement; AListOut: TStrings; AAsNew
 
 Checks which master files an element depends on and adds their filenames to the output list.
 
-### Arguments
+## Parameters
 
-- `AElement`: The element to check
-- `AListOut`: List to store the required master filenames
-- `AAsNew`: Boolean parameter for checking as new
-- `ARecursive`: If true, checks children elements of containers
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to check for required masters |
+| AListOut | TStrings | The string list to store the required master filenames |
+| AAsNew | boolean | Boolean parameter for checking as new |
+| ARecursive | boolean | If true, checks children elements of containers |
 
 ## Example
 

@@ -10,6 +10,16 @@ function ElementTypeAsText(AElement: IwbElement): String;
 
 Returns the element type of `AElement` as a string.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the element type from |
+
+## Returns
+
+Returns the element type as a string.
+
 ## Example
 
 ```pascal

@@ -10,6 +10,16 @@ function GetFileName(AFile: IwbFile): String;
 
 Returns the file name and extension for `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to get the name from |
+
+## Returns
+
+Returns the file name with extension as a string.
+
 ## Example
 
 ```pascal

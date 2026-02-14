@@ -12,6 +12,13 @@ Changes the native value of the `Version` property of `ARecord` to `AVersion`
 
 The `Version` property corresponds to the `Form Version` element in the Record Header.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to set the form version on |
+| AVersion | Cardinal | The new form version value |
+
 ## Example
 
 ```pascal

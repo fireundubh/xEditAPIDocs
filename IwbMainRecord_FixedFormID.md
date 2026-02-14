@@ -14,6 +14,16 @@ Local records will not have a load order prefix (e.g., `0x00FFFFFF`) and overrid
 
 This function can be used in the resolution of HITME issues.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the fixed Form ID from |
+
+## Returns
+
+Returns the File Form ID with the Mod ID clamped to the master file count.
+
 ## Example
 
 ```pascal

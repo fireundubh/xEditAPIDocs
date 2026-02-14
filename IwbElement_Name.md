@@ -12,6 +12,16 @@ Returns the basic name of the element.
 
 This function returns the standard name of the element. This is the most commonly used name function and returns a basic identifier for the element.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element whose name to retrieve |
+
+## Returns
+
+Returns the standard name of the element as a string.
+
 ## Example
 
 ```pascal

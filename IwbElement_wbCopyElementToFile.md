@@ -10,14 +10,18 @@ function wbCopyElementToFile(AElement: IwbElement; AFile: IwbFile; AAsNew: boole
 
 Copies an element to another file.
 
-Parameters:
+## Parameters
 
-- `AElement`: Source element (IwbMainRecord, IwbGroupRecord, or IwbContainer)
-- `AFile`: Destination file
-- `AAsNew`: When true, creates new record instead of override
-- `ADeepCopy`: When true, performs deep copy of the element
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The source element to copy (IwbMainRecord, IwbGroupRecord, or IwbContainer) |
+| AFile | IwbFile | The destination file |
+| AAsNew | boolean | When true, creates new record instead of override |
+| ADeepCopy | boolean | When true, performs deep copy of the element |
 
-Returns the copied element.
+## Returns
+
+Returns the copied element as an IwbElement interface.
 
 ## Example
 

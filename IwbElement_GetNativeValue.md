@@ -12,6 +12,16 @@ Returns the element's value in its native type.
 
 This function returns the element's value as a Variant containing the native data type (integer, float, string, etc.) rather than a string representation. This is useful when you need to perform calculations or comparisons with the actual value.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the native value from |
+
+## Returns
+
+Returns the element's native value as a Variant type.
+
 ## Example
 
 ```pascal

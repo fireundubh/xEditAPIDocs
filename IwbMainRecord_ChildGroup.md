@@ -10,6 +10,16 @@ function ChildGroup(AWorldspace: IwbMainRecord): IwbGroupRecord;
 
 Returns the group contained by `AWorldspace`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AWorldspace | IwbMainRecord | The worldspace or other main record to get the child group from |
+
+## Returns
+
+Returns the IwbGroupRecord contained by the main record.
+
 ## Example
 
 ```pascal

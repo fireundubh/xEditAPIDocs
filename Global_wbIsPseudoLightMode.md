@@ -10,6 +10,10 @@ function wbIsPseudoLightMode: Boolean;
 
 Returns whether pseudo Light mode is enabled.
 
+## Returns
+
+Returns `True` if pseudo Light mode is enabled, `False` otherwise.
+
 ## Example
 
 ```pascal

@@ -21,6 +21,12 @@ Unlike `UpdateRefs`, this function will accept any of these argument types:
 
 If references are updating for an `IwbFile` and references are not out-of-date, or if the plugin is a delta patch, the procedure will abort.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element for which to rebuild reference information |
+
 ## Example
 
 ```pascal

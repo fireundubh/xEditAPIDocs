@@ -10,6 +10,16 @@ function GetGridCell(ARecord: IwbMainRecord): TwbGridCell;
 
 Returns a `TwbGridCell` object containing the `X` and `Y` coordinates for `ARecord` (must be an exterior cell record)
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The exterior cell record to get grid coordinates from |
+
+## Returns
+
+Returns a TwbGridCell object with X and Y coordinates.
+
 ## Example
 
 ```pascal

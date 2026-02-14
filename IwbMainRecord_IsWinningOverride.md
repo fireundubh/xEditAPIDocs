@@ -10,6 +10,16 @@ function IsWinningOverride(ARecord: IwbMainRecord): boolean;
 
 Returns whether `ARecord` loads last in the current load order
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to check if it is the winning override |
+
+## Returns
+
+Returns `True` if the record loads last in the current load order, `False` otherwise.
+
 ## Example
 
 ```pascal

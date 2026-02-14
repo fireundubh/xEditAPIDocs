@@ -12,6 +12,16 @@ Checks if an element can be edited.
 
 Returns true if the element can be modified. Some elements, particularly those in base game master files like Skyrim.esm, may be locked from editing.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to check if it's editable |
+
+## Returns
+
+Returns true if the element can be edited, false otherwise.
+
 ## Example
 
 ```pascal

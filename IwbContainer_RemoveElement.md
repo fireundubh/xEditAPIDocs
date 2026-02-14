@@ -10,6 +10,17 @@ function RemoveElement(AContainer: IwbContainer; AChild: Variant): IwbElement;
 
 Removes and returns the specified element from the container.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to remove the element from |
+| AChild | Variant | The element or element name to remove |
+
+## Returns
+
+Returns the removed element as an IwbElement interface.
+
 ## Examples
 
 ```pascal

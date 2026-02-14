@@ -12,6 +12,16 @@ Returns the Form ID of `ARecord`
 
 **Note:** The Form ID returned by this function is not relative to file load order.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the Form ID from |
+
+## Returns
+
+Returns the Form ID as a Cardinal value (not relative to load order).
+
 ## Example
 
 ```pascal

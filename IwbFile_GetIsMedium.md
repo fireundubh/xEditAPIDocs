@@ -10,6 +10,16 @@ function GetIsMedium(AFile: IwbFile): Boolean;
 
 Returns whether `AFile` is a Medium file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check if it is Medium |
+
+## Returns
+
+Returns `True` if the file is Medium, `False` otherwise.
+
 ## Example
 
 ```pascal

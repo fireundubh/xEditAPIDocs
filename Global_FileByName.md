@@ -33,6 +33,16 @@ begin
 end;
 ```
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFileName | string | The name of the plugin file to find |
+
+## Returns
+
+Returns the file with the specified name as an IwbFile interface, or nil if not found.
+
 ## Example
 
 ```pascal

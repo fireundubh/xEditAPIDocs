@@ -12,6 +12,16 @@ Resolves the full filesystem path for a given filename.
 
 Returns the complete path to the specified file, including drive letter and all directory components.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFileName | string | The filename to resolve to a full path |
+
+## Returns
+
+Returns the complete filesystem path as a string.
+
 ## Example
 
 ```pascal

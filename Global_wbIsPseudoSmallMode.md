@@ -10,6 +10,10 @@ function wbIsPseudoSmallMode: Boolean;
 
 Returns whether pseudo Small mode is enabled.
 
+## Returns
+
+Returns `True` if pseudo Small mode is enabled, `False` otherwise.
+
 ## Example
 
 ```pascal

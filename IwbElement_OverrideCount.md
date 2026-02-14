@@ -12,6 +12,16 @@ Returns the number of override records for this element.
 
 For master records, this function returns the number of override records that exist in other plugins. Returns 0 for elements that are not master records.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the override count for |
+
+## Returns
+
+Returns the number of override records as an integer.
+
 ## Example
 
 ```pascal

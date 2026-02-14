@@ -12,6 +12,15 @@ Returns the Form ID of `ARecord` relative to the current load order
 
 `FixedFormID`, `FormID`, and `GetLoadOrderFormID` will return different Form ID values when `ARecord` is overridden but not when `ARecord` is the overriding record.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the load order Form ID from |
+
+## Returns
+
+Returns the Form ID relative to the current load order as a Cardinal value.
 
 ## Example
 

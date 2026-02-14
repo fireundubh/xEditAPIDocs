@@ -10,6 +10,17 @@ function RecordByEditorID(AFile: IwbFile; AEditorID: String): IwbMainRecord;
 
 Returns the record, whose Editor ID matches `AEditorID`, from `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to search for the record |
+| AEditorID | String | The Editor ID of the record to find |
+
+## Returns
+
+Returns the IwbMainRecord with the matching Editor ID, or nil if not found.
+
 ## Examples
 
 ```pascal

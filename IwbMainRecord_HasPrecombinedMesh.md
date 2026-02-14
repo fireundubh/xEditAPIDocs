@@ -10,6 +10,16 @@ function HasPrecombinedMesh(ARecord: IwbMainRecord): boolean;
 
 Returns whether `ARecord` is a Fallout 4 reference that has precombined mesh data
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The reference record to check for precombined mesh data |
+
+## Returns
+
+Returns `True` if the record has precombined mesh data, `False` otherwise.
+
 ## Example
 
 ```pascal

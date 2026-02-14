@@ -12,6 +12,12 @@ Moves an element down by one slot in an array.
 
 Only works if the element is part of an array. Should be used after checking if the movement is possible.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to move down in its array |
+
 ## Example
 
 ```pascal

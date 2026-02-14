@@ -14,6 +14,16 @@ The function takes an IwbFile interface as input and returns its index in the lo
 
 The load order index represents the position of the plugin in the overall load order, with master files typically having lower indices than dependent files.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| aeFile | IwbFile | The file to get the load order index from |
+
+## Returns
+
+Returns the load order index of the file, or -1 if the parameter is not a valid IwbFile.
+
 ## Example
 
 ```pascal

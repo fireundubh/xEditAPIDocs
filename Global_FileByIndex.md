@@ -10,6 +10,16 @@ function FileByIndex(AIndex: integer): IwbFile;
 
 Returns the plugin at `AIndex` in the array of loaded files
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AIndex | integer | The zero-based index of the file in the loaded files array |
+
+## Returns
+
+Returns the file at the specified index as an IwbFile interface.
+
 ## Example
 
 ```pascal

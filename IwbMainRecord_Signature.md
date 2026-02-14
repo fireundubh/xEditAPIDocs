@@ -10,6 +10,16 @@ function Signature(ARecord: IwbMainRecord): string;
 
 Returns the signature of `ARecord` (e.g., `ARMA`, `NPC_`, `WEAP`)
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to get the signature from |
+
+## Returns
+
+Returns the 4-character signature of the record as a string.
+
 ## Example
 
 ```pascal

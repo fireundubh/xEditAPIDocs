@@ -12,6 +12,14 @@ Inserts a new element at the specified index position in the container.
 
 This procedure creates a new element with the given signature and inserts it at the specified index. All existing elements at and after the index are shifted right.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to insert the element into |
+| AIndex | Integer | The zero-based index position to insert at |
+| AElement | IwbElement | The element to insert |
+
 ## Examples
 
 ```pascal

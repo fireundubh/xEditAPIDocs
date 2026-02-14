@@ -10,6 +10,17 @@ function AssignTemplateCount(AElement: IwbElement; AElementIndex: Integer): Inte
 
 Returns the number of assign templates for `AElement` at `AElementIndex`.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to count templates for |
+| AElementIndex | Integer | The index of the element to count templates for |
+
+## Returns
+
+Returns the number of assign templates as an Integer.
+
 ## Example
 
 ```pascal

@@ -10,17 +10,21 @@ function wbCopyElementToFileWithPrefix(ASource: IwbElement; AFile: IwbFile; AAsN
 
 Copies an element to another file with prefix/suffix manipulation.
 
-Parameters:
+## Parameters
 
-- `ASource`: Source element to copy
-- `AFile`: Destination file
-- `AAsNew`: When true, creates new record instead of override
-- `ADeepCopy`: When true, performs deep copy
-- `APrefixRemove`: Prefix to remove from names
-- `APrefix`: Prefix to add to names
-- `ASuffix`: Suffix to add to names
+| Name | Type | Description |
+|------|------|-------------|
+| ASource | IwbElement | The source element to copy |
+| AFile | IwbFile | The destination file |
+| AAsNew | boolean | When true, creates new record instead of override |
+| ADeepCopy | boolean | When true, performs deep copy |
+| APrefixRemove | string | Prefix to remove from names |
+| APrefix | string | Prefix to add to names |
+| ASuffix | string | Suffix to add to names |
 
-Returns the copied element.
+## Returns
+
+Returns the copied element as an IwbElement interface.
 
 ## Example
 

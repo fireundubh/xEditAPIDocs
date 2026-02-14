@@ -12,6 +12,16 @@ Returns the definition type of the element.
 
 This function returns the def-type of the element, which describes the fundamental type of the element's definition in the record structure.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the definition type for |
+
+## Returns
+
+Returns a TwbDefType enumeration value representing the definition type.
+
 ## Example
 
 ```pascal

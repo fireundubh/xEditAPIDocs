@@ -10,15 +10,20 @@ function ElementAssign(AContainer: IwbContainer; AIndex: integer; ASource: IwbEl
 
 Copies or creates elements within a container element.
 
-Parameters:
-- `AContainer`: Destination container element
-- `AIndex`: Position index where to place the new element
-  - Use `HighInteger` to append
-  - Use `LowInteger` or negative value for non-arrays
-- `ASource`: Source element to copy from (can be nil to create blank element)
-- `AOnlySK`: Sorted Key Only flag (use False for normal operations)
-
 Returns the newly created or copied element.
+
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The destination container element |
+| AIndex | integer | The position index where to place the new element (use HighInteger to append, LowInteger or negative for non-arrays) |
+| ASource | IwbElement | The source element to copy from (can be nil to create blank element) |
+| AOnlySK | boolean | Sorted Key Only flag (use false for normal operations) |
+
+## Returns
+
+Returns the newly created or copied element as an IwbElement interface.
 
 ## Example
 

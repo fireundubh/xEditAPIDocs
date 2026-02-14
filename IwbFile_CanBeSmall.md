@@ -10,6 +10,16 @@ function CanBeSmall(AFile: IwbFile): Boolean;
 
 Returns whether `AFile` can be a Small file.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to check if it can be Small |
+
+## Returns
+
+Returns `True` if the file can be Small, `False` otherwise.
+
 ## Example
 
 ```pascal

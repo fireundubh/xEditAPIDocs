@@ -12,6 +12,17 @@ Sets the element's value using its native data type.
 
 This function attempts to set the element's value using a Variant containing the appropriate native data type. Returns `true` if the value was successfully set, `false` otherwise. This is more efficient than `SetEditValue` when working with native data types.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to set the value for |
+| AValue | Variant | The new value in its native data type |
+
+## Returns
+
+Returns true if the value was successfully set, false otherwise.
+
 ## Example
 
 ```pascal

@@ -12,6 +12,16 @@ Returns the internal container state flags as a bitmask (e.g., initialized, refe
 
 The returned byte value contains bit flags representing various states of the container.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AContainer | IwbContainer | The container to retrieve state flags from |
+
+## Returns
+
+Returns a byte value containing bitmask flags representing the container's state.
+
 ## Constants
 
 - `csInit`

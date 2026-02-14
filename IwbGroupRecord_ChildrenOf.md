@@ -16,6 +16,16 @@ For example, a Dialogue Topic (`DIAL`) is followed by a group (`GRUP`) that cont
 Similarly, cells (`CELL`) and worldspaces (`WRLD`) have their contents organized in a comparable manner to Dialogue
 Topics. As a result, this function will work with them as well, returning their corresponding parent main record.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AGroup | IwbGroupRecord | The child group to get the parent main record from |
+
+## Returns
+
+Returns the parent IwbMainRecord associated with the child group, or nil if not applicable.
+
 ## Example
 
 ```pascal

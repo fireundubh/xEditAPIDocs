@@ -10,6 +10,17 @@ function HighestOverrideOrSelf(ARecord: IwbMainRecord; AMaxLoadOrder: integer): 
 
 Returns an overriding record for `ARecord` that loads last nearest to `AMaxLoadOrder`, or the record itself
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The main record to find the highest override for |
+| AMaxLoadOrder | integer | The maximum load order to search up to |
+
+## Returns
+
+Returns the highest override record up to the specified load order, or the record itself if no override exists.
+
 ## Example
 
 ```pascal

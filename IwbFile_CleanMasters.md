@@ -10,6 +10,12 @@ procedure CleanMasters(AFile: IwbFile);
 
 Removes unused master files from `AFile`'s master files list
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to clean master files from |
+
 ## Example
 
 ```pascal

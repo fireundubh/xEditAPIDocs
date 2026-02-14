@@ -10,6 +10,12 @@ procedure SortMasters(AFile: IwbFile);
 
 Sorts the master file list in `AFile`'s file header by the current load order. When the list is sorted, references to the affected masters are updated and affected records are marked as modified.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file whose master list should be sorted |
+
 ## Example
 
 ```pascal

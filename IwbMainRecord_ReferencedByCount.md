@@ -10,6 +10,16 @@ function ReferencedByCount(ARecord: IwbMainRecord): integer;
 
 Returns the number of records linking to `ARecord`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The record to count incoming references for |
+
+## Returns
+
+Returns the number of records that reference this record as an integer.
+
 ## Example
 
 ```pascal

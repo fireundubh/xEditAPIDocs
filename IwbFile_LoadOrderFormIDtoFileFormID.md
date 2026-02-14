@@ -10,6 +10,17 @@ function LoadOrderFormIDtoFileFormID(AFile: IwbFile; AFormID: Integer): Cardinal
 
 Converts `AFormID`, relative to the current load order, to a Form ID relative to `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to convert the Form ID relative to |
+| AFormID | Integer | The Form ID in load order format to convert |
+
+## Returns
+
+Returns the Form ID converted to file-relative format.
+
 ## Example
 
 ```pascal

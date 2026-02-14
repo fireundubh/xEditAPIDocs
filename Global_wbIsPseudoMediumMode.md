@@ -10,6 +10,10 @@ function wbIsPseudoMediumMode: Boolean;
 
 Returns whether pseudo Medium mode is enabled.
 
+## Returns
+
+Returns `True` if pseudo Medium mode is enabled, `False` otherwise.
+
 ## Example
 
 ```pascal

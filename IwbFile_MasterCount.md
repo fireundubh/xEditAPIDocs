@@ -10,6 +10,16 @@ function MasterCount(AFile: IwbFile): Integer;
 
 Returns the number of master files required by `AFile`
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AFile | IwbFile | The file to count master files for |
+
+## Returns
+
+Returns the number of master files required by the file.
+
 ## Example
 
 ```pascal

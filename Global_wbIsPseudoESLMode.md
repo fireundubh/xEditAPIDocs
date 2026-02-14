@@ -10,6 +10,10 @@ function wbIsPseudoESLMode: Boolean;
 
 Returns whether pseudo ESL (Light) mode is enabled.
 
+## Returns
+
+Returns `True` if pseudo ESL mode is enabled, `False` otherwise.
+
 ## Example
 
 ```pascal

@@ -12,6 +12,13 @@ Manipulates the internal flags of an element.
 
 This procedure allows you to clear specific state flags on elements. Common usage includes clearing the modified state of elements.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element whose state to clear |
+| AState | TwbElementState | The state flag to clear |
+
 ## Element States
 
 - `esModified`

@@ -10,6 +10,17 @@ function OverrideByIndex(ARecord: IwbMainRecord; AIndex: integer): IwbMainRecord
 
 Returns the overriding record for `ARecord` at `AIndex` in the array of overriding records for that record
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The master record to get the override from |
+| AIndex | integer | The zero-based index of the override in the override list |
+
+## Returns
+
+Returns the IwbMainRecord override at the specified index.
+
 ## Example
 
 ```pascal

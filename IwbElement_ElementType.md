@@ -12,6 +12,16 @@ Returns the type of the element.
 
 This function returns an enumerated value indicating the type of the element. This is useful for determining how to handle different types of elements.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| AElement | IwbElement | The element to get the type for |
+
+## Returns
+
+Returns a TwbElementType enumeration value representing the element type.
+
 ## Element Types
 
 - `etFile`

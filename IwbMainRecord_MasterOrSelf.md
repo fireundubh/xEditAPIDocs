@@ -12,6 +12,16 @@ Returns the master record overridden by `ARecord`, or the overriding record itse
 
 **Note:** Unlike [Master](IwbMainRecord_Master.md), the return value from this function will always be assigned.
 
+## Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| ARecord | IwbMainRecord | The record to get the master or itself from |
+
+## Returns
+
+Returns the master IwbMainRecord if the record is an override, or the record itself if it is the master.
+
 ## Example
 
 ```pascal
