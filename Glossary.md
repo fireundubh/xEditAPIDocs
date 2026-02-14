@@ -1,10 +1,26 @@
 # Glossary
 
+## B
+
+### BSA
+
+Bethesda Archive - a proprietary compressed archive format used by Bethesda Game Studios to package game assets (textures, models, sounds, etc.) for their games.
+
 ## C
 
 ### Container
 
 Any [element](#element) that contains or can contain other elements
+
+### CRC32
+
+Cyclic Redundancy Check 32-bit - a hash function that produces a 32-bit checksum value used to detect accidental changes to raw data. Commonly used for verifying file integrity and resource archives.
+
+## D
+
+### DDS
+
+DirectDraw Surface - a Microsoft image file format used for storing textures and environment maps. Widely used in video games for efficient GPU texture storage and supports various compression formats.
 
 ## E
 
@@ -48,7 +64,17 @@ The Form ID format for ESL records has three parts:
 2. a 3-character [Light Mod ID](#light-mod-id), and
 3. a 3-character Object ID (e.g., `FExxxyyy`.)
 
+## G
+
+### Grid Cell
+
+A coordinate unit in the game's worldspace system. Grid cells divide the world into manageable chunks, typically 4096 units square. Used for organizing exterior cell data and optimizing loading/rendering.
+
 ## H
+
+### Hash
+
+A cryptographic or non-cryptographic function that maps data of arbitrary size to fixed-size values. Common hash functions include CRC32, MD5, and SHA1, used for file integrity verification, resource identification, and data deduplication.
 
 ### Hardcoded Form
 
@@ -74,6 +100,14 @@ When injected records with different [signatures](#signature) conflict, the game
 
 ## L
 
+### Localization
+
+The system for storing and retrieving translated game strings in language-specific files (.STRINGS, .DLSTRINGS, .ILSTRINGS). Allows games to support multiple languages by externalizing text content from plugin files.
+
+### LOD
+
+Level of Detail - simplified versions of 3D models and textures used at greater distances to improve rendering performance. LOD generation creates these optimized assets automatically from full-detail game data.
+
 ### Light Mod ID
 
 A 3-character hexadecimal identifier for an ESL file associated with the [Object ID](#object-id) in a [Form ID](#form-id). The term "light" comes from nomenclature used to distinguish between slots into which plugins are loaded. ESL plugins are loaded into "light slots" and other plugins into "full slots."
@@ -95,6 +129,10 @@ If `Dragonborn.esm` was reordered before `Dawnguard.esm`, the global Mod ID for 
 
 ## M
 
+### MD5
+
+Message-Digest Algorithm 5 - a widely-used cryptographic hash function that produces a 128-bit hash value. While no longer considered secure for cryptographic purposes, it remains useful for file integrity verification and resource comparison.
+
 ### Master File
 
 A [plugin](#plugin) on which another plugin depends. For a [record](#record) in a plugin to link to records outside its scope, that plugin must declare the source master files in its File Header. A plugin's master files has implications for its records' [File Form IDs](#file-form-id) and its load order.
@@ -106,6 +144,12 @@ A [record](#record) at the start of an [overriding record](#overriding-record) c
 ### Mod ID
 
 A 2-character hexadecimal identifier for an ESM or ESP plugin associated with the [Object ID](#object-id) in a [Form ID](#form-id)
+
+## N
+
+### NIF
+
+NetImmerse Format - the 3D model file format used by Gamebryo and Creation Engine games. NIF files contain mesh geometry, textures, animations, and other 3D asset data.
 
 ## O
 
@@ -131,11 +175,19 @@ See also: [Data File - Creation Kit Wiki](https://www.creationkit.com/fallout4/i
 
 ## R
 
+### Resource
+
+Game assets such as textures, 3D models, sounds, and other binary data files typically stored in BSA archives or loose files. Resources are referenced by records but stored separately from plugin data.
+
 ### Record
 
 A record is a data structure in a [plugin](#plugin) identified by its [signature](#signature) and [Form ID](#form-id) that describes an object
 
 ## S
+
+### SHA1
+
+Secure Hash Algorithm 1 - a cryptographic hash function that produces a 160-bit hash value. Like MD5, it's no longer recommended for security purposes but remains useful for file integrity checking and version control.
 
 ### Signature
 
