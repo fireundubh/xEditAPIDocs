@@ -8,10 +8,10 @@ Comprehensive documentation for xEdit's JvInterpreter scripting system, covering
 
 | Section | Description | Functions |
 |---------|-------------|-----------|
-| [Plugin Records](#plugin-records) | Work with ESP/ESM/ESL files and game records | ~200 |
-| [Binary Formats](#binary-formats) | NIF meshes, materials, LOD files, textures | ~100 |
-| [Utility Functions](#utility-functions) | Math, strings, collections, grid cells | ~20 |
-| [Resources](#resources) | Glossary, examples, tutorials | - |
+| [Plugin Records](#-plugin-records) | Work with ESP/ESM/ESL files and game records | ~200 |
+| [Binary Formats](#-binary-formats) | NIF meshes, materials, LOD files, textures | ~100 |
+| [Utility Functions](#-utility-functions) | Math, strings, collections, grid cells | ~20 |
+| [Resources](#-resources) | Glossary, examples, tutorials | - |
 
 **Total Documented Functions:** ~377 | **Coverage:** >90% of core API
 
