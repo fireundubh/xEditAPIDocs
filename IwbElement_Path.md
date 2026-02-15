@@ -25,10 +25,61 @@ Returns the path component as a string.
 ## Example
 
 ```pascal
+// Example 1: Get local path segment for logging
 var
-  pathComponent: string;
+  element: IwbElement;
+  pathSegment: string;
 begin
-  pathComponent := Path(element);
+  if Assigned(e) then begin
+    element := ElementByPath(e, 'DATA\Value');
+    if Assigned(element) then begin
+      pathSegment := Path(element);
+      AddMessage(Format('Element path segment: %s', [pathSegment]));
+      AddMessage(Format('Full path: %s', [FullPath(element)]));
+    end;
+  end;
+end;
+
+// Example 2: Build relative paths during iteration
+var
+  container: IwbContainer;
+  i: integer;
+  element: IwbElement;
+  localPath, fullPath: string;
+begin
+  if Assigned(e) then begin
+    container := ElementByPath(e, 'Conditions');
+    if Assigned(container) then begin
+      for i := 0 to ElementCount(container) - 1 do begin
+        element := ElementByIndex(container, i);
+        if Assigned(element) then begin
+          localPath := Path(element);
+          fullPath := FullPath(element);
+          AddMessage(Format('Local: %s | Full: %s', [localPath, fullPath]));
+        end;
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Compare path components
+var
+  element1, element2: IwbElement;
+  path1, path2: string;
+begin
+  if Assigned(e) then begin
+    element1 := ElementByPath(e, 'EDID');
+    element2 := ElementByPath(e, 'FULL');
+    if Assigned(element1) and Assigned(element2) then begin
+      path1 := Path(element1);
+      path2 := Path(element2);
+      AddMessage(Format('Comparing paths: %s vs %s', [path1, path2]));
+      if path1 = path2 then
+        AddMessage('  Same path component')
+      else
+        AddMessage('  Different path components');
+    end;
+  end;
 end;
 ```
 

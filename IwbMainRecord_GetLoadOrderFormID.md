@@ -24,16 +24,65 @@ Returns the Form ID relative to the current load order as a Cardinal value.
 
 ## Example
 
-With `Unofficial Fallout 4 Patch.esp` loaded and `[MISC:06022DC0]` selected in `DLCNukaWorld.esm`:
-
 ```pascal
-sFixedFormID     := IntToHex(FixedFormID(e),        8);
-sFormID          := IntToHex(FormID(e),             8);
-sLoadOrderFormID := IntToHex(GetLoadOrderFormID(e), 8);
+// Example 1: Get runtime FormID for game scripts
+var
+  loadOrderFormID: Cardinal;
+begin
+  if Assigned(e) then begin
+    loadOrderFormID := GetLoadOrderFormID(e);
+    AddMessage(Format('Runtime FormID: %s', [IntToHex(loadOrderFormID, 8)]));
+    AddMessage('Use this FormID in console commands and scripts');
+  end;
+end;
 
-AddMessage(sFixedFormID);      // Output: 01022DC0
-AddMessage(sFormID);           // Output: 01022DC0
-AddMessage(sLoadOrderFormID);  // Output: 06022DC0
+// Example 2: Compare FormID types for DLC record
+var
+  fileFormID, loadOrderFormID, fixedFormID: Cardinal;
+begin
+  if Assigned(e) then begin
+    fileFormID := FormID(e);
+    loadOrderFormID := GetLoadOrderFormID(e);
+    fixedFormID := FixedFormID(e);
+
+    AddMessage(Format('File FormID:       %s (saved in plugin)', [IntToHex(fileFormID, 8)]));
+    AddMessage(Format('Load Order FormID: %s (current runtime)', [IntToHex(loadOrderFormID, 8)]));
+    AddMessage(Format('Fixed FormID:      %s (master-relative)', [IntToHex(fixedFormID, 8)]));
+  end;
+end;
+
+// Example 3: Build console command with runtime FormID
+var
+  loadOrderFormID: Cardinal;
+  consoleCmd: string;
+begin
+  if Assigned(e) then begin
+    loadOrderFormID := GetLoadOrderFormID(e);
+    consoleCmd := Format('player.additem %s 1', [IntToHex(loadOrderFormID, 8)]);
+    AddMessage('Console command: ' + consoleCmd);
+  end;
+end;
+
+// Example 4: Find record by runtime FormID across all files
+var
+  targetFormID: Cardinal;
+  foundRec: IwbMainRecord;
+  i: integer;
+  plugin: IwbFile;
+begin
+  targetFormID := $06022DC0; // Runtime FormID to find
+
+  for i := 0 to Pred(FileCount) do begin
+    plugin := FileByIndex(i);
+    if Assigned(plugin) then begin
+      foundRec := RecordByFormID(plugin, targetFormID, true);
+      if Assigned(foundRec) then begin
+        AddMessage(Format('Found: %s in %s', [EditorID(foundRec), GetFileName(plugin)]));
+        Break;
+      end;
+    end;
+  end;
+end;
 ```
 
 ## See Also

@@ -25,11 +25,67 @@ Returns the base name of the element as a string, without load order prefixes fo
 ## Example
 
 ```pascal
+// Example 1: Get clean file name without load order prefix
 var
-  element: IwbElement;
-  baseName: string;
+  rec: IwbMainRecord;
+  pluginFile: IwbFile;
+  baseName, displayName: string;
 begin
-  baseName := BaseName(element); // Returns "PluginName.esp" instead of "[02] PluginName.esp"
+  if Assigned(e) then begin
+    pluginFile := GetFile(rec);
+    if Assigned(pluginFile) then begin
+      baseName := BaseName(pluginFile);
+      displayName := Name(pluginFile);
+      AddMessage('Base name: ' + baseName);
+      AddMessage('Display name: ' + displayName);
+      // Base: "MyMod.esp", Display: "[05] MyMod.esp"
+    end;
+  end;
+end;
+
+// Example 2: Compare base names for file matching
+var
+  rec: IwbMainRecord;
+  masterFile, currentFile: IwbFile;
+  masterBase, currentBase: string;
+begin
+  if Assigned(e) then begin
+    currentFile := GetFile(rec);
+    masterFile := MasterOrSelf(rec)._File;
+    if Assigned(currentFile) and Assigned(masterFile) then begin
+      currentBase := BaseName(currentFile);
+      masterBase := BaseName(masterFile);
+      if currentBase = masterBase then
+        AddMessage('Record is in master file: ' + masterBase)
+      else
+        AddMessage(Format('Override from %s to %s', [masterBase, currentBase]));
+    end;
+  end;
+end;
+
+// Example 3: Build file list without load order prefixes
+var
+  i: integer;
+  pluginFile: IwbFile;
+  baseName: string;
+  fileList: TStringList;
+begin
+  fileList := TStringList.Create;
+  try
+    for i := 0 to FileCount - 1 do begin
+      pluginFile := FileByIndex(i);
+      if Assigned(pluginFile) then begin
+        baseName := BaseName(pluginFile);
+        fileList.Add(baseName);
+      end;
+    end;
+    fileList.Sort;
+    AddMessage('Loaded plugins (alphabetical):');
+    for i := 0 to fileList.Count - 1 do
+      AddMessage('  ' + fileList[i]);
+  finally
+    fileList.Free;
+  end;
 end;
 ```
 

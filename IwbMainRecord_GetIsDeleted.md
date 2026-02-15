@@ -25,8 +25,92 @@ Returns `True` if the record is flagged as Deleted, `False` otherwise.
 ## Example
 
 ```pascal
-if GetIsDeleted(e) then
-	AddMessage(Name(e) + ' is flagged as Deleted');
+// Example 1: Filter out deleted records
+var
+  plugin: IwbFile;
+  i, count, activeCount: integer;
+  rec: IwbMainRecord;
+begin
+  plugin := FileByIndex(0);
+  if Assigned(plugin) then begin
+    count := RecordCount(plugin);
+    activeCount := 0;
+
+    for i := 0 to count - 1 do begin
+      rec := RecordByIndex(plugin, i);
+      if Assigned(rec) and not GetIsDeleted(rec) then begin
+        Inc(activeCount);
+        AddMessage(Format('Active: %s', [EditorID(rec)]));
+      end;
+    end;
+
+    AddMessage(Format('Found %d active records (out of %d total)', [activeCount, count]));
+  end;
+end;
+
+// Example 2: Check deleted status before processing
+begin
+  if Assigned(e) then begin
+    if GetIsDeleted(e) then begin
+      AddMessage(Format('WARNING: %s is flagged as deleted', [EditorID(e)]));
+      AddMessage('This record is ignored by the game');
+    end else begin
+      AddMessage(Format('%s is active', [EditorID(e)]));
+      // Safe to process...
+    end;
+  end;
+end;
+
+// Example 3: Find all deleted records in plugin
+var
+  plugin: IwbFile;
+  i, count, deletedCount: integer;
+  rec: IwbMainRecord;
+  deletedList: TStringList;
+begin
+  plugin := FileByIndex(0);
+  if Assigned(plugin) then begin
+    deletedList := TStringList.Create;
+    try
+      count := RecordCount(plugin);
+      deletedCount := 0;
+
+      for i := 0 to count - 1 do begin
+        rec := RecordByIndex(plugin, i);
+        if Assigned(rec) and GetIsDeleted(rec) then begin
+          Inc(deletedCount);
+          deletedList.Add(Format('%s (%s)', [EditorID(rec), Signature(rec)]));
+        end;
+      end;
+
+      AddMessage(Format('Found %d deleted record(s) in %s:',
+        [deletedCount, GetFileName(plugin)]));
+      for i := 0 to deletedList.Count - 1 do
+        AddMessage('  ' + deletedList[i]);
+    finally
+      deletedList.Free;
+    end;
+  end;
+end;
+
+// Example 4: Warn when editing deleted override
+var
+  masterRec: IwbMainRecord;
+begin
+  if Assigned(e) then begin
+    if GetIsDeleted(e) then begin
+      if IsMaster(e) then
+        AddMessage('Record is deleted in master file')
+      else begin
+        masterRec := Master(e);
+        if Assigned(masterRec) and GetIsDeleted(masterRec) then
+          AddMessage('WARNING: Overriding a deleted master record')
+        else
+          AddMessage('This override marks the record as deleted');
+      end;
+    end;
+  end;
+end;
 ```
 
 ## See Also

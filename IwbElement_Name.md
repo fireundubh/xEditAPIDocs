@@ -25,12 +25,65 @@ Returns the standard name of the element as a string.
 ## Example
 
 ```pascal
+// Example 1: Iterate record elements and log their names
 var
-    element: IwbElement;
-    elementName: string;
+  container: IwbContainer;
+  i: integer;
+  element: IwbElement;
+  elementName: string;
 begin
-    elementName := Name(element);
-    // Use the element name
+  if Assigned(e) then begin
+    container := e;
+    AddMessage('Elements in ' + EditorID(e) + ':');
+    for i := 0 to ElementCount(container) - 1 do begin
+      element := ElementByIndex(container, i);
+      if Assigned(element) then begin
+        elementName := Name(element);
+        AddMessage(Format('  [%d] %s = %s', [i, elementName, GetEditValue(element)]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Find elements with specific signature
+var
+  container: IwbContainer;
+  i: integer;
+  element: IwbElement;
+  elementName: string;
+begin
+  if Assigned(e) then begin
+    container := e;
+    for i := 0 to ElementCount(container) - 1 do begin
+      element := ElementByIndex(container, i);
+      if Assigned(element) then begin
+        elementName := Name(element);
+        if elementName = 'MODL' then
+          AddMessage('Found model path: ' + GetEditValue(element));
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Build dynamic element access
+var
+  keywords: IwbContainer;
+  i: integer;
+  kwdElement: IwbElement;
+  kwdName: string;
+begin
+  if Assigned(e) then begin
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      for i := 0 to ElementCount(keywords) - 1 do begin
+        kwdElement := ElementByIndex(keywords, i);
+        if Assigned(kwdElement) then begin
+          kwdName := Name(kwdElement);
+          AddMessage(Format('Keyword element name: %s (index %d)', [kwdName, i]));
+        end;
+      end;
+    end;
+  end;
 end;
 ```
 

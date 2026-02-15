@@ -25,11 +25,65 @@ Returns the total number of elements as an integer.
 ## Example
 
 ```pascal
+// Example 1: Iterate through all elements in container
 var
+  keywords: IwbContainer;
+  i, count: integer;
+  keyword: IwbElement;
+begin
+  if Assigned(e) then begin
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      count := ElementCount(keywords);
+      AddMessage(Format('Record has %d keywords', [count]));
+
+      for i := 0 to count - 1 do begin
+        keyword := ElementByIndex(keywords, i);
+        if Assigned(keyword) then
+          AddMessage(Format('  Keyword %d: %s', [i, GetEditValue(keyword)]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Check if container is empty
+var
+  conditions: IwbContainer;
   count: integer;
 begin
-  count := ElementCount(container);
-  AddMessage('Container has ' + IntToStr(count) + ' elements');
+  if Assigned(e) then begin
+    conditions := ElementByPath(e, 'Conditions');
+    if Assigned(conditions) then begin
+      count := ElementCount(conditions);
+      if count = 0 then
+        AddMessage('No conditions present')
+      else
+        AddMessage(Format('Has %d condition(s)', [count]));
+    end;
+  end;
+end;
+
+// Example 3: Process all records in file
+var
+  plugin: IwbFile;
+  i, count: integer;
+  rec: IwbMainRecord;
+  signature: string;
+begin
+  plugin := FileByIndex(0);
+  if Assigned(plugin) then begin
+    count := RecordCount(plugin);
+    AddMessage(Format('Processing %d records...', [count]));
+
+    for i := 0 to count - 1 do begin
+      rec := RecordByIndex(plugin, i);
+      if Assigned(rec) then begin
+        signature := Signature(rec);
+        if signature = 'ARMO' then
+          AddMessage(Format('Found armor: %s', [EditorID(rec)]));
+      end;
+    end;
+  end;
 end;
 ```
 

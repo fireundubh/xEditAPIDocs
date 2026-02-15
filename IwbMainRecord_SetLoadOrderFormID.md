@@ -22,8 +22,68 @@ This function assigns to the LoadOrderFormID property, converting the load order
 ## Example
 
 ```pascal
-SetLoadOrderFormID(e, $060FFFFF);
-AddMessage(IntToHex(GetLoadOrderFormID(e), 8));  // Output: 060FFFFF
+// Example 1: Assign new FormID to copied record
+var
+  copiedRec: IwbMainRecord;
+  targetFile: IwbFile;
+  newFormID: Cardinal;
+begin
+  if Assigned(e) then begin
+    targetFile := FileByIndex(0);
+    if Assigned(targetFile) then begin
+      copiedRec := wbCopyElementToFile(e, targetFile, false, true);
+      if Assigned(copiedRec) then begin
+        newFormID := GetNewFormID(targetFile);
+        SetLoadOrderFormID(copiedRec, newFormID);
+        AddMessage(Format('Assigned new FormID: %s', [IntToHex(newFormID, 8)]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Change FormID file index to current plugin
+var
+  currentFile: IwbFile;
+  currentFormID, newFormID: Cardinal;
+  loadOrder: byte;
+begin
+  if Assigned(e) then begin
+    currentFile := GetFile(e);
+    if Assigned(currentFile) then begin
+      currentFormID := GetLoadOrderFormID(e);
+      loadOrder := GetLoadOrder(currentFile);
+      newFormID := (currentFormID and $00FFFFFF) or (loadOrder shl 24);
+
+      SetLoadOrderFormID(e, newFormID);
+      AddMessage(Format('Changed FormID from %s to %s',
+        [IntToHex(currentFormID, 8), IntToHex(newFormID, 8)]));
+    end;
+  end;
+end;
+
+// Example 3: Update all references after changing FormID
+var
+  refByRec: IwbMainRecord;
+  oldFormID, newFormID: Cardinal;
+  i, refCount: integer;
+begin
+  if Assigned(e) then begin
+    oldFormID := GetLoadOrderFormID(e);
+    newFormID := GetNewFormID(GetFile(e));
+
+    // Update all records that reference this one
+    refCount := ReferencedByCount(e);
+    for i := 0 to refCount - 1 do begin
+      refByRec := ReferencedByIndex(e, i);
+      if Assigned(refByRec) then
+        CompareExchangeFormID(refByRec, oldFormID, newFormID);
+    end;
+
+    // Now change the record's FormID
+    SetLoadOrderFormID(e, newFormID);
+    AddMessage(Format('Updated FormID and %d references', [refCount]));
+  end;
+end;
 ```
 
 ## See Also

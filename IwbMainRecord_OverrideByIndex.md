@@ -26,8 +26,117 @@ Returns the IwbMainRecord override at the specified index.
 ## Example
 
 ```pascal
-for i := 0 to Pred(OverrideCount(e)) do
-	o := OverrideByIndex(e, i);
+// Example 1: List all plugins that override a record
+var
+  overrideRec: IwbMainRecord;
+  i, count: integer;
+  overrideFile: IwbFile;
+begin
+  if Assigned(e) then begin
+    count := OverrideCount(e);
+    AddMessage(Format('%s is overridden by %d file(s):', [EditorID(e), count]));
+
+    for i := 0 to count - 1 do begin
+      overrideRec := OverrideByIndex(e, i);
+      if Assigned(overrideRec) then begin
+        overrideFile := GetFile(overrideRec);
+        AddMessage(Format('  [%d] %s', [i, GetFileName(overrideFile)]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Find first override that changes specific field
+var
+  overrideRec: IwbMainRecord;
+  i, count: integer;
+  masterValue, overrideValue: string;
+begin
+  if Assigned(e) then begin
+    masterValue := GetElementEditValue(e, 'DATA\Value');
+    count := OverrideCount(e);
+
+    for i := 0 to count - 1 do begin
+      overrideRec := OverrideByIndex(e, i);
+      if Assigned(overrideRec) then begin
+        overrideValue := GetElementEditValue(overrideRec, 'DATA\Value');
+        if overrideValue <> masterValue then begin
+          AddMessage(Format('First value change in: %s',
+            [GetFileName(GetFile(overrideRec))]));
+          AddMessage(Format('  Changed from %s to %s', [masterValue, overrideValue]));
+          Break;
+        end;
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Apply changes to all overrides in chain
+var
+  masterRec, overrideRec: IwbMainRecord;
+  i, count: integer;
+  newKeyword: string;
+begin
+  masterRec := MasterOrSelf(e);
+  if Assigned(masterRec) then begin
+    newKeyword := '0010A8A6'; // ArmorLight keyword
+    count := OverrideCount(masterRec);
+
+    AddMessage(Format('Adding keyword to master and %d override(s)...', [count]));
+
+    // Process master
+    SetElementEditValue(masterRec, 'KWDA\[0]', newKeyword);
+
+    // Process all overrides
+    for i := 0 to count - 1 do begin
+      overrideRec := OverrideByIndex(masterRec, i);
+      if Assigned(overrideRec) then begin
+        SetElementEditValue(overrideRec, 'KWDA\[0]', newKeyword);
+        AddMessage(Format('  Updated: %s', [GetFileName(GetFile(overrideRec))]));
+      end;
+    end;
+  end;
+end;
+
+// Example 4: Build override history showing all changes
+var
+  masterRec, overrideRec: IwbMainRecord;
+  i, count: integer;
+  history: TStringList;
+  currentValue, prevValue: string;
+begin
+  masterRec := MasterOrSelf(e);
+  if Assigned(masterRec) then begin
+    history := TStringList.Create;
+    try
+      prevValue := GetElementEditValue(masterRec, 'FULL');
+      history.Add(Format('[Master] %s: "%s"',
+        [GetFileName(GetFile(masterRec)), prevValue]));
+
+      count := OverrideCount(masterRec);
+      for i := 0 to count - 1 do begin
+        overrideRec := OverrideByIndex(masterRec, i);
+        if Assigned(overrideRec) then begin
+          currentValue := GetElementEditValue(overrideRec, 'FULL');
+          if currentValue <> prevValue then begin
+            history.Add(Format('[%d] %s: "%s" (changed)',
+              [i, GetFileName(GetFile(overrideRec)), currentValue]));
+            prevValue := currentValue;
+          end else begin
+            history.Add(Format('[%d] %s: "%s"',
+              [i, GetFileName(GetFile(overrideRec)), currentValue]));
+          end;
+        end;
+      end;
+
+      AddMessage('Override history for ' + EditorID(masterRec) + ':');
+      for i := 0 to history.Count - 1 do
+        AddMessage(history[i]);
+    finally
+      history.Free;
+    end;
+  end;
+end;
 ```
 
 ## See Also

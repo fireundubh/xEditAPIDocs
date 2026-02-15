@@ -25,8 +25,50 @@ Returns the Form ID as a Cardinal value (not relative to load order).
 ## Example
 
 ```pascal
-if FormID(e) and $00FFFFFF = 0 then
-	AddMessage(FullPath(e));
+// Example 1: Get file-local FormID
+var
+  formID: Cardinal;
+begin
+  if Assigned(e) then begin
+    formID := FormID(e);
+    AddMessage(Format('File-local FormID: %s', [IntToHex(formID, 8)]));
+  end;
+end;
+
+// Example 2: Check if FormID is from master file (object ID only)
+var
+  formID, objectID: Cardinal;
+begin
+  if Assigned(e) then begin
+    formID := FormID(e);
+    objectID := formID and $00FFFFFF; // Strip file index byte
+
+    if objectID = 0 then
+      AddMessage('ERROR: Invalid object ID: ' + FullPath(e))
+    else
+      AddMessage(Format('Object ID: %s', [IntToHex(objectID, 6)]));
+  end;
+end;
+
+// Example 3: Compare file FormID with load order FormID
+var
+  fileFormID, loadOrderFormID: Cardinal;
+  fileIndex, loadOrderIndex: byte;
+begin
+  if Assigned(e) then begin
+    fileFormID := FormID(e);
+    loadOrderFormID := GetLoadOrderFormID(e);
+
+    fileIndex := fileFormID shr 24;
+    loadOrderIndex := loadOrderFormID shr 24;
+
+    AddMessage(Format('File FormID: %s (file index: %d)', [IntToHex(fileFormID, 8), fileIndex]));
+    AddMessage(Format('Load Order FormID: %s (LO index: %d)', [IntToHex(loadOrderFormID, 8), loadOrderIndex]));
+
+    if fileIndex <> loadOrderIndex then
+      AddMessage('WARNING: File index differs from current load order position');
+  end;
+end;
 ```
 
 ## See Also

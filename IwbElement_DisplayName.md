@@ -25,12 +25,66 @@ Returns the display name of the element as a string. If no specific display name
 ## Example
 
 ```pascal
+// Example 1: Show user-friendly element names
 var
+  rec: IwbMainRecord;
+  container: IwbContainer;
+  i: integer;
   element: IwbElement;
-  name: string;
+  displayName: string;
 begin
-  name := DisplayName(element);
-  // Use the display name
+  if Assigned(e) then begin
+    container := rec;
+    AddMessage('Elements in ' + EditorID(e) + ':');
+    for i := 0 to ElementCount(container) - 1 do begin
+      element := ElementByIndex(container, i);
+      if Assigned(element) then begin
+        displayName := DisplayName(element);
+        AddMessage(Format('  %s = %s', [displayName, GetEditValue(element)]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Compare Name vs DisplayName
+var
+  rec: IwbMainRecord;
+  element: IwbElement;
+  elemName, elemDisplay: string;
+begin
+  if Assigned(e) then begin
+    element := ElementByPath(e, 'KWDA\[0]');
+    if Assigned(element) then begin
+      elemName := Name(element);
+      elemDisplay := DisplayName(element);
+      AddMessage('Name: ' + elemName);
+      AddMessage('DisplayName: ' + elemDisplay);
+      // Name might be "Keyword [0]", DisplayName adds value context
+    end;
+  end;
+end;
+
+// Example 3: Build UI-friendly element tree
+var
+  rec: IwbMainRecord;
+  conditions: IwbContainer;
+  i: integer;
+  condition: IwbElement;
+  conditionDisplay: string;
+begin
+  if Assigned(e) then begin
+    conditions := ElementByPath(e, 'Conditions');
+    if Assigned(conditions) then begin
+      AddMessage('Condition list for ' + EditorID(e) + ':');
+      for i := 0 to ElementCount(conditions) - 1 do begin
+        condition := ElementByIndex(conditions, i);
+        if Assigned(condition) then begin
+          conditionDisplay := DisplayName(condition);
+          AddMessage(Format('  Condition %d: %s', [i, conditionDisplay]));
+        end;
+      end;
+    end;
+  end;
 end;
 ```
 

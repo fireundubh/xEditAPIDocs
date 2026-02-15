@@ -23,10 +23,72 @@ Use with caution. Removing critical elements may corrupt the record structure or
 ## Example
 
 ```pascal
+// Example 1: Remove unwanted subrecord
 var
-    elementToDelete: IwbElement;
+  rec: IwbMainRecord;
+  modelElement: IwbElement;
 begin
-    Remove(elementToDelete);
+  if Assigned(e) then begin
+    modelElement := ElementByPath(rec, 'MODL');
+    if Assigned(modelElement) then begin
+      AddMessage(Format('Removing model from %s', [EditorID(e)]));
+      Remove(modelElement);
+    end;
+  end;
+end;
+
+// Example 2: Clean up empty or invalid array elements
+var
+  rec: IwbMainRecord;
+  keywords: IwbContainer;
+  i: integer;
+  kwdElement: IwbElement;
+  kwdRecord: IwbMainRecord;
+begin
+  if Assigned(e) then begin
+    keywords := ElementByPath(rec, 'KWDA');
+    if Assigned(keywords) then begin
+      // Iterate backwards when removing to avoid index shifts
+      for i := ElementCount(keywords) - 1 downto 0 do begin
+        kwdElement := ElementByIndex(keywords, i);
+        if Assigned(kwdElement) then begin
+          kwdRecord := LinksTo(kwdElement);
+          if not Assigned(kwdRecord) then begin
+            AddMessage(Format('Removing invalid keyword at index %d', [i]));
+            Remove(kwdElement);
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Remove specific conditions
+var
+  rec: IwbMainRecord;
+  conditions: IwbContainer;
+  i: integer;
+  condition, funcElement: IwbElement;
+  funcValue: string;
+begin
+  if Assigned(e) then begin
+    conditions := ElementByPath(rec, 'Conditions');
+    if Assigned(conditions) then begin
+      for i := ElementCount(conditions) - 1 downto 0 do begin
+        condition := ElementByIndex(conditions, i);
+        if Assigned(condition) then begin
+          funcElement := ElementByPath(condition, 'CTDA\Function');
+          if Assigned(funcElement) then begin
+            funcValue := GetEditValue(funcElement);
+            if funcValue = 'GetDead' then begin
+              AddMessage(Format('Removing GetDead condition from %s', [EditorID(e)]));
+              Remove(condition);
+            end;
+          end;
+        end;
+      end;
+    end;
+  end;
 end;
 ```
 

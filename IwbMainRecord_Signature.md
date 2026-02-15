@@ -25,8 +25,59 @@ Returns the 4-character signature of the record as a string.
 ## Example
 
 ```pascal
-if ContainsStr('ACHR REFR', Signature(e)) then
-	AddMessage(Name(e) + ' is a reference');
+// Example 1: Filter records by signature
+var
+  sig: string;
+begin
+  if Assigned(e) then begin
+    sig := Signature(e);
+    if sig = 'WEAP' then
+      AddMessage('Found weapon: ' + EditorID(e))
+    else if sig = 'ARMO' then
+      AddMessage('Found armor: ' + EditorID(e));
+  end;
+end;
+
+// Example 2: Check if record is a reference (placed object)
+var
+  sig: string;
+begin
+  if Assigned(e) then begin
+    sig := Signature(e);
+    if (sig = 'ACHR') or (sig = 'REFR') then begin
+      AddMessage(Name(e) + ' is a placed reference');
+      AddMessage('  Base: ' + GetEditValue(ElementByPath(e, 'NAME')));
+    end;
+  end;
+end;
+
+// Example 3: Count records by signature in file
+var
+  plugin: IwbFile;
+  i, count, weaponCount, armorCount: integer;
+  rec: IwbMainRecord;
+  sig: string;
+begin
+  plugin := FileByIndex(0);
+  if Assigned(plugin) then begin
+    count := RecordCount(plugin);
+    weaponCount := 0;
+    armorCount := 0;
+
+    for i := 0 to count - 1 do begin
+      rec := RecordByIndex(plugin, i);
+      if Assigned(rec) then begin
+        sig := Signature(rec);
+        if sig = 'WEAP' then
+          Inc(weaponCount)
+        else if sig = 'ARMO' then
+          Inc(armorCount);
+      end;
+    end;
+
+    AddMessage(Format('Weapons: %d, Armor: %d', [weaponCount, armorCount]));
+  end;
+end;
 ```
 
 ## See Also

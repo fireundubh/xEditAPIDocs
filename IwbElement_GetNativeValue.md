@@ -25,14 +25,58 @@ Returns the element's native value as a Variant type.
 ## Example
 
 ```pascal
+// Example 1: Get numeric value for calculations
 var
-  element: IwbElement;
-  value: Variant;
+  weightElement: IwbElement;
+  weight: Variant;
+  newWeight: double;
 begin
-  value := GetNativeValue(element);
-  // Use the native value
-  if VarType(value) = varInteger then
-    // Handle integer value
+  if Assigned(e) then begin
+    weightElement := ElementByPath(e, 'DATA\Weight');
+    if Assigned(weightElement) then begin
+      weight := GetNativeValue(weightElement);
+      newWeight := weight * 0.5; // Halve the weight
+      SetNativeValue(weightElement, newWeight);
+      AddMessage(Format('Reduced weight from %.2f to %.2f', [weight, newWeight]));
+    end;
+  end;
+end;
+
+// Example 2: Type-safe value retrieval
+var
+  valueElement: IwbElement;
+  value: Variant;
+  intValue: integer;
+begin
+  if Assigned(e) then begin
+    valueElement := ElementByPath(e, 'DATA\Value');
+    if Assigned(valueElement) then begin
+      value := GetNativeValue(valueElement);
+      if VarType(value) = varInteger then begin
+        intValue := value;
+        if intValue < 10 then
+          AddMessage('Low value item: ' + IntToStr(intValue));
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Compare values programmatically
+var
+  rec2: IwbMainRecord;
+  value1, value2: Variant;
+begin
+  if Assigned(e) then begin
+    rec2 := WinningOverride(e);
+
+    if Assigned(rec2) then begin
+      value1 := GetNativeValue(ElementByPath(e, 'DATA\Damage'));
+      value2 := GetNativeValue(ElementByPath(rec2, 'DATA\Damage'));
+
+      if value1 <> value2 then
+        AddMessage(Format('Damage changed from %s to %s', [VarToStr(value1), VarToStr(value2)]));
+    end;
+  end;
 end;
 ```
 

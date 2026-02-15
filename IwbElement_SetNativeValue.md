@@ -26,13 +26,56 @@ This procedure does not return a value.
 ## Example
 
 ```pascal
+// Example 1: Set integer value directly
 var
-    element: IwbElement;
-    success: boolean;
+  valueElement: IwbElement;
 begin
-    success := SetNativeValue(element, 100); // Set integer value
-    if success then
-        // Value was successfully set
+  if Assigned(e) then begin
+    valueElement := ElementByPath(e, 'DATA\Value');
+    if Assigned(valueElement) then begin
+      SetNativeValue(valueElement, 100); // Direct integer assignment
+      AddMessage('Set value to 100');
+    end;
+  end;
+end;
+
+// Example 2: Set float value for precise calculations
+var
+  weightElement: IwbElement;
+  newWeight: double;
+begin
+  if Assigned(e) then begin
+    weightElement := ElementByPath(e, 'DATA\Weight');
+    if Assigned(weightElement) then begin
+      newWeight := 12.5;
+      SetNativeValue(weightElement, newWeight);
+      AddMessage(Format('Set weight to %.2f', [newWeight]));
+    end;
+  end;
+end;
+
+// Example 3: Batch update with native values (more efficient than EditValue)
+var
+  damageElement, speedElement, reachElement: IwbElement;
+begin
+  if Assigned(e) then begin
+    BeginUpdate(e);
+    try
+      damageElement := ElementByPath(e, 'DATA\Damage');
+      if Assigned(damageElement) then
+        SetNativeValue(damageElement, 25);
+
+      speedElement := ElementByPath(e, 'DATA\Speed');
+      if Assigned(speedElement) then
+        SetNativeValue(speedElement, 1.0);
+
+      reachElement := ElementByPath(e, 'DATA\Reach');
+      if Assigned(reachElement) then
+        SetNativeValue(reachElement, 1.5);
+    finally
+      EndUpdate(e);
+    end;
+  end;
 end;
 ```
 

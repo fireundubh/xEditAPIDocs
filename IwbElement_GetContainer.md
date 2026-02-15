@@ -25,13 +25,60 @@ Returns the immediate container as an IwbContainer interface.
 ## Example
 
 ```pascal
+// Example 1: Navigate from child element to parent
 var
-  element: IwbElement;
-  container: IwbContainer;
+  valueElement: IwbElement;
+  dataContainer: IwbContainer;
+  containerName: string;
 begin
-  container := GetContainer(element);
-  if Assigned(container) then
-    // Work with the container
+  if Assigned(e) then begin
+    valueElement := ElementByPath(e, 'DATA\Value');
+    if Assigned(valueElement) then begin
+      dataContainer := GetContainer(valueElement);
+      if Assigned(dataContainer) then begin
+        containerName := Name(dataContainer);
+        AddMessage(Format('Value element is in container: %s', [containerName]));
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Remove element from its parent
+var
+  unusedElement: IwbElement;
+  parentContainer: IwbContainer;
+begin
+  if Assigned(e) then begin
+    unusedElement := ElementByPath(e, 'MODL');
+    if Assigned(unusedElement) then begin
+      parentContainer := GetContainer(unusedElement);
+      if Assigned(parentContainer) then begin
+        AddMessage('Removing MODL from ' + Name(parentContainer));
+        RemoveElement(parentContainer, unusedElement);
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Traverse hierarchy upward
+var
+  deepElement: IwbElement;
+  container: IwbContainer;
+  depth: integer;
+begin
+  if Assigned(e) then begin
+    deepElement := ElementByPath(e, 'Conditions\[0]\CTDA\Function');
+    if Assigned(deepElement) then begin
+      depth := 0;
+      container := GetContainer(deepElement);
+      while Assigned(container) do begin
+        Inc(depth);
+        AddMessage(Format('Level %d: %s', [depth, Name(container)]));
+        container := GetContainer(container);
+      end;
+      AddMessage(Format('Total depth: %d levels', [depth]));
+    end;
+  end;
 end;
 ```
 

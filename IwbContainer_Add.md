@@ -27,11 +27,66 @@ Returns the newly created element as an IwbElement interface.
 ## Example
 
 ```pascal
+// Example 1: Add element to array
 var
-  newElement: IwbElement;
+  keywords: IwbContainer;
+  newKeyword: IwbElement;
 begin
-  newElement := container.Add;
-  // Work with the new element
+  if Assigned(e) then begin
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      newKeyword := Add(keywords, 'Keyword', true);
+      if Assigned(newKeyword) then begin
+        SetEditValue(newKeyword, '00012345');
+        AddMessage('Added keyword');
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Add multiple array elements
+var
+  conditions: IwbContainer;
+  condition: IwbElement;
+  i: integer;
+begin
+  if Assigned(e) then begin
+    conditions := ElementByPath(e, 'Conditions');
+    if Assigned(conditions) then begin
+      BeginUpdate(conditions);
+      try
+        for i := 0 to 2 do begin
+          condition := Add(conditions, 'Condition', true);
+          if Assigned(condition) then begin
+            SetElementEditValue(condition, 'CTDA\Type', '10000000');
+            SetElementEditValue(condition, 'CTDA\Comparison Value', IntToStr(i));
+            AddMessage(Format('Added condition %d', [i]));
+          end;
+        end;
+      finally
+        EndUpdate(conditions);
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Add optional struct element
+var
+  effects: IwbContainer;
+  effect: IwbElement;
+begin
+  if Assigned(e) then begin
+    effects := ElementByPath(e, 'Effects');
+    if Assigned(effects) then begin
+      effect := Add(effects, 'Effect', false); // Not silent - trigger notifications
+      if Assigned(effect) then begin
+        SetElementEditValue(effect, 'EFID', 'RestoreHealth');
+        SetElementEditValue(effect, 'EFIT\Magnitude', '25');
+        SetElementEditValue(effect, 'EFIT\Duration', '0');
+        AddMessage('Added restore health effect');
+      end;
+    end;
+  end;
 end;
 ```
 

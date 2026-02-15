@@ -21,11 +21,77 @@ This function calls the element's MoveDown method, which swaps the element with 
 ## Example
 
 ```pascal
+// Example 1: Move single element down with validation
 var
-    element: IwbElement;
+  keywords: IwbContainer;
+  element: IwbElement;
+  oldIndex: integer;
 begin
-    if CanMoveDown(element) then
-        MoveDown(element);
+  if Assigned(e) then begin
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      element := ElementByIndex(keywords, 0);
+      if Assigned(element) then begin
+        oldIndex := 0;
+        if CanMoveDown(element) then begin
+          MoveDown(element);
+          AddMessage(Format('Moved keyword from index %d to %d', [oldIndex, oldIndex + 1]));
+        end;
+      end;
+    end;
+  end;
+end;
+
+// Example 2: Deprioritize specific condition
+var
+  conditions: IwbContainer;
+  i: integer;
+  condition, funcElement: IwbElement;
+  funcValue: string;
+begin
+  if Assigned(e) then begin
+    conditions := ElementByPath(e, 'Conditions');
+    if Assigned(conditions) then begin
+      // Find GetQuestRunning condition and move to end
+      for i := 0 to ElementCount(conditions) - 1 do begin
+        condition := ElementByIndex(conditions, i);
+        if Assigned(condition) then begin
+          funcElement := ElementByPath(condition, 'CTDA\Function');
+          if Assigned(funcElement) then begin
+            funcValue := GetEditValue(funcElement);
+            if funcValue = 'GetQuestRunning' then begin
+              while CanMoveDown(condition) do
+                MoveDown(condition);
+              AddMessage('Moved GetQuestRunning condition to end');
+              Break;
+            end;
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+// Example 3: Reverse array order
+var
+  keywords: IwbContainer;
+  element: IwbElement;
+  i, count: integer;
+begin
+  if Assigned(e) then begin
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      count := ElementCount(keywords);
+      for i := 0 to count - 2 do begin
+        element := ElementByIndex(keywords, 0);
+        if Assigned(element) then begin
+          while CanMoveDown(element) do
+            MoveDown(element);
+        end;
+      end;
+      AddMessage(Format('Reversed order of %d keywords', [count]));
+    end;
+  end;
 end;
 ```
 

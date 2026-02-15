@@ -26,14 +26,54 @@ This procedure does not return a value.
 ## Example
 
 ```pascal
+// Example 1: Rename a record's Editor ID
 var
-  element: IwbElement;
-  oldValue, newValue: string;
+  edidElement: IwbElement;
+  oldValue: string;
 begin
-  element := ElementByPath(e, 'EDID');
-  oldValue := GetEditValue(element);
-  newValue := SetEditValue(element, 'MyNewEditorID');
-  AddMessage('Changed value from "' + oldValue + '" to "' + newValue + '"');
+  if Assigned(e) then begin
+    edidElement := ElementByPath(e, 'EDID');
+    if Assigned(edidElement) then begin
+      oldValue := GetEditValue(edidElement);
+      SetEditValue(edidElement, 'MyNewEditorID');
+      AddMessage(Format('Changed Editor ID from "%s" to "%s"', [oldValue, GetEditValue(edidElement)]));
+    end;
+  end;
+end;
+
+// Example 2: Batch update multiple elements
+var
+  fullElement, valueElement: IwbElement;
+begin
+  if Assigned(e) then begin
+    BeginUpdate(e);
+    try
+      fullElement := ElementByPath(e, 'DATA\Full');
+      if Assigned(fullElement) then
+        SetEditValue(fullElement, 'New Display Name');
+
+      valueElement := ElementByPath(e, 'DATA\Value');
+      if Assigned(valueElement) then
+        SetEditValue(valueElement, '100');
+    finally
+      EndUpdate(e);
+    end;
+  end;
+end;
+
+// Example 3: Set FormID reference
+var
+  baseElement: IwbElement;
+  targetFormID: string;
+begin
+  if Assigned(e) then begin
+    baseElement := ElementByPath(e, 'NAME');
+    if Assigned(baseElement) then begin
+      targetFormID := '00012E46'; // Iron Armor
+      SetEditValue(baseElement, targetFormID);
+      AddMessage('Set base object to FormID: ' + targetFormID);
+    end;
+  end;
 end;
 ```
 
