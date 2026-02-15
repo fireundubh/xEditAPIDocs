@@ -50,6 +50,10 @@ Cyclic Redundancy Check 32-bit - a hash function that produces a 32-bit checksum
 
 DirectDraw Surface - a Microsoft image file format used for storing textures and environment maps. Widely used in video games for efficient GPU texture storage and supports various compression formats.
 
+### DLSTRINGS
+
+Dialog Localized Strings - a binary file format (`.DLSTRINGS`) used by Skyrim and later games to store externalized dialogue text in multiple languages. Part of the [localization](#localization) system alongside [STRINGS](#strings) and [ILSTRINGS](#ilstrings) files. DLSTRINGS specifically contains dialogue text that can vary in length.
+
 ## E
 
 ### Editor ID
@@ -81,10 +85,6 @@ A [cell](#cell) that represents outdoor game space within a [worldspace](#worlds
 
 ## F
 
-### FUZ
-
-Facial Animation + Audio - Bethesda's container file format (`.fuz`) that combines lip-sync facial animation data with compressed audio ([XWM](#xwm) format). Used extensively in Skyrim and Fallout games for NPC dialogue, packaging spoken audio together with phoneme timing data for realistic lip synchronization during conversations.
-
 ### File Form ID
 
 A [Form ID](#form-id) where the [Mod ID](#mod-id) is relative to the plugin's [master files](#master-file)
@@ -112,7 +112,19 @@ The Form ID format for ESL records has three parts:
 2. a 3-character [Light Mod ID](#light-mod-id), and
 3. a 3-character Object ID (e.g., `FExxxyyy`.)
 
+### Form Version
+
+A value stored in the [record header](#record-header) that tracks the format version of a [record](#record). Form versions allow games to update record structures across patches while maintaining backward compatibility. For example, Fallout 4 records may have form version 40 (base game) or 44 (version 1.10+). Different form versions can have different data layouts for the same [signature](#signature).
+
+### FUZ
+
+Facial Animation + Audio - Bethesda's container file format (`.fuz`) that combines lip-sync facial animation data with compressed audio ([XWM](#xwm) format). Used extensively in Skyrim and Fallout games for NPC dialogue, packaging spoken audio together with phoneme timing data for realistic lip synchronization during conversations.
+
 ## G
+
+### Group Record
+
+A container [record](#record) that organizes and groups [main records](#main-record) of the same type or belonging to the same parent. Group records use the `GRUP` signature and can be organized by record type (e.g., all `WEAP` records), by parent (e.g., all [references](#reference) in a [cell](#cell)), or by [grid cell](#grid-cell). Group records are structural elements that don't have [Form IDs](#form-id) but are essential for organizing plugin data efficiently.
 
 ### Gamebryo
 
@@ -144,6 +156,10 @@ Broken links display as `< Error: Could not be resolved >`, although not all suc
 
 An [overriding record](#overriding-record) that does not change its [master record](#master-record) in any way. Some mod authors exploit Identical to Master (ITM) records to revert changes made by other plugins, or the Creation Kit may populate plugins with ITMs for no apparent reason. Most mod authors and players agree ITMs are problematic, if not harmful, and so xEdit is popularly used to "clean" ITMs from plugins.
 
+### ILSTRINGS
+
+Info Localized Strings - a binary file format (`.ILSTRINGS`) used by Skyrim and later games to store externalized info text (typically UI elements, book contents, and item descriptions) in multiple languages. Part of the [localization](#localization) system alongside [STRINGS](#strings) and [DLSTRINGS](#dlstrings) files.
+
 ### Initially Disabled
 
 A flag on [reference](#reference) records (REFR, ACHR, etc.) that marks the placed object as disabled when the game starts. Initially disabled references can be enabled later through scripts or quest stages. Commonly used for quest-specific objects that should only appear at certain times.
@@ -162,7 +178,7 @@ A [cell](#cell) that represents indoor game space, such as buildings, caves, or 
 
 ### Localization
 
-The system for storing and retrieving translated game strings in language-specific files (.STRINGS, .DLSTRINGS, .ILSTRINGS). Allows games to support multiple languages by externalizing text content from plugin files.
+The system for storing and retrieving translated game strings in language-specific files ([STRINGS](#strings), [DLSTRINGS](#dlstrings), [ILSTRINGS](#ilstrings)). Introduced in Skyrim, allows games to support multiple languages by externalizing text content from plugin files into separate binary string files for each language.
 
 ### LOD
 
@@ -171,6 +187,10 @@ Level of Detail - simplified versions of 3D models and textures used at greater 
 ### Light Mod ID
 
 A 3-character hexadecimal identifier for an ESL file associated with the [Object ID](#object-id) in a [Form ID](#form-id). The term "light" comes from nomenclature used to distinguish between slots into which plugins are loaded. ESL plugins are loaded into "light slots" and other plugins into "full slots."
+
+### Load Order
+
+The sequence in which [plugins](#plugin) are loaded by the game. Load order determines which [overriding records](#overriding-record) take precedence through the [winning override](#winning-override) system. Later-loading plugins override earlier ones. The load order affects [Load Order Form IDs](#load-order-form-id) and is critical for mod compatibility. [ESM](#esm) files load before [ESP](#esp) files, and [ESL](#esl) files can load in light slots without consuming regular plugin slots.
 
 ### Load Order Form ID
 
@@ -188,6 +208,10 @@ For example, consider a load order containing these plugins:
 If `Dragonborn.esm` was reordered before `Dawnguard.esm`, the global Mod ID for `Dragonborn.esm` would change to `02`.
 
 ## M
+
+### Main Record
+
+A primary data [record](#record) in a [plugin](#plugin) that represents a game object, such as a weapon (`WEAP`), character (`NPC_`), quest (`QUST`), or placed object ([Reference](#reference)). Main records have [Form IDs](#form-id), can be overridden by other plugins, and are organized within [group records](#group-record). Contrast with [subrecords](#subrecord), which are data fields within main records.
 
 ### MD5
 
@@ -255,6 +279,14 @@ See also: [Data File - Creation Kit Wiki](https://www.creationkit.com/fallout4/i
 
 ## R
 
+### Record
+
+A record is a data structure in a [plugin](#plugin) identified by its [signature](#signature) and [Form ID](#form-id) that describes an object
+
+### Record Header
+
+The initial data structure of every [record](#record) that contains metadata about the record. The record header includes the record's [signature](#signature), data size, flags (such as deleted, [persistent](#persistent), compressed), [Form ID](#form-id), [form version](#form-version), and version control fields (VCS1, VCS2). Record headers are parsed before the record's actual data and provide essential information for xEdit to correctly interpret the record structure.
+
 ### Reference
 
 A placed instance of an object in the game world, typically using the `REFR` signature (or `ACHR` for characters, `ACRE` for creatures). References link to a [base record](#base-record) that defines the object's properties, while the reference itself stores placement data (position, rotation, scale) and instance-specific flags like [Persistent](#persistent), [Initially Disabled](#initially-disabled), or [Visible When Distant](#visible-when-distant). For example, multiple sword references can all point to the same weapon base record.
@@ -262,10 +294,6 @@ A placed instance of an object in the game world, typically using the `REFR` sig
 ### Resource
 
 Game assets such as textures, 3D models, sounds, and other binary data files typically stored in BSA archives or loose files. Resources are referenced by records but stored separately from plugin data.
-
-### Record
-
-A record is a data structure in a [plugin](#plugin) identified by its [signature](#signature) and [Form ID](#form-id) that describes an object
 
 ## S
 
@@ -276,6 +304,10 @@ Secure Hash Algorithm 1 - a cryptographic hash function that produces a 160-bit 
 ### Signature
 
 An uppercase 4-character identifier that uniquely identifies a [record](#record) (e.g., `GLOB`, `NPC_`, `WEAP`) or [subrecord](#subrecord) (e.g., `EDID`, `LNAM`, `XCLL`) within a record. The signature is commonly, but not always, an abbreviation for the type of record or subrecord. For example, `GLOB` is always associated with a Global Variable record whereas `EDID` is always associated with the Editor ID subrecord, but `ANAM`, `BNAM`, `CNAM`, and so on do not have fixed meanings.
+
+### STRINGS
+
+Localized Strings - a binary file format (`.STRINGS`) used by Skyrim and later games to store externalized text strings in multiple languages. Part of the [localization](#localization) system alongside [DLSTRINGS](#dlstrings) and [ILSTRINGS](#ilstrings) files. STRINGS files contain general game text with limited length constraints.
 
 ### Subrecord
 
@@ -288,6 +320,10 @@ An [element](#element) with a [signature](#signature) that exists as data in the
 Truevision Targa - a raster graphics file format (`.tga`) used for texture storage in games. While [DDS](#dds) is more common in modern games for GPU-optimized textures, TGA files are still used for source artwork and in older games like Morrowind and Oblivion.
 
 ## V
+
+### VCS
+
+Version Control System - two fields (VCS1 and VCS2) stored in the [record header](#record-header) of [main records](#main-record) in some games. These fields were intended for internal Bethesda version tracking but are rarely used in practice. VCS values can be read and modified through scripting but generally don't affect game behavior.
 
 ### Visible When Distant
 
