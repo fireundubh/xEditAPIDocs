@@ -586,9 +586,6 @@ _Worldspace grid cell coordinates (4096-unit squares)_
 - [Glossary](Glossary.md) - Technical terms and concepts
 - [Constants](Constants.md) - Enumerations and constants
 
-### Development
-- [TODO](TODO.md) - Planned improvements and missing documentation
-
 ---
 
 ## 📊 Documentation Stats
