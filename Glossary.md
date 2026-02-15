@@ -2,11 +2,39 @@
 
 ## B
 
+### Base Record
+
+The original [record](#record) definition that a [reference](#reference) points to. For example, a `REFR` (placed object reference) links to a base record like `WEAP` (weapon), `NPC_` (character), or `ARMO` (armor) that defines the object's properties. The base record contains the template data, while references represent individual instances of that object placed in the game world.
+
+### BGEM
+
+Bethesda Effect Material - a binary material file format introduced in Fallout 4 and used in Fallout 76 and Starfield. BGEM files define effect materials such as particle effects, glowing materials, and other shader-based visual effects. Works alongside [BGSM](#bgsm) files to provide complete material definitions for game assets.
+
+### BGSM
+
+Bethesda Material - a binary material file format introduced in Fallout 4 and used in Fallout 76 and Starfield. BGSM files define material properties for 3D models including texture paths, shader parameters, opacity, specularity, and other rendering properties. Replaces the older NIF-embedded material system used in earlier games.
+
 ### BSA
 
 Bethesda Archive - a proprietary compressed archive format used by Bethesda Game Studios to package game assets (textures, models, sounds, etc.) for their games.
 
 ## C
+
+### Cell
+
+A container for game world data representing either an interior space (interior cell) or a section of an exterior space (exterior cell). Cells contain [references](#reference) (placed objects), lighting, encounter zones, and other environmental data. Exterior cells are organized within a [worldspace](#worldspace) using a grid system, while interior cells exist independently. See also: [Exterior Cell](#exterior-cell), [Interior Cell](#interior-cell).
+
+### Child Group
+
+A subgroup of [records](#record) that belong to a parent record. Most commonly seen in worldspaces and cells, where the child group contains [references](#reference) (placed objects) for that location. Child groups organize hierarchical data structures within plugins.
+
+### Creation Engine
+
+Bethesda's proprietary game engine used for The Elder Scrolls V: Skyrim (2011), Fallout 4 (2015), Fallout 76 (2018), and Starfield (2023). Evolution of the [Gamebryo](#gamebryo) engine with enhanced graphics, physics, and scripting capabilities. Uses [NIF](#nif) files for 3D models and introduces [BGSM](#bgsm)/[BGEM](#bgem) material formats in later iterations.
+
+### Creation Kit
+
+Bethesda's official modding tool for [Creation Engine](#creation-engine) games. Provides a graphical interface for editing plugins, creating quests, building interiors, placing objects, and scripting game logic. Different versions exist for each game (Skyrim Creation Kit, Fallout 4 Creation Kit, etc.). Often generates [Identical to Master](#identical-to-master-record) records that require cleaning with xEdit.
 
 ### Container
 
@@ -35,7 +63,27 @@ All objects in xEdit are elements. There are two element archetypes:
 - An element with a [signature](#signature) exists as data in the plugin itself. Also called a [subrecord](#subrecord).
 - An element without a signature exists only in xEdit to represent the logical structure of parsed plugin data. These elements are not found in or saved to plugins.
 
+### ESL
+
+Elder Scrolls Light - a [plugin](#plugin) file format (`.esl`) introduced in Fallout 4 and used in subsequent games. ESL plugins use a compact [Form ID](#form-id) format (FExxxyyy) that allows thousands of light plugins to load simultaneously without consuming limited plugin slots. ESL files have restrictions: they can only contain up to 2,048 new records with unique Form IDs, but can include unlimited [overriding records](#overriding-record).
+
+### ESM
+
+Elder Scrolls Master - a [plugin](#plugin) file format (`.esm`) that serves as a [master file](#master-file) for other plugins. ESM files load before ESP files in the load order and use a 2-character [Mod ID](#mod-id) in their [Form ID](#form-id) format (xxyyyyyy). Typically used for game data files and major expansion packs.
+
+### ESP
+
+Elder Scrolls Plugin - the standard [plugin](#plugin) file format (`.esp`) for mods. ESP files load after [ESM](#esm) files in the load order and use the same [Form ID](#form-id) format (xxyyyyyy) with a 2-character [Mod ID](#mod-id). Most user-created mods use the ESP format.
+
+### Exterior Cell
+
+A [cell](#cell) that represents outdoor game space within a [worldspace](#worldspace). Exterior cells are organized in a grid system using [grid cell](#grid-cell) coordinates. Multiple exterior cells can be loaded simultaneously to create seamless outdoor environments. Contrast with [Interior Cell](#interior-cell).
+
 ## F
+
+### FUZ
+
+Facial Animation + Audio - Bethesda's container file format (`.fuz`) that combines lip-sync facial animation data with compressed audio ([XWM](#xwm) format). Used extensively in Skyrim and Fallout games for NPC dialogue, packaging spoken audio together with phoneme timing data for realistic lip synchronization during conversations.
 
 ### File Form ID
 
@@ -66,6 +114,10 @@ The Form ID format for ESL records has three parts:
 
 ## G
 
+### Gamebryo
+
+A commercial game engine developed by Gamebase Co., Ltd. and Emergent Game Technologies, used by Bethesda for The Elder Scrolls IV: Oblivion (2006), Fallout 3 (2008), and Fallout: New Vegas (2010). Predecessor to the [Creation Engine](#creation-engine). Uses [NIF](#nif) files for 3D models.
+
 ### Grid Cell
 
 A coordinate unit in the game's worldspace system. Grid cells divide the world into manageable chunks, typically 4096 units square. Used for organizing exterior cell data and optimizing loading/rendering.
@@ -92,11 +144,19 @@ Broken links display as `< Error: Could not be resolved >`, although not all suc
 
 An [overriding record](#overriding-record) that does not change its [master record](#master-record) in any way. Some mod authors exploit Identical to Master (ITM) records to revert changes made by other plugins, or the Creation Kit may populate plugins with ITMs for no apparent reason. Most mod authors and players agree ITMs are problematic, if not harmful, and so xEdit is popularly used to "clean" ITMs from plugins.
 
+### Initially Disabled
+
+A flag on [reference](#reference) records (REFR, ACHR, etc.) that marks the placed object as disabled when the game starts. Initially disabled references can be enabled later through scripts or quest stages. Commonly used for quest-specific objects that should only appear at certain times.
+
 ### Injected Record
 
 A record whose [Load Order Form ID](#load-order-form-id) is unreserved but treated as contained by the file matching the specified [Mod ID](#mod-id) or [Light Mod ID](#light-mod-id).
 
 When injected records with different [signatures](#signature) conflict, the game will crash.
+
+### Interior Cell
+
+A [cell](#cell) that represents indoor game space, such as buildings, caves, or dungeons. Interior cells exist independently from worldspaces and load as isolated environments. Only one interior cell is typically loaded at a time. Contrast with [Exterior Cell](#exterior-cell).
 
 ## L
 
@@ -147,6 +207,14 @@ A 2-character hexadecimal identifier for an ESM or ESP plugin associated with th
 
 ## N
 
+### Navigation Mesh
+
+Also known as **Navmesh** - a 3D mesh that defines walkable surfaces and pathfinding data for NPCs and creatures. Navigation meshes enable AI-controlled characters to navigate the game world intelligently, avoiding obstacles and finding optimal paths to their destinations. Created and edited in the [Creation Kit](#creation-kit).
+
+### NetImmerse
+
+A game engine developed by Numerical Design Limited (NDL), used by Bethesda for The Elder Scrolls III: Morrowind (2002). The [NIF](#nif) file format is named after this engine (NetImmerse Format). Predecessor to [Gamebryo](#gamebryo).
+
 ### NIF
 
 NetImmerse Format - the 3D model file format used by Gamebryo and Creation Engine games. NIF files contain mesh geometry, textures, animations, and other 3D asset data.
@@ -167,6 +235,18 @@ A [record](#record) whose [Load Order Form ID](#load-order-form-id) matches that
 
 ## P
 
+### Persistent
+
+A flag on [reference](#reference) records (REFR, ACHR, etc.) that keeps the placed object loaded in memory at all times, even when its [cell](#cell) is not active. Persistent references remain accessible to scripts from anywhere in the game world. Essential for objects that need to be referenced by scripts or quests regardless of the player's location.
+
+### Precombined Mesh
+
+A Fallout 4 optimization feature that merges multiple static mesh references into a single combined mesh to improve rendering performance. Precombined meshes reduce draw calls and improve frame rates in dense urban environments. Modifying or deleting references that are part of precombined meshes can cause visual glitches unless the precombined data is regenerated.
+
+### Previs
+
+Short for **Precomputed Visibility** - optimization data in Fallout 4 that determines which objects are visible from specific locations. Works alongside [precombined meshes](#precombined-mesh) to improve performance by culling objects that cannot be seen from the player's current position. Like precombined meshes, modifying worldspace data may require regenerating previs data.
+
 ### Plugin
 
 A collection of [records](#record) in a binary file with the extension `.esp`, `.esm`, or `.esl`. Also known as *files*, *data files*, or *modules*.
@@ -174,6 +254,10 @@ A collection of [records](#record) in a binary file with the extension `.esp`, `
 See also: [Data File - Creation Kit Wiki](https://www.creationkit.com/fallout4/index.php?title=Data_File)
 
 ## R
+
+### Reference
+
+A placed instance of an object in the game world, typically using the `REFR` signature (or `ACHR` for characters, `ACRE` for creatures). References link to a [base record](#base-record) that defines the object's properties, while the reference itself stores placement data (position, rotation, scale) and instance-specific flags like [Persistent](#persistent), [Initially Disabled](#initially-disabled), or [Visible When Distant](#visible-when-distant). For example, multiple sword references can all point to the same weapon base record.
 
 ### Resource
 
@@ -196,4 +280,32 @@ An uppercase 4-character identifier that uniquely identifies a [record](#record)
 ### Subrecord
 
 An [element](#element) with a [signature](#signature) that exists as data in the plugin itself
+
+## T
+
+### TGA
+
+Truevision Targa - a raster graphics file format (`.tga`) used for texture storage in games. While [DDS](#dds) is more common in modern games for GPU-optimized textures, TGA files are still used for source artwork and in older games like Morrowind and Oblivion.
+
+## V
+
+### Visible When Distant
+
+A flag on [reference](#reference) records that marks the placed object for [LOD](#lod) (Level of Detail) rendering. Objects with this flag generate distant LOD meshes so they remain visible at long distances, important for large structures and landmarks that should be visible from far away.
+
+## W
+
+### Winning Override
+
+The final [overriding record](#overriding-record) in a chain of overrides across multiple plugins, determined by load order. The winning override is the version of the record that the game actually uses. For example, if a weapon record is modified by three different plugins, the version in the last-loading plugin becomes the winning override.
+
+### Worldspace
+
+A top-level container for exterior game world data. Worldspaces contain a grid of [exterior cells](#exterior-cell) that make up large outdoor environments. Each game has a main worldspace (e.g., "Tamriel" in Skyrim, "Commonwealth" in Fallout 4) and may include additional worldspaces for DLC areas or separate dimensions. Interior cells exist independently of worldspaces.
+
+## X
+
+### XWM
+
+Xbox Wave Media - Bethesda's proprietary compressed audio format used in Skyrim and later games. XWM files use xWMA (Xbox Windows Media Audio) compression for efficient storage and streaming of sound effects, music, and dialogue. Often packaged inside [FUZ](#fuz) files for voice acting with lip-sync data.
 
