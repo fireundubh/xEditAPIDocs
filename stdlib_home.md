@@ -47,6 +47,18 @@ This reference documents the standard library functions and classes available to
 
 ## Quick Reference Tables
 
+**Contents:**
+- [Most Common Functions](#most-common-functions)
+  - [String Operations](#string-operations)
+  - [File Operations](#file-operations)
+  - [Math Functions](#math-functions)
+  - [Date/Time Functions](#datetime-functions)
+- [xEdit Integration Examples](#xedit-integration-examples)
+  - [Example 1: Format Record Information](#example-1-format-record-information)
+  - [Example 2: Build Output Path](#example-2-build-output-path)
+  - [Example 3: Process Records with Progress](#example-3-process-records-with-progress)
+  - [Example 4: Validate User Input](#example-4-validate-user-input)
+
 ### Most Common Functions
 
 #### String Operations
