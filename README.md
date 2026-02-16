@@ -11,9 +11,10 @@ Comprehensive documentation for xEdit's JvInterpreter scripting system, covering
 | [Plugin Records](#-plugin-records) | Work with ESP/ESM/ESL files and game records | ~200 |
 | [Binary Formats](#-binary-formats) | NIF meshes, materials, LOD files, textures | ~100 |
 | [Utility Functions](#-utility-functions) | Math, strings, collections, grid cells | ~20 |
-| [Resources](#-resources) | Glossary, examples, tutorials | - |
+| [Standard Library](#-standard-library) | Pascal/Delphi runtime library (strings, files, UI, math) | ~240 |
+| [Resources](#-resources) | Glossary, constants, documentation | - |
 
-**Total Documented Functions:** ~377 | **Coverage:** >90% of core API
+**Total Documented Functions:** ~617 | **Coverage:** >95% of available API
 
 ---
 
@@ -580,6 +581,38 @@ _Worldspace grid cell coordinates (4096-unit squares)_
 
 ---
 
+## 📚 Standard Library
+
+Pascal/Delphi standard library functions available to xEdit scripts through JvInterpreter.
+
+### Overview
+- **[Standard Library Home](stdlib_home.md)** - Complete overview with quick reference tables and examples
+
+### Reference by Topic
+
+| Topic | Functions | Description |
+|-------|-----------|-------------|
+| **[Core Functions](stdlib_core.md)** | 80+ | Strings, numbers, arrays, conversions, variants |
+| **[File & Path Operations](stdlib_files.md)** | 40+ | File I/O, path manipulation, directories, streams |
+| **[Date & Time](stdlib_datetime.md)** | 35+ | Date/time creation, formatting, calculations |
+| **[Mathematics](stdlib_math.md)** | 60+ | Trigonometry, logarithms, rounding, random |
+| **[User Interface](stdlib_ui.md)** | 50+ | Dialogs, forms, controls, menus |
+| **[Graphics & Drawing](stdlib_graphics.md)** | 30+ | Canvas, bitmaps, fonts, colors |
+| **[Data Structures](stdlib_data.md)** | 40+ | Lists, strings, streams, collections |
+
+**Total:** 240+ standard library functions and 50+ VCL classes
+
+### Quick Links
+
+**Common Operations:**
+- String manipulation: [Format](stdlib_core.md#string-formatting), [Trim](stdlib_core.md#string-functions), [Pos](stdlib_core.md#string-functions), [Copy](stdlib_core.md#string-functions)
+- File operations: [FileExists](stdlib_files.md#file-existence-and-properties), [TStringList.LoadFromFile](stdlib_data.md#tstringlist), [TFileStream](stdlib_files.md#tfilestream)
+- User input: [InputBox](stdlib_ui.md#inputbox), [MessageDlg](stdlib_ui.md#messagedlg), [ShowMessage](stdlib_ui.md#showmessage)
+- Date/time: [Now](stdlib_datetime.md#current-date-and-time), [FormatDateTime](stdlib_datetime.md#formatting)
+- Math: [Power](stdlib_math.md#power-and-roots), [Max](stdlib_math.md#rounding-and-comparison), [Min](stdlib_math.md#rounding-and-comparison), [Round](stdlib_math.md#rounding-and-comparison)
+
+---
+
 ## 📖 Resources
 
 ### Documentation
@@ -590,11 +623,12 @@ _Worldspace grid cell coordinates (4096-unit squares)_
 
 ## 📊 Documentation Stats
 
-- **Total Functions:** ~377
+- **Total Functions:** ~617
 - **Plugin Record API:** ~200 functions (IwbElement, IwbContainer, IwbFile, IwbMainRecord, etc.)
 - **Binary Format API:** ~100 functions (TdfElement, TwbNifFile, file formats)
 - **Utility Functions:** ~20 functions (Math, StrUtils, TStringList, TwbGridCell)
-- **Coverage:** >90% of core xEdit scripting API
+- **Standard Library:** ~240 functions + 50 VCL classes (strings, files, UI, math, graphics, data structures)
+- **Coverage:** >95% of available xEdit scripting API
 
 ---
 
