@@ -49,7 +49,7 @@ begin
       bsxFlags := rootNode.ExtraDataByType('BSXFlags', False);
 
       if Assigned(bsxFlags) then begin
-        flagValue := bsxFlags.ElementByPath['Integer Data'].NativeValue;
+        flagValue := bsxFlags.NativeValues['Integer Data'];
         AddMessage('BSXFlags: ' + IntToStr(flagValue));
       end else
         AddMessage('No BSXFlags found');
@@ -58,7 +58,7 @@ begin
       behaviorGraph := rootNode.ExtraDataByType('BSBehaviorGraphExtraData', False);
 
       if Assigned(behaviorGraph) then
-        AddMessage('Has behavior graph: ' + behaviorGraph.ElementByPath['Name'].EditValue);
+        AddMessage('Has behavior graph: ' + behaviorGraph.EditValues['Name']);
     end;
   finally
     nif.Free;

@@ -47,7 +47,7 @@ begin
     // Insert a new node right after the root node
     insertPos := rootNode.Index + 1;
     newNode := nif.InsertBlock(insertPos, 'NiNode');
-    newNode.ElementByPath['Name'].EditValue := 'Inserted Node';
+    newNode.EditValues['Name'] := 'Inserted Node';
 
     AddMessage(Format('Inserted block at position %d', [insertPos]));
     AddMessage('New block count: ' + IntToStr(nif.BlocksCount));

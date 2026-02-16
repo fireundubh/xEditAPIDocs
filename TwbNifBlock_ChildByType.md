@@ -56,7 +56,7 @@ begin
       childNode := rootNode.ChildByType('NiNode', False);
 
       if Assigned(childNode) then
-        AddMessage('Found NiNode child: ' + childNode.ElementByPath['Name'].EditValue);
+        AddMessage('Found NiNode child: ' + childNode.EditValues['Name']);
     end;
   finally
     nif.Free;

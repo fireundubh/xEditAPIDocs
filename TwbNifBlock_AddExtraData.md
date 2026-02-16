@@ -50,12 +50,12 @@ begin
     if Assigned(rootNode) then begin
       // Add BSXFlags to control object behavior
       bsxFlags := rootNode.AddExtraData('BSXFlags');
-      bsxFlags.ElementByPath['Integer Data'].NativeValue := 2; // Static
+      bsxFlags.NativeValues['Integer Data'] := 2; // Static
 
       // Add custom string metadata
       stringData := rootNode.AddExtraData('NiStringExtraData');
-      stringData.ElementByPath['Name'].EditValue := 'MyCustomTag';
-      stringData.ElementByPath['String Data'].EditValue := 'CustomValue';
+      stringData.EditValues['Name'] := 'MyCustomTag';
+      stringData.EditValues['String Data'] := 'CustomValue';
 
       AddMessage('Added extra data to root node');
       nif.SaveToFile('meshes\clutter\bucket01_modified.nif');

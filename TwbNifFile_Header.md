@@ -46,16 +46,16 @@ begin
 
     if Assigned(header) then begin
       // Read header information
-      numBlocks := header.ElementByPath['Num Blocks'].NativeValue;
+      numBlocks := header.NativeValues['Num Blocks'];
       AddMessage('File contains ' + IntToStr(numBlocks) + ' blocks');
 
       // Get export info
-      exportInfo := header.ElementByPath['Export Info'].EditValue;
+      exportInfo := header.EditValues['Export Info'];
       if exportInfo <> '' then
         AddMessage('Export Info: ' + exportInfo);
 
       // Get version string
-      AddMessage('Version String: ' + header.ElementByPath['Version'].EditValue);
+      AddMessage('Version String: ' + header.EditValues['Version']);
     end;
   finally
     nif.Free;

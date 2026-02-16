@@ -61,8 +61,8 @@ begin
       AddMessage('Found ' + IntToStr(stringDataList.Count) + ' string extra data blocks:');
       for i := 0 to stringDataList.Count - 1 do begin
         extraData := TwbNifBlock(stringDataList[i]);
-        AddMessage('  Name: ' + extraData.ElementByPath['Name'].EditValue);
-        AddMessage('  Data: ' + extraData.ElementByPath['String Data'].EditValue);
+        AddMessage('  Name: ' + extraData.EditValues['Name']);
+        AddMessage('  Data: ' + extraData.EditValues['String Data']);
       end;
     end;
   finally

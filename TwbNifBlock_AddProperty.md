@@ -49,13 +49,13 @@ begin
     if Assigned(geometry) then begin
       // Add a lighting shader property
       shader := geometry.AddProperty('BSLightingShaderProperty');
-      shader.ElementByPath['Shader Flags 1'].NativeValue := 2147483649; // Basic flags
-      shader.ElementByPath['Shader Flags 2'].NativeValue := 1; // Enable textures
+      shader.NativeValues['Shader Flags 1'] := 2147483649; // Basic flags
+      shader.NativeValues['Shader Flags 2'] := 1; // Enable textures
 
       // Add texture set
       texSet := shader.AddProperty('BSShaderTextureSet');
-      texSet.ElementByPath['Textures\[0]'].EditValue := 'textures\clutter\bucket01_d.dds';
-      texSet.ElementByPath['Textures\[1]'].EditValue := 'textures\clutter\bucket01_n.dds';
+      texSet.EditValues['Textures\[0]'] := 'textures\clutter\bucket01_d.dds';
+      texSet.EditValues['Textures\[1]'] := 'textures\clutter\bucket01_n.dds';
 
       AddMessage('Added shader property to geometry');
       nif.SaveToFile('meshes\clutter\common\bucket01_modified.nif');

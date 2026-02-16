@@ -929,7 +929,7 @@ begin
 
     // Create root node
     rootNode := nif.AddBlock('BSFadeNode');
-    rootNode.ElementByPath['Name'].EditValue := 'Scene Root';
+    rootNode.EditValues['Name'] := 'Scene Root';
 
     nif.SaveToFile('meshes\test\new_mesh.nif');
     AddMessage('Created NIF for ' + wbGameName);

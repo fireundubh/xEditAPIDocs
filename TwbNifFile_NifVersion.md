@@ -80,7 +80,7 @@ begin
 
     // Now we can add SSE-specific blocks
     rootNode := nif.AddBlock('BSFadeNode');
-    rootNode.ElementByPath['Name'].EditValue := 'Scene Root';
+    rootNode.EditValues['Name'] := 'Scene Root';
 
     nif.SaveToFile('meshes\test\sse_mesh.nif');
   finally

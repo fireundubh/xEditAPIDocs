@@ -52,7 +52,7 @@ begin
       AddMessage('Found bone: ' + boneBlock.BlockType);
 
       // Access the bone's transform
-      transform := boneBlock.ElementByPath['Transform'];
+      transform := boneBlock.Elements['Transform'];
       if Assigned(transform) then
         AddMessage('Transform: ' + transform.EditValue);
     end else

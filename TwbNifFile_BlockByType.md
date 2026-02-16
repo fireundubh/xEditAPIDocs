@@ -58,7 +58,7 @@ begin
     rootNode := nif.BlockByType('NiNode', False);
 
     if Assigned(rootNode) then
-      AddMessage('Root node: ' + rootNode.ElementByPath['Name'].EditValue);
+      AddMessage('Root node: ' + rootNode.EditValues['Name']);
   finally
     nif.Free;
   end;

@@ -44,7 +44,7 @@ begin
       geometry := nif.Blocks[i];
 
       if geometry.IsNiObject('NiTriBasedGeom', True) then begin
-        uv := geometry.ElementByPath['Vertex Data\[0]\UV'];
+        uv := geometry.Elements['Vertex Data\[0]\UV'];
         if Assigned(uv) then begin
           uv.NativeValues['U'] := uv.NativeValues['U'] * 2.0;
           uv.NativeValues['V'] := uv.NativeValues['V'] * 2.0;

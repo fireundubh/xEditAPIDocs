@@ -50,13 +50,13 @@ begin
       // Look for BSX flags
       bsxFlags := rootNode.ExtraDataByName('BSX');
       if Assigned(bsxFlags) then
-        AddMessage('Found BSXFlags: ' + IntToStr(bsxFlags.ElementByPath['Integer Data'].NativeValue));
+        AddMessage('Found BSXFlags: ' + IntToStr(bsxFlags.NativeValues['Integer Data']));
 
       // Look for inventory marker
       invMarker := rootNode.ExtraDataByName('INV');
       if Assigned(invMarker) then begin
         AddMessage('Found inventory marker');
-        AddMessage('  Rotation: ' + invMarker.ElementByPath['Rotation'].EditValue);
+        AddMessage('  Rotation: ' + invMarker.EditValues['Rotation']);
       end else
         AddMessage('No inventory marker found');
     end;

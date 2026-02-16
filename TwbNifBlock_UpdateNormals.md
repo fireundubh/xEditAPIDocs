@@ -47,7 +47,7 @@ begin
 
     if Assigned(geometry) then begin
       // Modify vertex positions (example: offset all vertices)
-      vertex := geometry.ElementByPath['Vertex Data\[0]\Vertex'];
+      vertex := geometry.Elements['Vertex Data\[0]\Vertex'];
       vertex.NativeValues['Z'] := vertex.NativeValues['Z'] + 10.0;
 
       // Recalculate normals for proper lighting

@@ -50,18 +50,18 @@ begin
 
     // Add root node
     rootNode := nif.AddBlock('BSFadeNode');
-    rootNode.ElementByPath['Name'].EditValue := 'Scene Root';
+    rootNode.EditValues['Name'] := 'Scene Root';
 
     // Add geometry
     geometry := nif.AddBlock('BSTriShape');
-    geometry.ElementByPath['Name'].EditValue := 'Mesh';
+    geometry.EditValues['Name'] := 'Mesh';
 
     // Add shader property
     shader := nif.AddBlock('BSLightingShaderProperty');
 
     // Add texture set
     texSet := nif.AddBlock('BSShaderTextureSet');
-    texSet.ElementByPath['Textures\[0]'].EditValue := 'textures\test\diffuse.dds';
+    texSet.EditValues['Textures\[0]'] := 'textures\test\diffuse.dds';
 
     // Link them together
     // (Would need to set up references properly here)

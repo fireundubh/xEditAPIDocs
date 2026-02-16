@@ -41,7 +41,7 @@ begin
     // Process the NIF...
     rootNode := nif.RootNode;
     if Assigned(rootNode) then
-      AddMessage('Root node: ' + rootNode.ElementByPath['Name'].EditValue);
+      AddMessage('Root node: ' + rootNode.EditValues['Name']);
 
     // Save modified NIF
     nif.SaveToFile('meshes\clutter\bucket01_modified.nif');
@@ -67,7 +67,7 @@ begin
 
     // Add root node
     rootNode := nif.AddBlock('NiNode');
-    rootNode.ElementByPath['Name'].EditValue := 'Scene Root';
+    rootNode.EditValues['Name'] := 'Scene Root';
 
     AddMessage('Created new NIF structure');
     nif.SaveToFile('meshes\test\new_nif.nif');

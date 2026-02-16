@@ -46,7 +46,7 @@ begin
 
       if geometry.IsNiObject('NiTriBasedGeom', True) then begin
         // Scale vertices (simplified example)
-        vertex := geometry.ElementByPath['Vertex Data\[0]\Vertex'];
+        vertex := geometry.Elements['Vertex Data\[0]\Vertex'];
         if Assigned(vertex) then begin
           vertex.NativeValues['X'] := vertex.NativeValues['X'] * 1.5;
           vertex.NativeValues['Y'] := vertex.NativeValues['Y'] * 1.5;

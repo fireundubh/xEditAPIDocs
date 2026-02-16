@@ -42,7 +42,7 @@ begin
 
     if Assigned(footer) then begin
       // Read footer information
-      numRoots := footer.ElementByPath['Num Roots'].NativeValue;
+      numRoots := footer.NativeValues['Num Roots'];
       AddMessage('Footer indicates ' + IntToStr(numRoots) + ' root nodes');
     end else
       AddMessage('This NIF version does not use a footer');

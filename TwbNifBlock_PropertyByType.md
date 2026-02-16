@@ -49,12 +49,12 @@ begin
       shader := geometry.PropertyByType('BSLightingShaderProperty', False);
 
       if Assigned(shader) then begin
-        AddMessage('Shader Flags 1: ' + IntToStr(shader.ElementByPath['Shader Flags 1'].NativeValue));
+        AddMessage('Shader Flags 1: ' + IntToStr(shader.NativeValues['Shader Flags 1']));
 
         // Many shaders have a texture set as a child property
         texSet := shader.PropertyByType('BSShaderTextureSet', False);
         if Assigned(texSet) then
-          AddMessage('Diffuse: ' + texSet.ElementByPath['Textures\[0]'].EditValue);
+          AddMessage('Diffuse: ' + texSet.EditValues['Textures\[0]']);
       end;
 
       // Check for alpha property

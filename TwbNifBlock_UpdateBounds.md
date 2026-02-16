@@ -44,7 +44,7 @@ begin
 
     if Assigned(geometry) then begin
       // Modify vertex positions
-      vertexData := geometry.ElementByPath['Vertex Data\[0]\Vertex'];
+      vertexData := geometry.Elements['Vertex Data\[0]\Vertex'];
       vertexData.NativeValues['X'] := vertexData.NativeValues['X'] * 2.0;
       vertexData.NativeValues['Y'] := vertexData.NativeValues['Y'] * 2.0;
       vertexData.NativeValues['Z'] := vertexData.NativeValues['Z'] * 2.0;

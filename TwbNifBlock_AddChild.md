@@ -46,7 +46,7 @@ begin
     childNode := rootNode.AddChild('NiNode');
 
     // Set the child node's name
-    childNode.ElementByPath['Name'].EditValue := 'ChildNode01';
+    childNode.EditValues['Name'] := 'ChildNode01';
 
     // Add geometry as a child of the child node
     geometry := childNode.AddChild('BSTriShape');
