@@ -3,15 +3,17 @@
 ## Syntax
 
 ```pascal
-function IsNiObject(ABlock: TwbNifBlock; ATemplate: string): Boolean;
-function IsNiObject(ABlock: TwbNifBlock; ATemplate: string; AInherited: Boolean): Boolean;
+function IsNiObject(ATemplate: string): Boolean;
+function IsNiObject(ATemplate: string; AInherited: Boolean): Boolean;
 ```
+
+**Access via:** `block.IsNiObject(ATemplate)` or `block.IsNiObject(ATemplate, Inherited)`
 
 ## Description
 
 Tests whether a NIF block matches a specific block type or inherits from it. This is essential for type checking in NIF manipulation, as NIF uses an inheritance-based type system.
 
-The function can check for exact type matches or include inheritance checking. When inheritance checking is enabled, it returns True if the block is of the specified type OR inherits from that type. For example, checking if a BSTriShape IsNiObject("NiAVObject", True) returns True because BSTriShape inherits from NiAVObject.
+The method can check for exact type matches or include inheritance checking. When inheritance checking is enabled, it returns True if the block is of the specified type OR inherits from that type. For example, checking if a BSTriShape IsNiObject("NiAVObject", True) returns True because BSTriShape inherits from NiAVObject.
 
 Common NIF inheritance chains:
 - NiObject (base for all blocks)
@@ -26,7 +28,6 @@ Common NIF inheritance chains:
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block to test |
 | ATemplate | string | The block type name to test against |
 | AInherited | Boolean | Optional. If True, check inheritance; if False, require exact match. Default is True |
 
@@ -50,17 +51,17 @@ begin
     for i := 0 to nif.BlocksCount - 1 do begin
       block := nif.Blocks[i];
 
-      if IsNiObject(block, 'NiAVObject', True) then
-        AddMessage('Renderable block: ' + BlockType(block));
+      if block.IsNiObject('NiAVObject', True) then
+        AddMessage('Renderable block: ' + block.BlockType);
     end;
 
     // Check for exact type match
     block := nif.BlockByType('BSTriShape');
     if Assigned(block) then begin
-      if IsNiObject(block, 'BSTriShape', False) then
+      if block.IsNiObject('BSTriShape', False) then
         AddMessage('Exact match: BSTriShape');
 
-      if IsNiObject(block, 'NiTriShape', True) then
+      if block.IsNiObject('NiTriShape', True) then
         AddMessage('Inherits from NiTriShape');
     end;
   finally

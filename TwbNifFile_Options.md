@@ -3,9 +3,10 @@
 ## Syntax
 
 ```pascal
-function Options(ANifFile: TwbNifFile): Byte; // Get
-procedure Options(ANifFile: TwbNifFile; AValue: Byte); // Set
+property Options: Byte;
 ```
+
+Access via: `nifFile.Options` (read) or `nifFile.Options := value` (write)
 
 ## Description
 
@@ -19,12 +20,7 @@ Options are stored as a byte where each bit represents a flag. Multiple options 
 
 These options primarily affect save operations and can help optimize the output file size and structure.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
-| AValue | Byte | The options value to set (for setter) |
+This is a read/write property.
 
 ## Returns
 

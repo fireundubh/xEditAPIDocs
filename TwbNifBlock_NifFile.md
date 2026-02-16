@@ -3,20 +3,16 @@
 ## Syntax
 
 ```pascal
-function NifFile(ABlock: TwbNifBlock): TwbNifFile;
+property NifFile: TwbNifFile;
 ```
+
+Access via: `block.NifFile`
 
 ## Description
 
 Returns the parent TwbNifFile object that contains this block. This provides access to the overall NIF file structure and all other blocks in the file.
 
 Every block in a NIF file is part of a TwbNifFile container. This property allows you to navigate from any individual block back to the file level, where you can access file-wide operations, other blocks, the header, footer, and file version information.
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block to query |
 
 ## Returns
 
@@ -38,7 +34,7 @@ begin
     block := nif.BlockByType('NiNode');
 
     // Navigate back to the parent file
-    parentFile := NifFile(block);
+    parentFile := block.NifFile;
 
     // Now we can access file-level properties
     AddMessage('NIF Version: ' + IntToStr(Ord(parentFile.NifVersion)));

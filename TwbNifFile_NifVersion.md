@@ -3,9 +3,10 @@
 ## Syntax
 
 ```pascal
-function NifVersion(ANifFile: TwbNifFile): Integer; // Get
-procedure NifVersion(ANifFile: TwbNifFile; AVersion: Integer); // Set
+property NifVersion: Integer;
 ```
+
+Access via: `nifFile.NifVersion` (read) or `nifFile.NifVersion := value` (write)
 
 ## Description
 
@@ -27,12 +28,7 @@ The version affects:
 
 When creating a new NIF, always set the version first before adding blocks. When loading a NIF, the version is automatically detected from the file header.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
-| AVersion | Integer | The version to set (for setter) |
+This is a read/write property.
 
 ## Returns
 

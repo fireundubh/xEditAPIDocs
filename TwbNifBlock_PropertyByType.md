@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function PropertyByType(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
-function PropertyByType(ABlock: TwbNifBlock; ABlockType: string; AInherited: Boolean): TwbNifBlock;
+function PropertyByType(ABlockType: string): TwbNifBlock;
+function PropertyByType(ABlockType: string; AInherited: Boolean): TwbNifBlock;
 ```
+
+**Access via:** `block.PropertyByType(ABlockType)` or `block.PropertyByType(ABlockType, Inherited)`
 
 ## Description
 
@@ -13,13 +15,12 @@ Finds and returns the first property block of a specific type attached to this b
 
 This is a convenience method for finding a single property when you expect only one or only need the first match. It's commonly used to locate the shader property, alpha property, or other rendering properties attached to geometry.
 
-The function supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first property that is of the specified type or inherits from it.
+The method supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first property that is of the specified type or inherits from it.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block whose properties to search |
 | ABlockType | string | The property type to search for |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
 
@@ -45,19 +46,19 @@ begin
 
     if Assigned(geometry) then begin
       // Get the shader property
-      shader := PropertyByType(geometry, 'BSLightingShaderProperty', False);
+      shader := geometry.PropertyByType('BSLightingShaderProperty', False);
 
       if Assigned(shader) then begin
         AddMessage('Shader Flags 1: ' + IntToStr(shader.ElementByPath['Shader Flags 1'].NativeValue));
 
         // Many shaders have a texture set as a child property
-        texSet := PropertyByType(shader, 'BSShaderTextureSet', False);
+        texSet := shader.PropertyByType('BSShaderTextureSet', False);
         if Assigned(texSet) then
           AddMessage('Diffuse: ' + texSet.ElementByPath['Textures\[0]'].EditValue);
       end;
 
       // Check for alpha property
-      alphaProp := PropertyByType(geometry, 'NiAlphaProperty', False);
+      alphaProp := geometry.PropertyByType('NiAlphaProperty', False);
       if Assigned(alphaProp) then
         AddMessage('Has alpha blending');
     end;

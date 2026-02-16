@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function AddBlock(ANifFile: TwbNifFile; ABlockType: string): TwbNifBlock;
+function AddBlock(ABlockType: string): TwbNifBlock;
 ```
+
+Access via: `nifFile.AddBlock(BlockType)`
 
 ## Description
 
@@ -26,7 +28,6 @@ Common block types to add:
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | ABlockType | string | The type of block to create |
 
 ## Returns

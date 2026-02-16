@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function AddExtraData(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
+function AddExtraData(ABlockType: string): TwbNifBlock;
 ```
+
+**Access via:** `block.AddExtraData(ABlockType)`
 
 ## Description
 
@@ -18,13 +20,12 @@ Extra data blocks are used for various purposes:
 - **BSBehaviorGraphExtraData**: Animation behavior graph data
 - **BSInvMarker**: Inventory marker position data
 
-The function creates a new extra data block, adds it to the NIF file, and links it to the parent block's Extra Data list.
+The method creates a new extra data block, adds it to the NIF file, and links it to the parent block's Extra Data list.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The parent block that will receive the extra data |
 | ABlockType | string | The type of extra data block to create (e.g., "NiStringExtraData", "BSXFlags") |
 
 ## Returns
@@ -48,11 +49,11 @@ begin
 
     if Assigned(rootNode) then begin
       // Add BSXFlags to control object behavior
-      bsxFlags := AddExtraData(rootNode, 'BSXFlags');
+      bsxFlags := rootNode.AddExtraData('BSXFlags');
       bsxFlags.ElementByPath['Integer Data'].NativeValue := 2; // Static
 
       // Add custom string metadata
-      stringData := AddExtraData(rootNode, 'NiStringExtraData');
+      stringData := rootNode.AddExtraData('NiStringExtraData');
       stringData.ElementByPath['Name'].EditValue := 'MyCustomTag';
       stringData.ElementByPath['String Data'].EditValue := 'CustomValue';
 

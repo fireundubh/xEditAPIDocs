@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Refs(ABlock: TwbNifBlock; Index: Integer): TwbNiRef;
+property Refs[Index: Integer]: TwbNiRef;
 ```
+
+Access via: `block.Refs[index]`
 
 ## Description
 
@@ -16,7 +18,6 @@ This indexed property provides access to the individual reference elements withi
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block containing the references |
 | Index | Integer | Zero-based index of the reference to retrieve |
 
 ## Returns
@@ -40,13 +41,13 @@ begin
     node := nif.BlockByType('NiNode');
 
     if Assigned(node) then begin
-      AddMessage('Examining ' + IntToStr(RefsCount(node)) + ' references:');
+      AddMessage('Examining ' + IntToStr(node.RefsCount) + ' references:');
 
-      for i := 0 to RefsCount(node) - 1 do begin
-        childRef := Refs(node, i);
+      for i := 0 to node.RefsCount - 1 do begin
+        childRef := node.Refs[i];
 
         AddMessage(Format('Ref[%d]: Template=%s, IsPtr=%s',
-          [i, Template(childRef), BoolToStr(Ptr(childRef), True)]));
+          [i, childRef.Template, BoolToStr(childRef.Ptr, True)]));
 
         // Get the actual block index this reference points to
         refValue := childRef.NativeValue;

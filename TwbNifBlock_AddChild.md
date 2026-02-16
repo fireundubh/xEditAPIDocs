@@ -3,22 +3,23 @@
 ## Syntax
 
 ```pascal
-function AddChild(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
+function AddChild(ABlockType: string): TwbNifBlock;
 ```
+
+**Access via:** `block.AddChild(ABlockType)`
 
 ## Description
 
 Adds a new child block to this NIF block and returns the created block. This is used to build the NIF scene graph hierarchy by attaching child nodes and geometry to parent nodes.
 
-This function only works on blocks that support children (typically NiNode and derived types). It creates a new block of the specified type, adds it to the NIF file, and establishes the parent-child relationship by updating the parent's Children array.
+This method only works on blocks that support children (typically NiNode and derived types). It creates a new block of the specified type, adds it to the NIF file, and establishes the parent-child relationship by updating the parent's Children array.
 
-The new child block is properly initialized with default values and can be further configured after creation. The function handles all the necessary internal bookkeeping including updating block references and counts.
+The new child block is properly initialized with default values and can be further configured after creation. The method handles all the necessary internal bookkeeping including updating block references and counts.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The parent block that will receive the new child |
 | ABlockType | string | The type of block to create (e.g., "NiNode", "BSTriShape") |
 
 ## Returns
@@ -42,13 +43,13 @@ begin
     rootNode := nif.AddBlock('NiNode');
 
     // Add a child node to the root
-    childNode := AddChild(rootNode, 'NiNode');
+    childNode := rootNode.AddChild('NiNode');
 
     // Set the child node's name
     childNode.ElementByPath['Name'].EditValue := 'ChildNode01';
 
     // Add geometry as a child of the child node
-    geometry := AddChild(childNode, 'BSTriShape');
+    geometry := childNode.AddChild('BSTriShape');
 
     AddMessage('Created hierarchy: Root -> ChildNode01 -> BSTriShape');
 

@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function BlocksCount(ANifFile: TwbNifFile): Integer;
+property BlocksCount: Integer;
 ```
+
+Access via: `nifFile.BlocksCount`
 
 ## Description
 
@@ -14,11 +16,7 @@ The block count represents all blocks in the file's linear block list. Blocks ar
 
 This count is automatically maintained by the TwbNifFile class when blocks are added, inserted, or removed.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
+This is a read-only property.
 
 ## Returns
 
@@ -41,7 +39,7 @@ begin
     // Iterate through all blocks
     for i := 0 to nif.BlocksCount - 1 do begin
       block := nif.Blocks[i];
-      AddMessage(Format('Block %d: %s', [i, BlockType(block)]));
+      AddMessage(Format('Block %d: %s', [i, block.BlockType]));
     end;
   finally
     nif.Free;

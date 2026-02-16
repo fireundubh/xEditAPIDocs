@@ -3,15 +3,17 @@
 ## Syntax
 
 ```pascal
-procedure PropertiesByType(ABlock: TwbNifBlock; ABlockType: string; AList: TList);
-procedure PropertiesByType(ABlock: TwbNifBlock; ABlockType: string; AList: TList; AInherited: Boolean);
+procedure PropertiesByType(ABlockType: string; AList: TList);
+procedure PropertiesByType(ABlockType: string; AList: TList; AInherited: Boolean);
 ```
+
+**Access via:** `block.PropertiesByType(ABlockType, AList)` or `block.PropertiesByType(ABlockType, AList, Inherited)`
 
 ## Description
 
 Populates a TList with all property blocks of a specific type attached to this block. Properties control rendering, materials, and visual characteristics.
 
-The function can search for exact type matches or include inheritance. When inheritance checking is enabled, it includes all properties that are of the specified type or inherit from it.
+The method can search for exact type matches or include inheritance. When inheritance checking is enabled, it includes all properties that are of the specified type or inherit from it.
 
 Common property types to search for:
 - "BSLightingShaderProperty" - Standard Skyrim/FO4 materials
@@ -26,7 +28,6 @@ The list must be created before calling this method and should be freed by the c
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block whose properties to search |
 | ABlockType | string | The property type to search for |
 | AList | TList | The list to populate with matching properties |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
@@ -54,12 +55,12 @@ begin
 
     if Assigned(geometry) then begin
       // Find all shader properties (including derived types)
-      PropertiesByType(geometry, 'BSShaderProperty', shaderList, True);
+      geometry.PropertiesByType('BSShaderProperty', shaderList, True);
 
       AddMessage('Found ' + IntToStr(shaderList.Count) + ' shader properties:');
       for i := 0 to shaderList.Count - 1 do begin
         shader := TwbNifBlock(shaderList[i]);
-        AddMessage('  ' + BlockType(shader));
+        AddMessage('  ' + shader.BlockType);
       end;
     end;
   finally

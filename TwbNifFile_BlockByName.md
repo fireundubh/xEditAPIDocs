@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function BlockByName(ANifFile: TwbNifFile; ABlockName: string): TwbNifBlock;
+function BlockByName(ABlockName: string): TwbNifBlock;
 ```
+
+Access via: `nifFile.BlockByName(Name)`
 
 ## Description
 
@@ -24,7 +26,6 @@ The search is case-sensitive and matches the exact string.
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | ABlockName | string | The name to search for |
 
 ## Returns
@@ -48,7 +49,7 @@ begin
     boneBlock := nif.BlockByName('NPC Spine2 [Spn2]');
 
     if Assigned(boneBlock) then begin
-      AddMessage('Found bone: ' + BlockType(boneBlock));
+      AddMessage('Found bone: ' + boneBlock.BlockType);
 
       // Access the bone's transform
       transform := boneBlock.ElementByPath['Transform'];

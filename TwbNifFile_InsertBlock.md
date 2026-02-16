@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function InsertBlock(ANifFile: TwbNifFile; Index: Integer; ABlockType: string): TwbNifBlock;
+function InsertBlock(Index: Integer; ABlockType: string): TwbNifBlock;
 ```
+
+Access via: `nifFile.InsertBlock(Index, BlockType)`
 
 ## Description
 
@@ -20,7 +22,6 @@ Be careful when inserting blocks into loaded files, as the block order can be im
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | Index | Integer | The position where the block should be inserted |
 | ABlockType | string | The type of block to create |
 

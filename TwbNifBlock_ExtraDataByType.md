@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function ExtraDataByType(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
-function ExtraDataByType(ABlock: TwbNifBlock; ABlockType: string; AInherited: Boolean): TwbNifBlock;
+function ExtraDataByType(ABlockType: string): TwbNifBlock;
+function ExtraDataByType(ABlockType: string; AInherited: Boolean): TwbNifBlock;
 ```
+
+**Access via:** `block.ExtraDataByType(ABlockType)` or `block.ExtraDataByType(ABlockType, Inherited)`
 
 ## Description
 
@@ -13,13 +15,12 @@ Finds and returns the first extra data block of a specific type attached to this
 
 This is a convenience method for finding a single extra data block when you expect only one or only need the first match. It's commonly used to locate specific metadata blocks like BSXFlags or behavior graph data.
 
-The function supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first extra data block that is of the specified type or inherits from it.
+The method supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first extra data block that is of the specified type or inherits from it.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block whose extra data to search |
 | ABlockType | string | The extra data type to search for |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
 
@@ -45,7 +46,7 @@ begin
 
     if Assigned(rootNode) then begin
       // Look for BSXFlags
-      bsxFlags := ExtraDataByType(rootNode, 'BSXFlags', False);
+      bsxFlags := rootNode.ExtraDataByType('BSXFlags', False);
 
       if Assigned(bsxFlags) then begin
         flagValue := bsxFlags.ElementByPath['Integer Data'].NativeValue;
@@ -54,7 +55,7 @@ begin
         AddMessage('No BSXFlags found');
 
       // Look for behavior graph
-      behaviorGraph := ExtraDataByType(rootNode, 'BSBehaviorGraphExtraData', False);
+      behaviorGraph := rootNode.ExtraDataByType('BSBehaviorGraphExtraData', False);
 
       if Assigned(behaviorGraph) then
         AddMessage('Has behavior graph: ' + behaviorGraph.ElementByPath['Name'].EditValue);

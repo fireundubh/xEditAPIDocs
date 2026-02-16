@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Ptr(ANiRef: TwbNiRef): Boolean;
+property Ptr: Boolean;
 ```
+
+Access via: `niRef.Ptr`
 
 ## Description
 
@@ -15,12 +17,6 @@ In NIF files, there are two types of block references:
 - **NiPtr**: Points forward to blocks that appear later in the file (higher block indices)
 
 This distinction is important for understanding the NIF file structure and block dependencies. Most references are NiRefs pointing to previously defined blocks, but some specialized cases use NiPtr to point forward in the block list.
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANiRef | TwbNiRef | The NIF reference element |
 
 ## Returns
 
@@ -43,7 +39,7 @@ begin
 
     for i := 0 to block.RefsCount - 1 do begin
       ref := block.Refs[i];
-      if Ptr(ref) then
+      if ref.Ptr then
         AddMessage('Reference ' + IntToStr(i) + ' is a forward pointer (NiPtr)')
       else
         AddMessage('Reference ' + IntToStr(i) + ' is a backward reference (NiRef)');

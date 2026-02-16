@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function UpdateBounds(ABlock: TwbNifBlock): Boolean;
+function UpdateBounds(): Boolean;
 ```
+
+**Access via:** `block.UpdateBounds()`
 
 ## Description
 
@@ -12,7 +14,7 @@ Recalculates and updates the bounding sphere and bounding box for this geometry 
 
 Bounding volumes are used by the game engine for frustum culling and collision detection optimization. When you modify vertex positions, you must update the bounds to ensure proper rendering and collision behavior.
 
-This function:
+This method:
 - Calculates the axis-aligned bounding box from all vertices
 - Computes the bounding sphere that encompasses all vertices
 - Updates the block's Bounds or Bounding Box fields
@@ -20,9 +22,7 @@ This function:
 
 ## Parameters
 
-| Name | Type | Description |
-|------|------|-------------|
-| ABlock | TwbNifBlock | The geometry block whose bounds to update |
+None.
 
 ## Returns
 
@@ -50,7 +50,7 @@ begin
       vertexData.NativeValues['Z'] := vertexData.NativeValues['Z'] * 2.0;
 
       // Update bounds to reflect the changes
-      if UpdateBounds(geometry) then
+      if geometry.UpdateBounds() then
         AddMessage('Bounding sphere updated successfully')
       else
         AddMessage('Failed to update bounds');

@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function SpellUpdateTangents(ANifFile: TwbNifFile): Boolean;
+function SpellUpdateTangents: Boolean;
 ```
+
+Access via: `nifFile.SpellUpdateTangents`
 
 ## Description
 
@@ -19,12 +21,6 @@ The spell:
 - Skips geometry that doesn't have tangent data
 
 Tangent space is essential for normal mapping. After modifying vertices, normals, or UVs, you must update tangents for normal maps to display correctly.
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 
 ## Returns
 
@@ -47,7 +43,7 @@ begin
     for i := 0 to nif.BlocksCount - 1 do begin
       geometry := nif.Blocks[i];
 
-      if IsNiObject(geometry, 'NiTriBasedGeom', True) then begin
+      if geometry.IsNiObject('NiTriBasedGeom', True) then begin
         uv := geometry.ElementByPath['Vertex Data\[0]\UV'];
         if Assigned(uv) then begin
           uv.NativeValues['U'] := uv.NativeValues['U'] * 2.0;

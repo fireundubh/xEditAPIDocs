@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function RefsCount(ABlock: TwbNifBlock): Integer;
+property RefsCount: Integer;
 ```
+
+Access via: `block.RefsCount`
 
 ## Description
 
@@ -15,12 +17,6 @@ References are fundamental to NIF file structure. They create relationships betw
 - Links to properties (materials, shaders, textures)
 - Links to extra data (metadata, custom data)
 - Links to skinning, collision, and animation data
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block to query |
 
 ## Returns
 
@@ -42,12 +38,12 @@ begin
     node := nif.BlockByType('NiNode');
 
     if Assigned(node) then begin
-      AddMessage('Node has ' + IntToStr(RefsCount(node)) + ' references');
+      AddMessage('Node has ' + IntToStr(node.RefsCount) + ' references');
 
       // Iterate through all references
-      for i := 0 to RefsCount(node) - 1 do begin
+      for i := 0 to node.RefsCount - 1 do begin
         childRef := node.Refs[i];
-        AddMessage('Reference ' + IntToStr(i) + ': ' + Template(childRef));
+        AddMessage('Reference ' + IntToStr(i) + ': ' + childRef.Template);
       end;
     end;
   finally

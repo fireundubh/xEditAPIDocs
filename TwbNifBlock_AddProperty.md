@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function AddProperty(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
+function AddProperty(ABlockType: string): TwbNifBlock;
 ```
+
+**Access via:** `block.AddProperty(ABlockType)`
 
 ## Description
 
@@ -17,13 +19,12 @@ Properties define how objects are rendered in the game engine. Common property t
 - **NiMaterialProperty**: Material colors and properties (older games)
 - **BSShaderTextureSet**: Texture file paths for materials
 
-The function creates a new property block, adds it to the NIF file, and links it to the parent block's Properties array. Properties are processed in order, so the order matters for rendering.
+The method creates a new property block, adds it to the NIF file, and links it to the parent block's Properties array. Properties are processed in order, so the order matters for rendering.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The parent block that will receive the property |
 | ABlockType | string | The type of property block to create (e.g., "BSLightingShaderProperty") |
 
 ## Returns
@@ -47,12 +48,12 @@ begin
 
     if Assigned(geometry) then begin
       // Add a lighting shader property
-      shader := AddProperty(geometry, 'BSLightingShaderProperty');
+      shader := geometry.AddProperty('BSLightingShaderProperty');
       shader.ElementByPath['Shader Flags 1'].NativeValue := 2147483649; // Basic flags
       shader.ElementByPath['Shader Flags 2'].NativeValue := 1; // Enable textures
 
       // Add texture set
-      texSet := AddProperty(shader, 'BSShaderTextureSet');
+      texSet := shader.AddProperty('BSShaderTextureSet');
       texSet.ElementByPath['Textures\[0]'].EditValue := 'textures\clutter\bucket01_d.dds';
       texSet.ElementByPath['Textures\[1]'].EditValue := 'textures\clutter\bucket01_n.dds';
 

@@ -3,15 +3,17 @@
 ## Syntax
 
 ```pascal
-function UpdateNormals(ABlock: TwbNifBlock): Boolean;
-function UpdateNormals(ABlock: TwbNifBlock; AAddIfMissing: Boolean): Boolean;
+function UpdateNormals(): Boolean;
+function UpdateNormals(AAddIfMissing: Boolean): Boolean;
 ```
+
+**Access via:** `block.UpdateNormals()` or `block.UpdateNormals(AddIfMissing)`
 
 ## Description
 
 Recalculates vertex normals for this geometry block based on face geometry. Normals are essential for proper lighting in the game engine.
 
-This function:
+This method:
 - Calculates face normals from triangle vertex positions
 - Averages face normals at each vertex to create smooth shading
 - Updates the Normal vectors in the vertex data
@@ -23,7 +25,6 @@ Normals must be updated whenever you modify vertex positions or triangle topolog
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The geometry block whose normals to update |
 | AAddIfMissing | Boolean | Optional. If True, add Normal data if not present. Default is True |
 
 ## Returns
@@ -50,11 +51,11 @@ begin
       vertex.NativeValues['Z'] := vertex.NativeValues['Z'] + 10.0;
 
       // Recalculate normals for proper lighting
-      if UpdateNormals(geometry, True) then begin
+      if geometry.UpdateNormals(True) then begin
         AddMessage('Normals updated successfully');
 
         // Update bounds as well
-        UpdateBounds(geometry);
+        geometry.UpdateBounds();
 
         nif.SaveToFile('meshes\furniture\bench01_modified.nif');
       end else

@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function GetAssetsList(ANifFile: TwbNifFile): string;
-procedure GetAssetsList(ANifFile: TwbNifFile; AList: TStrings);
+function GetAssetsList: string;
+procedure GetAssetsList(AList: TStrings);
 ```
+
+Access via: `nifFile.GetAssetsList` or `nifFile.GetAssetsList(List)`
 
 ## Description
 
@@ -25,7 +27,6 @@ Asset paths are typically relative to the game's Data folder and use backslash s
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | AList | TStrings | Optional. If provided, assets are added to this list |
 
 ## Returns

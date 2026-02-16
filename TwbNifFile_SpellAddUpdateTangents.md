@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function SpellAddUpdateTangents(ANifFile: TwbNifFile): Boolean;
+function SpellAddUpdateTangents: Boolean;
 ```
+
+Access via: `nifFile.SpellAddUpdateTangents`
 
 ## Description
 
@@ -23,12 +25,6 @@ Use this when:
 - Preparing meshes for use with normal maps
 - Converting old meshes to support modern shaders
 - Ensuring all geometry has proper tangent space
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 
 ## Returns
 

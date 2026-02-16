@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function StringsCount(ABlock: TwbNifBlock): Integer;
+property StringsCount: Integer;
 ```
+
+Access via: `block.StringsCount`
 
 ## Description
 
@@ -19,12 +21,6 @@ Indexed strings are commonly used for:
 - Texture file paths
 - Material names
 - Shader parameter names
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block to query |
 
 ## Returns
 
@@ -46,11 +42,11 @@ begin
     for i := 0 to nif.BlocksCount - 1 do begin
       block := nif.Blocks[i];
 
-      if StringsCount(block) > 0 then begin
+      if block.StringsCount > 0 then begin
         AddMessage(Format('Block %d (%s) has %d indexed strings:',
-          [i, BlockType(block), StringsCount(block)]));
+          [i, block.BlockType, block.StringsCount]));
 
-        for j := 0 to StringsCount(block) - 1 do begin
+        for j := 0 to block.StringsCount - 1 do begin
           strElement := block.Strings[j];
           AddMessage('  String[' + IntToStr(j) + ']: ' + strElement.EditValue);
         end;

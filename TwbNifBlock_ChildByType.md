@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function ChildByType(ABlock: TwbNifBlock; ABlockType: string): TwbNifBlock;
-function ChildByType(ABlock: TwbNifBlock; ABlockType: string; AInherited: Boolean): TwbNifBlock;
+function ChildByType(ABlockType: string): TwbNifBlock;
+function ChildByType(ABlockType: string; AInherited: Boolean): TwbNifBlock;
 ```
+
+**Access via:** `block.ChildByType(ABlockType)` or `block.ChildByType(ABlockType, Inherited)`
 
 ## Description
 
@@ -13,13 +15,12 @@ Finds and returns the first child block of a specific type. Returns nil if no ma
 
 This is a convenience method for finding a single child when you expect only one or only need the first match. It searches the block's Children array and returns the first block that matches the type criteria.
 
-The function supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first child that is of the specified type or inherits from it.
+The method supports both exact type matching and inheritance checking. When inheritance is enabled, it returns the first child that is of the specified type or inherits from it.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The parent block whose children to search |
 | ABlockType | string | The block type to search for |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
 
@@ -44,15 +45,15 @@ begin
 
     if Assigned(rootNode) then begin
       // Find the first geometry child
-      geometry := ChildByType(rootNode, 'NiTriBasedGeom', True);
+      geometry := rootNode.ChildByType('NiTriBasedGeom', True);
 
       if Assigned(geometry) then
-        AddMessage('Found geometry: ' + BlockType(geometry))
+        AddMessage('Found geometry: ' + geometry.BlockType)
       else
         AddMessage('No geometry found');
 
       // Find a specific child node type
-      childNode := ChildByType(rootNode, 'NiNode', False);
+      childNode := rootNode.ChildByType('NiNode', False);
 
       if Assigned(childNode) then
         AddMessage('Found NiNode child: ' + childNode.ElementByPath['Name'].EditValue);

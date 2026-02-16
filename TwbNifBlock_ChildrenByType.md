@@ -3,15 +3,17 @@
 ## Syntax
 
 ```pascal
-procedure ChildrenByType(ABlock: TwbNifBlock; ABlockType: string; AList: TList);
-procedure ChildrenByType(ABlock: TwbNifBlock; ABlockType: string; AList: TList; AInherited: Boolean);
+procedure ChildrenByType(ABlockType: string; AList: TList);
+procedure ChildrenByType(ABlockType: string; AList: TList; AInherited: Boolean);
 ```
+
+**Access via:** `block.ChildrenByType(ABlockType, AList)` or `block.ChildrenByType(ABlockType, AList, Inherited)`
 
 ## Description
 
 Populates a TList with all child blocks of a specific type. This method searches the block's Children array and adds matching blocks to the provided list.
 
-The function can search for exact type matches or include inheritance. When inheritance checking is enabled, it includes all children that are of the specified type or inherit from it. This is useful for finding all geometry (anything inheriting from NiTriBasedGeom) or all visible objects (anything inheriting from NiAVObject).
+The method can search for exact type matches or include inheritance. When inheritance checking is enabled, it includes all children that are of the specified type or inherit from it. This is useful for finding all geometry (anything inheriting from NiTriBasedGeom) or all visible objects (anything inheriting from NiAVObject).
 
 The list must be created before calling this method and should be freed by the caller. The list contains references to existing blocks, not copies.
 
@@ -19,7 +21,6 @@ The list must be created before calling this method and should be freed by the c
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The parent block whose children to search |
 | ABlockType | string | The block type to search for |
 | AList | TList | The list to populate with matching blocks |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
@@ -47,12 +48,12 @@ begin
 
     if Assigned(rootNode) then begin
       // Find all geometry children (including inherited types)
-      ChildrenByType(rootNode, 'NiTriBasedGeom', geometryList, True);
+      rootNode.ChildrenByType('NiTriBasedGeom', geometryList, True);
 
       AddMessage('Found ' + IntToStr(geometryList.Count) + ' geometry children:');
       for i := 0 to geometryList.Count - 1 do begin
         child := TwbNifBlock(geometryList[i]);
-        AddMessage('  ' + BlockType(child));
+        AddMessage('  ' + child.BlockType);
       end;
     end;
   finally

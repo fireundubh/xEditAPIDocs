@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Header(ANifFile: TwbNifFile): TwbNifBlock;
+property Header: TwbNifBlock;
 ```
+
+Access via: `nifFile.Header`
 
 ## Description
 
@@ -20,11 +22,7 @@ The header is always the first block in a NIF file (index 0) and contains essent
 
 You typically don't need to modify the header directly as it's automatically managed by the TwbNifFile class, but you can read its values to understand the file structure.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
+This is a read-only property.
 
 ## Returns
 

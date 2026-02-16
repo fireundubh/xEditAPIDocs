@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Footer(ANifFile: TwbNifFile): TwbNifBlock;
+property Footer: TwbNifBlock;
 ```
+
+Access via: `nifFile.Footer`
 
 ## Description
 
@@ -17,11 +19,7 @@ Footers are only present in some NIF versions (primarily Oblivion and later). Th
 
 If the NIF file doesn't have a footer (older versions like Morrowind), this may return nil or an empty block. The presence and structure of footers varies by NIF version.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
+This is a read-only property.
 
 ## Returns
 

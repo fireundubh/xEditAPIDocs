@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Strings(ABlock: TwbNifBlock; Index: Integer): TdfElement;
+property Strings[Index: Integer]: TdfElement;
 ```
+
+Access via: `block.Strings[index]`
 
 ## Description
 
@@ -16,7 +18,6 @@ The returned TdfElement can be used to read or modify the string value using its
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block containing the indexed strings |
 | Index | Integer | Zero-based index of the string element to retrieve |
 
 ## Returns
@@ -40,9 +41,9 @@ begin
     for i := 0 to nif.BlocksCount - 1 do begin
       node := nif.Blocks[i];
 
-      if (BlockType(node) = 'NiNode') and (StringsCount(node) > 0) then begin
+      if (node.BlockType = 'NiNode') and (node.StringsCount > 0) then begin
         // Get the name string (usually first indexed string)
-        nameStr := Strings(node, 0);
+        nameStr := node.Strings[0];
         AddMessage('Found node: ' + nameStr.EditValue);
       end;
     end;

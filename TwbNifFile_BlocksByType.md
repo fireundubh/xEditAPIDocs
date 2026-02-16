@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-procedure BlocksByType(ANifFile: TwbNifFile; ABlockType: string; AList: TList);
-procedure BlocksByType(ANifFile: TwbNifFile; ABlockType: string; AList: TList; AInherited: Boolean);
+procedure BlocksByType(ABlockType: string; AList: TList);
+procedure BlocksByType(ABlockType: string; AList: TList; AInherited: Boolean);
 ```
+
+Access via: `nifFile.BlocksByType(BlockType, List)` or `nifFile.BlocksByType(BlockType, List, Inherited)`
 
 ## Description
 
@@ -25,7 +27,6 @@ The list must be created before calling this method and should be freed by the c
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | ABlockType | string | The block type to search for |
 | AList | TList | The list to populate with matching blocks |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
@@ -56,7 +57,7 @@ begin
     AddMessage('Found ' + IntToStr(geometryList.Count) + ' geometry blocks:');
     for i := 0 to geometryList.Count - 1 do begin
       block := TwbNifBlock(geometryList[i]);
-      AddMessage('  ' + BlockType(block));
+      AddMessage('  ' + block.BlockType);
     end;
 
     // Find all shader properties

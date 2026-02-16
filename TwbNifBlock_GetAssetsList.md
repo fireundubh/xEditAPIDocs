@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function GetAssetsList(ABlock: TwbNifBlock): string;
-procedure GetAssetsList(ABlock: TwbNifBlock; AList: TStrings);
+function GetAssetsList(): string;
+procedure GetAssetsList(AList: TStrings);
 ```
+
+**Access via:** `block.GetAssetsList()` or `block.GetAssetsList(AList)`
 
 ## Description
 
@@ -13,7 +15,7 @@ Retrieves the list of asset file paths referenced by this block and its children
 
 When called with no parameters, returns a newline-delimited string of asset paths. When called with a TStrings parameter, adds each asset path to the provided list.
 
-This function searches the block and all its child blocks for asset references including:
+This method searches the block and all its child blocks for asset references including:
 - Texture file paths (diffuse, normal, specular, etc.)
 - Material files (BGSM, BGEM)
 - Other referenced files
@@ -24,7 +26,6 @@ Asset paths are typically relative to the game's Data folder.
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block to search for asset references |
 | AList | TStrings | Optional. If provided, assets are added to this list |
 
 ## Returns
@@ -50,11 +51,11 @@ begin
 
     if Assigned(geometry) then begin
       // Get assets as a delimited string
-      assetStr := GetAssetsList(geometry);
+      assetStr := geometry.GetAssetsList();
       AddMessage('Assets (string): ' + assetStr);
 
       // Get assets in a list for easier processing
-      GetAssetsList(geometry, assets);
+      geometry.GetAssetsList(assets);
       AddMessage('Found ' + IntToStr(assets.Count) + ' assets:');
       for i := 0 to assets.Count - 1 do
         AddMessage('  ' + assets[i]);

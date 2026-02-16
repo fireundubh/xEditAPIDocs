@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function PropertyByName(ABlock: TwbNifBlock; AName: string): TwbNifBlock;
+function PropertyByName(AName: string): TwbNifBlock;
 ```
+
+**Access via:** `block.PropertyByName(AName)`
 
 ## Description
 
@@ -18,7 +20,6 @@ Note that not all property types support names. This method is most useful for c
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block whose properties to search |
 | AName | string | The name of the property to find |
 
 ## Returns
@@ -41,10 +42,10 @@ begin
 
     if Assigned(geometry) then begin
       // Try to find a property by name
-      namedProp := PropertyByName(geometry, 'CustomMaterial');
+      namedProp := geometry.PropertyByName('CustomMaterial');
 
       if Assigned(namedProp) then
-        AddMessage('Found property: ' + BlockType(namedProp))
+        AddMessage('Found property: ' + namedProp.BlockType)
       else
         AddMessage('Property "CustomMaterial" not found');
     end;

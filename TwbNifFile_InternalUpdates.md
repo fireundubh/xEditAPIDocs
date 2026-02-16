@@ -3,9 +3,10 @@
 ## Syntax
 
 ```pascal
-function InternalUpdates(ANifFile: TwbNifFile): Boolean; // Get
-procedure InternalUpdates(ANifFile: TwbNifFile; AValue: Boolean); // Set
+property InternalUpdates: Boolean;
 ```
+
+Access via: `nifFile.InternalUpdates` (read) or `nifFile.InternalUpdates := value` (write)
 
 ## Description
 
@@ -21,12 +22,7 @@ Setting this to False can improve performance when making many modifications, bu
 
 Default value is True.
 
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
-| AValue | Boolean | The value to set (for setter) |
+This is a read/write property.
 
 ## Returns
 

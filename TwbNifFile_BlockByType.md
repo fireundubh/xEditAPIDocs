@@ -3,9 +3,11 @@
 ## Syntax
 
 ```pascal
-function BlockByType(ANifFile: TwbNifFile; ABlockType: string): TwbNifBlock;
-function BlockByType(ANifFile: TwbNifFile; ABlockType: string; AInherited: Boolean): TwbNifBlock;
+function BlockByType(ABlockType: string): TwbNifBlock;
+function BlockByType(ABlockType: string; AInherited: Boolean): TwbNifBlock;
 ```
+
+Access via: `nifFile.BlockByType(BlockType)` or `nifFile.BlockByType(BlockType, Inherited)`
 
 ## Description
 
@@ -19,7 +21,6 @@ The function supports both exact type matching and inheritance checking. When in
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | ABlockType | string | The block type to search for |
 | AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
 
@@ -44,10 +45,10 @@ begin
     geometry := nif.BlockByType('NiTriBasedGeom', True);
 
     if Assigned(geometry) then begin
-      AddMessage('Found geometry: ' + BlockType(geometry));
+      AddMessage('Found geometry: ' + geometry.BlockType);
 
       // Get its shader
-      shader := PropertyByType(geometry, 'BSLightingShaderProperty');
+      shader := geometry.PropertyByType('BSLightingShaderProperty');
       if Assigned(shader) then
         AddMessage('Has lighting shader');
     end else

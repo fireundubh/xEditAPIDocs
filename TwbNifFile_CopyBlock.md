@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function CopyBlock(ANifFile: TwbNifFile; Index: Integer): TwbNifBlock;
+function CopyBlock(Index: Integer): TwbNifBlock;
 ```
+
+Access via: `nifFile.CopyBlock(Index)`
 
 ## Description
 
@@ -20,7 +22,6 @@ After copying, you may need to update references to integrate the copied block i
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | Index | Integer | The index of the block to copy |
 
 ## Returns
@@ -50,8 +51,8 @@ begin
       copy := nif.CopyBlock(origIndex);
 
       AddMessage(Format('Copied block %d to new block %d', [origIndex, copy.Index]));
-      AddMessage('Original type: ' + BlockType(original));
-      AddMessage('Copy type: ' + BlockType(copy));
+      AddMessage('Original type: ' + original.BlockType);
+      AddMessage('Copy type: ' + copy.BlockType);
 
       // Modify the copy (example)
       if copy.StringsCount > 0 then

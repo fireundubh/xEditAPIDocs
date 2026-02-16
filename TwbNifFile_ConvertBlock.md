@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-procedure ConvertBlock(ANifFile: TwbNifFile; Index: Integer; ABlockType: string);
+procedure ConvertBlock(Index: Integer; ABlockType: string);
 ```
+
+Access via: `nifFile.ConvertBlock(Index, BlockType)`
 
 ## Description
 
@@ -23,7 +25,6 @@ After conversion, all references to this block remain valid because the block in
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | Index | Integer | The index of the block to convert |
 | ABlockType | string | The new block type |
 
@@ -47,7 +48,7 @@ begin
     for i := nif.BlocksCount - 1 downto 0 do begin
       block := nif.Blocks[i];
 
-      if BlockType(block) = 'NiTriShape' then begin
+      if block.BlockType = 'NiTriShape' then begin
         AddMessage('Converting block ' + IntToStr(i) + ' to BSTriShape');
         nif.ConvertBlock(i, 'BSTriShape');
       end;

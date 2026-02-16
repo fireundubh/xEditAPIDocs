@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function ExtraDataByName(ABlock: TwbNifBlock; AName: string): TwbNifBlock;
+function ExtraDataByName(AName: string): TwbNifBlock;
 ```
+
+**Access via:** `block.ExtraDataByName(AName)`
 
 ## Description
 
@@ -23,7 +25,6 @@ Common extra data names:
 
 | Name | Type | Description |
 |------|------|-------------|
-| ABlock | TwbNifBlock | The block whose extra data to search |
 | AName | string | The name of the extra data to find |
 
 ## Returns
@@ -47,12 +48,12 @@ begin
 
     if Assigned(rootNode) then begin
       // Look for BSX flags
-      bsxFlags := ExtraDataByName(rootNode, 'BSX');
+      bsxFlags := rootNode.ExtraDataByName('BSX');
       if Assigned(bsxFlags) then
         AddMessage('Found BSXFlags: ' + IntToStr(bsxFlags.ElementByPath['Integer Data'].NativeValue));
 
       // Look for inventory marker
-      invMarker := ExtraDataByName(rootNode, 'INV');
+      invMarker := rootNode.ExtraDataByName('INV');
       if Assigned(invMarker) then begin
         AddMessage('Found inventory marker');
         AddMessage('  Rotation: ' + invMarker.ElementByPath['Rotation'].EditValue);

@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function Blocks(ANifFile: TwbNifFile; Index: Integer): TwbNifBlock;
+property Blocks[Index: Integer]: TwbNifBlock;
 ```
+
+Access via: `nifFile.Blocks[Index]`
 
 ## Description
 
@@ -14,11 +16,12 @@ This indexed property provides direct access to any block in the file's linear b
 
 Use this when you know the specific block index you need, or when iterating through all blocks. For finding blocks by type or other criteria, use the BlockByType or BlocksByType methods instead.
 
+This is a read-only indexed property.
+
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 | Index | Integer | Zero-based index of the block to retrieve |
 
 ## Returns
@@ -43,7 +46,7 @@ begin
       block := nif.Blocks[i];
 
       // Get block type
-      AddMessage(Format('Block[%d]: Type = %s', [i, BlockType(block)]));
+      AddMessage(Format('Block[%d]: Type = %s', [i, block.BlockType]));
 
       // Try to get name if it's a named block
       if block.StringsCount > 0 then begin
@@ -55,7 +58,7 @@ begin
 
     // Access specific block
     block := nif.Blocks[1]; // Get second block
-    AddMessage('Second block type: ' + BlockType(block));
+    AddMessage('Second block type: ' + block.BlockType);
   finally
     nif.Free;
   end;

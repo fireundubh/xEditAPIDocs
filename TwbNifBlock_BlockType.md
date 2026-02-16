@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function BlockType(ABlock: TwbNifBlock): string;
+property BlockType: string;
 ```
+
+Access via: `block.BlockType`
 
 ## Description
 
@@ -17,12 +19,6 @@ NIF files are composed of blocks that form a hierarchical structure. Each block 
 - **BSLightingShaderProperty**: Shader properties for materials
 - **NiSkinInstance**: Skinning data for animated meshes
 - **bhkCollisionObject**: Collision data
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ABlock | TwbNifBlock | The NIF block to query |
 
 ## Returns
 
@@ -44,7 +40,7 @@ begin
 
     for i := 0 to nif.BlocksCount - 1 do begin
       block := nif.Blocks[i];
-      AddMessage('Block ' + IntToStr(i) + ': ' + BlockType(block));
+      AddMessage('Block ' + IntToStr(i) + ': ' + block.BlockType);
     end;
     // Example output:
     // Block 0: NiNode

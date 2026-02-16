@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function SpellTriangulate(ANifFile: TwbNifFile): Boolean;
+function SpellTriangulate: Boolean;
 ```
+
+Access via: `nifFile.SpellTriangulate`
 
 ## Description
 
@@ -22,12 +24,6 @@ Converting to triangles is often necessary when:
 - Preparing meshes for editing or manipulation
 - Ensuring compatibility with tools that don't support strips
 - Making geometry data easier to work with programmatically
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANifFile | TwbNifFile | The NIF file object |
 
 ## Returns
 

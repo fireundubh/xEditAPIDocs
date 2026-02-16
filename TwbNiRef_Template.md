@@ -3,20 +3,16 @@
 ## Syntax
 
 ```pascal
-function Template(ANiRef: TwbNiRef): string;
+property Template: string;
 ```
+
+Access via: `niRef.Template`
 
 ## Description
 
 Returns the template string that defines what type of NIF block this reference can point to. The template specifies the expected block type inheritance, allowing validation of block references within the NIF file structure.
 
 In NIF files, references (NiRef) are pointers to other blocks in the file. Each reference has a template that constrains which block types are valid targets. For example, a NiNode's Children array might have references with template "NiAVObject", meaning the children must be NiAVObject blocks or blocks that inherit from NiAVObject (like NiNode, NiTriShape, etc.).
-
-## Parameters
-
-| Name | Type | Description |
-|------|------|-------------|
-| ANiRef | TwbNiRef | The NIF reference element |
 
 ## Returns
 
@@ -41,7 +37,7 @@ begin
     // Check what type of blocks its references expect
     for i := 0 to block.RefsCount - 1 do begin
       childRef := block.Refs[i];
-      AddMessage('Reference ' + IntToStr(i) + ' expects: ' + Template(childRef));
+      AddMessage('Reference ' + IntToStr(i) + ' expects: ' + childRef.Template);
       // Example output: "Reference 0 expects: NiAVObject"
     end;
   finally
