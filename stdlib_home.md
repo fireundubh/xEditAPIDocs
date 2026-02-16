@@ -1,6 +1,6 @@
 # Standard Library Reference for xEdit Scripts
 
-This reference documents the standard library functions and classes available to xEdit scripts through the JvInterpreter adapter configuration.
+This reference documents the standard library functions and classes available to xEdit scripts.
 
 ## Quick Navigation
 
@@ -25,29 +25,7 @@ This reference documents the standard library functions and classes available to
 | Work with dates | `Now()`, `FormatDateTime()`, `IncMonth()` | [DateTime](stdlib_datetime.md) |
 | Process strings | `Pos()`, `Copy()`, `Trim()`, `UpperCase()`, `AnsiCompareText()` | [Core](stdlib_core.md#string-functions) |
 
-## Configuration Overview
-
-xEdit scripts use the following adapter configuration for the standard JvInterpreter library:
-
-```pascal
-JvInterpreterFm.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_System.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_SysUtils.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Classes.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Dialogs.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Windows.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Graphics.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Controls.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Buttons.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_StdCtrls.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_ComCtrls.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_ExtCtrls.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Forms.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Menus.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-JvInterpreter_Math.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
-```
-
-### Key Features
+## Key Features
 
 ✅ **Math-Enhanced** - Full Math unit support (trigonometry, logarithms, financial functions)
 
@@ -66,8 +44,6 @@ JvInterpreter_Math.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
 ✅ **Graphics** - Drawing, bitmaps, icons, fonts
 
 ✅ **Dialogs** - Message boxes, input dialogs, file dialogs
-
-This configuration provides a **GUI-focused, non-database** adapter set with **enhanced math capabilities**.
 
 ## Quick Reference Tables
 

@@ -4,8 +4,6 @@ Advanced mathematical functions including trigonometry, logarithms, hyperbolic f
 
 **Unit:** Math
 
-**Note:** This unit is included in xEdit's configuration but NOT in the default `JvInterpreter_all` adapter set.
-
 [← Back to Standard Library Overview](stdlib_home.md)
 
 ## Table of Contents
