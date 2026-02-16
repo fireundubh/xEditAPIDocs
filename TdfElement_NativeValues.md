@@ -12,7 +12,9 @@ Gets or sets the native value of a child element specified by path.
 
 The NativeValues indexed property provides convenient access to descendant elements without explicitly navigating the tree. The path parameter uses backslash separators to traverse the hierarchy (e.g., "Translation\X" or "Children\[0]\Name").
 
-This is equivalent to calling ElementByPath followed by accessing NativeValue, but more concise. The path navigation respects the Enabled property - only enabled elements are accessible by default.
+This is equivalent to calling ElementByPath followed by accessing NativeValue, but in a single call. You cannot chain these operations (e.g., `element.ElementByPath('Name').NativeValue`) because the scripting engine cannot resolve property access on the Variant returned by ElementByPath. Use NativeValues whenever you need to read or write a child element's native value by path.
+
+If you already have a reference to the specific element, use NativeValue directly instead.
 
 If the path does not resolve to a valid element, reading returns Null and writing has no effect.
 

@@ -12,7 +12,9 @@ Gets or sets the edit value (human-readable string) of a child element specified
 
 The EditValues indexed property provides convenient access to descendant elements' string representations without explicitly navigating the tree. The path parameter uses backslash separators to traverse the hierarchy (e.g., "Material Name" or "Properties\[0]\Type").
 
-This is equivalent to calling ElementByPath followed by accessing EditValue, but more concise. The path navigation respects the Enabled property - only enabled elements are accessible by default.
+This is equivalent to calling ElementByPath followed by accessing EditValue, but in a single call. You cannot chain these operations (e.g., `element.ElementByPath('Name').EditValue`) because the scripting engine cannot resolve property access on the Variant returned by ElementByPath. Use EditValues whenever you need to read or write a child element's string value by path.
+
+If you already have a reference to the specific element, use EditValue directly instead.
 
 If the path does not resolve to a valid element, reading returns an empty string and writing has no effect.
 

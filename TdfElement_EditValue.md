@@ -16,6 +16,8 @@ EditValue handles the conversion between string representation and the underlyin
 
 This differs from NativeValue which returns data in its native Variant type. Use EditValue for display purposes and user input, and NativeValue for calculations.
 
+Use EditValue when you already have a reference to the specific element you want to read or write. If you need to access a child element's value by path, use EditValues instead — it combines path navigation and value access in a single call, avoiding the need to chain calls like `element.ElementByPath('Name').EditValue` which is not supported by the scripting engine.
+
 This property is read-write.
 
 ## Parameters

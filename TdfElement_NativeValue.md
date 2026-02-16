@@ -14,6 +14,8 @@ The NativeValue property provides direct access to the element's data as it exis
 
 This differs from EditValue which always returns a human-readable string representation. NativeValue is preferred when performing calculations or comparisons, while EditValue is better for display and user input.
 
+Use NativeValue when you already have a reference to the specific element you want to read or write. If you need to access a child element's value by path, use NativeValues instead — it combines path navigation and value access in a single call, avoiding the need to chain calls like `element.ElementByPath('Name').NativeValue` which is not supported by the scripting engine.
+
 For container elements (structs/arrays), the behavior of NativeValue depends on custom callbacks defined in the element's definition.
 
 This property is read-write.
