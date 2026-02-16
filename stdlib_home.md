@@ -50,13 +50,21 @@ JvInterpreter_Math.RegisterJvInterpreterAdapter(GlobalJvInterpreterAdapter);
 ### Key Features
 
 ✅ **Math-Enhanced** - Full Math unit support (trigonometry, logarithms, financial functions)
+
 ✅ **GUI-Complete** - All VCL controls for building forms
+
 ✅ **No Database** - No database dependencies (smaller, simpler)
+
 ✅ **Form Runner** - Load and execute forms from .pas/.dfm files
+
 ✅ **File I/O** - Complete file and directory operations
+
 ✅ **String Processing** - Extensive string manipulation functions
+
 ✅ **Date/Time** - Full date/time support with formatting
+
 ✅ **Graphics** - Drawing, bitmaps, icons, fonts
+
 ✅ **Dialogs** - Message boxes, input dialogs, file dialogs
 
 This configuration provides a **GUI-focused, non-database** adapter set with **enhanced math capabilities**.
