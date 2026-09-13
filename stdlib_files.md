@@ -26,7 +26,6 @@ Functions for file I/O, path manipulation, directory operations, and stream-base
 | `FileAge` | `FileAge(FileName: string): Integer` | Get file date/time as integer |
 | `FileGetAttr` | `FileGetAttr(FileName: string): Integer` | Get file attributes (readonly, hidden, etc.) |
 | `FileSetAttr` | `FileSetAttr(FileName: string, Attr: Integer): Integer` | Set file attributes |
-| `FileSize` | `FileSize(FileName: string): Int64` | Get file size in bytes |
 
 ### File Attribute Constants
 
@@ -43,7 +42,8 @@ faArchive   = $00000020;  // Archive bit
 // Verify plugin file before processing
 var
   pluginPath: string;
-  fileSize: Int64;
+  fs: TFileStream;
+  fileSize: Integer;
   attr: Integer;
 begin
   pluginPath := wbDataPath + 'Skyrim.esm';
@@ -53,7 +53,12 @@ begin
     Exit;
   end;
 
-  fileSize := FileSize(pluginPath);
+  fs := TFileStream.Create(pluginPath, fmOpenRead);
+  try
+    fileSize := fs.Size;
+  finally
+    fs.Free;
+  end;
   AddMessage(Format('File size: %d bytes (%.2f MB)', [fileSize, fileSize / 1048576]));
 
   attr := FileGetAttr(pluginPath);
@@ -84,12 +89,13 @@ fmOpenReadWrite  = $0002;  // Read and write
 fmShareDenyNone  = $0040;  // Allow others to access
 ```
 
-### File Seek Origin Constants
+### File Seek Origin
+
+`FileSeek` and `TStream.Seek` take the origin as an integer. These names are **not** registered constants; pass the number:
 
 ```pascal
-soFromBeginning = 0;  // Seek from start of file
-soFromCurrent   = 1;  // Seek from current position
-soFromEnd       = 2;  // Seek from end of file
+// 0 = from start, 1 = from current position, 2 = from end
+FileSeek(Handle, 0, 0);
 ```
 
 ### Example: Read Binary Data
@@ -122,7 +128,7 @@ end;
 |----------|-----------|-------------|
 | `DeleteFile` | `DeleteFile(FileName: string): Boolean` | Delete file (returns True on success) |
 | `RenameFile` | `RenameFile(OldName, NewName: string): Boolean` | Rename/move file |
-| `CopyFile` | `CopyFile(Source, Dest: PChar, FailIfExists: Boolean): Boolean` | Copy file (Windows API) |
+| `CopyFile` | `CopyFile(Source, Dest: string, FailIfExists: Boolean): Boolean` | Copy file. All three arguments are required. |
 
 ### xEdit Example: Backup Plugin File
 ```pascal
@@ -144,7 +150,7 @@ begin
   timeStamp := FormatDateTime('yyyymmdd_hhnnss', Now());
   backupPath := ChangeFileExt(sourcePath, Format('.%s.backup', [timeStamp]));
 
-  if CopyFile(PChar(sourcePath), PChar(backupPath), False) then begin
+  if CopyFile(sourcePath, backupPath, False) then begin
     AddMessage('Backup created: ' + backupPath);
     Result := True;
   end else
@@ -166,17 +172,11 @@ Functions for manipulating file paths and names.
 | `ChangeFileExt` | `ChangeFileExt(FileName, Extension: string): string` | Replace file extension |
 | `ExpandFileName` | `ExpandFileName(FileName: string): string` | Convert to full absolute path |
 | `ExtractRelativePath` | `ExtractRelativePath(BaseName, DestName: string): string` | Get relative path |
-| `IncludeTrailingPathDelimiter` | `IncludeTrailingPathDelimiter(Path: string): string` | Ensure path ends with '\' |
-| `ExcludeTrailingPathDelimiter` | `ExcludeTrailingPathDelimiter(Path: string): string` | Remove trailing '\' |
+| `IncludeTrailingBackslash` | `IncludeTrailingBackslash(Path: string): string` | Ensure path ends with '\' |
+| `ExcludeTrailingBackslash` | `ExcludeTrailingBackslash(Path: string): string` | Remove trailing '\' |
 | `IsPathDelimiter` | `IsPathDelimiter(Path: string, Index: Integer): Boolean` | Check if character is path delimiter |
 
-### Path Constants
-
-```pascal
-PathDelim = '\';      // Windows path delimiter
-DriveDelim = ':';     // Drive letter delimiter
-PathSep = ';';        // Path list separator (as in PATH environment variable)
-```
+Use `'\'` in path strings. `PathDelim` / `DriveDelim` / `PathSep` are not registered.
 
 ### xEdit Path Examples
 
@@ -188,10 +188,10 @@ var
   basePath, fileName, outputPath: string;
 begin
   rec := e;
-  basePath := IncludeTrailingPathDelimiter(wbDataPath) + 'Output\';
+  basePath := IncludeTrailingBackslash(wbDataPath) + 'Output\';
 
   // Build filename from EditorID
-  fileName := rec.EditorID + '.txt';
+  fileName := EditorID(rec) + '.txt';
   outputPath := basePath + fileName;
 
   AddMessage('Output path: ' + outputPath);
@@ -255,8 +255,9 @@ end;
 // Create organized output directories
 var
   baseDir, recordsDir, reportsDir, logsDir: string;
+  freeSpace: Int64;
 begin
-  baseDir := IncludeTrailingPathDelimiter(wbDataPath) + 'ScriptOutput';
+  baseDir := IncludeTrailingBackslash(wbDataPath) + 'ScriptOutput';
   recordsDir := baseDir + '\Records';
   reportsDir := baseDir + '\Reports';
   logsDir := baseDir + '\Logs';
@@ -275,8 +276,6 @@ begin
   ForceDirectories(reportsDir);
   ForceDirectories(logsDir);
 
-  // Check disk space
-  var freeSpace: Int64;
   freeSpace := DiskFree(0);  // 0 = current drive
   AddMessage(Format('Free disk space: %.2f GB', [freeSpace / 1073741824]));
 end;
@@ -296,11 +295,10 @@ Find files matching patterns using TSearchRec.
 
 ```pascal
 TSearchRec = record
-  Name: string;           // Filename
-  Size: Int64;            // File size in bytes
-  Attr: Integer;          // File attributes
-  TimeStamp: TDateTime;   // Last modified time
-  // ... other fields
+  Name: string;    // Filename
+  Size: Integer;   // File size in bytes (Integer in the interpreter, not Int64)
+  Attr: Integer;   // File attributes
+  Time: Integer;   // DOS file date; convert with FileDateToDateTime
 end;
 ```
 
@@ -313,7 +311,7 @@ var
   count: Integer;
 begin
   count := 0;
-  searchPath := IncludeTrailingPathDelimiter(wbDataPath) + '*.es*';
+  searchPath := IncludeTrailingBackslash(wbDataPath) + '*.es*';
 
   if FindFirst(searchPath, faAnyFile, searchRec) = 0 then begin
     try
@@ -342,15 +340,15 @@ var
   cutoffTime: TDateTime;
 begin
   cutoffTime := Now() - 1;  // 24 hours ago
-  searchPath := IncludeTrailingPathDelimiter(wbDataPath) + '*.*';
+  searchPath := IncludeTrailingBackslash(wbDataPath) + '*.*';
 
   if FindFirst(searchPath, faAnyFile, searchRec) = 0 then begin
     try
       repeat
-        if searchRec.TimeStamp >= cutoffTime then
+        if FileDateToDateTime(searchRec.Time) >= cutoffTime then
           AddMessage(Format('%s (modified: %s)', [
             searchRec.Name,
-            FormatDateTime('yyyy-mm-dd hh:nn:ss', searchRec.TimeStamp)
+            FormatDateTime('yyyy-mm-dd hh:nn:ss', FileDateToDateTime(searchRec.Time))
           ]));
       until FindNext(searchRec) <> 0;
     finally
@@ -370,7 +368,7 @@ Stream classes provide flexible, high-level file I/O. All streams inherit from T
 |--------|-----------|-------------|
 | `Read` | `Read(var Buffer, Count: Longint): Longint` | Read bytes |
 | `Write` | `Write(const Buffer, Count: Longint): Longint` | Write bytes |
-| `Seek` | `Seek(Offset: Int64, Origin: TSeekOrigin): Int64` | Move position |
+| `Seek` | `Seek(Offset: Integer, Origin: Integer): Integer` | Move position. Origin: 0=start, 1=current, 2=end |
 | `CopyFrom` | `CopyFrom(Source: TStream, Count: Int64): Int64` | Copy from another stream |
 | **Position** | `Position: Int64` | Current position (property) |
 | **Size** | `Size: Int64` | Stream size (property) |
@@ -421,8 +419,6 @@ Work with data in memory.
 |--------|-----------|-------------|
 | `LoadFromFile` | `LoadFromFile(FileName: string)` | Load file into memory |
 | `SaveToFile` | `SaveToFile(FileName: string)` | Save memory to file |
-| `SetSize` | `SetSize(NewSize: Int64)` | Resize buffer |
-| `Clear` | `Clear()` | Empty the stream |
 
 #### Example: Load and Modify File in Memory
 ```pascal
@@ -481,11 +477,7 @@ begin
     line := 'Line 2' + #13#10;
     ss.WriteString(line);
 
-    // Get final string
     AddMessage(ss.DataString);
-
-    // Save to file
-    ss.SaveToFile('output.txt');
   finally
     ss.Free;
   end;
@@ -494,29 +486,34 @@ end;
 
 ### xEdit Example: Export Records to Binary Stream
 ```pascal
-// Export record data to binary file
+// Export record data to a binary file (FormID + EditorID via TStringStream)
 var
   fs: TFileStream;
+  ss: TStringStream;
   rec: IwbMainRecord;
   formID: Cardinal;
   edid: string;
-  edidLen: Integer;
+  edidLen, i: Integer;
 begin
   fs := TFileStream.Create(wbDataPath + 'records.dat', fmCreate);
   try
     for i := 0 to RecordCount(f) - 1 do begin
       rec := RecordByIndex(f, i);
 
-      // Write FormID (4 bytes)
-      formID := rec.FormID;
+      formID := FormID(rec);
       fs.Write(formID, 4);
 
-      // Write EditorID (length + string)
-      edid := rec.EditorID;
+      edid := EditorID(rec);
       edidLen := Length(edid);
       fs.Write(edidLen, 4);
-      if edidLen > 0 then
-        fs.Write(PChar(edid)^, edidLen);
+      if edidLen > 0 then begin
+        ss := TStringStream.Create(edid);
+        try
+          fs.CopyFrom(ss, 0);
+        finally
+          ss.Free;
+        end;
+      end;
     end;
 
     AddMessage(Format('Exported %d records to binary file', [RecordCount(f)]));
@@ -551,8 +548,8 @@ begin
     // Collect EditorIDs
     for i := 0 to RecordCount(f) - 1 do begin
       rec := RecordByIndex(f, i);
-      if rec.EditorID <> '' then
-        list.Add(rec.EditorID);
+      if EditorID(rec) <> '' then
+        list.Add(EditorID(rec));
     end;
 
     // Sort alphabetically

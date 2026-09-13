@@ -2,7 +2,7 @@
 
 Functions for working with dates, times, formatting, and calendar calculations.
 
-**Unit:** SysUtils
+**Unit:** SysUtils (DateUtils is not registered)
 
 [← Back to Standard Library Overview](stdlib_home.md)
 
@@ -14,7 +14,7 @@ Functions for working with dates, times, formatting, and calendar calculations.
 - [Formatting](#formatting)
 - [Parsing](#parsing)
 - [Date Calculations](#date-calculations)
-- [Time Calculations](#time-calculations)
+- [Elapsed Time](#elapsed-time)
 - [Conversion](#conversion)
 
 ## Understanding TDateTime
@@ -82,7 +82,6 @@ end;
 |----------|-----------|-------------|
 | `EncodeDate` | `EncodeDate(Year, Month, Day: Word): TDateTime` | Create date from components |
 | `EncodeTime` | `EncodeTime(Hour, Min, Sec, MSec: Word): TDateTime` | Create time from components |
-| `EncodeDateTime` | `EncodeDateTime(Y, M, D, H, Min, S, MS: Word): TDateTime` | Create date and time |
 
 ### Examples
 
@@ -98,8 +97,8 @@ begin
   dt := EncodeTime(14, 30, 0, 0);  // 2:30 PM
   AddMessage('Time: ' + TimeToStr(dt));
 
-  // Create specific date and time
-  dt := EncodeDateTime(2024, 12, 25, 14, 30, 0, 0);  // Christmas 2024 at 2:30 PM
+  // Date and time together: add EncodeDate + EncodeTime
+  dt := EncodeDate(2024, 12, 25) + EncodeTime(14, 30, 0, 0);
   AddMessage('DateTime: ' + DateTimeToStr(dt));
 end;
 ```
@@ -130,13 +129,7 @@ end;
 |----------|-----------|-------------|
 | `DecodeDate` | `DecodeDate(Date: TDateTime, var Y, M, D: Word)` | Extract year, month, day |
 | `DecodeTime` | `DecodeTime(Time: TDateTime, var H, Min, S, MS: Word)` | Extract hour, minute, second, millisecond |
-| `DecodeDateTime` | `DecodeDateTime(DT: TDateTime, var Y, M, D, H, Min, S, MS: Word)` | Extract all components |
 | `DayOfWeek` | `DayOfWeek(Date: TDateTime): Integer` | Day of week (1=Sunday, 7=Saturday) |
-| `DayOfTheWeek` | `DayOfTheWeek(Date: TDateTime): Integer` | Day of week (1=Monday, 7=Sunday) |
-| `DayOfYear` | `DayOfYear(Date: TDateTime): Integer` | Day number in year (1-366) |
-| `WeekOf` | `WeekOf(Date: TDateTime): Integer` | Week number in year |
-| `MonthOf` | `MonthOf(Date: TDateTime): Integer` | Month (1-12) |
-| `YearOf` | `YearOf(Date: TDateTime): Integer` | Year |
 
 ### Examples
 
@@ -304,9 +297,6 @@ Convert strings back to TDateTime values.
 | `StrToDate` | `StrToDate(S: string): TDateTime` | Parse date string (raises exception on error) |
 | `StrToTime` | `StrToTime(S: string): TDateTime` | Parse time string (raises exception on error) |
 | `StrToDateTime` | `StrToDateTime(S: string): TDateTime` | Parse date/time string (raises exception on error) |
-| `TryStrToDate` | `TryStrToDate(S: string, var Value: TDateTime): Boolean` | Safe date parsing |
-| `TryStrToTime` | `TryStrToTime(S: string, var Value: TDateTime): Boolean` | Safe time parsing |
-| `TryStrToDateTime` | `TryStrToDateTime(S: string, var Value: TDateTime): Boolean` | Safe date/time parsing |
 
 ### Example: Parse User Input
 ```pascal
@@ -315,29 +305,29 @@ var
   input: string;
   dt: TDateTime;
 begin
-  if InputQuery('Enter Date', 'Date (YYYY-MM-DD):', input) then begin
-    if TryStrToDate(input, dt) then
-      AddMessage('Parsed: ' + DateToStr(dt))
-    else
-      MessageDlg('Invalid date format', mtError, [mbOK], 0);
+  if InputQuery('Enter Date', 'Date (system format):', input) then begin
+    dt := StrToDate(input);
+    AddMessage('Parsed: ' + DateToStr(dt));
   end;
 end;
 ```
 
 ## Date Calculations
 
+DateUtils (`IncDay`, `IncYear`, `DaysBetween`, and the rest) is **not** registered. Use `IncMonth` and TDateTime arithmetic (1.0 = one day).
+
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `IncMonth` | `IncMonth(Date: TDateTime, NumberOfMonths: Integer): TDateTime` | Add/subtract months |
-| `IncYear` | `IncYear(Date: TDateTime, NumberOfYears: Integer): TDateTime` | Add/subtract years |
-| `IncDay` | `IncDay(Date: TDateTime, NumberOfDays: Integer): TDateTime` | Add/subtract days |
-| `IncWeek` | `IncWeek(Date: TDateTime, NumberOfWeeks: Integer): TDateTime` | Add/subtract weeks |
-| `DaysBetween` | `DaysBetween(Date1, Date2: TDateTime): Integer` | Days between dates |
-| `MonthsBetween` | `MonthsBetween(Date1, Date2: TDateTime): Integer` | Months between dates |
-| `YearsBetween` | `YearsBetween(Date1, Date2: TDateTime): Integer` | Years between dates |
+| `IncMonth` | `IncMonth(Date: TDateTime, NumberOfMonths: Integer): TDateTime` | Add/subtract months. Both arguments are required. |
 | `IsLeapYear` | `IsLeapYear(Year: Word): Boolean` | Check if leap year |
-| `DaysInMonth` | `DaysInMonth(Date: TDateTime): Integer` | Number of days in month |
-| `DaysInYear` | `DaysInYear(Year: Word): Integer` | Number of days in year (365 or 366) |
+
+```pascal
+today + 30              // 30 days later
+today + 7               // one week later
+IncMonth(today, 12)     // one year later
+IncMonth(today, -1)     // one month earlier
+Trunc(Abs(a - b))       // whole days between two dates
+```
 
 ### Examples
 
@@ -348,22 +338,19 @@ var
 begin
   today := Date();
 
-  // Add time periods
-  future := IncMonth(today, 6);    // 6 months from now
+  future := IncMonth(today, 6);
   AddMessage('In 6 months: ' + DateToStr(future));
 
-  future := IncYear(today, 1);     // 1 year from now
+  future := IncMonth(today, 12);
   AddMessage('In 1 year: ' + DateToStr(future));
 
-  future := IncDay(today, 30);     // 30 days from now
+  future := today + 30;
   AddMessage('In 30 days: ' + DateToStr(future));
 
-  // Calculate difference
   past := EncodeDate(2020, 1, 1);
-  days := DaysBetween(today, past);
+  days := Trunc(Abs(today - past));
   AddMessage(Format('Days since 2020-01-01: %d', [days]));
 
-  // Check leap year
   if IsLeapYear(2024) then
     AddMessage('2024 is a leap year');
 end;
@@ -371,90 +358,50 @@ end;
 
 ### xEdit Example: Schedule Maintenance
 ```pascal
-// Calculate next maintenance date (first Monday of next month)
+// First Monday of next month
 function NextMaintenanceDate(fromDate: TDateTime): TDateTime;
 var
   nextMonth: TDateTime;
-  firstDay, dow: Integer;
+  year, month, day: Word;
+  dow: Integer;
 begin
-  // Go to first day of next month
   nextMonth := IncMonth(fromDate, 1);
   DecodeDate(nextMonth, year, month, day);
   nextMonth := EncodeDate(year, month, 1);
 
-  // Find first Monday (DayOfWeek: 1=Sun, 2=Mon, ...)
+  // DayOfWeek: 1=Sunday, 2=Monday, ...
   dow := DayOfWeek(nextMonth);
   if dow = 2 then
-    Result := nextMonth  // Already Monday
+    Result := nextMonth
   else if dow = 1 then
-    Result := IncDay(nextMonth, 1)  // Sunday, add 1 day
+    Result := nextMonth + 1
   else
-    Result := IncDay(nextMonth, 9 - dow);  // Calculate days to Monday
+    Result := nextMonth + (9 - dow);
 end;
 ```
 
-## Time Calculations
+## Elapsed Time
 
-| Function | Signature | Description |
-|----------|-----------|-------------|
-| `IncHour` | `IncHour(Time: TDateTime, NumberOfHours: Integer): TDateTime` | Add/subtract hours |
-| `IncMinute` | `IncMinute(Time: TDateTime, NumberOfMinutes: Integer): TDateTime` | Add/subtract minutes |
-| `IncSecond` | `IncSecond(Time: TDateTime, NumberOfSeconds: Integer): TDateTime` | Add/subtract seconds |
-| `IncMilliSecond` | `IncMilliSecond(Time: TDateTime, NumberOfMilliSeconds: Int64): TDateTime` | Add/subtract milliseconds |
-| `HoursBetween` | `HoursBetween(Time1, Time2: TDateTime): Int64` | Hours between times |
-| `MinutesBetween` | `MinutesBetween(Time1, Time2: TDateTime): Int64` | Minutes between times |
-| `SecondsBetween` | `SecondsBetween(Time1, Time2: TDateTime): Int64` | Seconds between times |
-| `MilliSecondsBetween` | `MilliSecondsBetween(Time1, Time2: TDateTime): Int64` | Milliseconds between times |
+Add fractions of a day. There are no `IncHour` / `SecondsBetween` / `MilliSecondsBetween` functions.
 
-### Examples
+```pascal
+dt + (1 / 24)           // one hour
+dt + (1 / 24 / 60)      // one minute
+dt + (1 / 24 / 60 / 60) // one second
+```
 
 ```pascal
 var
   startTime, endTime: TDateTime;
-  elapsed: Int64;
+  elapsedSec, elapsedMs: Extended;
 begin
   startTime := Now();
-
-  // ... do work ...
-
+  // ... work ...
   endTime := Now();
 
-  // Calculate elapsed time
-  elapsed := SecondsBetween(endTime, startTime);
-  AddMessage(Format('Elapsed: %d seconds', [elapsed]));
-
-  elapsed := MilliSecondsBetween(endTime, startTime);
-  AddMessage(Format('Elapsed: %d milliseconds', [elapsed]));
-end;
-```
-
-### xEdit Example: Performance Timing
-```pascal
-// Measure performance of different operations
-var
-  startTime, endTime: TDateTime;
-  elapsedMs: Int64;
-  i: Integer;
-begin
-  AddMessage('Performance test starting...');
-
-  // Test operation 1
-  startTime := Now();
-  for i := 0 to 999999 do begin
-    // Do something...
-  end;
-  endTime := Now();
-  elapsedMs := MilliSecondsBetween(endTime, startTime);
-  AddMessage(Format('Operation 1: %d ms', [elapsedMs]));
-
-  // Test operation 2
-  startTime := Now();
-  for i := 0 to 999999 do begin
-    // Do something else...
-  end;
-  endTime := Now();
-  elapsedMs := MilliSecondsBetween(endTime, startTime);
-  AddMessage(Format('Operation 2: %d ms', [elapsedMs]));
+  elapsedSec := Abs(endTime - startTime) * 24 * 60 * 60;
+  elapsedMs := elapsedSec * 1000;
+  AddMessage(Format('Elapsed: %.0f seconds (%.0f ms)', [elapsedSec, elapsedMs]));
 end;
 ```
 
@@ -462,20 +409,9 @@ end;
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `DateTimeToTimeStamp` | `DateTimeToTimeStamp(DateTime: TDateTime): TTimeStamp` | Convert to timestamp record |
-| `TimeStampToDateTime` | `TimeStampToDateTime(TimeStamp: TTimeStamp): TDateTime` | Convert from timestamp record |
 | `DateTimeToFileDate` | `DateTimeToFileDate(DateTime: TDateTime): Integer` | Convert to DOS file date |
 | `FileDateToDateTime` | `FileDateToDateTime(FileDate: Integer): TDateTime` | Convert from DOS file date |
 | `DateTimeToStr` | `DateTimeToStr(DateTime: TDateTime): string` | Convert to string |
-
-### TTimeStamp Record
-
-```pascal
-TTimeStamp = record
-  Time: Integer;  // Milliseconds since midnight
-  Date: Integer;  // Days since 1/1/0001
-end;
-```
 
 ---
 

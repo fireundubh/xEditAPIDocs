@@ -31,8 +31,6 @@ list := TList.Create;
 | `Count` | Integer | Number of items |
 | `Capacity` | Integer | Allocated capacity |
 | `Items[Index]` | Pointer | Item at index (0-based) |
-| `First` | Pointer | First item (nil if empty) |
-| `Last` | Pointer | Last item (nil if empty) |
 
 ### Methods
 
@@ -44,9 +42,11 @@ list := TList.Create;
 | `Remove` | `Remove(Item: Pointer): Integer` | Remove first occurrence, returns index |
 | `Clear` | `Clear()` | Remove all items |
 | `IndexOf` | `IndexOf(Item: Pointer): Integer` | Find item index (-1 if not found) |
+| `First` | `First(): Pointer` | First item (nil if empty) |
+| `Last` | `Last(): Pointer` | Last item (nil if empty) |
 | `Exchange` | `Exchange(Index1, Index2: Integer)` | Swap two items |
 | `Move` | `Move(CurIndex, NewIndex: Integer)` | Move item to new position |
-| `Sort` | `Sort(Compare: TListSortCompare)` | Sort using comparison function |
+| `Sort` | `Sort(Compare: TListSortCompare)` | Registered, but the compare argument is a native callback. Do not pass a script function. |
 
 ### TList Example
 
@@ -62,7 +62,7 @@ begin
     // Add records to list
     for i := 0 to RecordCount(FileByIndex(0)) - 1 do begin
       rec := RecordByIndex(FileByIndex(0), i);
-      if rec.Signature = 'WEAP' then
+      if Signature(rec) = 'WEAP' then
         list.Add(Pointer(i));  // Store index
     end;
 
@@ -71,7 +71,7 @@ begin
     // Process list
     for i := 0 to list.Count - 1 do begin
       rec := RecordByIndex(FileByIndex(0), Integer(list[i]));
-      AddMessage(rec.EditorID);
+      AddMessage(EditorID(rec));
     end;
 
     // Clear list
@@ -124,8 +124,6 @@ list := TStringList.Create;
 | `Assign` | `Assign(Source: TPersistent)` | Copy from another string list |
 | `Exchange` | `Exchange(Index1, Index2: Integer)` | Swap two strings |
 | `Move` | `Move(CurIndex, NewIndex: Integer)` | Move string |
-| `GetText` | `GetText(): PChar` | Get all text as PChar |
-| `SetText` | `SetText(Text: PChar)` | Set all text from PChar |
 | `BeginUpdate` | `BeginUpdate()` | Begin batch update |
 | `EndUpdate` | `EndUpdate()` | End batch update |
 
@@ -142,21 +140,20 @@ list := TStringList.Create;
 | Method | Signature | Description |
 |--------|-----------|-------------|
 | `Sort` | `Sort()` | Sort strings |
-| `CustomSort` | `CustomSort(Compare: TStringListSortCompare)` | Sort with custom comparison |
 | `Find` | `Find(S: string, var Index: Integer): Boolean` | Binary search (requires sorted) |
 
 ### String List Set Operations
 
-TStringList supports set operations for comparing lists.
+TStringList set operations are **in-place procedures** on `Self`. They sort `Self`, set `Duplicates := dupIgnore`, then replace `Self` with the result. They do not return a new list.
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
-| `Intersection` | `Intersection(List: TStringList): TStringList` | Items in both lists |
-| `Union` | `Union(List: TStringList): TStringList` | Items in either list (no duplicates) |
-| `Difference` | `Difference(List: TStringList): TStringList` | Items in first list but not second |
-| `SymmetricDifference` | `SymmetricDifference(List: TStringList): TStringList` | Items in either list but not both |
+| `Intersection` | `procedure Intersection(List: TStringList)` | `Self := Self ∩ List` |
+| `Union` | `procedure Union(List: TStringList)` | `Self := Self ∪ List` |
+| `Difference` | `procedure Difference(List: TStringList)` | `Self := Self − List` |
+| `SymmetricDifference` | `procedure SymmetricDifference(List: TStringList)` | `Self := (Self ∪ List) − (Self ∩ List)` |
 
-**Note:** These methods require both lists to be sorted and have `Duplicates := dupIgnore`.
+Call `list1.Union(list2)`, not `combined := list1.Union(list2)`. See [Union](TStringList_Union.md).
 
 ### Basic TStringList Examples
 
@@ -234,14 +231,14 @@ begin
     // Add EditorIDs with record indices as objects
     for i := 0 to RecordCount(FileByIndex(0)) - 1 do begin
       rec := RecordByIndex(FileByIndex(0), i);
-      list.AddObject(rec.EditorID, TObject(i));
+      list.AddObject(EditorID(rec), TObject(i));
     end;
 
     // Find and retrieve
     i := list.IndexOf('PlayerRef');
     if i >= 0 then begin
       rec := RecordByIndex(FileByIndex(0), Integer(list.Objects[i]));
-      AddMessage('Found: ' + rec.Name);
+      AddMessage('Found: ' + Name(rec));
     end;
   finally
     list.Free;
@@ -255,39 +252,27 @@ end;
 ```pascal
 // Find EditorIDs that appear in both files
 var
-  list1, list2, common: TStringList;
+  list1, list2: TStringList;
   i: Integer;
   rec: IwbMainRecord;
 begin
   list1 := TStringList.Create;
   list2 := TStringList.Create;
   try
-    // Collect from file 1
     for i := 0 to RecordCount(FileByIndex(0)) - 1 do begin
       rec := RecordByIndex(FileByIndex(0), i);
-      list1.Add(rec.EditorID);
+      list1.Add(EditorID(rec));
     end;
 
-    // Collect from file 2
     for i := 0 to RecordCount(FileByIndex(1)) - 1 do begin
       rec := RecordByIndex(FileByIndex(1), i);
-      list2.Add(rec.EditorID);
+      list2.Add(EditorID(rec));
     end;
 
-    // Find common items
-    list1.Sorted := True;
-    list1.Duplicates := dupIgnore;
-    list2.Sorted := True;
-    list2.Duplicates := dupIgnore;
-
-    common := list1.Intersection(list2);
-    try
-      AddMessage(Format('Common EditorIDs: %d', [common.Count]));
-      for i := 0 to common.Count - 1 do
-        AddMessage('  ' + common[i]);
-    finally
-      common.Free;
-    end;
+    list1.Intersection(list2);
+    AddMessage(Format('Common EditorIDs: %d', [list1.Count]));
+    for i := 0 to list1.Count - 1 do
+      AddMessage('  ' + list1[i]);
   finally
     list1.Free;
     list2.Free;
@@ -299,7 +284,7 @@ end;
 ```pascal
 // Combine two lists without duplicates
 var
-  list1, list2, combined: TStringList;
+  list1, list2: TStringList;
 begin
   list1 := TStringList.Create;
   list2 := TStringList.Create;
@@ -310,20 +295,9 @@ begin
     list2.Add('Banana');
     list2.Add('Cherry');
 
-    // Prepare for set operation
-    list1.Sorted := True;
-    list1.Duplicates := dupIgnore;
-    list2.Sorted := True;
-    list2.Duplicates := dupIgnore;
-
-    // Union
-    combined := list1.Union(list2);
-    try
-      // Result: Apple, Banana, Cherry
-      AddMessage(Format('Combined: %d items', [combined.Count]));
-    finally
-      combined.Free;
-    end;
+    list1.Union(list2);
+    // list1 is now Apple, Banana, Cherry
+    AddMessage(Format('Combined: %d items', [list1.Count]));
   finally
     list1.Free;
     list2.Free;
@@ -335,21 +309,12 @@ end;
 ```pascal
 // Find EditorIDs in first file but not in second
 var
-  list1, list2, diff: TStringList;
+  list1, list2: TStringList;
 begin
   // ... populate list1 and list2 ...
 
-  list1.Sorted := True;
-  list1.Duplicates := dupIgnore;
-  list2.Sorted := True;
-  list2.Duplicates := dupIgnore;
-
-  diff := list1.Difference(list2);
-  try
-    AddMessage(Format('Unique to first file: %d', [diff.Count]));
-  finally
-    diff.Free;
-  end;
+  list1.Difference(list2);
+  AddMessage(Format('Unique to first file: %d', [list1.Count]));
 end;
 ```
 
@@ -357,21 +322,12 @@ end;
 ```pascal
 // Find EditorIDs unique to each file
 var
-  list1, list2, symDiff: TStringList;
+  list1, list2: TStringList;
 begin
   // ... populate list1 and list2 ...
 
-  list1.Sorted := True;
-  list1.Duplicates := dupIgnore;
-  list2.Sorted := True;
-  list2.Duplicates := dupIgnore;
-
-  symDiff := list1.SymmetricDifference(list2);
-  try
-    AddMessage(Format('Unique items: %d', [symDiff.Count]));
-  finally
-    symDiff.Free;
-  end;
+  list1.SymmetricDifference(list2);
+  AddMessage(Format('Unique items: %d', [list1.Count]));
 end;
 ```
 
@@ -396,17 +352,12 @@ Abstract base class for all streams.
 |--------|-----------|-------------|
 | `Read` | `Read(var Buffer; Count: Longint): Longint` | Read bytes |
 | `Write` | `Write(const Buffer; Count: Longint): Longint` | Write bytes |
-| `Seek` | `Seek(Offset: Int64, Origin: TSeekOrigin): Int64` | Move position |
+| `Seek` | `Seek(Offset: Integer, Origin: Integer): Integer` | Move position. Origin: 0=start, 1=current, 2=end |
 | `CopyFrom` | `CopyFrom(Source: TStream, Count: Int64): Int64` | Copy from stream |
 | `ReadBuffer` | `ReadBuffer(var Buffer; Count: Longint)` | Read exact bytes (raises exception on error) |
 | `WriteBuffer` | `WriteBuffer(const Buffer; Count: Longint)` | Write exact bytes |
 
-**Seek Origin:**
-```pascal
-soBeginning = 0;  // From start
-soCurrent = 1;    // From current position
-soEnd = 2;        // From end
-```
+**Seek origin** is an integer (these names are not registered): `0` from start, `1` from current, `2` from end.
 
 ### TFileStream
 
@@ -445,8 +396,6 @@ ms := TMemoryStream.Create;
 | `LoadFromFile` | `LoadFromFile(FileName: string)` | Load file into memory |
 | `SaveToFile` | `SaveToFile(FileName: string)` | Save to file |
 | `LoadFromStream` | `LoadFromStream(Stream: TStream)` | Load from stream |
-| `SetSize` | `SetSize(NewSize: Int64)` | Resize buffer |
-| `Clear` | `Clear()` | Empty stream |
 
 ### TStringStream
 
@@ -532,73 +481,31 @@ Base class for components.
 
 ## xEdit Data Management Examples
 
-### Example 1: Record Cache System
+### Example 1: Record Cache
 
 ```pascal
-// Cache frequently accessed records
-type
-  TRecordCache = class
-  private
-    FCache: TStringList;  // EditorID -> Record index
-  public
-    constructor Create;
-    destructor Destroy; override;
-    procedure BuildCache(aFile: IwbFile);
-    function FindRecord(const edid: string): IwbMainRecord;
-    procedure Clear;
-  end;
-
-constructor TRecordCache.Create;
-begin
-  inherited;
-  FCache := TStringList.Create;
-  FCache.Sorted := True;
-  FCache.Duplicates := dupIgnore;
-end;
-
-destructor TRecordCache.Destroy;
-begin
-  FCache.Free;
-  inherited;
-end;
-
-procedure TRecordCache.BuildCache(aFile: IwbFile);
+// Cache EditorID -> record index
 var
-  i: Integer;
+  cache: TStringList;
+  i, idx: Integer;
   rec: IwbMainRecord;
+  aFile: IwbFile;
 begin
-  FCache.Clear;
-  for i := 0 to aFile.RecordCount - 1 do begin
-    rec := aFile.Records[i];
-    FCache.AddObject(rec.EditorID, TObject(i));
-  end;
-end;
-
-function TRecordCache.FindRecord(const edid: string): IwbMainRecord;
-var
-  idx: Integer;
-begin
-  Result := nil;
-  if FCache.Find(edid, idx) then
-    Result := RecordByIndex(FileByIndex(0), Integer(FCache.Objects[idx]));
-end;
-
-procedure TRecordCache.Clear;
-begin
-  FCache.Clear;
-end;
-
-// Usage
-var
-  cache: TRecordCache;
-  rec: IwbMainRecord;
-begin
-  cache := TRecordCache.Create;
+  aFile := FileByIndex(0);
+  cache := TStringList.Create;
   try
-    cache.BuildCache(FileByIndex(0));
-    rec := cache.FindRecord('PlayerRef');
-    if Assigned(rec) then
-      AddMessage('Found: ' + rec.Name);
+    cache.Sorted := True;
+    cache.Duplicates := dupIgnore;
+
+    for i := 0 to RecordCount(aFile) - 1 do begin
+      rec := RecordByIndex(aFile, i);
+      cache.AddObject(EditorID(rec), TObject(i));
+    end;
+
+    if cache.Find('PlayerRef', idx) then begin
+      rec := RecordByIndex(aFile, Integer(cache.Objects[idx]));
+      AddMessage('Found: ' + Name(rec));
+    end;
   finally
     cache.Free;
   end;
@@ -619,12 +526,10 @@ var
   spaces: string;
 begin
   spaces := StringOfChar(' ', level * 2);
-  output.Add(Format('%s%s: %s', [spaces, el.Name, el.EditValue]));
+  output.Add(Format('%s%s: %s', [spaces, Name(el), GetEditValue(el)]));
 
-  // Recursively export children
-  if Supports(el, IwbContainer) then
-    for i := 0 to ElementCount(el) - 1 do
-      ExportElement(ElementByIndex(el, i), level + 1);
+  for i := 0 to ElementCount(el) - 1 do
+    ExportElement(ElementByIndex(el, i), level + 1);
 end;
 
 begin
@@ -692,7 +597,6 @@ var
   fileLists: array of TStringList;
   i, j, fileCount: Integer;
   rec: IwbMainRecord;
-  allEditorIDs, uniqueToFile: TStringList;
 begin
   fileCount := FileCount();
   SetLength(fileLists, fileCount);
@@ -706,7 +610,7 @@ begin
 
       for j := 0 to RecordCount(FileByIndex(i)) - 1 do begin
         rec := RecordByIndex(FileByIndex(i), j);
-        fileLists[i].Add(rec.EditorID);
+        fileLists[i].Add(EditorID(rec));
       end;
 
       AddMessage(Format('%s: %d EditorIDs',
@@ -715,13 +619,9 @@ begin
 
     // Find EditorIDs unique to first file
     if fileCount > 1 then begin
-      uniqueToFile := fileLists[0].Difference(fileLists[1]);
-      try
-        AddMessage(Format('Unique to %s: %d',
-          [GetFileName(FileByIndex(0)), uniqueToFile.Count]));
-      finally
-        uniqueToFile.Free;
-      end;
+      fileLists[0].Difference(fileLists[1]);
+      AddMessage(Format('Unique to %s: %d',
+        [GetFileName(FileByIndex(0)), fileLists[0].Count]));
     end;
 
   finally

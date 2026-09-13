@@ -120,7 +120,7 @@ Global application and screen objects.
 
 ### TApplication
 
-Global variable: `Application`
+`Application` is a 0-argument function that returns the `TApplication` object (`O2V(Application)`). Use `Application.ProcessMessages` (no extra argument list on `Application`).
 
 | Property/Method | Type | Description |
 |----------------|------|-------------|
@@ -131,7 +131,7 @@ Global variable: `Application`
 
 ### TScreen
 
-Global variable: `Screen`
+`Screen` is a 0-argument function that returns the `TScreen` object, same pattern as `Application`.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -818,8 +818,8 @@ begin
     // Populate list
     for i := 0 to RecordCount(FileByIndex(0)) - 1 do begin
       rec := RecordByIndex(FileByIndex(0), i);
-      if rec.Signature = 'NPC_' then
-        listBox.Items.AddObject(rec.EditorID, TObject(i));
+      if Signature(rec) = 'NPC_' then
+        listBox.Items.AddObject(EditorID(rec), TObject(i));
     end;
 
     // OK button
@@ -900,7 +900,7 @@ begin
 
       // Update UI
       lblStatus.Caption := Format('Processing %d of %d: %s',
-        [i + 1, total, rec.EditorID]);
+        [i + 1, total, EditorID(rec)]);
       progress.Position := i + 1;
       Application.ProcessMessages;
 
@@ -989,7 +989,7 @@ begin
     // Show and get results
     if form.ShowModal = mrOk then begin
       AddMessage('Prefix: ' + editPrefix.Text);
-      AddMessage('Include deleted: ' + BoolToStr(chkIncludeDeleted.Checked, True));
+      AddMessage('Include deleted: ' + IfThen(chkIncludeDeleted.Checked, 'True', 'False'));
     end;
   finally
     form.Free;

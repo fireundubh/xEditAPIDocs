@@ -1,6 +1,6 @@
 # Mathematics Reference
 
-Advanced mathematical functions including trigonometry, logarithms, hyperbolic functions, and financial calculations.
+Registered Math-unit functions: trigonometry, logarithms, hyperbolic functions, integer Min/Max, and SLN/SYD depreciation. Delphi array min/max, Frexp, and PV/FV helpers are not registered.
 
 **Unit:** Math
 
@@ -27,7 +27,6 @@ Advanced mathematical functions including trigonometry, logarithms, hyperbolic f
 | **`Power`** | `Power(Base, Exponent: Extended): Extended` | Base^Exponent (floating-point exponent) |
 | **`IntPower`** | `IntPower(Base: Extended, Exponent: Integer): Extended` | Base^Exponent (integer exponent, faster) |
 | `Ldexp` | `Ldexp(X: Extended, P: Integer): Extended` | X × 2^P (fast multiply by power of 2) |
-| `Frexp` | `Frexp(X: Extended, var Exponent: Integer): Extended` | Split X into mantissa and exponent |
 
 ### Examples
 
@@ -353,16 +352,12 @@ end;
 | `Trunc` | `Trunc(X: Extended): Integer` | Truncate (remove decimals) |
 | **`Floor`** | `Floor(X: Extended): Integer` | Round down (largest integer ≤ X) |
 | **`Ceil`** | `Ceil(X: Extended): Integer` | Round up (smallest integer ≥ X) |
-| **`Max`** | `Max(A, B: Integer): Integer` | Maximum of two values |
-| **`Min`** | `Min(A, B: Integer): Integer` | Minimum of two values |
-| `MaxValue` | `MaxValue(const Data: array of Extended): Extended` | Maximum in array |
-| `MinValue` | `MinValue(const Data: array of Extended): Extended` | Minimum in array |
-| `MaxIntValue` | `MaxIntValue(const Data: array of Integer): Integer` | Maximum integer in array |
-| `MinIntValue` | `MinIntValue(const Data: array of Integer): Integer` | Minimum integer in array |
-| **`InRange`** | `InRange(Value, Min, Max: Integer): Boolean` | Check if value in range [Min, Max] |
-| **`EnsureRange`** | `EnsureRange(Value, Min, Max: Integer): Integer` | Clamp value to range |
-| `CompareValue` | `CompareValue(A, B: Extended, Epsilon: Extended = 0): Integer` | Compare floats (returns -1, 0, 1) |
-| `SameValue` | `SameValue(A, B: Extended, Epsilon: Extended = 0): Boolean` | Test if floats are equal |
+| **`Max`** | `Max(A, B: Integer): Integer` | Maximum of two integers (floats are truncated) |
+| **`Min`** | `Min(A, B: Integer): Integer` | Minimum of two integers (floats are truncated) |
+| **`InRange`** | `InRange(Value, AMin, AMax: Extended): Boolean` | True if Value is in [AMin, AMax] |
+| **`EnsureRange`** | `EnsureRange(Value, AMin, AMax: Extended): Extended` | Clamp Value to [AMin, AMax] |
+| `CompareValue` | `CompareValue(A, B, Epsilon: Extended): Integer` | Compare floats (−1, 0, 1). Epsilon is required. |
+| `SameValue` | `SameValue(A, B: Extended): Boolean` | True if A and B compare equal. No Epsilon argument. |
 
 ### Examples
 
@@ -416,12 +411,6 @@ begin
     SetEditValue(element, IntToStr(clamped));
   end;
 end;
-
-// Find highest value record
-function FindMaxValue(const values: array of Extended): Extended;
-begin
-  Result := MaxValue(values);
-end;
 ```
 
 ## Special Functions
@@ -431,7 +420,7 @@ end;
 | **`Hypot`** | `Hypot(X, Y: Extended): Extended` | Hypotenuse: √(X² + Y²) |
 | `IsNan` | `IsNan(const Value: Extended): Boolean` | Check if Not-a-Number |
 | `IsInfinite` | `IsInfinite(const Value: Extended): Boolean` | Check if ±infinity |
-| `IsZero` | `IsZero(const Value: Extended, Epsilon: Extended = 0): Boolean` | Check if zero (with tolerance) |
+| `IsZero` | `IsZero(const Value: Extended): Boolean` | Check if Value is zero. One argument only; no Epsilon. |
 | `Sign` | `Sign(const Value: Integer): TValueSign` | Get sign: -1, 0, or 1 |
 
 ### Examples
@@ -457,10 +446,8 @@ begin
   if IsInfinite(x) then
     AddMessage('Value is infinite');
 
-  // Check if effectively zero
-  x := 0.00000001;
-  if IsZero(x, 0.0001) then
-    AddMessage('Value is effectively zero');
+  if IsZero(0.0) then
+    AddMessage('Value is zero');
 end;
 ```
 
@@ -488,8 +475,7 @@ end;
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `Randomize` | `Randomize()` | Initialize random generator (call once) |
-| `Random` | `Random(): Extended` | Random float in [0.0, 1.0) |
-| `Random` | `Random(Range: Integer): Integer` | Random integer in [0, Range-1] |
+| `Random` | `Random(Range: Integer): Integer` | Random integer in [0, Range-1]. Range is required. |
 | **`RandomRange`** | `RandomRange(AFrom, ATo: Integer): Integer` | Random integer in [AFrom, ATo-1] |
 | **`RandG`** | `RandG(Mean, StdDev: Extended): Extended` | Gaussian (normal) random number |
 
@@ -502,11 +488,6 @@ var
 begin
   Randomize();  // Initialize (call once at start)
 
-  // Random float [0.0, 1.0)
-  randomFloat := Random();
-  AddMessage(Format('Random float: %.3f', [randomFloat]));
-
-  // Random integer [0, 99]
   randomInt := Random(100);
   AddMessage(Format('Random 0-99: %d', [randomInt]));
 
@@ -540,12 +521,12 @@ begin
     for i := 1 to count do begin
       randomIndex := Random(totalRecords);
       rec := RecordByIndex(f, randomIndex);
-      formIDStr := IntToHex(rec.FormID, 8);
+      formIDStr := IntToHex(FormID(rec), 8);
 
       // Check if already selected
       if selected.IndexOf(formIDStr) = -1 then begin
         selected.Add(formIDStr);
-        AddMessage(Format('Selected: %s [%s]', [rec.EditorID, formIDStr]));
+        AddMessage(Format('Selected: %s [%s]', [EditorID(rec), formIDStr]));
       end;
     end;
   finally
@@ -570,9 +551,6 @@ end;
 |----------|-----------|-------------|
 | **`SLNDepreciation`** | `SLNDepreciation(Cost, Salvage, Life: Extended): Extended` | Straight-line depreciation |
 | **`SYDDepreciation`** | `SYDDepreciation(Cost, Salvage, Life, Period: Extended): Extended` | Sum-of-years-digits depreciation |
-| `FutureValue` | `FutureValue(Rate: Extended, NPeriods: Integer, Payment, PresentValue: Extended, PaymentTime: TPaymentTime): Extended` | Future value of investment |
-| `PresentValue` | `PresentValue(Rate: Extended, NPeriods: Integer, Payment, FutureValue: Extended, PaymentTime: TPaymentTime): Extended` | Present value |
-| `InterestPayment` | `InterestPayment(Rate: Extended, Period, NPeriods: Integer, PresentValue, FutureValue: Extended, PaymentTime: TPaymentTime): Extended` | Interest payment for period |
 
 ### Example: Depreciation
 

@@ -78,7 +78,7 @@ var
   sig, recType: string;
 begin
   rec := e;
-  sig := rec.Signature;
+  sig := Signature(rec);
 
   // Extract first two characters
   recType := Copy(sig, 1, 2);
@@ -173,7 +173,7 @@ var
   msg: string;
 begin
   rec := e;
-  formID := rec.FormID;
+  formID := FormID(rec);
 
   msg := Format(
     'Record Information:'#13#10 +
@@ -183,11 +183,11 @@ begin
     '  EditorID: %s'#13#10 +
     '  File:     %s',
     [
-      rec.Name,
-      rec.Signature,
+      Name(rec),
+      Signature(rec),
       IntToHex(formID, 8),
       formID,
-      rec.EditorID,
+      EditorID(rec),
       GetFileName(GetFile(rec))
     ]
   );
@@ -219,27 +219,19 @@ end;
 ```pascal
 // Create aligned table output
 var
-  records: TStringList;
   i: Integer;
   rec: IwbMainRecord;
 begin
-  records := TStringList.Create;
-  try
-    AddMessage('EditorID                      FormID    Signature');
-    AddMessage('---------------------------------------------------');
+  AddMessage('EditorID                      FormID    Signature');
+  AddMessage('---------------------------------------------------');
 
-    for i := 0 to RecordCount(f) - 1 do begin
-      rec := RecordByIndex(f, i);
-      // %-30s = left-aligned, width 30
-      // %8s = right-aligned, width 8
-      AddMessage(Format('%-30s  %8s  %s', [
-        rec.EditorID,
-        IntToHex(rec.FormID, 8),
-        rec.Signature
-      ]));
-    end;
-  finally
-    records.Free;
+  for i := 0 to RecordCount(f) - 1 do begin
+    rec := RecordByIndex(f, i);
+    AddMessage(Format('%-30s  %8s  %s', [
+      EditorID(rec),
+      IntToHex(FormID(rec), 8),
+      Signature(rec)
+    ]));
   end;
 end;
 ```
@@ -260,7 +252,8 @@ end;
 | `IntToHex` | `IntToHex(Value: Integer, Digits: Integer): string` | Integer to hex (uppercase) |
 | `StrToInt` | `StrToInt(S: string): Integer` | String to integer (raises exception on error) |
 | `StrToIntDef` | `StrToIntDef(S: string, Default: Integer): Integer` | String to integer (returns default on error) |
-| `TryStrToInt` | `TryStrToInt(S: string, var Value: Integer): Boolean` | Safe string to integer conversion |
+| `StrToInt64` | `StrToInt64(S: string): Int64` | String to Int64 (raises exception on error) |
+| `StrToInt64Def` | `StrToInt64Def(S: string, Default: Int64): Int64` | String to Int64 (returns default on error) |
 
 ### Float Conversion
 
@@ -269,7 +262,7 @@ end;
 | `FloatToStr` | `FloatToStr(Value: Extended): string` | Float to string |
 | `FloatToStrF` | `FloatToStrF(Value: Extended, Format: TFloatFormat, Precision, Digits: Integer): string` | Float to string with format |
 | `StrToFloat` | `StrToFloat(S: string): Extended` | String to float (raises exception) |
-| `TryStrToFloat` | `TryStrToFloat(S: string, var Value: Extended): Boolean` | Safe string to float conversion |
+| `StrToFloatDef` | `StrToFloatDef(S: string, Default: Extended): Extended` | String to float (returns default on error) |
 | `FormatFloat` | `FormatFloat(Format: string, Value: Extended): string` | Custom float formatting |
 
 ### Currency Conversion
@@ -294,11 +287,11 @@ begin
     if Copy(input, 1, 2) = '0x' then
       input := Copy(input, 3, Length(input) - 2);
 
-    // Try to parse as hex
-    if TryStrToInt('$' + input, formID) then begin
+    formID := StrToIntDef('$' + input, -1);
+    if formID <> -1 then begin
       rec := RecordByFormID(FileByIndex(0), formID, True);
       if Assigned(rec) then
-        AddMessage('Found: ' + rec.EditorID)
+        AddMessage('Found: ' + EditorID(rec))
       else
         AddMessage('Record not found');
     end else
@@ -311,18 +304,8 @@ end;
 ```pascal
 // Get numeric value safely
 function GetElementValueAsFloat(el: IwbElement; default: Extended): Extended;
-var
-  s: string;
-  value: Extended;
 begin
-  s := GetEditValue(el);
-
-  if TryStrToFloat(s, value) then
-    Result := value
-  else begin
-    AddMessage('Warning: Could not parse as float: ' + s);
-    Result := default;
-  end;
+  Result := StrToFloatDef(GetEditValue(el), default);
 end;
 ```
 
@@ -391,7 +374,7 @@ Variants are flexible types that can hold different kinds of values.
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `VarArrayCreate` | `VarArrayCreate(Bounds, VarType: Integer): Variant` | Create variant array |
+| `VarArrayCreate` | `VarArrayCreate(Bounds: array of Integer, VarType: Integer): Variant` | Create variant array. `Bounds` is an even-length list of low/high pairs, e.g. `[0, 9]` |
 | `VarArrayOf` | `VarArrayOf(Values: array of const): Variant` | Create from values |
 | `VarIsArray` | `VarIsArray(V: Variant): Boolean` | Check if array |
 | `VarArrayDimCount` | `VarArrayDimCount(A: Variant): Integer` | Number of dimensions |
@@ -473,8 +456,7 @@ end;
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `Randomize` | `Randomize()` | Initialize random number generator (call once at start) |
-| `Random` | `Random(): Extended` | Random float in [0..1) |
-| `Random` | `Random(Range: Integer): Integer` | Random integer in [0..Range-1] |
+| `Random` | `Random(Range: Integer): Integer` | Random integer in [0..Range-1]. Range is required. |
 
 **Note:** For more random functions, see [Math Reference](stdlib_math.md#random-functions).
 
@@ -494,7 +476,7 @@ begin
   for i := 1 to 10 do begin
     randomIndex := Random(count);
     rec := RecordByIndex(f, randomIndex);
-    AddMessage(Format('Random %d: %s', [i, rec.EditorID]));
+    AddMessage(Format('Random %d: %s', [i, EditorID(rec)]));
   end;
 end;
 ```

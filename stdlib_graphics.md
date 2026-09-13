@@ -8,7 +8,7 @@ Graphics classes for drawing, images, fonts, colors, and visual elements in xEdi
 
 ## Table of Contents
 
-- [Color Functions](#color-functions)
+- [Colors](#colors)
 - [TCanvas - Drawing Surface](#tcanvas---drawing-surface)
 - [TBitmap - Bitmap Images](#tbitmap---bitmap-images)
 - [TFont - Text Fonts](#tfont---text-fonts)
@@ -17,17 +17,15 @@ Graphics classes for drawing, images, fonts, colors, and visual elements in xEdi
 - [TPicture - Image Container](#tpicture---image-container)
 - [xEdit Visualization Examples](#xedit-visualization-examples)
 
-## Color Functions
+## Colors
 
-Color manipulation functions.
+`RGB`, `ColorToRGB`, `GetRValue`, `GetGValue`, and `GetBValue` are **not** registered. Build a `TColor` as `$00BBGGRR` (blue in the high byte of the low word, red in the low byte).
 
-| Function | Signature | Description |
-|----------|-----------|-------------|
-| `RGB` | `RGB(Red, Green, Blue: Byte): TColor` | Create color from RGB values (0-255) |
-| `ColorToRGB` | `ColorToRGB(Color: TColor): Longint` | Convert to RGB value |
-| `GetRValue` | `GetRValue(RGB: DWORD): Byte` | Extract red component |
-| `GetGValue` | `GetGValue(RGB: DWORD): Byte` | Extract green component |
-| `GetBValue` | `GetBValue(RGB: DWORD): Byte` | Extract blue component |
+```pascal
+color := $004080FF;  // R=255, G=128, B=64
+```
+
+Registered named colors include `clBlack`…`clWhite` and `clWebLightBlue` (there is no `clLightBlue`).
 
 ### Standard Color Constants
 
@@ -52,50 +50,37 @@ clWhite      = $FFFFFF;
 
 ### System Color Constants
 
+Use the registered `cl*` names. `COLOR_SCROLLBAR` and the other `COLOR_*` identifiers are **not** registered.
+
 ```pascal
-clScrollBar        = COLOR_SCROLLBAR or $80000000;
-clBackground       = COLOR_BACKGROUND or $80000000;
-clActiveCaption    = COLOR_ACTIVECAPTION or $80000000;
-clInactiveCaption  = COLOR_INACTIVECAPTION or $80000000;
-clMenu             = COLOR_MENU or $80000000;
-clWindow           = COLOR_WINDOW or $80000000;
-clWindowFrame      = COLOR_WINDOWFRAME or $80000000;
-clMenuText         = COLOR_MENUTEXT or $80000000;
-clWindowText       = COLOR_WINDOWTEXT or $80000000;
-clCaptionText      = COLOR_CAPTIONTEXT or $80000000;
-clActiveBorder     = COLOR_ACTIVEBORDER or $80000000;
-clInactiveBorder   = COLOR_INACTIVEBORDER or $80000000;
-clAppWorkSpace     = COLOR_APPWORKSPACE or $80000000;
-clHighlight        = COLOR_HIGHLIGHT or $80000000;
-clHighlightText    = COLOR_HIGHLIGHTTEXT or $80000000;
-clBtnFace          = COLOR_BTNFACE or $80000000;
-clBtnShadow        = COLOR_BTNSHADOW or $80000000;
-clGrayText         = COLOR_GRAYTEXT or $80000000;
-clBtnText          = COLOR_BTNTEXT or $80000000;
-clBtnHighlight     = COLOR_BTNHIGHLIGHT or $80000000;
-cl3DDkShadow       = COLOR_3DDKSHADOW or $80000000;
-cl3DLight          = COLOR_3DLIGHT or $80000000;
-clInfoText         = COLOR_INFOTEXT or $80000000;
-clInfoBk           = COLOR_INFOBK or $80000000;
+clScrollBar, clBackground, clActiveCaption, clInactiveCaption,
+clMenu, clWindow, clWindowFrame, clMenuText, clWindowText,
+clCaptionText, clActiveBorder, clInactiveBorder, clAppWorkSpace,
+clHighlight, clHighlightText, clBtnFace, clBtnShadow, clGrayText,
+clBtnText, clInactiveCaptionText, clBtnHighlight, cl3DDkShadow,
+cl3DLight, clInfoText, clInfoBk, clHotLight,
+clGradientActiveCaption, clGradientInactiveCaption,
+clMenuHighlight, clMenuBar
 ```
 
 ### Color Example
 
 ```pascal
-// Create custom colors
 var
+  bmp: TBitmap;
   color: TColor;
-  r, g, b: Byte;
 begin
-  // Create from RGB
-  color := RGB(255, 128, 64);  // Orange
-
-  // Extract components
-  r := GetRValue(ColorToRGB(color));  // 255
-  g := GetGValue(ColorToRGB(color));  // 128
-  b := GetBValue(ColorToRGB(color));  // 64
-
-  AddMessage(Format('RGB: %d, %d, %d', [r, g, b]));
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := 100;
+    bmp.Height := 100;
+    color := $004080FF;  // orange: R=255 G=128 B=64
+    bmp.Canvas.Brush.Color := color;
+    bmp.Canvas.Pen.Color := clBlack;
+    bmp.Canvas.Rectangle(0, 0, 100, 100);
+  finally
+    bmp.Free;
+  end;
 end;
 ```
 
@@ -113,7 +98,6 @@ Access via: `Form.Canvas`, `Bitmap.Canvas`, `PaintBox.Canvas`, etc.
 |--------|-----------|-------------|
 | `MoveTo` | `MoveTo(X, Y: Integer)` | Move pen to position |
 | `LineTo` | `LineTo(X, Y: Integer)` | Draw line from current position |
-| `Line` | `Line(X1, Y1, X2, Y2: Integer)` | Draw line between points |
 | `Polyline` | `Polyline(Points: array of TPoint)` | Draw connected lines |
 | `Rectangle` | `Rectangle(X1, Y1, X2, Y2: Integer)` | Draw rectangle |
 | `RoundRect` | `RoundRect(X1, Y1, X2, Y2, X3, Y3: Integer)` | Draw rounded rectangle |
@@ -149,11 +133,7 @@ Access via: `Form.Canvas`, `Bitmap.Canvas`, `PaintBox.Canvas`, etc.
 | `StretchDraw` | `StretchDraw(Rect: TRect, Graphic: TGraphic)` | Draw graphic stretched |
 | `CopyRect` | `CopyRect(Dest: TRect, Canvas: TCanvas, Source: TRect)` | Copy from another canvas |
 
-#### Pixels
-
-| Method | Signature | Description |
-|--------|-----------|-------------|
-| `Pixels[X, Y]` | `property Pixels[X, Y: Integer]: TColor` | Get/set pixel color |
+`TCanvas.Pixels` is not registered. Fill areas with `FillRect` / `Rectangle` instead.
 
 ### Canvas Properties
 
@@ -186,30 +166,33 @@ function Point(X, Y: Integer): TPoint;
 ### Canvas Drawing Example
 
 ```pascal
-// Draw on form canvas
-procedure TForm1.FormPaint(Sender: TObject);
+// Draw on a bitmap canvas (no custom form class)
 var
+  bmp: TBitmap;
   canvas: TCanvas;
 begin
-  canvas := TForm1(Sender).Canvas;
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := 240;
+    bmp.Height := 180;
+    canvas := bmp.Canvas;
 
-  // Set pen and brush
-  canvas.Pen.Color := clBlack;
-  canvas.Pen.Width := 2;
-  canvas.Brush.Color := clYellow;
+    canvas.Pen.Color := clBlack;
+    canvas.Pen.Width := 2;
+    canvas.Brush.Color := clYellow;
 
-  // Draw shapes
-  canvas.Rectangle(10, 10, 100, 100);
-  canvas.Ellipse(120, 10, 210, 100);
+    canvas.Rectangle(10, 10, 100, 100);
+    canvas.Ellipse(120, 10, 210, 100);
 
-  // Draw line
-  canvas.MoveTo(10, 120);
-  canvas.LineTo(210, 120);
+    canvas.MoveTo(10, 120);
+    canvas.LineTo(210, 120);
 
-  // Draw text
-  canvas.Font.Size := 14;
-  canvas.Font.Style := [fsBold];
-  canvas.TextOut(10, 140, 'Hello World');
+    canvas.Font.Size := 14;
+    canvas.Font.Style := [fsBold];
+    canvas.TextOut(10, 140, 'Hello World');
+  finally
+    bmp.Free;
+  end;
 end;
 ```
 
@@ -243,7 +226,6 @@ bmp := TBitmap.Create;
 | `LoadFromStream` | `LoadFromStream(Stream: TStream)` | Load from stream |
 | `SaveToStream` | `SaveToStream(Stream: TStream)` | Save to stream |
 | `Assign` | `Assign(Source: TPersistent)` | Copy from another bitmap |
-| `SetSize` | `SetSize(AWidth, AHeight: Integer)` | Resize bitmap |
 
 ### Bitmap Example
 
@@ -251,7 +233,6 @@ bmp := TBitmap.Create;
 // Create and manipulate bitmap
 var
   bmp: TBitmap;
-  x, y: Integer;
 begin
   bmp := TBitmap.Create;
   try
@@ -260,10 +241,8 @@ begin
     bmp.Height := 200;
     bmp.PixelFormat := pf24bit;
 
-    // Fill with gradient
-    for y := 0 to bmp.Height - 1 do
-      for x := 0 to bmp.Width - 1 do
-        bmp.Canvas.Pixels[x, y] := RGB(x, y, 128);
+    bmp.Canvas.Brush.Color := $00808080;
+    bmp.Canvas.FillRect(Rect(0, 0, bmp.Width, bmp.Height));
 
     // Draw on bitmap
     bmp.Canvas.Pen.Color := clRed;
@@ -349,23 +328,27 @@ font.Style := [fsUnderline, fsStrikeOut];  // Underline and strikeout
 ```pascal
 // Configure font
 var
+  bmp: TBitmap;
   canvas: TCanvas;
 begin
-  canvas := Form1.Canvas;
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := 300;
+    bmp.Height := 80;
+    canvas := bmp.Canvas;
 
-  // Set font properties
-  canvas.Font.Name := 'Arial';
-  canvas.Font.Size := 16;
-  canvas.Font.Style := [fsBold, fsItalic];
-  canvas.Font.Color := clBlue;
+    canvas.Font.Name := 'Arial';
+    canvas.Font.Size := 16;
+    canvas.Font.Style := [fsBold, fsItalic];
+    canvas.Font.Color := clBlue;
+    canvas.TextOut(10, 10, 'Styled Text');
 
-  // Draw text
-  canvas.TextOut(10, 10, 'Styled Text');
-
-  // Change style
-  canvas.Font.Style := [fsUnderline];
-  canvas.Font.Color := clRed;
-  canvas.TextOut(10, 40, 'Underlined Red Text');
+    canvas.Font.Style := [fsUnderline];
+    canvas.Font.Color := clRed;
+    canvas.TextOut(10, 40, 'Underlined Red Text');
+  finally
+    bmp.Free;
+  end;
 end;
 ```
 
@@ -424,38 +407,42 @@ TPenMode = (
 ```pascal
 // Draw with different pen styles
 var
+  bmp: TBitmap;
   canvas: TCanvas;
   y: Integer;
 begin
-  canvas := Form1.Canvas;
-  y := 10;
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := 220;
+    bmp.Height := 100;
+    canvas := bmp.Canvas;
+    y := 10;
 
-  // Solid line
-  canvas.Pen.Style := psSolid;
-  canvas.Pen.Width := 2;
-  canvas.Pen.Color := clBlack;
-  canvas.MoveTo(10, y);
-  canvas.LineTo(200, y);
+    canvas.Pen.Style := psSolid;
+    canvas.Pen.Width := 2;
+    canvas.Pen.Color := clBlack;
+    canvas.MoveTo(10, y);
+    canvas.LineTo(200, y);
 
-  // Dashed line
-  Inc(y, 20);
-  canvas.Pen.Style := psDash;
-  canvas.MoveTo(10, y);
-  canvas.LineTo(200, y);
+    Inc(y, 20);
+    canvas.Pen.Style := psDash;
+    canvas.MoveTo(10, y);
+    canvas.LineTo(200, y);
 
-  // Dotted line
-  Inc(y, 20);
-  canvas.Pen.Style := psDot;
-  canvas.MoveTo(10, y);
-  canvas.LineTo(200, y);
+    Inc(y, 20);
+    canvas.Pen.Style := psDot;
+    canvas.MoveTo(10, y);
+    canvas.LineTo(200, y);
 
-  // Thick colored line
-  Inc(y, 20);
-  canvas.Pen.Style := psSolid;
-  canvas.Pen.Width := 5;
-  canvas.Pen.Color := clRed;
-  canvas.MoveTo(10, y);
-  canvas.LineTo(200, y);
+    Inc(y, 20);
+    canvas.Pen.Style := psSolid;
+    canvas.Pen.Width := 5;
+    canvas.Pen.Color := clRed;
+    canvas.MoveTo(10, y);
+    canvas.LineTo(200, y);
+  finally
+    bmp.Free;
+  end;
 end;
 ```
 
@@ -490,29 +477,34 @@ TBrushStyle = (
 ```pascal
 // Draw rectangles with different fill styles
 var
+  bmp: TBitmap;
   canvas: TCanvas;
   x, y: Integer;
 begin
-  canvas := Form1.Canvas;
-  canvas.Pen.Color := clBlack;
-  x := 10;
-  y := 10;
+  bmp := TBitmap.Create;
+  try
+    bmp.Width := 320;
+    bmp.Height := 100;
+    canvas := bmp.Canvas;
+    canvas.Pen.Color := clBlack;
+    x := 10;
+    y := 10;
 
-  // Solid fill
-  canvas.Brush.Style := bsSolid;
-  canvas.Brush.Color := clYellow;
-  canvas.Rectangle(x, y, x + 80, y + 80);
+    canvas.Brush.Style := bsSolid;
+    canvas.Brush.Color := clYellow;
+    canvas.Rectangle(x, y, x + 80, y + 80);
 
-  // Hatched fill
-  Inc(x, 100);
-  canvas.Brush.Style := bsCross;
-  canvas.Brush.Color := clRed;
-  canvas.Rectangle(x, y, x + 80, y + 80);
+    Inc(x, 100);
+    canvas.Brush.Style := bsCross;
+    canvas.Brush.Color := clRed;
+    canvas.Rectangle(x, y, x + 80, y + 80);
 
-  // No fill (transparent)
-  Inc(x, 100);
-  canvas.Brush.Style := bsClear;
-  canvas.Rectangle(x, y, x + 80, y + 80);
+    Inc(x, 100);
+    canvas.Brush.Style := bsClear;
+    canvas.Rectangle(x, y, x + 80, y + 80);
+  finally
+    bmp.Free;
+  end;
 end;
 ```
 
@@ -541,19 +533,14 @@ TPicture is a container for different graphic types (bitmaps, icons, metafiles).
 ### Picture Example
 
 ```pascal
-// Load and display various image formats
+// Load an image and report size
 var
   pic: TPicture;
-  img: TImage;
 begin
   pic := TPicture.Create;
   try
-    // Load bitmap
-    pic.LoadFromFile('image.bmp');
+    pic.LoadFromFile(wbDataPath + 'image.bmp');
     AddMessage(Format('Image size: %d x %d', [pic.Width, pic.Height]));
-
-    // Display in TImage
-    img.Picture.Assign(pic);
   finally
     pic.Free;
   end;
@@ -602,14 +589,14 @@ begin
         rec := RecordByIndex(FileByIndex(0), i);
 
         // Draw node
-        bmp.Canvas.Brush.Color := clLightBlue;
+        bmp.Canvas.Brush.Color := clWebLightBlue;
         bmp.Canvas.Pen.Color := clBlack;
         bmp.Canvas.Ellipse(x, y, x + nodeSize, y + nodeSize);
 
         // Draw label
         bmp.Canvas.Font.Size := 8;
         bmp.Canvas.TextOut(x + 5, y + nodeSize + 5,
-          Copy(rec.EditorID, 1, 8));
+          Copy(EditorID(rec), 1, 8));
 
         // Arrange in grid
         Inc(x, nodeSize + 30);
@@ -643,7 +630,7 @@ var
   paintBox: TPaintBox;
   i: Integer;
   rec: IwbMainRecord;
-  color: TColor;
+  status: string;
 begin
   form := TForm.Create(nil);
   try
@@ -684,18 +671,16 @@ begin
     for i := 0 to RecordCount(FileByIndex(0)) - 1 do begin
       rec := RecordByIndex(FileByIndex(0), i);
 
-      // Determine status color
-      if rec.IsDeleted then
-        color := clRed
-      else if rec.IsInitiallyDisabled then
-        color := clYellow
+      if GetIsDeleted(rec) then
+        status := 'Deleted'
+      else if GetIsInitiallyDisabled(rec) then
+        status := 'Disabled'
       else
-        color := clGreen;
+        status := 'Valid';
 
-      // Add to list (note: actual coloring would need custom drawing)
       with listView.Items.Add do begin
-        Caption := rec.EditorID;
-        SubItems.Add('Status');
+        Caption := EditorID(rec);
+        SubItems.Add(status);
       end;
     end;
 

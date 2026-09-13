@@ -18,7 +18,7 @@ This reference documents the standard library functions and classes available to
 |------|-----------|------|
 | Format text with values | `Format()`, `FormatFloat()`, `FormatDateTime()` | [Core](stdlib_core.md#string-formatting) |
 | Read/write files | `TStringList`, `TFileStream`, `TMemoryStream` | [Files](stdlib_files.md#streams) |
-| Build file paths | `ExtractFilePath()`, `ChangeFileExt()`, `IncludeTrailingPathDelimiter()` | [Files](stdlib_files.md#path-functions) |
+| Build file paths | `ExtractFilePath()`, `ChangeFileExt()`, `IncludeTrailingBackslash()` | [Files](stdlib_files.md#path-functions) |
 | Show messages to user | `ShowMessage()`, `MessageDlg()`, `InputBox()` | [UI](stdlib_ui.md#dialogs) |
 | Create dynamic forms | `TForm`, `TButton`, `TEdit`, `TMemo` | [UI](stdlib_ui.md#creating-forms) |
 | Math calculations | `Power()`, `Sqrt()`, `Sin()`, `Cos()`, `Max()`, `Min()` | [Math](stdlib_math.md) |
@@ -27,23 +27,11 @@ This reference documents the standard library functions and classes available to
 
 ## Key Features
 
-✅ **Math-Enhanced** - Full Math unit support (trigonometry, logarithms, financial functions)
-
-✅ **GUI-Complete** - All VCL controls for building forms
-
-✅ **No Database** - No database dependencies (smaller, simpler)
-
-✅ **Form Runner** - Load and execute forms from .pas/.dfm files
-
-✅ **File I/O** - Complete file and directory operations
-
-✅ **String Processing** - Extensive string manipulation functions
-
-✅ **Date/Time** - Full date/time support with formatting
-
-✅ **Graphics** - Drawing, bitmaps, icons, fonts
-
-✅ **Dialogs** - Message boxes, input dialogs, file dialogs
+- **Math** — trigonometry, logarithms, `Power`/`Floor`/`Ceil`, integer `Max`/`Min`, SLN/SYD depreciation (not the full Delphi Math unit)
+- **GUI** — VCL controls, dialogs, and the JvInterpreter form runner
+- **Files** — SysUtils paths, streams, `FindFirst`/`FindNext`
+- **Date/time** — SysUtils only (`EncodeDate`/`EncodeTime`/`IncMonth`/`DayOfWeek`). DateUtils is not registered.
+- **Graphics** — `TCanvas`/`TBitmap`/`TFont` (no `RGB`/`Pixels`/`Line`)
 
 ## Quick Reference Tables
 
@@ -86,8 +74,8 @@ This reference documents the standard library functions and classes available to
 | Function | Purpose | Example |
 |----------|---------|---------|
 | `Abs(x)` | Absolute value | `Abs(-5)` → `5` |
-| `Max(a, b)` | Maximum of two | `Max(10, 20)` → `20` |
-| `Min(a, b)` | Minimum of two | `Min(10, 20)` → `10` |
+| `Max(a, b)` | Maximum of two integers | `Max(10, 20)` → `20` |
+| `Min(a, b)` | Minimum of two integers | `Min(10, 20)` → `10` |
 | `Power(base, exp)` | Power | `Power(2, 10)` → `1024` |
 | `Sqrt(x)` | Square root | `Sqrt(144)` → `12` |
 | `Round(x)` | Round to integer | `Round(3.7)` → `4` |
@@ -114,10 +102,10 @@ var
 begin
   rec := e;  // current element
   msg := Format('Record: %s [%s]'#13#10'FormID: %s'#13#10'EditorID: %s', [
-    rec.Name,
-    rec.Signature,
-    IntToHex(rec.FormID, 8),
-    rec.EditorID
+    Name(rec),
+    Signature(rec),
+    IntToHex(FormID(rec), 8),
+    EditorID(rec)
   ]);
   ShowMessage(msg);
 end;
@@ -131,7 +119,7 @@ var
 begin
   basePath := wbDataPath;
   fileName := ChangeFileExt(ExtractFileName(GetFileName(e)), '.txt');
-  outputPath := IncludeTrailingPathDelimiter(basePath) + 'Output\' + fileName;
+  outputPath := IncludeTrailingBackslash(basePath) + 'Output\' + fileName;
 
   if not DirectoryExists(ExtractFilePath(outputPath)) then
     ForceDirectories(ExtractFilePath(outputPath));
@@ -150,10 +138,10 @@ var
   elapsed: string;
 begin
   startTime := Now();
-  total := FileByIndex(0).RecordCount;
+  total := RecordCount(FileByIndex(0));
 
   for i := 0 to total - 1 do begin
-    rec := FileByIndex(0).Records[i];
+    rec := RecordByIndex(FileByIndex(0), i);
     // Process record...
 
     if (i mod 100) = 0 then begin
@@ -172,7 +160,8 @@ var
   value: Integer;
 begin
   if InputQuery('Enter Value', 'Enter a number (1-100):', input) then begin
-    if not TryStrToInt(input, value) then begin
+    value := StrToIntDef(input, -1);
+    if value = -1 then begin
       MessageDlg('Invalid number entered.', mtError, [mbOK], 0);
       Exit;
     end;
@@ -191,13 +180,10 @@ end;
 
 ### Available Functions and Classes
 
-**Functions:** 240+ standard library functions
-- System: 40+
-- SysUtils: 163
-- Math: 60+
-- Dialogs: 10+
-- Form runner: 4
-- Windows API: 20+
+**Functions:** hundreds of registered stdlib functions (not the full Delphi RTL)
+- System, SysUtils, Math (integer `Max`/`Min`; no DateUtils)
+- Dialogs, Forms (`Application`/`Screen` are 0-arg functions)
+- Windows API helpers (`CopyFile`, `Sleep`, …)
 
 **Classes:** 50+ VCL classes
 - **Base:** TObject, TPersistent, TComponent
@@ -221,5 +207,5 @@ end;
 - [UI Components Reference](stdlib_ui.md) - Forms, dialogs, and controls
 - [Graphics Reference](stdlib_graphics.md) - Drawing and images
 - [Data Structures Reference](stdlib_data.md) - Lists, strings, and streams
-- [Constants Reference](CONSTANTS.md) - All available constants
-- [Glossary](GLOSSARY.md) - Term definitions
+- [Constants Reference](Constants.md) - All available constants
+- [Glossary](Glossary.md) - Term definitions
