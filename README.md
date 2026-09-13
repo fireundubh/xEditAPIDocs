@@ -91,6 +91,7 @@ _Base interface for all plugin data structures (records, fields, etc.)_
 - [GetFile](IwbElement_GetFile.md) - Get containing file
 - [ContainingMainRecord](IwbElement_ContainingMainRecord.md) - Get parent record
 - [LinksTo](IwbElement_LinksTo.md) - Get referenced element
+- [SortOrderOf](IwbElement_SortOrderOf.md) - Get element sort order index
 
 **State Management:**
 - [GetElementState](IwbElement_GetElementState.md) - Get element state flags
@@ -169,6 +170,7 @@ _Interface for elements that contain child elements (records, structs, arrays)_
 - [RemoveElement](IwbContainer_RemoveElement.md) - Remove child element
 - [RemoveByIndex](IwbContainer_RemoveByIndex.md) - Remove by index
 - [ReverseElements](IwbContainer_ReverseElements.md) - Reverse child order
+- [CopyByPath](IwbContainer_CopyByPath.md) - Copy element to path in container
 - [IndexOf](IwbContainer_IndexOf.md) - Get child index
 
 **Batch Operations:**
