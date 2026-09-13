@@ -68,7 +68,7 @@ Core functions for string manipulation, number conversion, arrays, variants, and
 | `IsDelimiter` | `IsDelimiter(Delimiters, S: string, Index: Integer): Boolean` | Check if character at index is delimiter |
 | `LastDelimiter` | `LastDelimiter(Delimiters, S: string): Integer` | Find last occurrence of any delimiter |
 
-### xEdit Integration Examples
+### Integration Examples
 
 #### Extract Record Type from Signature
 ```pascal
@@ -162,7 +162,7 @@ Format('%8.2f', [3.14159]) // '    3.14' (width 8, 2 decimals)
 Format('%.2f', [3.14159])  // '3.14' (2 decimals)
 ```
 
-### xEdit Formatting Examples
+### Formatting Examples
 
 #### Format Record Information
 ```pascal
@@ -272,7 +272,7 @@ end;
 | `CurrToStr` | `CurrToStr(Value: Currency): string` | Currency to string |
 | `StrToCurr` | `StrToCurr(S: string): Currency` | String to currency |
 
-### xEdit Conversion Examples
+### Conversion Examples
 
 #### Safe FormID Parsing
 ```pascal

@@ -50,7 +50,7 @@ begin
 end;
 ```
 
-### xEdit Example: Calculate Level Scaling
+### Example: Calculate Level Scaling
 ```pascal
 // Calculate scaled value using power function
 function ScaleValueByLevel(baseValue: Extended; level, maxLevel: Integer): Extended;
@@ -105,7 +105,7 @@ begin
 end;
 ```
 
-### xEdit Example: Logarithmic Distribution
+### Example: Logarithmic Distribution
 ```pascal
 // Distribute items using logarithmic scale
 function CalculateDropChance(itemValue: Extended): Extended;
@@ -171,7 +171,7 @@ begin
 end;
 ```
 
-### xEdit Example: Calculate Projectile Trajectory
+### Example: Calculate Projectile Trajectory
 ```pascal
 // Calculate projectile landing distance
 function ProjectileDistance(velocity, angleRad, gravity: Extended): Extended;
@@ -228,7 +228,7 @@ begin
 end;
 ```
 
-### xEdit Example: Calculate Angle Between Points
+### Example: Calculate Angle Between Points
 ```pascal
 // Calculate direction angle between two 2D points
 function AngleBetweenPoints(x1, y1, x2, y2: Extended): Extended;
@@ -325,7 +325,7 @@ begin
 end;
 ```
 
-### xEdit Example: Normalize Rotation Angles
+### Example: Normalize Rotation Angles
 ```pascal
 // Normalize rotation angle to 0-360 degrees
 function NormalizeAngle(degrees: Extended): Extended;
@@ -394,7 +394,7 @@ begin
 end;
 ```
 
-### xEdit Example: Clamp and Validate Values
+### Example: Clamp and Validate Values
 ```pascal
 // Validate and clamp element values
 procedure ValidateArmorRating(element: IwbElement);
@@ -451,7 +451,7 @@ begin
 end;
 ```
 
-### xEdit Example: Calculate 3D Distance
+### Example: Calculate 3D Distance
 ```pascal
 // Calculate distance between two 3D points
 function Distance3D(x1, y1, z1, x2, y2, z2: Extended): Extended;
@@ -501,7 +501,7 @@ begin
 end;
 ```
 
-### xEdit Example: Random Record Selection and Variation
+### Example: Random Record Selection and Variation
 ```pascal
 // Select random records from a file
 procedure SelectRandomRecords(f: IwbFile; count: Integer);

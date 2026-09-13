@@ -56,7 +56,7 @@ begin
 end;
 ```
 
-### xEdit Example: Timestamp Script Execution
+### Example: Timestamp Script Execution
 ```pascal
 // Log script start and end times
 var
@@ -103,7 +103,7 @@ begin
 end;
 ```
 
-### xEdit Example: Schedule Tasks
+### Example: Schedule Tasks
 ```pascal
 // Check if current time is within maintenance window
 var
@@ -161,7 +161,7 @@ begin
 end;
 ```
 
-### xEdit Example: Organize Output by Date
+### Example: Organize Output by Date
 ```pascal
 // Create output directory based on current date
 var
@@ -244,7 +244,7 @@ FormatDateTime('dddd, mmmm d, yyyy "at" h:nn am/pm', Now()) // Wednesday, Decemb
 | `TimeToStr` | `TimeToStr(Time: TDateTime): string` | Format time using system format |
 | `DateTimeToStr` | `DateTimeToStr(DateTime: TDateTime): string` | Format date/time using system format |
 
-### xEdit Formatting Examples
+### Formatting Examples
 
 #### Create Timestamped Log File
 ```pascal
@@ -356,7 +356,7 @@ begin
 end;
 ```
 
-### xEdit Example: Schedule Maintenance
+### Example: Schedule Maintenance
 ```pascal
 // First Monday of next month
 function NextMaintenanceDate(fromDate: TDateTime): TDateTime;

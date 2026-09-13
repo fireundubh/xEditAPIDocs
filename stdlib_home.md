@@ -41,7 +41,7 @@ This reference documents the standard library functions and classes available to
   - [File Operations](#file-operations)
   - [Math Functions](#math-functions)
   - [Date/Time Functions](#datetime-functions)
-- [xEdit Integration Examples](#xedit-integration-examples)
+- [Integration Examples](#integration-examples)
   - [Example 1: Format Record Information](#example-1-format-record-information)
   - [Example 2: Build Output Path](#example-2-build-output-path)
   - [Example 3: Process Records with Progress](#example-3-process-records-with-progress)
@@ -91,7 +91,7 @@ This reference documents the standard library functions and classes available to
 | `EncodeDate(y, m, d)` | Create date | `EncodeDate(2024, 12, 25)` |
 | `DayOfWeek(dt)` | Day of week | `DayOfWeek(Now())` → `1..7` |
 
-### xEdit Integration Examples
+### Integration Examples
 
 #### Example 1: Format Record Information
 ```pascal

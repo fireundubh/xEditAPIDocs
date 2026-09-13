@@ -63,7 +63,7 @@ mrNo = idNo;
 mrAll = mrYes + 1;
 ```
 
-### xEdit Dialog Examples
+### Dialog Examples
 
 #### Confirm Action
 ```pascal

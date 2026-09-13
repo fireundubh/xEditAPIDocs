@@ -13,7 +13,7 @@ Data structure classes for managing lists, strings, streams, collections, and co
 - [Stream Classes](#stream-classes)
 - [TCollection and TCollectionItem](#tcollection-and-tcollectionitem)
 - [TPersistent and TComponent](#tpersistent-and-tcomponent)
-- [xEdit Data Management Examples](#xedit-data-management-examples)
+- [Data Management Examples](#data-management-examples)
 
 ## TList - Object List
 
@@ -479,7 +479,7 @@ Base class for components.
 | `RemoveComponent` | `RemoveComponent(AComponent: TComponent)` | Remove owned component |
 | `FreeNotification` | `FreeNotification(AComponent: TComponent)` | Request free notification |
 
-## xEdit Data Management Examples
+## Data Management Examples
 
 ### Example 1: Record Cache
 

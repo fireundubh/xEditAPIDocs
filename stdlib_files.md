@@ -37,7 +37,7 @@ faDirectory = $00000010;  // Directory
 faArchive   = $00000020;  // Archive bit
 ```
 
-### xEdit Example: Check Plugin File
+### Example: Check Plugin File
 ```pascal
 // Verify plugin file before processing
 var
@@ -130,7 +130,7 @@ end;
 | `RenameFile` | `RenameFile(OldName, NewName: string): Boolean` | Rename/move file |
 | `CopyFile` | `CopyFile(Source, Dest: string, FailIfExists: Boolean): Boolean` | Copy file. All three arguments are required. |
 
-### xEdit Example: Backup Plugin File
+### Example: Backup Plugin File
 ```pascal
 // Create backup of plugin before modification
 function BackupPlugin(const fileName: string): Boolean;
@@ -178,7 +178,7 @@ Functions for manipulating file paths and names.
 
 Use `'\'` in path strings. `PathDelim` / `DriveDelim` / `PathSep` are not registered.
 
-### xEdit Path Examples
+### Path Examples
 
 #### Build Output File Path
 ```pascal
@@ -250,7 +250,7 @@ end;
 | `DiskFree` | `DiskFree(Drive: Byte): Int64` | Free disk space in bytes (0=current, 1=A:, 3=C:) |
 | `DiskSize` | `DiskSize(Drive: Byte): Int64` | Total disk size in bytes |
 
-### xEdit Example: Create Output Directory Structure
+### Example: Create Output Directory Structure
 ```pascal
 // Create organized output directories
 var
@@ -302,7 +302,7 @@ TSearchRec = record
 end;
 ```
 
-### xEdit Example: Find All Plugin Files
+### Example: Find All Plugin Files
 ```pascal
 // List all ESP/ESM files in Data directory
 var
@@ -484,7 +484,7 @@ begin
 end;
 ```
 
-### xEdit Example: Export Records to Binary Stream
+### Example: Export Records to Binary Stream
 ```pascal
 // Export record data to a binary file (FormID + EditorID via TStringStream)
 var
@@ -534,7 +534,7 @@ TStringList provides the easiest way to work with text files. See [Data Structur
 | `LoadFromStream` | `LoadFromStream(Stream: TStream)` | Load from stream |
 | `SaveToStream` | `SaveToStream(Stream: TStream)` | Save to stream |
 
-### xEdit Example: Export EditorIDs to File
+### Example: Export EditorIDs to File
 ```pascal
 // Export all EditorIDs to text file
 var

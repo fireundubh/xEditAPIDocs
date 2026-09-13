@@ -15,7 +15,7 @@ Graphics classes for drawing, images, fonts, colors, and visual elements in xEdi
 - [TPen - Drawing Pen](#tpen---drawing-pen)
 - [TBrush - Fill Brush](#tbrush---fill-brush)
 - [TPicture - Image Container](#tpicture---image-container)
-- [xEdit Visualization Examples](#xedit-visualization-examples)
+- [Visualization Examples](#visualization-examples)
 
 ## Colors
 
@@ -547,7 +547,7 @@ begin
 end;
 ```
 
-## xEdit Visualization Examples
+## Visualization Examples
 
 ### Example 1: Draw Record Dependency Graph
 
