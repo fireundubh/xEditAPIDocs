@@ -92,6 +92,7 @@ end;
 - [FormID](IwbMainRecord_FormID.md)
 - [LoadOrderFormIDtoFileFormID](IwbFile_LoadOrderFormIDtoFileFormID.md)
 - [RecordByFormID](IwbFile_RecordByFormID.md)
+- [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md)
 - [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md)
 
 

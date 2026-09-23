@@ -226,7 +226,7 @@ _Interface for ESP/ESM/ESL plugin files_
 - [RecordByIndex](IwbFile_RecordByIndex.md) - Get record by index
 - [RecordByFormID](IwbFile_RecordByFormID.md) - Find record by FormID
 - [RecordByEditorID](IwbFile_RecordByEditorID.md) - Find record by EditorID
-- [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md) - Get record from this file
+- [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md) - Find a record by object ID, ignoring a stale module prefix
 
 **Groups:**
 - [GroupBySignature](IwbFile_GroupBySignature.md) - Get group by signature
