@@ -224,7 +224,7 @@ _Interface for ESP/ESM/ESL plugin files_
 **Records:**
 - [RecordCount](IwbFile_RecordCount.md) - Get record count
 - [RecordByIndex](IwbFile_RecordByIndex.md) - Get record by index
-- [RecordByFormID](IwbFile_RecordByFormID.md) - Find record by FormID
+- [RecordByFormID](IwbFile_RecordByFormID.md) - Find a record by its file FormID
 - [RecordByEditorID](IwbFile_RecordByEditorID.md) - Find record by EditorID
 - [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md) - Find a record by object ID, ignoring a stale module prefix
 

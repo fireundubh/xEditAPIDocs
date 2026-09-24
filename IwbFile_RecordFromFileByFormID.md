@@ -24,7 +24,7 @@ What happens to `AFormID`:
 3. A value that already looks like a light or medium FormID is read at that width first. On games that support light plugins, a high byte of `FE` means only the last three hex digits are the object ID. On games that support medium masters, a high byte of `FD` means only the last four. The file's own type can only shorten that further. It cannot put those digits back. `FE003001` is object `001`, not `003001`, even when the file you pass is a normal plugin.
 4. The named file's current load-order module index replaces the prefix, and the record is looked up in that file. Injected records are included.
 
-The usual case is a record introduced by that file. An override of another file's record keeps the other file's FormID, so passing the master FormID and a patch filename does not find the override. Use [RecordByFormID](IwbFile_RecordByFormID.md) with a current load-order FormID for that.
+The usual case is a record introduced by that file. An override of another file's record keeps the other file's FormID, so passing the master FormID and a patch filename does not find the override. Use [RecordByFormID](IwbFile_RecordByFormID.md) with that patch's file FormID. [LoadOrderFormIDtoFileFormID](IwbFile_LoadOrderFormIDtoFileFormID.md) converts a load-order FormID into that value. Passing the load-order FormID straight to `RecordByFormID` does not find the override.
 
 Pass the returned record to [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md) when you need its FormID in this session's load order.
 

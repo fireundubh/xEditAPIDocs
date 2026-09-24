@@ -12,6 +12,8 @@ Returns the FormID adjusted for the current runtime load order.
 
 This function retrieves the LoadOrderFormID property and converts it to a Cardinal. The returned value has the file index updated to reflect the current load order position (not the saved file index). This is the FormID the game engine uses at runtime. Returns 0 for invalid records. Use this when you need the FormID that will actually work in the game, especially when load order has changed since the file was saved.
 
+This is not the value [RecordByFormID](IwbFile_RecordByFormID.md) expects. Convert it with [LoadOrderFormIDtoFileFormID](IwbFile_LoadOrderFormIDtoFileFormID.md) before that lookup. The unconverted value can find a record the plugin itself created, and miss an override of another plugin.
+
 ## Parameters
 
 | Name | Type | Description |
@@ -63,24 +65,20 @@ begin
   end;
 end;
 
-// Example 4: Find record by runtime FormID across all files
+// Example 4: RecordByFormID does not take the load-order FormID.
+// Convert to the target plugin's file FormID first. The origin must be
+// that plugin or one of its masters, or the conversion raises.
 var
-  targetFormID: Cardinal;
-  foundRec: IwbMainRecord;
-  i: integer;
   plugin: IwbFile;
+  foundRec: IwbMainRecord;
+  fileFormID: Cardinal;
 begin
-  targetFormID := $06022DC0; // Runtime FormID to find
-
-  for i := 0 to Pred(FileCount) do begin
-    plugin := FileByIndex(i);
-    if Assigned(plugin) then begin
-      foundRec := RecordByFormID(plugin, targetFormID, true);
-      if Assigned(foundRec) then begin
-        AddMessage(Format('Found: %s in %s', [EditorID(foundRec), GetFileName(plugin)]));
-        Break;
-      end;
-    end;
+  plugin := FileByName('MyPatch.esp');
+  if Assigned(e) and Assigned(plugin) then begin
+    fileFormID := LoadOrderFormIDtoFileFormID(plugin, GetLoadOrderFormID(e));
+    foundRec := RecordByFormID(plugin, fileFormID, True);
+    if Assigned(foundRec) and Equals(GetFile(foundRec), plugin) then
+      AddMessage(Format('Found: %s in %s', [EditorID(foundRec), GetFileName(plugin)]));
   end;
 end;
 ```
