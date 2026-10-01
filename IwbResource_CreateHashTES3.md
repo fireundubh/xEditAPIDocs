@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function CreateHashTES3(AFileName: string): Cardinal;
+function CreateHashTES3(AFileName: string): UInt64;
 ```
 
 ## Description
@@ -18,18 +18,18 @@ Creates a Morrowind (TES3)-specific hash value for a given filename. This hash f
 
 ## Returns
 
-Returns a Cardinal value representing the TES3-specific hash of the filename.
+Returns the hash as a `UInt64`.
 
 ## Example
 
 ```pascal
 var
   resourceName: string;
-  hash: Cardinal;
+  hash: UInt64;
 begin
   resourceName := 'meshes\i\in_c_stair_plain_tall.nif';
   hash := CreateHashTES3(resourceName);
-  AddMessage('TES3 hash: ' + IntToHex(hash, 8));
+  AddMessage('TES3 hash: ' + IntToHex64(hash, 16));
 end;
 ```
 

@@ -8,13 +8,13 @@ function NifTextureListResource(AContainerName: string; AResourceName: string; A
 
 ## Description
 
-Extracts all texture file paths from a NIF mesh file stored in a BSA or BA2 archive and adds them to a string list. This is a convenience wrapper that opens the resource data and calls NifTextureList internally.
+Opens a NIF with [ResourceOpenData](IwbResource_ResourceOpenData.md) and passes the bytes to [NifTextureList](IwbResource_NifTextureList.md). An empty `AContainerName` uses the last loaded container that has the file. A missing file yields empty bytes, and [NifTextureList](IwbResource_NifTextureList.md) then returns False.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AContainerName | string | The name of the BSA/BA2 archive containing the mesh (empty string searches all) |
+| AContainerName | string | Container name, or `''` for the last loaded match |
 | AResourceName | string | The path to the NIF file within the archive |
 | AList | TStrings | The string list to receive the texture paths |
 
@@ -42,4 +42,4 @@ end;
 
 - [NifTextureList](IwbResource_NifTextureList.md)
 - [NifTextureListUVRange](IwbResource_NifTextureListUVRange.md)
-- [ResourceOpenData](IwbContainer_ResourceOpenData.md)
+- [ResourceOpenData](IwbResource_ResourceOpenData.md)

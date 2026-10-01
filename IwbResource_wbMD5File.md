@@ -8,36 +8,35 @@ function wbMD5File(AFileName: string): string;
 
 ## Description
 
-Calculates an MD5 hash for a file on disk and returns it as a hexadecimal string. This function reads the entire file and computes its MD5 hash for data integrity verification.
+`wbMD5File` is not registered. The adapter procedure and its `AddFunction` line are commented out, so a script that calls this name fails as an unknown identifier. Use [wbCRC32File](IwbResource_wbCRC32File.md) for a checksum of a file on disk.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFileName | string | The full path to the file to calculate the MD5 hash for |
+| AFileName | string | Not available. The commented adapter would have hashed this path |
 
 ## Returns
 
-Returns a string containing the hexadecimal MD5 hash of the file.
+Not available. The commented adapter would have returned a hexadecimal string.
 
 ## Example
 
 ```pascal
 var
   pluginPath: string;
-  hash: string;
+  checksum: Cardinal;
 begin
   pluginPath := DataPath + 'MyMod.esp';
-
   if FileExists(pluginPath) then begin
-    hash := wbMD5File(pluginPath);
-    AddMessage('Plugin MD5: ' + hash);
+    checksum := wbCRC32File(pluginPath);
+    AddMessage(IntToHex(checksum, 8));
   end;
 end;
 ```
 
 ## See Also
 
+- [wbCRC32File](IwbResource_wbCRC32File.md)
 - [wbMD5Data](IwbResource_wbMD5Data.md)
 - [wbSHA1File](IwbResource_wbSHA1File.md)
-- [wbCRC32File](IwbResource_wbCRC32File.md)

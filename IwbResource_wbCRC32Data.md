@@ -38,4 +38,3 @@ end;
 
 - [wbCRC32File](IwbResource_wbCRC32File.md)
 - [wbCRC32Resource](IwbResource_wbCRC32Resource.md)
-- [wbMD5Data](IwbResource_wbMD5Data.md)

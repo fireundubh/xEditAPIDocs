@@ -3,29 +3,35 @@
 ## Syntax
 
 ```pascal
-function dfFloatDecimalDigits: Integer;
+function dfFloatDecimalDigits: integer;
+```
+
+Assign it as well. The assignment takes an integer and returns nothing.
+
+```pascal
+dfFloatDecimalDigits := 6;
 ```
 
 ## Description
 
-Returns the number of decimal digits to display for floating-point values in the data format display. This setting controls the precision shown for float values throughout xEdit's user interface.
+Reads or sets how many digits follow the decimal point when data-format code formats a float. The initial value is 6.
+
+Before the assignment is stored, the host checks the current value. If that current value is not greater than 0, the assignment raises `dfFloatDecimalDigits must be greater than 0`. The new value is not checked.
 
 ## Parameters
 
-This function takes no parameters.
+The function takes no parameters. The assignment takes the new digit count.
 
 ## Returns
 
-Returns an Integer representing the number of decimal digits used for displaying floating-point values.
+The function returns the current digit count. The assignment returns nothing.
 
 ## Example
 
 ```pascal
-var
-  precision: Integer;
 begin
-  precision := dfFloatDecimalDigits;
-  AddMessage('Current float display precision: ' + IntToStr(precision) + ' decimal places');
+  AddMessage(IntToStr(dfFloatDecimalDigits));
+  dfFloatDecimalDigits := 4;
 end;
 ```
 

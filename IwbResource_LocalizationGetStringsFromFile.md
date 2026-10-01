@@ -8,14 +8,16 @@ procedure LocalizationGetStringsFromFile(AFileName: string; AStrings: TStrings);
 
 ## Description
 
-Extracts all localized strings from a localization file (.STRINGS, .DLSTRINGS, or .ILSTRINGS) and adds them to a string list. This function uses the localization handler to parse the binary string files used by Skyrim and later games.
+Copies the strings from a localization file the handler has already loaded. `AFileName` is the file name only, compared without regard to case, such as `Skyrim_English.STRINGS`. A path does not match. The call replaces the contents of `AStrings`. It does not append, and it does not open a file from disk.
+
+Each entry's text is the string. The entry's object is the string ID. If that file is not loaded, the list is left unchanged. If the localization handler is not assigned, the call does nothing.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFileName | string | The name of the localization file to read (without path) |
-| AStrings | TStrings | The string list to receive the extracted strings |
+| AFileName | string | File name of a localization file the handler has already loaded |
+| AStrings | TStrings | List replaced with that file's strings |
 
 ## Returns
 
@@ -39,4 +41,4 @@ end;
 
 ## See Also
 
-- [ResourceExists](IwbContainer_ResourceExists.md)
+- [ResourceExists](IwbResource_ResourceExists.md)

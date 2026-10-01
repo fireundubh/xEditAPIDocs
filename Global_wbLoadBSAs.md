@@ -31,5 +31,5 @@ end;
 
 ## See Also
 
-- [ResourceExists](IwbContainer_ResourceExists.md)
-- [ResourceOpenData](IwbContainer_ResourceOpenData.md)
+- [ResourceExists](IwbResource_ResourceExists.md)
+- [ResourceOpenData](IwbResource_ResourceOpenData.md)

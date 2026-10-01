@@ -8,7 +8,7 @@ function bscrc32(AString: string): Cardinal;
 
 ## Description
 
-Calculates a Bethesda-specific CRC32 checksum for a given string. This hash function is used by Bethesda's game engines for file identification and resource lookups in BSA archives.
+Calculates a BSCRC32 checksum of the string as written. Letter case and slashes are left alone. This is not the Oblivion or Skyrim BSA filename hash, and it is not a checksum of a file on disk. Fallout 4 archive names go through [CreateHashFO4](IwbResource_CreateHashFO4.md), which lowercases the path and converts slashes first.
 
 ## Parameters
 
@@ -29,11 +29,12 @@ var
 begin
   fileName := 'meshes\armor\iron\ironarmor.nif';
   hash := bscrc32(fileName);
-  AddMessage('BSA hash for ' + fileName + ': ' + IntToHex(hash, 8));
+  AddMessage('BSCRC32 for ' + fileName + ': ' + IntToHex(hash, 8));
 end;
 ```
 
 ## See Also
 
-- [wbCRC32File](IwbResource_wbCRC32File.md)
+- [CreateHashFO4](IwbResource_CreateHashFO4.md)
 - [wbCRC32Data](IwbResource_wbCRC32Data.md)
+- [wbCRC32File](IwbResource_wbCRC32File.md)

@@ -8,36 +8,37 @@ function NifTextureListUVRange(AData: TBytes; AUVRange: Single; AList: TStrings)
 
 ## Description
 
-Extracts texture file paths from a NIF mesh file that have UV coordinates exceeding a specified range. This is useful for identifying textures that use tiling or have UV mapping outside the standard 0.0-1.0 range.
+Clears `AList` and fills it with textures from `NiTriShape` blocks whose UV coordinates all stay inside `-AUVRange` to `AUVRange`. A shape with any UV outside that range is skipped, so tiled shapes are left out. Only a BSLightingShaderProperty texture set on that shape is listed. Empty paths are removed.
+
+A nil list or an empty `AData` returns False. A NIF that loads returns True even when the list is empty.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
 | AData | TBytes | The raw binary data of the NIF file |
-| AUVRange | Single | The UV range threshold to check against |
-| AList | TStrings | The string list to receive the texture paths that exceed the UV range |
+| AUVRange | Single | Absolute UV limit. A coordinate past `-AUVRange` or `AUVRange` drops that shape |
+| AList | TStrings | List cleared and filled with textures from shapes inside the range |
 
 ## Returns
 
-Returns True if the NIF was successfully parsed, False otherwise.
+True when the NIF loaded. False when `AList` is nil, `AData` is empty, or the NIF did not load.
 
 ## Example
 
 ```pascal
 var
   nifData: TBytes;
-  tiledTextures: TStringList;
+  textures: TStringList;
 begin
-  tiledTextures := TStringList.Create;
+  textures := TStringList.Create;
   try
     nifData := ResourceOpenData('', 'meshes\landscape\mountains\mountaincliff01.nif');
 
-    // Find textures with UV coordinates exceeding 1.0
-    if NifTextureListUVRange(nifData, 1.0, tiledTextures) then
-      AddMessage('Found ' + IntToStr(tiledTextures.Count) + ' tiled textures');
+    if NifTextureListUVRange(nifData, 1.0, textures) then
+      AddMessage('Textures on shapes inside UV 1.0: ' + IntToStr(textures.Count));
   finally
-    tiledTextures.Free;
+    textures.Free;
   end;
 end;
 ```

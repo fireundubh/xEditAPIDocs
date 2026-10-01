@@ -6,34 +6,34 @@
 function wbOutputPath: string;
 ```
 
+Assign it as well. The assignment takes a string and returns nothing.
+
+```pascal
+wbOutputPath := 'C:\Output\';
+```
+
 ## Description
 
-Returns the path to the output directory where xEdit saves generated files. This is typically used for LOD generation, exports, and other file creation operations.
+Reads or sets the path where xEdit writes generated files such as LOD meshes and textures.
 
 ## Parameters
 
-This function takes no parameters.
+The function takes no parameters. The assignment takes the new path.
 
 ## Returns
 
-Returns a string containing the full path to the output directory.
+The function returns the output directory path. The assignment returns nothing.
 
 ## Example
 
 ```pascal
-var
-  outputDir: string;
-  exportFile: string;
 begin
-  outputDir := wbOutputPath;
-  exportFile := outputDir + 'LOD\Meshes\terrain.nif';
-
-  AddMessage('Output directory: ' + outputDir);
-  ForceDirectories(ExtractFilePath(exportFile));
+  AddMessage(wbOutputPath);
+  wbOutputPath := 'C:\Output\';
 end;
 ```
 
 ## See Also
 
-- [wbTempPath](Global_wbTempPath.md)
 - [wbDataPath](Global_wbDataPath.md)
+- [wbTempPath](Global_wbTempPath.md)

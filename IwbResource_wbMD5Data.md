@@ -8,34 +8,33 @@ function wbMD5Data(AData: TBytes): string;
 
 ## Description
 
-Calculates an MD5 hash for the provided binary data and returns it as a hexadecimal string. MD5 is a cryptographic hash function commonly used for data integrity verification.
+`wbMD5Data` is not registered. The adapter procedure and its `AddFunction` line are commented out, so a script that calls this name fails as an unknown identifier. Use [wbCRC32Data](IwbResource_wbCRC32Data.md) for a checksum of a byte array.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AData | TBytes | The binary data to calculate the MD5 hash for |
+| AData | TBytes | Not available. The commented adapter would have hashed these bytes |
 
 ## Returns
 
-Returns a string containing the hexadecimal MD5 hash of the input data.
+Not available. The commented adapter would have returned a hexadecimal string.
 
 ## Example
 
 ```pascal
 var
-  fileData: TBytes;
-  hash: string;
+  data: TBytes;
+  checksum: Cardinal;
 begin
-  fileData := ResourceOpenData('', 'meshes\armor\iron\ironarmor.nif');
-  hash := wbMD5Data(fileData);
-
-  AddMessage('MD5 hash: ' + hash);
+  data := ResourceOpenData('', 'meshes\armor\iron\ironarmor.nif');
+  checksum := wbCRC32Data(data);
+  AddMessage(IntToHex(checksum, 8));
 end;
 ```
 
 ## See Also
 
+- [wbCRC32Data](IwbResource_wbCRC32Data.md)
 - [wbMD5File](IwbResource_wbMD5File.md)
 - [wbSHA1Data](IwbResource_wbSHA1Data.md)
-- [wbCRC32Data](IwbResource_wbCRC32Data.md)

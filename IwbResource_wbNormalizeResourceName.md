@@ -3,23 +3,27 @@
 ## Syntax
 
 ```pascal
-function wbNormalizeResourceName(AResourceName: string; AResourceType: TGameResourceType): string;
+function wbNormalizeResourceName(AResourceName: string; AAssetType: integer): string;
 ```
 
 ## Description
 
-Normalizes a resource name according to game-specific conventions. This function adjusts path separators, case, and format to match the expected resource naming standards for the current game.
+Finds a known asset root in a path and returns the path from that root. The search treats `/` and `\` as the same and ignores letter case. The result keeps the letters of the original path, converts slashes to backslashes, and collapses a doubled backslash. A name shorter than two characters, or a name that contains `#8` followed by `NOR`, returns an empty string.
+
+When the path has no known root, the root for `AAssetType` is added in front. A rooted path keeps only the file name. `atNone` (`0`) picks the root from the extension. Voice and music are treated as sound, and an extension that matches nothing is treated as a mesh.
+
+`AAssetType` is a `TwbAssetType` value. Use an `at*` constant such as `atTexture`. `resTexture` is the same value as `atTexture`.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AResourceName | string | The resource name to normalize |
-| AResourceType | TGameResourceType | The type of resource (resMesh, resTexture, resSound, resMusic, resMaterial) |
+| AResourceName | string | Path or filename to search |
+| AAssetType | integer | `TwbAssetType` value, used when the path has no known root |
 
 ## Returns
 
-Returns a string containing the normalized resource name.
+The path from the asset root, or an empty string when the name is shorter than two characters.
 
 ## Example
 
@@ -29,13 +33,11 @@ var
   normalizedPath: string;
 begin
   texturePath := 'Textures/Armor/Iron/IronArmor_d.DDS';
-  normalizedPath := wbNormalizeResourceName(texturePath, resTexture);
-
-  AddMessage('Normalized path: ' + normalizedPath);
-  // Output: textures\armor\iron\ironarmor_d.dds
+  normalizedPath := wbNormalizeResourceName(texturePath, atTexture);
+  AddMessage(normalizedPath);
 end;
 ```
 
 ## See Also
 
-- [ResourceExists](IwbContainer_ResourceExists.md)
+- [ResourceExists](IwbResource_ResourceExists.md)

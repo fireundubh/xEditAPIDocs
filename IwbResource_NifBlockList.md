@@ -8,18 +8,18 @@ function NifBlockList(AData: TBytes; AList: TStrings): Boolean;
 
 ## Description
 
-Extracts all block type names from a NIF (NetImmerse File Format) mesh file and adds them to a string list. This function parses the NIF binary structure and identifies all node and block types present in the mesh.
+Clears `AList` and fills it with one line per block in a NIF. Each line is `Name=BlockType`, and that line's `Objects` value is the block index. A nil list returns False and is not written. A NIF that does not load returns False after the list has been cleared.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
 | AData | TBytes | The raw binary data of the NIF file |
-| AList | TStrings | The string list to receive the block type names |
+| AList | TStrings | List cleared and filled with `Name=BlockType` lines |
 
 ## Returns
 
-Returns True if the NIF was successfully parsed and block names were extracted, False otherwise.
+True when the NIF loaded. False when `AList` is nil or the NIF did not load. An empty block list can still return True.
 
 ## Example
 

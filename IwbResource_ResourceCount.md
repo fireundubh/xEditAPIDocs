@@ -3,31 +3,47 @@
 ## Syntax
 
 ```pascal
-function ResourceCount(AFileName: String; AContainerNames: TStrings): Cardinal;
+function ResourceCount(AFileName: string; AContainers: TStrings): Integer;
 ```
 
 ## Description
 
-Populates `AContainers` list with the names of loaded resources that contain files matching `AFileName` and returns the match count
+Counts loaded containers that contain `AFileName`. Each match is appended to `AContainers`. The list is not cleared first. The order is the container load order.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFileName | String | The file name to search for within resource containers |
-| AContainerNames | TStrings | The string list to populate with matching container names |
+| AFileName | string | Resource path to look for, such as `meshes\clutter\bucket01.nif` |
+| AContainers | TStrings | List that receives the name of each container that has the file |
 
 ## Returns
 
-Returns the number of resource containers that contain the specified file.
+The number of matching containers.
 
 ## Example
 
 ```pascal
-slResList := TStringList.Create;
-ResourceCount(aFileName, slResList);
-
-for i := 0 to Pred(slResList.Count) do
-  sContainerName := ExtractFileName(slResList[i]);
+var
+  containers: TStringList;
+  fileName: string;
+  n, i: Integer;
+begin
+  fileName := 'meshes\clutter\bucket01.nif';
+  containers := TStringList.Create;
+  try
+    n := ResourceCount(fileName, containers);
+    AddMessage(fileName + ' is in ' + IntToStr(n) + ' containers');
+    for i := 0 to Pred(containers.Count) do
+      AddMessage(containers[i]);
+  finally
+    containers.Free;
+  end;
+end;
 ```
 
+## See Also
+
+- [ResourceExists](IwbResource_ResourceExists.md)
+- [ResourceContainerList](IwbResource_ResourceContainerList.md)
+- [ResourceCopy](IwbResource_ResourceCopy.md)

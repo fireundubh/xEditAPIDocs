@@ -8,34 +8,33 @@ function wbSHA1Data(AData: TBytes): string;
 
 ## Description
 
-Calculates a SHA-1 hash for the provided binary data and returns it as a hexadecimal string. SHA-1 is a cryptographic hash function commonly used for data integrity verification.
+`wbSHA1Data` is not registered. The adapter procedure and its `AddFunction` line are commented out, so a script that calls this name fails as an unknown identifier. Use [wbCRC32Data](IwbResource_wbCRC32Data.md) for a checksum of a byte array.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AData | TBytes | The binary data to calculate the SHA-1 hash for |
+| AData | TBytes | Not available. The commented adapter would have hashed these bytes |
 
 ## Returns
 
-Returns a string containing the hexadecimal SHA-1 hash of the input data.
+Not available. The commented adapter would have returned a hexadecimal string.
 
 ## Example
 
 ```pascal
 var
-  resourceData: TBytes;
-  hash: string;
+  data: TBytes;
+  checksum: Cardinal;
 begin
-  resourceData := ResourceOpenData('', 'meshes\architecture\whiterun\wrbuildings.nif');
-  hash := wbSHA1Data(resourceData);
-
-  AddMessage('SHA-1 hash: ' + hash);
+  data := ResourceOpenData('', 'meshes\architecture\whiterun\wrbuildings.nif');
+  checksum := wbCRC32Data(data);
+  AddMessage(IntToHex(checksum, 8));
 end;
 ```
 
 ## See Also
 
+- [wbCRC32Data](IwbResource_wbCRC32Data.md)
 - [wbSHA1File](IwbResource_wbSHA1File.md)
 - [wbMD5Data](IwbResource_wbMD5Data.md)
-- [wbCRC32Data](IwbResource_wbCRC32Data.md)

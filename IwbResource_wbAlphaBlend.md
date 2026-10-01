@@ -8,7 +8,7 @@ function wbAlphaBlend(DestDC: HDC; X, Y, Width, Height: Integer; SrcDC: HDC; Src
 
 ## Description
 
-Performs alpha blending between two device contexts, copying a rectangular region from the source DC to the destination DC with specified transparency. This is a wrapper around the Windows AlphaBlend API function.
+Blends a rectangle from one device context onto another. `Alpha` is the constant source alpha, from 0 (fully transparent) to 255 (opaque). A value of 255 also uses per-pixel alpha. Any lower value uses constant alpha only.
 
 ## Parameters
 

@@ -52,5 +52,5 @@ end;
 
 ## See Also
 
-- [ConflictAllForMainRecord](Global_ConflictAllForMainRecord.md)
-- [ConflictAllForNode](Global_ConflictAllForNode.md)
+- [ConflictAllForMainRecord](IwbMainRecord_ConflictAllForMainRecord.md)
+- [ConflictAllForNode](IwbElement_ConflictAllForNode.md)

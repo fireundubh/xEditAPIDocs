@@ -10,7 +10,7 @@ function GetPosition(ARecord: IwbMainRecord): TwbVector;
 
 Returns the positional vector for `ARecord` when the record is a reference
 
-The `x`, `y`, and `z` members of the return type can be accessed as [Single](http:__docwiki.embarcadero.com_Libraries_Rio_en_System.Single.md) fields.
+The `x`, `y`, and `z` members of the return type can be accessed as [Single](https://docwiki.embarcadero.com/Libraries/Rio/en/System.Single) fields.
 
 ## Parameters
 

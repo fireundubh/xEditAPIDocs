@@ -3,41 +3,44 @@
 ## Syntax
 
 ```pascal
-function AddNewFileName(AFileName: string; AIsESL: Boolean = False): IwbFile;
+function AddNewFileName(AFileName: string): IwbFile;
+function AddNewFileName(AFileName: string; AIsLight: Boolean): IwbFile;
+function AddNewFileName(AFileName: string; AIsLight: Boolean; AIsMedium: Boolean): IwbFile;
 ```
 
 ## Description
 
-Appends a blank plugin to the tree view named `AFileName` and returns the file. If the user cancels the prompt, `Nil` will be returned.
+Creates a plugin with the filename you pass. There is no prompt, and the extension is not changed.
 
-`AIsESL` is an optional argument and defaults to `False`, but when `True`, the new plugin will be created as an ESL-flagged plugin with the `.esl` extension.
+`AFileName` is the filename only, including the extension, such as `MyPlugin.esp`. Omit both flags, or pass False for both, for a normal plugin. Pass True only for `AIsLight` to make a light plugin. Pass True only for `AIsMedium` to make a medium plugin. Do not pass True for both. That combination is rejected.
 
-**Note:** The new plugin will not exist in the file system until the plugin is saved.
+A filename that is not valid for Windows raises. If that filename already exists under the data path, a message is shown and the call returns nil.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFileName | string | The name for the new plugin file |
-| AIsESL | Boolean | Optional. If true, creates an ESL-flagged plugin with .esl extension (defaults to false) |
+| AFileName | string | Filename, including the extension |
+| AIsLight | Boolean | Create a light plugin. Optional. False when omitted |
+| AIsMedium | Boolean | Create a medium plugin. Optional. False when omitted. Requires `AIsLight` to be passed as well |
 
 ## Returns
 
-Returns the newly created file as an IwbFile interface, or Nil if the user cancels the prompt.
+The new `IwbFile`, or nil when a file of that name already exists under the data path.
 
 ## Example
 
 ```pascal
-f := AddNewFileName('MyPlugin.esp');
-
-if not Assigned(f) then
-	Exit;
-  
-AddMessage('File created with name: ' + GetFileName(f));
+var
+  f: IwbFile;
+begin
+  f := AddNewFileName('MyPlugin.esp', False, True);
+  if Assigned(f) then
+    AddMessage(GetFileName(f));
+end;
 ```
 
 ## See Also
 
 - [AddNewFile](Global_AddNewFile.md)
-
-
+- [FileByName](Global_FileByName.md)

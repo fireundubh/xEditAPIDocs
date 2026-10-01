@@ -83,6 +83,7 @@ end;
 ## See Also
 
 - [ChangeFormSignature](IwbMainRecord_ChangeFormSignature.md)
+- [ScriptProcessSignatures](Global_ScriptProcessSignatures.md)
 - [EditorID](IwbMainRecord_EditorID.md)
 - [FormID](IwbMainRecord_FormID.md)
 - [ElementBySignature](IwbContainer_ElementBySignature.md)

@@ -8,7 +8,7 @@ function wbDDSResourceToBitmap(AResourceName: string; ABitmap: TBitmap): Boolean
 
 ## Description
 
-Converts a DDS texture stored in a BSA or BA2 archive directly to a Windows bitmap. This is a convenience wrapper that opens the resource data and calls wbDDSDataToBitmap internally.
+Opens a DDS with an empty container name, the same last-loaded match as [ResourceOpenData](IwbResource_ResourceOpenData.md), and passes the bytes to [wbDDSDataToBitmap](IwbResource_wbDDSDataToBitmap.md). A missing file yields empty bytes and this function returns False.
 
 ## Parameters
 
@@ -43,4 +43,4 @@ end;
 
 - [wbDDSDataToBitmap](IwbResource_wbDDSDataToBitmap.md)
 - [wbDDSStreamToBitmap](IwbResource_wbDDSStreamToBitmap.md)
-- [ResourceOpenData](IwbContainer_ResourceOpenData.md)
+- [ResourceOpenData](IwbResource_ResourceOpenData.md)

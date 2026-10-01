@@ -8,15 +8,17 @@ procedure wbGetUVRangeTexturesList(AMeshes: TStrings; ATextures: TStrings; AUVRa
 
 ## Description
 
-Analyzes a list of mesh files and builds a list of textures that use UV coordinates exceeding a specified range. This is useful for identifying tiling textures used in LOD generation.
+Builds the texture list used for an LOD atlas. For each mesh, a shape whose UV coordinates all stay inside `-AUVRange` to `AUVRange` contributes its diffuse texture. A shape with any UV outside that range is skipped, so tiled shapes are left out. UV values outside `-100` to `100` are ignored as bad data and do not count as tiled.
+
+A `.dds` entry in `AMeshes` is added as-is and marked as a billboard. Other names are resolved as mesh resources. A missing mesh is skipped. Texture names are normalized, and a name already in `ATextures` is not added again. A nil list returns without doing anything.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AMeshes | TStrings | String list containing paths to mesh files to analyze |
-| ATextures | TStrings | Output string list to receive texture paths that exceed the UV range |
-| AUVRange | Single | The UV range threshold to check against |
+| AMeshes | TStrings | Mesh paths to scan, or a `.dds` path to add as a billboard |
+| ATextures | TStrings | List that receives textures from shapes inside the UV range |
+| AUVRange | Single | Absolute UV limit. A coordinate past `-AUVRange` or `AUVRange` drops that shape |
 
 ## Returns
 
@@ -34,10 +36,9 @@ begin
     meshList.Add('meshes\landscape\mountains\mountain01.nif');
     meshList.Add('meshes\landscape\rocks\rock01.nif');
 
-    // Find textures with UV > 1.0 (tiling textures)
     wbGetUVRangeTexturesList(meshList, textureList, 1.0);
 
-    AddMessage('Found ' + IntToStr(textureList.Count) + ' tiling textures');
+    AddMessage('Textures on shapes inside UV 1.0: ' + IntToStr(textureList.Count));
   finally
     meshList.Free;
     textureList.Free;

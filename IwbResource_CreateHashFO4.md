@@ -3,12 +3,12 @@
 ## Syntax
 
 ```pascal
-function CreateHashFO4(AFileName: string): UInt64;
+function CreateHashFO4(AFileName: string): Cardinal;
 ```
 
 ## Description
 
-Creates a Fallout 4-specific hash value for a given filename. This hash function is used by Fallout 4's BA2 archive format for file identification and resource lookups.
+Calculates the BA2 filename hash used by Fallout 4. The path is lowercased and `/` is turned into `\` before the hash. Letter case and slash style in the argument do not change the result. [bscrc32](IwbResource_bscrc32.md) hashes the string as written and does not do that.
 
 ## Parameters
 
@@ -18,18 +18,18 @@ Creates a Fallout 4-specific hash value for a given filename. This hash function
 
 ## Returns
 
-Returns a UInt64 value representing the Fallout 4-specific hash of the filename.
+Returns the hash as a `Cardinal`.
 
 ## Example
 
 ```pascal
 var
   resourceName: string;
-  hash: UInt64;
+  hash: Cardinal;
 begin
   resourceName := 'textures\landscape\grass01.dds';
   hash := CreateHashFO4(resourceName);
-  AddMessage('FO4 hash: ' + IntToHex(hash, 16));
+  AddMessage('FO4 hash: ' + IntToHex(hash, 8));
 end;
 ```
 

@@ -42,7 +42,8 @@ end;
 
 ## See Also
 
-- [IwbGroupRecord Interface](IwbGroupRecord.md)
-- [Group Types Reference](GroupTypes.md)
+- [ChildrenOf](IwbGroupRecord_ChildrenOf.md)
+- [GroupLabel](IwbGroupRecord_GroupLabel.md)
+- [GroupType](IwbGroupRecord_GroupType.md)
 
 

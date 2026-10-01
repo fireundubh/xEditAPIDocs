@@ -8,30 +8,34 @@ function FileByLoadOrder(ALoadOrder: integer): IwbFile;
 
 ## Description
 
-Returns the plugin at `ALoadOrder` in the array of loaded files
+Returns the loaded file whose load order equals `ALoadOrder`.
 
-To pass a hexadecimal load order as an argument to this function, convert the string to an integer.
+`ALoadOrder` must be a number, and it must be less than the number of loaded files. Otherwise the call raises an invalid-argument error. A negative number does not raise. It returns nil, because no file has that load order. A number inside that range also returns nil when no loaded file uses it as its load order.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ALoadOrder | integer | The load order position of the file to retrieve |
+| ALoadOrder | integer | Load order to find. Must be less than the number of loaded files |
 
 ## Returns
 
-Returns the file at the specified load order position as an IwbFile interface.
+The `IwbFile` with that load order, or nil when none has it.
 
 ## Example
 
 ```pascal
-sLoadOrderFromHexID := Copy(AHexFormID, 1, 2);
-f := FileByLoadOrder(StrToInt('$' + sLoadOrderFromHexID));
-r := RecordByFormID(f, StrToInt('$' + AHexFormID), True);
+var
+  f: IwbFile;
+begin
+  f := FileByLoadOrder(0);
+  if Assigned(f) then
+    AddMessage(GetFileName(f));
+end;
 ```
 
 ## See Also
 
+- [FileByIndex](Global_FileByIndex.md)
 - [FileByName](Global_FileByName.md)
-
-
+- [FileCount](Global_FileCount.md)

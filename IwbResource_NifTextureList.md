@@ -8,7 +8,7 @@ function NifTextureList(AData: TBytes; AList: TStrings): Boolean;
 
 ## Description
 
-Extracts all texture file paths referenced by a NIF (NetImmerse File Format) mesh file and adds them to a string list. This function parses the NIF binary structure and identifies all texture resources used by the mesh.
+Clears `AList` and fills it with texture paths from BSShaderTextureSet and BSEffectShaderProperty blocks. Empty paths are removed. A nil list or an empty `AData` returns False. A NIF that loads returns True even when it has no textures.
 
 ## Parameters
 
@@ -19,7 +19,7 @@ Extracts all texture file paths referenced by a NIF (NetImmerse File Format) mes
 
 ## Returns
 
-Returns True if the NIF was successfully parsed and texture paths were extracted, False otherwise.
+True when the NIF loaded. False when `AList` is nil, `AData` is empty, or the NIF did not load.
 
 ## Example
 

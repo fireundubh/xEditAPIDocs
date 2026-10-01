@@ -8,7 +8,7 @@ function wbCRC32File(AFileName: string): Cardinal;
 
 ## Description
 
-Calculates a standard CRC32 checksum for a file on disk. This function reads the entire file and computes its checksum for data integrity verification.
+Calculates a CRC32 checksum for a file on disk. Returns 0 when the file does not exist. A path that exists but cannot be read raises.
 
 ## Parameters
 
@@ -40,4 +40,3 @@ end;
 
 - [wbCRC32Data](IwbResource_wbCRC32Data.md)
 - [wbCRC32Resource](IwbResource_wbCRC32Resource.md)
-- [wbMD5File](IwbResource_wbMD5File.md)

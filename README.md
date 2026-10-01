@@ -35,10 +35,13 @@ _File management, messaging, and utilities_
 - [AddMessage](Global_AddMessage.md) - Log message to console
 - [ClearMessages](Global_ClearMessages.md) - Clear message log
 
+**Script execution:**
+- [ScriptProcessSignatures](Global_ScriptProcessSignatures.md) - Limit `Process` to listed record signatures
+
 **Utilities:**
 - [GetRecordDefNames](Global_GetRecordDefNames.md) - Get all record type signatures
 - [IntToHex64](Global_IntToHex64.md) - Convert Int64 to hex string
-- [JumpTo](Global_JumpTo.md) - Navigate UI to element
+- [JumpTo](Global_JumpTo.md) - Select a main record in the UI
 - [ObjectToElement](Global_ObjectToElement.md) - Convert variant to IwbElement
 - [FullPathToFileName](Global_FullPathToFileName.md) - Extract filename from path
 
@@ -326,8 +329,8 @@ _Interface for record groups (GRUP records)_
 _Interface for BSA/BA2 archive access_
 
 - [ResourceContainerList](IwbResource_ResourceContainerList.md) - Get all resource containers
-- [ResourceCount](IwbResource_ResourceCount.md) - Count resources in folder
-- [ResourceList](IwbResource_ResourceList.md) - List resources in folder
+- [ResourceCount](IwbResource_ResourceCount.md) - Count containers that contain a file
+- [ResourceList](IwbResource_ResourceList.md) - List resource names in a container
 - [ResourceExists](IwbResource_ResourceExists.md) - Check if resource exists
 - [ResourceOpenData](IwbResource_ResourceOpenData.md) - Read resource data
 - [ResourceCopy](IwbResource_ResourceCopy.md) - Extract resource to disk

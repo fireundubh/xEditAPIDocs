@@ -8,36 +8,35 @@ function wbSHA1File(AFileName: string): string;
 
 ## Description
 
-Calculates a SHA-1 hash for a file on disk and returns it as a hexadecimal string. This function reads the entire file and computes its SHA-1 hash for data integrity verification.
+`wbSHA1File` is not registered. The adapter procedure and its `AddFunction` line are commented out, so a script that calls this name fails as an unknown identifier. Use [wbCRC32File](IwbResource_wbCRC32File.md) for a checksum of a file on disk.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFileName | string | The full path to the file to calculate the SHA-1 hash for |
+| AFileName | string | Not available. The commented adapter would have hashed this path |
 
 ## Returns
 
-Returns a string containing the hexadecimal SHA-1 hash of the file.
+Not available. The commented adapter would have returned a hexadecimal string.
 
 ## Example
 
 ```pascal
 var
   pluginPath: string;
-  hash: string;
+  checksum: Cardinal;
 begin
   pluginPath := DataPath + 'MyMod.esp';
-
   if FileExists(pluginPath) then begin
-    hash := wbSHA1File(pluginPath);
-    AddMessage('Plugin SHA-1: ' + hash);
+    checksum := wbCRC32File(pluginPath);
+    AddMessage(IntToHex(checksum, 8));
   end;
 end;
 ```
 
 ## See Also
 
+- [wbCRC32File](IwbResource_wbCRC32File.md)
 - [wbSHA1Data](IwbResource_wbSHA1Data.md)
 - [wbMD5File](IwbResource_wbMD5File.md)
-- [wbCRC32File](IwbResource_wbCRC32File.md)
