@@ -10,7 +10,9 @@ procedure SetIsDeleted(ARecord: IwbMainRecord; AFlag: boolean);
 
 Sets or clears the Deleted flag in the record's header.
 
-This function assigns to the IsDeleted property, which modifies a flag bit in the record header. Setting this to true marks the record as deleted (ignored by the game but preserved for reference tracking). Setting to false undeletes the record. The change takes effect immediately in memory but must be saved to persist. Prefer this over Remove when you want to preserve the record structure for dependency tracking.
+Setting `AFlag` to `True` sets the deleted flag and removes the record's subrecords. When the game mode is `gmFO4` or later in that order (Fallout 4, Skyrim SE, and the modes after them; not Skyrim LE), a resolved base-object link is kept. The record stays in the file.
+
+Setting `AFlag` to `False` clears the flag and adds required subrecords. If `ARecord` is an override, values are copied from the nearest earlier record in the chain that is not deleted and not partial, when that record's file is a master of this file. Otherwise they are copied from the master, if the master itself is not deleted and not partial.
 
 ## Parameters
 
@@ -18,6 +20,10 @@ This function assigns to the IsDeleted property, which modifies a flag bit in th
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to set the Deleted flag on |
 | AFlag | boolean | Whether to set (True) or clear (False) the Deleted flag |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 

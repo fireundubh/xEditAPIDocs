@@ -29,19 +29,17 @@ Returns a new `TwbFUZFile` instance ready for loading or creating FUZ audio+anim
 ```pascal
 var
   fuzFile: TwbFUZFile;
+  xwm: TdfElement;
 begin
   fuzFile := TwbFUZFile.Create;
   try
-    // Load existing dialogue FUZ file
     fuzFile.LoadFromFile('Sound\Voice\Skyrim.esm\MaleNord\DialogueWhiterun_0001A234.fuz');
 
-    // Access embedded data
-    AddMessage('Audio size: ' + fuzFile.ElementByName('Audio Data Size', True).EditValue);
-    AddMessage('Lip data size: ' + fuzFile.ElementByName('Lip Data Size', True).EditValue);
+    AddMessage('LIP size: ' + fuzFile.EditValues['LIP Size']);
 
-    // Export audio data for editing
-    // (Note: actual export would require additional processing)
-    AddMessage('Audio format: XWM compressed');
+    xwm := fuzFile.ElementByName('XWM Data', True);
+    if Assigned(xwm) then
+      AddMessage('XWM bytes: ' + IntToStr(xwm.DataSize));
   finally
     fuzFile.Free;
   end;

@@ -6,15 +6,15 @@
 procedure EndUpdate;
 ```
 
+Access via: `element.EndUpdate`
+
 ## Description
 
-Ends a batch update operation, resuming change notifications and callbacks.
+Ends an update and lets value and text callbacks run again.
 
-The EndUpdate method marks the end of an update batch started with BeginUpdate. Once called (and if this was the outermost BeginUpdate/EndUpdate pair), the element exits the update state and any deferred validations or callbacks can execute.
+EndUpdate clears the updating flag set by BeginUpdate. It is not a nesting counter: one call clears the flag even if BeginUpdate ran more than once. Value and text callbacks run again after the flag is clear.
 
-If BeginUpdate was called multiple times (nested), EndUpdate must be called the same number of times before the element fully exits the update state.
-
-Always call EndUpdate in a finally block to ensure the update state is properly cleared even if an exception occurs during modifications.
+Always call EndUpdate in a finally block so the flag is cleared if an exception occurs during modifications.
 
 This method has no return value.
 
@@ -30,14 +30,14 @@ This method does not return a value.
 
 ```pascal
 var
-    element: TdfElement;
+    element, child: TdfElement;
     i: Integer;
 begin
     element.BeginUpdate;
     try
-        // Make multiple changes efficiently
-        for i := 0 to 99 do begin
-            element[i].NativeValue := i * 100;
+        for i := 0 to Pred(element.Count) do begin
+            child := element[i];
+            child.NativeValue := i * 100;
         end;
     finally
         // Always call EndUpdate in finally block

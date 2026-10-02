@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function ElementByPath(const aPath: string; aEnabledOnly: Boolean = True): TdfElement;
+function ElementByPath(const aPath: string; aEnabledOnly: Boolean): TdfElement;
 ```
+
+Access via: `element.ElementByPath(Path, EnabledOnly)`
 
 ## Description
 
@@ -12,7 +14,7 @@ Navigates to and returns the descendant element at the specified path.
 
 The ElementByPath method traverses the element hierarchy using a path string with backslash separators. It can navigate through multiple levels of the tree in a single call. Array elements are accessed using bracket notation with zero-based indices (e.g., "[0]", "[15]").
 
-The aEnabledOnly parameter controls whether to navigate only through enabled elements (default) or include disabled ones. In most cases, you should use the default value of True.
+Both arguments are required. aEnabledOnly is not optional: pass True to follow only enabled elements, or False to include disabled elements.
 
 If any part of the path cannot be resolved, returns nil. The path is case-sensitive for element names.
 
@@ -21,7 +23,7 @@ If any part of the path cannot be resolved, returns nil. The path is case-sensit
 | Name | Type | Description |
 |------|------|-------------|
 | aPath | string | The path to navigate using backslash separators (e.g., "Header\Version" or "Blocks\[0]\Name") |
-| aEnabledOnly | Boolean | If True (default), navigate only through enabled elements; if False, include disabled elements |
+| aEnabledOnly | Boolean | Required. If True, navigate only through enabled elements; if False, include disabled elements |
 
 ## Returns
 
@@ -31,20 +33,20 @@ Returns the TdfElement at the specified path, or nil if the path is invalid.
 
 ```pascal
 var
-    nifFile, version, firstBlock, translation: TdfElement;
+    nifFile, version, firstBlock, blockType, translation: TdfElement;
 begin
-    // Navigate to nested elements
-    version := nifFile.ElementByPath('Header\Version');
+    version := nifFile.ElementByPath('Header\Version', True);
     if Assigned(version) then
         AddMessage('NIF Version: ' + version.EditValue);
 
-    // Navigate through arrays
-    firstBlock := nifFile.ElementByPath('Blocks\[0]');
-    if Assigned(firstBlock) then
-        AddMessage('First block type: ' + firstBlock.ElementByName('Block Type').EditValue);
+    firstBlock := nifFile.ElementByPath('Blocks\[0]', True);
+    if Assigned(firstBlock) then begin
+        blockType := firstBlock.ElementByName('Block Type', True);
+        if Assigned(blockType) then
+            AddMessage('First block type: ' + blockType.EditValue);
+    end;
 
-    // Deep navigation
-    translation := nifFile.ElementByPath('Blocks\[0]\Translation\X');
+    translation := nifFile.ElementByPath('Blocks\[0]\Translation\X', True);
     if Assigned(translation) then
         translation.NativeValue := 100.0;
 end;

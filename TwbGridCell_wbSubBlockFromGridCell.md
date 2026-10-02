@@ -8,11 +8,9 @@ function wbSubBlockFromGridCell(GridCell: TwbGridCell): TwbGridCell;
 
 ## Description
 
-Converts a grid cell coordinate to its corresponding sub-block grid cell coordinate.
+Converts an exterior cell grid coordinate to the sub-block grid coordinate that contains it.
 
-In Bethesda's game engines, the worldspace is hierarchically organized into blocks and sub-blocks for efficient LOD (Level of Detail) management and rendering optimization. Sub-blocks are finer subdivisions within the larger block structure. This function calculates the sub-block coordinate for a given grid cell, which is used in LOD generation and distant terrain management.
-
-Sub-blocks are typically used for organizing precombined meshes, distant LOD objects, and optimizing the streaming of world data.
+Each sub-block axis is the cell axis divided by 8, and a negative coordinate that is not an exact multiple is rounded toward negative infinity. A sub-block is coarser than a cell and finer than a block. Exterior cell groups in the plugin use this coordinate as the sub-block. Pass the result to `wbBlockFromSubBlock` to get the parent block.
 
 ## Parameters
 
@@ -28,22 +26,17 @@ Returns a TwbGridCell representing the sub-block coordinate.
 
 ```pascal
 var
-  Cell: TwbGridCell;
-  SubBlock: TwbGridCell;
-  Block: TwbGridCell;
+  Cell, SubBlock, Block: TwbGridCell;
 begin
-  // Get grid cell from an exterior cell record
-  Cell := GetGridCell(cellRecord);
+  if Assigned(e) and (Signature(e) = 'CELL') then begin
+    Cell := GetGridCell(e);
+    SubBlock := wbSubBlockFromGridCell(Cell);
+    Block := wbBlockFromSubBlock(SubBlock);
 
-  // Convert to sub-block coordinate
-  SubBlock := wbSubBlockFromGridCell(Cell);
-
-  // Also get parent block for comparison
-  Block := wbBlockFromSubBlock(SubBlock);
-
-  AddMessage(Format('Grid cell [%d, %d]', [Cell.x, Cell.y]));
-  AddMessage(Format('  Sub-block: [%d, %d]', [SubBlock.x, SubBlock.y]));
-  AddMessage(Format('  Block: [%d, %d]', [Block.x, Block.y]));
+    AddMessage(Format('Grid cell [%d, %d]', [Cell.x, Cell.y]));
+    AddMessage(Format('  Sub-block: [%d, %d]', [SubBlock.x, SubBlock.y]));
+    AddMessage(Format('  Block: [%d, %d]', [Block.x, Block.y]));
+  end;
 end;
 ```
 

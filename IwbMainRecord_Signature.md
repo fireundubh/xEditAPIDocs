@@ -10,7 +10,7 @@ function Signature(ARecord: IwbMainRecord): string;
 
 Returns the 4-character record type signature.
 
-This function retrieves the Signature property, which identifies the record type (e.g., "WEAP" for weapons, "NPC_" for NPCs, "ARMA" for armor addons). The signature determines which definition template the record uses and what fields it contains. Returns an empty string for invalid records. Signatures are always exactly 4 characters, padded with underscores if needed.
+The signature is the record type stored on the record, such as `WEAP` or `NPC_`. It selects the definition for the record. Returns an empty string when `ARecord` does not carry a signature.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ This function retrieves the Signature property, which identifies the record type
 
 ## Returns
 
-Returns the 4-character signature of the record as a string.
+Returns the record signature, or an empty string when `ARecord` has none.
 
 ## Example
 

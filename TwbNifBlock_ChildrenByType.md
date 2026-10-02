@@ -4,10 +4,10 @@
 
 ```pascal
 procedure ChildrenByType(ABlockType: string; AList: TList);
-procedure ChildrenByType(ABlockType: string; AList: TList; AInherited: Boolean);
+procedure ChildrenByType(ABlockType: string; AInherited: Boolean; AList: TList);
 ```
 
-**Access via:** `block.ChildrenByType(ABlockType, AList)` or `block.ChildrenByType(ABlockType, AList, Inherited)`
+**Access via:** `block.ChildrenByType(ABlockType, AList)` or `block.ChildrenByType(ABlockType, AInherited, AList)`
 
 ## Description
 
@@ -22,8 +22,8 @@ The list must be created before calling this method and should be freed by the c
 | Name | Type | Description |
 |------|------|-------------|
 | ABlockType | string | The block type to search for |
-| AList | TList | The list to populate with matching blocks |
-| AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
+| AInherited | Boolean | Optional. Second argument of the three-argument form. If True, include inherited types. Omitted in the two-argument form (exact match) |
+| AList | TList | The list to populate with matching blocks. Second argument when AInherited is omitted; third argument when it is passed |
 
 ## Returns
 
@@ -44,11 +44,11 @@ begin
   try
     nif.LoadFromFile('meshes\architecture\solitude\scastle01.nif');
 
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
 
     if Assigned(rootNode) then begin
-      // Find all geometry children (including inherited types)
-      rootNode.ChildrenByType('NiTriBasedGeom', geometryList, True);
+      // Find all NiAVObject children (including inherited types)
+      rootNode.ChildrenByType('NiAVObject', True, geometryList);
 
       AddMessage('Found ' + IntToStr(geometryList.Count) + ' geometry children:');
       for i := 0 to geometryList.Count - 1 do begin

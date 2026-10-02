@@ -6,6 +6,8 @@
 function Create(): TwbNifFile;
 ```
 
+Access via: `TwbNifFile.Create`
+
 ## Description
 
 Creates a new empty TwbNifFile object. This is the constructor for the NIF file class and must be called before loading or creating NIF data.
@@ -39,7 +41,7 @@ begin
     AddMessage('Loaded NIF with ' + IntToStr(nif.BlocksCount) + ' blocks');
 
     // Process the NIF...
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
     if Assigned(rootNode) then
       AddMessage('Root node: ' + rootNode.EditValues['Name']);
 

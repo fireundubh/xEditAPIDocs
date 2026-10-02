@@ -8,7 +8,9 @@ procedure SetIsPersistent(ARecord: IwbMainRecord; AFlag: boolean);
 
 ## Description
 
-Flags `ARecord` as Persistent when `AFlag` is `True` and otherwise when `AFlag` is `False`
+Flags `ARecord` as Persistent when `AFlag` is `True` and otherwise when `AFlag` is `False`.
+
+A reference that already sits in a cell child group may be moved when the flag changes. Persistent references go to the persistent children group. Clearing the flag places a visible-when-distant reference in the distant children group, unless distant references are kept with temporary children, and otherwise places it in the temporary group.
 
 ## Parameters
 
@@ -16,6 +18,10 @@ Flags `ARecord` as Persistent when `AFlag` is `True` and otherwise when `AFlag` 
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to set the Persistent flag on |
 | AFlag | boolean | Whether to set (True) or clear (False) the Persistent flag |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 

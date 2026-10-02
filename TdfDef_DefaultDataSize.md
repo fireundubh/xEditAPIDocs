@@ -6,6 +6,8 @@
 property DefaultDataSize: Integer;
 ```
 
+Access via: `def.DefaultDataSize`
+
 ## Description
 
 Returns the default size in bytes that elements created from this definition will occupy in binary data.

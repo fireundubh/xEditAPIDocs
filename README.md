@@ -87,14 +87,13 @@ _Base interface for all plugin data structures (records, fields, etc.)_
 - [SetEditValue](IwbElement_SetEditValue.md) - Set editable value
 - [SetNativeValue](IwbElement_SetNativeValue.md) - Set native value
 - [GetSummary](IwbElement_GetSummary.md) - Get summary string
-- [SortKey](IwbElement_SortKey.md) - Get sort key
+- [SortKey](IwbElement_SortKey.md) - Get the string used to sort an element
 
 **Navigation:**
 - [GetContainer](IwbElement_GetContainer.md) - Get parent container
 - [GetFile](IwbElement_GetFile.md) - Get containing file
 - [ContainingMainRecord](IwbElement_ContainingMainRecord.md) - Get parent record
 - [LinksTo](IwbElement_LinksTo.md) - Get referenced element
-- [SortOrderOf](IwbElement_SortOrderOf.md) - Get element sort order index
 
 **State Management:**
 - [GetElementState](IwbElement_GetElementState.md) - Get element state flags
@@ -173,7 +172,6 @@ _Interface for elements that contain child elements (records, structs, arrays)_
 - [RemoveElement](IwbContainer_RemoveElement.md) - Remove child element
 - [RemoveByIndex](IwbContainer_RemoveByIndex.md) - Remove by index
 - [ReverseElements](IwbContainer_ReverseElements.md) - Reverse child order
-- [CopyByPath](IwbContainer_CopyByPath.md) - Copy element to path in container
 - [IndexOf](IwbContainer_IndexOf.md) - Get child index
 
 **Batch Operations:**
@@ -208,10 +206,10 @@ _Interface for ESP/ESM/ESL plugin files_
 - [GetIsLight](IwbFile_GetIsLight.md) / [SetIsLight](IwbFile_SetIsLight.md) - Light flag (SSE)
 - [GetIsMedium](IwbFile_GetIsMedium.md) / [SetIsMedium](IwbFile_SetIsMedium.md) - Medium flag
 - [GetIsSmall](IwbFile_GetIsSmall.md) / [SetIsSmall](IwbFile_SetIsSmall.md) - Small flag
-- [CanBeESL](IwbFile_CanBeESL.md) - Check if can be ESL
-- [CanBeLight](IwbFile_CanBeLight.md) - Check if can be light
-- [CanBeMedium](IwbFile_CanBeMedium.md) - Check if can be medium
-- [CanBeSmall](IwbFile_CanBeSmall.md) - Check if can be small
+- [CanBeESL](IwbFile_CanBeESL.md) - Load-order slot is light
+- [CanBeLight](IwbFile_CanBeLight.md) - Load-order slot is light
+- [CanBeMedium](IwbFile_CanBeMedium.md) - Load-order slot is medium
+- [CanBeSmall](IwbFile_CanBeSmall.md) - Load-order slot is light
 
 **Masters:**
 - [MasterCount](IwbFile_MasterCount.md) - Get master count

@@ -27,12 +27,18 @@ Returns `True` if the record is flagged as Persistent, `False` otherwise.
 ```pascal
 // Example 1: Check if reference is always loaded
 var
+  cellElement: IwbElement;
   cell: IwbMainRecord;
 begin
   if Assigned(e) and (Signature(e) = 'REFR') then begin
     if GetIsPersistent(e) then begin
-      cell := GetElementLinksTo(e, 'Cell');
-      AddMessage(Format('%s in %s is persistent', [Name(e), EditorID(cell)]));
+      cellElement := ElementByPath(e, 'Cell');
+      if Assigned(cellElement) then
+        cell := LinksTo(cellElement);
+      if Assigned(cell) then
+        AddMessage(Format('%s in %s is persistent', [Name(e), EditorID(cell)]))
+      else
+        AddMessage(Format('%s is persistent', [Name(e)]));
       AddMessage('This reference stays loaded and can be accessed by scripts');
     end else begin
       AddMessage(Format('%s is temporary (unloads with cell)', [Name(e)]));

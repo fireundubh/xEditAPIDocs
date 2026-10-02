@@ -6,6 +6,8 @@
 property EditValues[const aPath: string]: string;
 ```
 
+Access via: `element.EditValues['Header\Version']`
+
 ## Description
 
 Gets or sets the edit value (human-readable string) of a child element specified by path.

@@ -20,7 +20,7 @@ Removes and returns the element at the specified index in the container.
 
 ## Returns
 
-Returns the removed element as an IwbElement interface.
+The removed element, or nil if the index is out of range. If the argument is not a container, the result is unassigned. `AMarkModified` is required.
 
 ## Example
 
@@ -65,7 +65,7 @@ end;
 // Example 3: Remove multiple elements by index (reverse iteration)
 var
   effects: IwbContainer;
-  removed: IwbElement;
+  removed, effect: IwbElement;
   i, count: integer;
   magnitude: string;
 begin
@@ -77,11 +77,14 @@ begin
       try
         // Remove all effects with magnitude 0 (iterate backwards to avoid index shift issues)
         for i := count - 1 downto 0 do begin
-          magnitude := GetElementEditValue(ElementByIndex(effects, i), 'EFIT\Magnitude');
-          if magnitude = '0' then begin
-            removed := RemoveByIndex(effects, i, False);
-            if Assigned(removed) then
-              AddMessage(Format('Removed effect at index %d', [i]));
+          effect := ElementByIndex(effects, i);
+          if Assigned(effect) then begin
+            magnitude := GetElementEditValues(effect, 'EFIT\Magnitude');
+            if magnitude = '0' then begin
+              removed := RemoveByIndex(effects, i, False);
+              if Assigned(removed) then
+                AddMessage(Format('Removed effect at index %d', [i]));
+            end;
           end;
         end;
       finally

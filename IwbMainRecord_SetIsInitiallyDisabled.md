@@ -17,6 +17,10 @@ Flags `ARecord` as Initially Disabled when `AFlag` is `True` and otherwise when 
 | ARecord | IwbMainRecord | The main record to set the Initially Disabled flag on |
 | AFlag | boolean | Whether to set (True) or clear (False) the Initially Disabled flag |
 
+## Returns
+
+Returns nothing.
+
 ## Example
 
 ```pascal

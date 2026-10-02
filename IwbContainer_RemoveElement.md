@@ -17,11 +17,11 @@ This function calls the container's RemoveElement method with flexible input han
 | Name | Type | Description |
 |------|------|-------------|
 | AContainer | IwbContainer | The container to remove the element from |
-| AChild | Variant | The element or element name to remove |
+| AChild | Variant | An index (integer), a path or name (string), or an element. An index or element reference marks the container modified. A string removes by path and does not take a modified flag |
 
 ## Returns
 
-Returns the removed element as an IwbElement interface.
+The removed element, or nil if it was not found or the index is out of range. If the argument is not a container, the result is unassigned. Other Variant types are ignored and leave the result unassigned.
 
 ## Example
 
@@ -75,7 +75,7 @@ begin
         for i := count - 1 downto 0 do begin
           condition := ElementByIndex(conditions, i);
           if Assigned(condition) then begin
-            functionName := GetElementEditValue(condition, 'CTDA\Function');
+            functionName := GetElementEditValues(condition, 'CTDA\Function');
             if functionName = 'GetItemCount' then begin
               removedCondition := RemoveElement(conditions, condition);
               if Assigned(removedCondition) then

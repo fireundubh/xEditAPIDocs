@@ -10,7 +10,7 @@ procedure InsertElement(AContainer: IwbContainer; AIndex: Integer; AElement: Iwb
 
 Inserts a new element at the specified index position in the container.
 
-This procedure creates a new element with the given signature and inserts it at the specified index. All existing elements at and after the index are shifted right.
+Inserts an existing element at `AIndex`. The call does not create an element from a signature. Elements at and after the index shift toward the end. An index below 0 is treated as 0, and an index past the end appends. If `AElement` is not an element, nothing is inserted. This procedure returns nothing.
 
 ## Parameters
 
@@ -57,8 +57,8 @@ begin
       // Create new condition
       newCondition := Add(conditions, 'Condition', True);
       if Assigned(newCondition) then begin
-        SetElementEditValue(newCondition, 'CTDA\Type', '10000000');
-        SetElementEditValue(newCondition, 'CTDA\Comparison Value', '1');
+        SetElementEditValues(newCondition, 'CTDA\Type', '10000000');
+        SetElementEditValues(newCondition, 'CTDA\Comparison Value', '1');
 
         // Insert at position 2 (third position)
         insertIndex := 2;

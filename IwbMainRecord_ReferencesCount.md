@@ -8,7 +8,9 @@ function ReferencesCount(ARecord: IwbMainRecord): integer;
 
 ## Description
 
-Returns the number of records linked to by `ARecord`
+Returns the number of records linked to by `ARecord`.
+
+The list belongs to this record, not to its master. The count is 0 until references for this record have been built, and 0 when `ARecord` is not a main record. [BuildRef](IwbElement_BuildRef.md) builds the list.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Returns the number of records linked to by `ARecord`
 
 ## Returns
 
-Returns the number of records this record references as an integer.
+Returns the number of outgoing references as an integer, or 0 when the list has not been built or `ARecord` is not a main record.
 
 ## Example
 
@@ -67,7 +69,7 @@ begin
     refCount := ReferencesCount(e);
 
     if refCount = 0 then
-      AddMessage(Format('%s: No dependencies (standalone record)', [EditorID(e)]))
+      AddMessage(Format('%s: No outgoing references', [EditorID(e)]))
     else
       AddMessage(Format('%s: Has %d dependencies', [EditorID(e), refCount]));
   end;

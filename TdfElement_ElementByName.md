@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-function ElementByName(const aName: string; aEnabledOnly: Boolean = True): TdfElement;
+function ElementByName(const aName: string; aEnabledOnly: Boolean): TdfElement;
 ```
+
+Access via: `element.ElementByName(Name, EnabledOnly)`
 
 ## Description
 
@@ -12,7 +14,7 @@ Searches for and returns the first direct child element with the specified name.
 
 The ElementByName method performs a case-sensitive search through this element's immediate children for an element whose Name property matches the specified string. It does not search recursively through descendants.
 
-The aEnabledOnly parameter controls whether to search only enabled elements (default) or all elements including disabled ones. In most cases, you should use the default value of True to respect element visibility.
+Both arguments are required. aEnabledOnly is not optional: pass True to search only enabled elements, or False to include disabled elements.
 
 If no matching element is found, returns nil.
 
@@ -21,7 +23,7 @@ If no matching element is found, returns nil.
 | Name | Type | Description |
 |------|------|-------------|
 | aName | string | The name of the child element to search for (case-sensitive) |
-| aEnabledOnly | Boolean | If True (default), search only enabled elements; if False, search all elements |
+| aEnabledOnly | Boolean | Required. If True, search only enabled elements; if False, search all elements |
 
 ## Returns
 
@@ -31,14 +33,15 @@ Returns the first matching TdfElement, or nil if not found.
 
 ```pascal
 var
-    nifBlock, translation, children: TdfElement;
+    nifBlock, translation, childX, children: TdfElement;
 begin
-    // Find child by name (enabled only)
-    translation := nifBlock.ElementByName('Translation');
-    if Assigned(translation) then
-        AddMessage('Translation X: ' + translation.Elements['X'].EditValue);
+    translation := nifBlock.ElementByName('Translation', True);
+    if Assigned(translation) then begin
+        childX := translation.Elements['X'];
+        if Assigned(childX) then
+            AddMessage('Translation X: ' + childX.EditValue);
+    end;
 
-    // Find child including disabled elements
     children := nifBlock.ElementByName('Children', False);
     if Assigned(children) then
         AddMessage('Children array found (Count: ' + IntToStr(children.Count) + ')');

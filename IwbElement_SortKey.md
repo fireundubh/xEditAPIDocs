@@ -3,20 +3,19 @@
 ## Syntax
 
 ```pascal
-function SortKey(AElement: IwbElement): string;
+function SortKey(AElement: IwbElement; AExtended: Boolean): string;
 ```
 
 ## Description
 
-Returns a string used for sorting elements.
-
-This function returns a string that can be used to sort elements in a consistent order. The sort key may be different from the element's name and is specifically designed for proper sorting.
+Returns the string xEdit uses when it sorts `AElement`. Both arguments are required. `False` is the normal sort key. `True` asks for the extended key, which some value definitions build differently. A main record's key is its FormID either way.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AElement | IwbElement | The element to get the sort key for |
+| AElement | IwbElement | Element to get the sort key for |
+| AExtended | Boolean | `False` for the normal key, `True` for the extended key |
 
 ## Returns
 
@@ -40,7 +39,7 @@ begin
       for i := 0 to ElementCount(container) - 1 do begin
         element := ElementByIndex(container, i);
         if Assigned(element) then begin
-          sortKey := SortKey(element);
+          sortKey := SortKey(element, False);
           sortKeys.Add(Format('%s=%s', [sortKey, Name(element)]));
         end;
       end;
@@ -89,7 +88,7 @@ begin
       for i := 0 to ElementCount(keywords) - 1 do begin
         kwdElement := ElementByIndex(keywords, i);
         if Assigned(kwdElement) then begin
-          sortKey := SortKey(kwdElement);
+          sortKey := SortKey(kwdElement, False);
           editValue := GetEditValue(kwdElement);
           AddMessage(Format('  [%d] Key: %s, Value: %s',
             [i, sortKey, editValue]));

@@ -3,26 +3,26 @@
 ## Syntax
 
 ```pascal
-function CompareExchangeFormID(ARecord: IwbMainRecord; AOldFormID: TwbFormID; ANewFormID: TwbFormID): Boolean;
+function CompareExchangeFormID(ARecord: IwbMainRecord; AOldFormID: Cardinal; ANewFormID: Cardinal): Boolean;
 ```
 
 ## Description
 
-Attempts to change the Form ID of `ARecord` from `AOldFormID` to `ANewFormID`
+Rewrites FormID values stored inside `ARecord`. Each contained FormID that currently refers to `AOldFormID` is changed to `ANewFormID`. Both arguments are load-order FormIDs, the same kind [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md) returns, not file FormIDs. This does not change `ARecord`'s own FormID; use [SetLoadOrderFormID](IwbMainRecord_SetLoadOrderFormID.md) for that.
 
-Returns `True` if the attempt was successful and `False` otherwise
+Returns `True` if at least one contained FormID changed, and `False` if `ARecord` is a main record and none matched.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ARecord | IwbMainRecord | The record to change the Form ID on |
-| AOldFormID | TwbFormID | The expected current Form ID to compare against |
-| ANewFormID | TwbFormID | The new Form ID to assign if the comparison matches |
+| ARecord | IwbMainRecord | The record whose contained FormIDs are rewritten |
+| AOldFormID | Cardinal | Load-order FormID to find inside `ARecord` |
+| ANewFormID | Cardinal | Load-order FormID to write in its place |
 
 ## Returns
 
-Returns `True` if the Form ID was successfully changed, `False` otherwise.
+Returns `True` if at least one contained FormID changed, `False` if `ARecord` is a main record and none matched.
 
 ## Example
 
@@ -36,7 +36,7 @@ var
 begin
   if Assigned(e) then begin
     oldFormID := GetLoadOrderFormID(e);
-    newFormID := GetNewFormID(GetFile(e));
+    newFormID := FileFormIDtoLoadOrderFormID(GetFile(e), GetNewFormID(GetFile(e)));
 
     refCount := ReferencedByCount(e);
     AddMessage(Format('Updating %d references from %s to %s',
@@ -57,26 +57,20 @@ begin
   end;
 end;
 
-// Example 2: Thread-safe FormID update with verification
+// Example 2: Replace one load-order FormID stored inside the record
 var
-  currentFormID, expectedFormID, newFormID: Cardinal;
+  oldFormID, newFormID: Cardinal;
   success: boolean;
 begin
   if Assigned(e) then begin
-    expectedFormID := $01ABC123;
+    oldFormID := $01ABC123;
     newFormID := $02ABC123;
 
-    currentFormID := GetLoadOrderFormID(e);
-    if currentFormID = expectedFormID then begin
-      success := CompareExchangeFormID(e, expectedFormID, newFormID);
-      if success then
-        AddMessage('FormID updated successfully')
-      else
-        AddMessage('FormID update failed - concurrent modification?');
-    end else begin
-      AddMessage(Format('ERROR: Expected FormID %s but found %s',
-        [IntToHex(expectedFormID, 8), IntToHex(currentFormID, 8)]));
-    end;
+    success := CompareExchangeFormID(e, oldFormID, newFormID);
+    if success then
+      AddMessage('Updated a contained FormID')
+    else
+      AddMessage('No contained FormID matched');
   end;
 end;
 
@@ -84,25 +78,21 @@ end;
 var
   refByRec: IwbMainRecord;
   oldFormID, newFormID: Cardinal;
-  newLoadOrder: byte;
-  i: integer;
 begin
   if Assigned(e) then begin
     oldFormID := GetLoadOrderFormID(e);
-    newLoadOrder := 10;
-    newFormID := (oldFormID and $00FFFFFF) or (newLoadOrder shl 24);
+    newFormID := FileFormIDtoLoadOrderFormID(GetFile(e), GetNewFormID(GetFile(e)));
 
-    // Update all referencing records
+    // Stop if a referencing record does not contain the old FormID.
     while ReferencedByCount(e) > 0 do begin
       refByRec := ReferencedByIndex(e, 0);
-      if Assigned(refByRec) then
-        CompareExchangeFormID(refByRec, oldFormID, newFormID);
+      if not Assigned(refByRec) then
+        Break;
+      if not CompareExchangeFormID(refByRec, oldFormID, newFormID) then
+        Break;
     end;
 
-    // Finally update the record itself
     SetLoadOrderFormID(e, newFormID);
-    AddMessage(Format('Changed load order index from %d to %d',
-      [oldFormID shr 24, newLoadOrder]));
   end;
 end;
 ```

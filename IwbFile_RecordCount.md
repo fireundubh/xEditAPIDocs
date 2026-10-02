@@ -8,26 +8,36 @@ function RecordCount(AFile: IwbFile): Integer;
 
 ## Description
 
-Returns the total number of main records contained in the file.
+Returns how many main records `AFile` contains.
 
-This function retrieves the RecordCount property, which counts all IwbMainRecord instances in the file (excluding groups and file headers). Returns 0 for empty files or invalid inputs. Use with RecordByIndex to iterate through all records in the file. This count includes all record types (WEAP, NPC_, etc.) but not group records.
+The count is the records [RecordByIndex](IwbFile_RecordByIndex.md) can return. Groups and the file header are not included.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to count records in |
+| AFile | IwbFile | The file to count |
 
 ## Returns
 
-Returns the number of records in the file.
+The number of main records, or `0` when `AFile` is not a file.
 
 ## Example
 
 ```pascal
-f := FileByName('Skyrim.esm');
-for i := 0 to Pred(RecordCount(f)) do
-	r := RecordByIndex(f, i);  // IwbMainRecord
+var
+  f: IwbFile;
+  r: IwbMainRecord;
+  i: Integer;
+begin
+  f := FileByName('Skyrim.esm');
+  if Assigned(f) then
+    for i := 0 to Pred(RecordCount(f)) do begin
+      r := RecordByIndex(f, i);
+      if Assigned(r) then
+        AddMessage(Name(r));
+    end;
+end;
 ```
 
 ## See Also
@@ -35,5 +45,3 @@ for i := 0 to Pred(RecordCount(f)) do
 - [RecordByEditorID](IwbFile_RecordByEditorID.md)
 - [RecordByFormID](IwbFile_RecordByFormID.md)
 - [RecordByIndex](IwbFile_RecordByIndex.md)
-
-

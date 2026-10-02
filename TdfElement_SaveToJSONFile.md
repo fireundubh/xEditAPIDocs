@@ -6,6 +6,8 @@
 procedure SaveToJSONFile(const aFileName: string; aCompact: Boolean);
 ```
 
+Access via: `element.SaveToJSONFile(FileName, Compact)`
+
 ## Description
 
 Serializes this element to JSON format and writes it to a file.

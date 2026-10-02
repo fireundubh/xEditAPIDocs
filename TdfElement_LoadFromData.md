@@ -6,6 +6,8 @@
 procedure LoadFromData(const aData: TBytes);
 ```
 
+Access via: `element.LoadFromData(Data)`
+
 ## Description
 
 Loads binary data into this element by deserializing from a byte array.
@@ -33,18 +35,15 @@ This method does not return a value.
 ```pascal
 var
     nifFile: TwbNifFile;
+    headerVersion: TdfElement;
     data: TBytes;
 begin
     nifFile := TwbNifFile.Create;
     try
-        // Load binary data from somewhere
-        // data := GetDataFromSomewhere();
-
-        // Parse the binary data
         nifFile.LoadFromData(data);
-
-        // Access parsed structure
-        AddMessage('NIF Version: ' + nifFile.Elements['Header\Version'].EditValue);
+        headerVersion := nifFile.Elements['Header\Version'];
+        if Assigned(headerVersion) then
+            AddMessage('NIF Version: ' + headerVersion.EditValue);
     finally
         nifFile.Free;
     end;

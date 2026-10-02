@@ -27,13 +27,19 @@ Returns `True` if the record is flagged as Initially Disabled, `False` otherwise
 ```pascal
 // Example 1: Check if placed reference is initially disabled
 var
+  cellElement: IwbElement;
   cell: IwbMainRecord;
 begin
   if Assigned(e) and (Signature(e) = 'REFR') then begin
     if GetIsInitiallyDisabled(e) then begin
-      cell := GetElementLinksTo(e, 'Cell');
-      AddMessage(Format('%s in %s starts disabled',
-        [Name(e), EditorID(cell)]));
+      cellElement := ElementByPath(e, 'Cell');
+      if Assigned(cellElement) then
+        cell := LinksTo(cellElement);
+      if Assigned(cell) then
+        AddMessage(Format('%s in %s starts disabled',
+          [Name(e), EditorID(cell)]))
+      else
+        AddMessage(Format('%s starts disabled', [Name(e)]));
       AddMessage('Must be enabled by script or quest');
     end else begin
       AddMessage(Format('%s is active when cell loads', [Name(e)]));

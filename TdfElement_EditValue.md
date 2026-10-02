@@ -6,6 +6,8 @@
 property EditValue: string;
 ```
 
+Access via: `element.EditValue`
+
 ## Description
 
 Gets or sets the element's value as a human-readable string.

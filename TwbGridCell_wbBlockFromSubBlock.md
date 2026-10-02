@@ -8,9 +8,9 @@ function wbBlockFromSubBlock(GridCell: TwbGridCell): TwbGridCell;
 
 ## Description
 
-Converts a sub-block grid cell coordinate to its parent block grid cell coordinate.
+Converts a sub-block grid coordinate to the block grid coordinate that contains it.
 
-In Bethesda's game engines, the worldspace is hierarchically divided into blocks and sub-blocks for efficient data organization and rendering. This function takes a sub-block coordinate and returns the block-level coordinate that contains it. This is useful when working with LOD (Level of Detail) systems and exterior cell organization, where blocks represent larger regions containing multiple sub-blocks.
+The argument must already be a sub-block, such as the result of `wbSubBlockFromGridCell`. A cell from `wbPositionToGridCell` or `GetGridCell` is not a sub-block. Each block axis is that sub-block axis divided by 4, and a negative coordinate that is not an exact multiple is rounded toward negative infinity. Exterior cell groups in the plugin use this coarser coordinate as the block.
 
 ## Parameters
 
@@ -26,17 +26,18 @@ Returns a TwbGridCell representing the parent block coordinate.
 
 ```pascal
 var
-  SubBlock: TwbGridCell;
-  Block: TwbGridCell;
+  RefPos: TwbVector;
+  Cell, SubBlock, Block: TwbGridCell;
 begin
-  // Get sub-block from a reference position
-  SubBlock := wbPositionToGridCell(GetPosition(refRecord));
+  if Assigned(e) and (Signature(e) = 'REFR') then begin
+    RefPos := GetPosition(e);
+    Cell := wbPositionToGridCell(RefPos);
+    SubBlock := wbSubBlockFromGridCell(Cell);
+    Block := wbBlockFromSubBlock(SubBlock);
 
-  // Convert to parent block coordinate
-  Block := wbBlockFromSubBlock(SubBlock);
-
-  AddMessage(Format('Sub-block [%d, %d] is in block [%d, %d]',
-    [SubBlock.x, SubBlock.y, Block.x, Block.y]));
+    AddMessage(Format('Cell [%d, %d] is in sub-block [%d, %d], block [%d, %d]',
+      [Cell.x, Cell.y, SubBlock.x, SubBlock.y, Block.x, Block.y]));
+  end;
 end;
 ```
 

@@ -8,25 +8,32 @@ function GetIsLight(AFile: IwbFile): Boolean;
 
 ## Description
 
-Checks whether the file has the Light (ESL) flag set.
+Returns whether `AFile` is light.
 
-This function retrieves the IsLight property, which checks the file header flag indicating light plugin status. Light plugins use a special FormID range (FE xxx) and don't consume a full load order slot. Returns false for invalid files. Light status affects FormID assignment and load order counting. Use CanBeLight to check if a file is eligible to be flagged as light.
+[GetIsESL](IwbFile_GetIsESL.md) and [GetIsSmall](IwbFile_GetIsSmall.md) are the same check. In pseudo-light mode this is the pseudo-light state. Otherwise, when the game supports light plugins and `AFile` is a plugin, this is the header light flag. Otherwise it is `False`. It is not the load-order slot. [CanBeLight](IwbFile_CanBeLight.md) tests the slot.
+
+Light plugins use the `FE` FormID range. Returns `False` when `AFile` is not a file.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to check if it is Light |
+| AFile | IwbFile | The file to check |
 
 ## Returns
 
-Returns `True` if the file is Light, `False` otherwise.
+`True` when the check above matches, `False` when it does not or when `AFile` is not a file.
 
 ## Example
 
 ```pascal
-if GetIsLight(f) then
-  AddMessage(GetFileName(f) + ' is light');
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) and GetIsLight(f) then
+    AddMessage(GetFileName(f) + ' is light');
+end;
 ```
 
 ## See Also

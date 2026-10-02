@@ -3,31 +3,40 @@
 ## Syntax
 
 ```pascal
-function RecordByEditorID(AFile: IwbFile; AEditorID: String): IwbMainRecord;
+function RecordByEditorID(AFile: IwbFile; AEditorID: string): IwbMainRecord;
 ```
 
 ## Description
 
-Searches the file for a main record with the specified Editor ID.
+Looks up a main record by EditorID.
 
-This function accesses the RecordByEditorID property, which performs a case-sensitive lookup for records with matching EDID values. Only searches within the specified file, not in masters or other plugins. Returns nil if no record with that Editor ID exists in the file. More efficient than iterating through all records manually.
+The comparison is case-insensitive. The search starts in `AFile`. If `AFile` has no match, it continues through `AFile`'s masters, from the last master toward the first. The record that comes back can be stored in a master rather than in `AFile`.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to search for the record |
-| AEditorID | String | The Editor ID of the record to find |
+| AFile | IwbFile | The file to search, then its masters |
+| AEditorID | string | EditorID to find |
 
 ## Returns
 
-Returns the IwbMainRecord with the matching Editor ID, or nil if not found.
+The matching main record, or nil when `AFile` and its masters have no such EditorID. If `AFile` is not a file, the result is unassigned.
 
 ## Example
 
 ```pascal
-f := FileByName('Skyrim.esm');
-r := RecordByEditorID(f, 'ActionIdle');  // --> ActionIdle [AACT:00013002]
+var
+  f: IwbFile;
+  r: IwbMainRecord;
+begin
+  f := FileByName('Skyrim.esm');
+  if Assigned(f) then begin
+    r := RecordByEditorID(f, 'ActionIdle');
+    if Assigned(r) then
+      AddMessage(Name(r));
+  end;
+end;
 ```
 
 ## See Also
@@ -36,5 +45,3 @@ r := RecordByEditorID(f, 'ActionIdle');  // --> ActionIdle [AACT:00013002]
 - [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md)
 - [RecordByIndex](IwbFile_RecordByIndex.md)
 - [RecordCount](IwbFile_RecordCount.md)
-
-

@@ -120,7 +120,7 @@ begin
     pos := GetPosition(e);
     newZ := pos.z + 100.0; // Raise 100 units
 
-    SetElementEditValue(e, 'DATA\Position\Z', FloatToStr(newZ));
+    SetElementEditValues(e, 'DATA\Position\Z', FloatToStr(newZ));
     AddMessage(Format('%s raised from Z=%f to Z=%f',
       [Name(e), pos.z, newZ]));
   end;

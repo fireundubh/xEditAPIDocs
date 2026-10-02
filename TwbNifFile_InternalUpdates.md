@@ -10,17 +10,11 @@ Access via: `nifFile.InternalUpdates` (read) or `nifFile.InternalUpdates := valu
 
 ## Description
 
-Gets or sets whether internal automatic updates are enabled. When enabled, the NIF file automatically maintains internal data structures and references when blocks are added, removed, or modified.
+Gets or sets whether save-time header maintenance is enabled. The default is True.
 
-Internal updates include:
-- Updating block reference indices when blocks are inserted or deleted
-- Maintaining the header's block count
-- Updating link arrays and reference counts
-- Renumbering blocks to maintain consistency
+When True, saving refreshes the header (block count, block type table, and related header fields). `nfoCollapseLinkArrays` removes None links only while this is also True. Insert, delete, and move still remap block indices when this is False.
 
-Setting this to False can improve performance when making many modifications, but you must manually ensure data consistency. It's recommended to disable internal updates only during batch operations, then re-enable them before saving.
-
-Default value is True.
+Set it False only when you intend to skip that header update. Turn it back on before saving if the header should match the blocks.
 
 This is a read/write property.
 

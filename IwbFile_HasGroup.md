@@ -3,29 +3,38 @@
 ## Syntax
 
 ```pascal
-function HasGroup(AFile: IwbFile; ASignature: String): Boolean;
+function HasGroup(AFile: IwbFile; ASignature: string): Boolean;
 ```
 
 ## Description
 
-Returns `True` if a top-level group whose signature matches `ASignature` exists in `AFile`, and `False` otherwise
+Returns whether `AFile` has a top-level group with signature `ASignature`.
+
+`ASignature` must be at least four characters. A shorter string raises. Only the first four characters are used.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to search for the group |
-| ASignature | String | The signature of the group to find |
+| AFile | IwbFile | The file to search |
+| ASignature | string | Four-character record signature, such as `ARMO` |
 
 ## Returns
 
-Returns `True` if the group exists, `False` otherwise.
+`True` when the group exists, `False` when it does not. If `AFile` is not a file, the result is unassigned.
 
 ## Example
 
 ```pascal
-f := FileByIndex(0);
-if HasGroup(f, 'ARMO') then
-  AddMessage('Skyrim.esm has top-level group: ARMO');
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) and HasGroup(f, 'ARMO') then
+    AddMessage(GetFileName(f) + ' has an ARMO group');
+end;
 ```
 
+## See Also
+
+- [GroupBySignature](IwbFile_GroupBySignature.md)

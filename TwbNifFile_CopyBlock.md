@@ -35,6 +35,7 @@ var
   nif: TwbNifFile;
   original: TwbNifBlock;
   copy: TwbNifBlock;
+  nameElement: TdfElement;
   origIndex: Integer;
 begin
   nif := TwbNifFile.Create;
@@ -55,8 +56,11 @@ begin
       AddMessage('Copy type: ' + copy.BlockType);
 
       // Modify the copy (example)
-      if copy.StringsCount > 0 then
-        copy.Strings[0].EditValue := copy.Strings[0].EditValue + '_Copy';
+      if copy.StringsCount > 0 then begin
+        nameElement := copy.Strings[0];
+        if Assigned(nameElement) then
+          nameElement.EditValue := nameElement.EditValue + '_Copy';
+      end;
 
       nif.SaveToFile('meshes\clutter\pottery\pot01_duplicated.nif');
     end;

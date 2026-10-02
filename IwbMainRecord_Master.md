@@ -8,9 +8,9 @@ function Master(ARecord: IwbMainRecord): IwbMainRecord;
 
 ## Description
 
-Returns the master record that this record directly overrides.
+Returns the master record that `ARecord` overrides.
 
-This function retrieves the Master property, which returns the immediate parent record in the override chain (the record from a higher-priority file that this record modifies). Returns nil if this record is itself a master (not an override of anything). For records with multiple levels of overrides, this returns only the direct parent, not the original master.
+Every override in the chain points at that same master: the record that owns the override list, not the previous override. Calling `Master` on the result returns nil. Returns nil when `ARecord` is itself the master, or when `ARecord` is not a main record. Use [MasterOrSelf](IwbMainRecord_MasterOrSelf.md) when the caller may already be holding the master.
 
 ## Parameters
 
@@ -50,8 +50,8 @@ begin
   if Assigned(e) then begin
     masterRec := Master(e);
     if Assigned(masterRec) then begin
-      masterValue := GetElementEditValue(masterRec, 'DATA\Value');
-      overrideValue := GetElementEditValue(e, 'DATA\Value');
+      masterValue := GetElementEditValues(masterRec, 'DATA\Value');
+      overrideValue := GetElementEditValues(e, 'DATA\Value');
 
       AddMessage(Format('Master value: %s', [masterValue]));
       AddMessage(Format('Override value: %s', [overrideValue]));
@@ -64,27 +64,17 @@ begin
   end;
 end;
 
-// Example 3: Walk the override chain to find original master
+// Example 3: The master is the base record, not the previous override
 var
-  currentRec, masterRec: IwbMainRecord;
-  chain: string;
+  masterRec: IwbMainRecord;
 begin
   if Assigned(e) then begin
-    currentRec := e;
-    chain := GetFileName(GetFile(currentRec));
-
-    // Walk backwards through override chain
-    while Assigned(currentRec) do begin
-      masterRec := Master(currentRec);
-      if Assigned(masterRec) then begin
-        chain := GetFileName(GetFile(masterRec)) + ' -> ' + chain;
-        currentRec := masterRec;
-      end else begin
-        AddMessage('Override chain: ' + chain);
-        AddMessage(Format('Original master in: %s', [GetFileName(GetFile(currentRec))]));
-        Break;
-      end;
-    end;
+    masterRec := Master(e);
+    if Assigned(masterRec) then begin
+      AddMessage(Format('Base master in %s', [GetFileName(GetFile(masterRec))]));
+      AddMessage(Format('Override count on that master: %d', [OverrideCount(masterRec)]));
+    end else
+      AddMessage(EditorID(e) + ' is the master');
   end;
 end;
 
@@ -96,9 +86,9 @@ begin
   if Assigned(e) then begin
     masterRec := Master(e);
     if Assigned(masterRec) then begin
-      masterScript := GetElementEditValue(masterRec, 'VMAD - Virtual Machine Adapter');
+      masterScript := GetElementEditValues(masterRec, 'VMAD - Virtual Machine Adapter');
       if masterScript <> '' then begin
-        SetElementEditValue(e, 'VMAD - Virtual Machine Adapter', masterScript);
+        SetElementEditValues(e, 'VMAD - Virtual Machine Adapter', masterScript);
         AddMessage('Copied script data from master');
       end;
     end;

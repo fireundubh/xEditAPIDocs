@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-property DataType: TdfDataType;
+property DataType: Integer;
 ```
+
+Access via: `element.DataType`
 
 ## Description
 
@@ -22,7 +24,7 @@ This property has no parameters.
 
 ## Returns
 
-Returns the TdfDataType enumeration value indicating the element's data type.
+Returns an integer equal to one of the dft* constants.
 
 ## Example
 

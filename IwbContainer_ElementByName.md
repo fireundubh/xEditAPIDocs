@@ -10,7 +10,7 @@ function ElementByName(AContainer: IwbContainer; AName: string): IwbElement;
 
 Searches the container for a child element with the specified name.
 
-This function accesses the ElementByName property, which searches for an element whose Name property matches the provided string. The search is typically case-sensitive and looks at the element's definition name (e.g., "EDID", "DATA"). Returns nil if no element with that name exists in the container. For nested paths, use ElementByPath instead.
+The comparison is case-insensitive. It matches a direct child's name, then its display name. It does not walk a path; use ElementByPath for that. Returns nil if nothing matches. If the argument is not a container, the result is unassigned.
 
 ## Parameters
 
@@ -21,7 +21,7 @@ This function accesses the ElementByName property, which searches for an element
 
 ## Returns
 
-Returns the element with the specified name as an IwbElement interface.
+The matching direct child, or nil if none matches. If the argument is not a container, the result is unassigned.
 
 ## Example
 

@@ -10,7 +10,7 @@ function BaseRecordID(AReference: IwbMainRecord): Cardinal;
 
 Returns the load order Form ID of the main record linked to the `NAME` subrecord for `AReference`
 
-**Note:** `AReference` must be a main record with the signature `ACHR` (Placed NPC) or `REFR` (Placed Object).
+**Note:** A non-zero result is returned only when the record has a base-object subrecord. That covers placed references (`REFR`, `ACHR`, and the other placed types for the current game). Other records return 0.
 
 ## Parameters
 

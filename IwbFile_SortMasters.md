@@ -8,21 +8,30 @@ procedure SortMasters(AFile: IwbFile);
 
 ## Description
 
-Reorders the master file list to match the current load order sequence.
+Reorders `AFile`'s master list to match the current load order.
 
-This function calls the file's SortMasters method, which sorts the master list entries based on their current load order positions. After sorting, all FormID references are updated to reflect the new master indices, and affected records are marked as modified. Essential after adding masters or when load order has changed. The operation ensures FormID references remain valid after the master list is reordered. May be slow for files with many records.
+For Oblivion and later, FormIDs whose master index changed are updated. If the order does not change, the file is left as it is. A file that is not editable raises. A file that is not a plugin returns without sorting. The change is in memory until the file is saved.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file whose master list should be sorted |
+| AFile | IwbFile | The file whose masters are sorted |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
 ```pascal
-f := FileByName('MyMod.esp');
-SortMasters(f);
+var
+  f: IwbFile;
+begin
+  f := FileByName('MyMod.esp');
+  if Assigned(f) then
+    SortMasters(f);
+end;
 ```
 
 ## See Also
@@ -30,5 +39,3 @@ SortMasters(f);
 - [CleanMasters](IwbFile_CleanMasters.md)
 - [GetMasters](IwbFile_GetMasters.md)
 - [MasterByIndex](IwbFile_MasterByIndex.md)
-
-

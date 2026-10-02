@@ -10,7 +10,7 @@ function ReferencedByIndex(ARecord: IwbMainRecord; AIndex: integer): IwbMainReco
 
 Returns the record at the specified index in the list of records referencing this record.
 
-This function accesses the ReferencedBy property by index, providing array-style access to all records that contain FormID fields pointing to this record. The order is determined internally and may not be meaningful. Use ReferencedByCount to get the valid index range. Returns nil for invalid indices. Ensure BuildRef has been called to populate the reference tracking.
+This function accesses the ReferencedBy list by index. The list is kept on the master, so an override and its master return the same records. Entries are sorted by load-order FormID. Use ReferencedByCount for the valid range. Returns nil for an index out of range, or when `ARecord` is not a main record. Build references before relying on this list.
 
 ## Parameters
 
@@ -31,7 +31,6 @@ var
   placedRef: IwbMainRecord;
   i, count, refCount: integer;
   sig: string;
-  cell: IwbMainRecord;
 begin
   if Assigned(e) then begin
     count := ReferencedByCount(e);
@@ -45,10 +44,7 @@ begin
         sig := Signature(placedRef);
         if (sig = 'REFR') or (sig = 'ACHR') then begin
           Inc(refCount);
-          cell := GetElementLinksTo(placedRef, 'Cell');
-          if Assigned(cell) then
-            AddMessage(Format('  Instance %d: %s in cell %s',
-              [refCount, Name(placedRef), EditorID(cell)]));
+          AddMessage(Format('  Instance %d: %s', [refCount, Name(placedRef)]));
         end;
       end;
     end;

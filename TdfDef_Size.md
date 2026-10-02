@@ -6,15 +6,13 @@
 property Size: Integer;
 ```
 
+Access via: `def.Size`
+
 ## Description
 
-Returns the fixed size constraint for elements created from this definition, if one has been explicitly set.
+Returns the size constraint stored on the definition. This property is read-only from scripts.
 
-The Size property differs from DefaultDataSize in that it represents an explicitly configured size constraint rather than a calculated default. This is primarily used for array definitions where the element count or total byte size is fixed. When Size is set to a non-zero value, it overrides the default size calculation.
-
-For most definitions, this will return 0, indicating that size should be determined dynamically or from DefaultDataSize.
-
-This property is read-only from script context.
+Zero means DefaultDataSize comes from the data type (0 for structs, arrays, and unsized bytes or chars). On an array, a positive Size is a fixed element count: Add and Delete raise, and writing Count has no effect. On bytes or chars, a positive Size is the byte length used as DefaultDataSize. When Size is negative, TdfDef.DefaultDataSize returns -Size (bytes and chars inherit that). On an array, bytes, or chars that width is a count prefix, not the payload length: only a prefix of 1, 2, or 4 bytes loads a stored count, and any other width uses a count of 0. A merge's DefaultDataSize ignores Size.
 
 ## Parameters
 
@@ -22,7 +20,7 @@ This property has no parameters.
 
 ## Returns
 
-Returns the fixed size constraint as an integer. Returns 0 if no explicit size constraint is set.
+Returns the stored size as an integer. The meaning of a non-zero value depends on the definition, as described above.
 
 ## Example
 
@@ -32,10 +30,7 @@ var
     fixedSize: Integer;
 begin
     fixedSize := def.Size;
-    if fixedSize > 0 then
-        AddMessage('Fixed size: ' + IntToStr(fixedSize))
-    else
-        AddMessage('Variable size element');
+    AddMessage('Size: ' + IntToStr(fixedSize));
 end;
 ```
 

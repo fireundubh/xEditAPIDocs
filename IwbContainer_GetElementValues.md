@@ -19,7 +19,7 @@ Returns the string display value of an element in the container by path. Useful 
 
 ## Returns
 
-Returns the display value as a string.
+The display value as a string. An empty string if the path does not exist or the argument is not a container.
 
 ## Example
 

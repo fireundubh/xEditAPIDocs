@@ -8,9 +8,9 @@ function MasterOrSelf(ARecord: IwbMainRecord): IwbMainRecord;
 
 ## Description
 
-Returns the master record overridden by `ARecord`, or the overriding record itself
+Returns the master record overridden by `ARecord`, or `ARecord` itself when `ARecord` is the master.
 
-**Note:** Unlike [Master](IwbMainRecord_Master.md), the return value from this function will always be assigned.
+For a main record the result is never nil. An override returns the base master that owns the override list, and a master returns itself. Returns nil when `ARecord` is not a main record.
 
 ## Parameters
 
@@ -25,14 +25,15 @@ Returns the master IwbMainRecord if the record is an override, or the record its
 ## Example
 
 ```pascal
-// Example 1: Get master record for processing (guaranteed non-nil)
+// Example 1: Get the base master from any record in the chain
 var
   masterRec: IwbMainRecord;
   masterFile: IwbFile;
 begin
   if Assigned(e) then begin
     masterRec := MasterOrSelf(e);
-    // masterRec is always assigned, safe to use
+    if not Assigned(masterRec) then
+      Exit;
     masterFile := GetFile(masterRec);
 
     if Equals(e, masterRec) then
@@ -84,11 +85,11 @@ var
 begin
   if Assigned(e) then begin
     masterRec := MasterOrSelf(e);
-    // No need to check if nil - always assigned
-
-    masterValue := GetElementEditValue(masterRec, 'FULL - Name');
-    if masterValue <> '' then
-      AddMessage(Format('Master name: %s', [masterValue]));
+    if Assigned(masterRec) then begin
+      masterValue := GetElementEditValues(masterRec, 'FULL - Name');
+      if masterValue <> '' then
+        AddMessage(Format('Master name: %s', [masterValue]));
+    end;
   end;
 end;
 ```

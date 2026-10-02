@@ -10,6 +10,8 @@ procedure LoadFromResource(const aContainerName, aFileName: string);
 procedure LoadFromResource(const aFileName: string);
 ```
 
+Access via: `element.LoadFromResource(FileName)` or `element.LoadFromResource(ContainerName, FileName)`
+
 ## Description
 
 Loads binary data from a resource archive (BSA/BA2) by extracting and deserializing the file.

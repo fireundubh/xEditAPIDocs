@@ -6,6 +6,8 @@
 function IndexOf(aElement: TdfElement): Integer;
 ```
 
+Access via: `element.IndexOf(child)`
+
 ## Description
 
 Returns the index of the specified child element within this container.

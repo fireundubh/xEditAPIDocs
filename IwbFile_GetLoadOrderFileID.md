@@ -3,29 +3,40 @@
 ## Syntax
 
 ```pascal
-function GetLoadOrderFileID(AFile: IwbFile): String;
+function GetLoadOrderFileID(AFile: IwbFile): string;
 ```
 
 ## Description
 
-Returns the load order file ID of `AFile` as a string.
+Returns `AFile`'s load-order module slot as a string.
+
+A full plugin is two hex digits (`00`, `0B`). A medium plugin is `FD` plus a space plus two hex digits. A light plugin is `FE` plus a space plus three hex digits.
+
+This is the load-order slot, not a file FormID. [RecordByFormID](IwbFile_RecordByFormID.md) does not take this string.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file whose load order file ID to retrieve |
+| AFile | IwbFile | The file whose slot is needed |
 
 ## Returns
 
-Returns the load order file ID as a string.
+The slot string. Returns `-1` when `AFile` is not a file. A file that has no slot raises.
 
 ## Example
 
 ```pascal
-AddMessage(GetLoadOrderFileID(f));
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) then
+    AddMessage(GetLoadOrderFileID(f));
+end;
 ```
 
 ## See Also
 
 - [GetLoadOrder](IwbFile_GetLoadOrder.md)
+- [RecordByFormID](IwbFile_RecordByFormID.md)

@@ -10,9 +10,7 @@ function MainRecordByEditorID(AGroup: IwbGroupRecord; AEditorID: string): IwbMai
 
 Searches for a main record within a group by its Editor ID.
 
-The function performs a search through the specified group to find a main record matching the given Editor ID. Returns nil if no matching record is found.
-
-Note: This function is not optimized for performance and should be used sparingly, especially with large groups.
+Only direct children that are main records are examined. Nested groups are not opened. The Editor ID comparison is case-insensitive. Returns nil if nothing matches or the argument is not a group. The scan is linear, so it is a poor choice for a large top-level group.
 
 ## Parameters
 
@@ -29,13 +27,19 @@ Returns the IwbMainRecord with the matching Editor ID, or nil if not found.
 
 ```pascal
 var
-    group: IwbGroupRecord;
-    record: IwbMainRecord;
+  armors: IwbGroupRecord;
+  rec: IwbMainRecord;
 begin
-    group := // ... get group reference
-    record := MainRecordByEditorID(group, 'ArmorIronHelmet');
-    if Assigned(record) then
-        AddMessage('Found record: ' + EditorID(record));
+  if not Assigned(e) then
+    Exit;
+
+  armors := GroupBySignature(GetFile(e), 'ARMO');
+  if not Assigned(armors) then
+    Exit;
+
+  rec := MainRecordByEditorID(armors, 'ArmorIronHelmet');
+  if Assigned(rec) then
+    AddMessage('Found record: ' + EditorID(rec));
 end;
 ```
 

@@ -6,6 +6,8 @@
 property Elements[const aPath: string]: TdfElement;
 ```
 
+Access via: `element.Elements['Header\Version']`
+
 ## Description
 
 Returns the enabled child element at the specified path.
@@ -32,18 +34,21 @@ Returns the TdfElement at the specified path, or nil if not found or disabled.
 
 ```pascal
 var
-    nifFile: TdfElement;
-    header, firstBlock: TdfElement;
+    nifFile, header, version, firstBlock, blockType: TdfElement;
 begin
-    // Access nested elements
     header := nifFile.Elements['Header'];
-    if Assigned(header) then
-        AddMessage('Header version: ' + header.Elements['Version'].EditValue);
+    if Assigned(header) then begin
+        version := header.Elements['Version'];
+        if Assigned(version) then
+            AddMessage('Header version: ' + version.EditValue);
+    end;
 
-    // Access array elements
     firstBlock := nifFile.Elements['Blocks\[0]'];
-    if Assigned(firstBlock) then
-        AddMessage('First block type: ' + firstBlock.Elements['Block Type'].EditValue);
+    if Assigned(firstBlock) then begin
+        blockType := firstBlock.Elements['Block Type'];
+        if Assigned(blockType) then
+            AddMessage('First block type: ' + blockType.EditValue);
+    end;
 end;
 ```
 

@@ -6,13 +6,13 @@
 function Path: string;
 ```
 
+Access via: `element.Path`
+
 ## Description
 
-Returns the full hierarchical path from the root element to this element.
+Returns this element's path. The root name is not included except when this element is the root.
 
-The Path property constructs a string that represents the complete navigation path through the element tree from the root to the current element. Each level in the hierarchy is separated by a backslash (\). This is analogous to a file system path and is useful for identifying the location of an element within a complex binary structure.
-
-For example, in a NIF file, a path might look like: "NiNode\Children\[0]\NiTriShape\Data"
+Path builds a backslash-separated path from this element toward the root, but it omits the root element's name. The root element's own path is just its name. A direct child of the root has a path equal to that child's name. A deeper element joins ancestor names, such as `Header\Version` when `Header` is not the root. Each segment is the Name property. An array child is `DefName #index`, not `[index]` bracket syntax.
 
 This property is read-only.
 

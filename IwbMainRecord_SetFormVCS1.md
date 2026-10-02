@@ -19,6 +19,10 @@ The `VCS1` property corresponds to the `Version Control Info 1` element in the R
 | ARecord | IwbMainRecord | The main record to set the version control info on |
 | AValue | Cardinal | The new Version Control Info 1 value |
 
+## Returns
+
+Returns nothing.
+
 ## Example
 
 ```pascal
@@ -33,24 +37,17 @@ begin
   end;
 end;
 
-// Example 2: Copy VCS1 from master to override
+// Example 2: Copy VCS1 from the master to this override
 var
   masterRec: IwbMainRecord;
-  masterFile: IwbFile;
-  fixedFormID: Cardinal;
   masterVCS1: Cardinal;
 begin
   if Assigned(e) then begin
-    masterFile := FileByIndex(0);
-    if Assigned(masterFile) then begin
-      fixedFormID := FixedFormID(e);
-      masterRec := RecordByFormID(masterFile, fixedFormID, false);
-
-      if Assigned(masterRec) then begin
-        masterVCS1 := GetFormVCS1(masterRec);
-        SetFormVCS1(e, masterVCS1);
-        AddMessage(Format('Synchronized VCS1: %d', [masterVCS1]));
-      end;
+    masterRec := Master(e);
+    if Assigned(masterRec) then begin
+      masterVCS1 := GetFormVCS1(masterRec);
+      SetFormVCS1(e, masterVCS1);
+      AddMessage(Format('Synchronized VCS1: %d', [masterVCS1]));
     end;
   end;
 end;

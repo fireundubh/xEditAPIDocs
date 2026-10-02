@@ -10,7 +10,9 @@ procedure SetLoadOrderFormID(ARecord: IwbMainRecord; ALoadOrderFormID: Cardinal)
 
 Changes the record's FormID to a new value specified in load order format.
 
-This function assigns to the LoadOrderFormID property, converting the load order FormID to file-local format before storing. The upper byte of the FormID determines the owning file. Changing an override's FormID to use the current file's index converts it to a new master record. Changing any record's FormID to use another file's index makes it an injected record. Raises an exception if the new FormID already exists or cannot be mapped to a valid master.
+`ALoadOrderFormID` is a load-order FormID, not the file-local value accepted by [RecordByFormID](IwbFile_RecordByFormID.md). The call converts it to the file's FormID before storing. On Morrowind the call does nothing. The file header's FormID is cleared instead of taking `ALoadOrderFormID`.
+
+Changing an override's FormID onto the current file makes it a new record in that file. A FormID that belongs to another file becomes an override when that record already exists, and is injected when it does not. Raises an exception if that FormID is already used in the file, or if the object ID is below `$800`, is not a hardcoded ID, and the file has no master that can own it.
 
 ## Parameters
 
@@ -18,6 +20,10 @@ This function assigns to the LoadOrderFormID property, converting the load order
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to change the Form ID on |
 | ALoadOrderFormID | Cardinal | The new load order Form ID to assign |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 

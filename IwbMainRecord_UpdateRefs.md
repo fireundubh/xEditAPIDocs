@@ -8,11 +8,9 @@ procedure UpdateRefs(ARecord: IwbMainRecord);
 
 ## Description
 
-Updates reference information for `ARecord`, if reference information is not already updating
+Rebuilds outgoing references for `ARecord` when reference building is already active for that record.
 
-If reference information is already updating, the procedure will abort.
-
-Unlike [BuildRef](IwbElement_BuildRef.md), only an `IwbMainRecord` can be passed as an argument to this function.
+If references have never been built, this call does nothing. Use [BuildRef](IwbElement_BuildRef.md) to build them. If the lists are already current, the rebuild is skipped. This refreshes records this record points at. It does not rescan the load order for records that point at `ARecord`. Only a main record can be passed.
 
 ## Parameters
 
@@ -20,48 +18,44 @@ Unlike [BuildRef](IwbElement_BuildRef.md), only an `IwbMainRecord` can be passed
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to update reference information for |
 
+## Returns
+
+Returns nothing.
+
 ## Example
 
 ```pascal
-// Example 1: Update references after modifying record
+// Example 1: Refresh outgoing references after they have been built
 begin
   if Assigned(e) then begin
-    // Make changes to record
-    SetElementEditValue(e, 'FULL', 'Modified Name');
-    SetElementEditValue(e, 'DATA\Value', '500');
-
-    // Update reference tracking
+    BuildRef(e);
     UpdateRefs(e);
-    AddMessage('Reference information updated');
+    AddMessage(Format('Outgoing references: %d', [ReferencesCount(e)]));
   end;
 end;
 
-// Example 2: Refresh reference counts after adding/removing references
+// Example 2: UpdateRefs does nothing until references have been built
 var
   beforeCount, afterCount: integer;
 begin
   if Assigned(e) then begin
-    beforeCount := ReferencedByCount(e);
-
-    // External operation that might affect references
-    // ... (e.g., another script adds FormID field pointing to this record)
-
+    beforeCount := ReferencesCount(e);
     UpdateRefs(e);
-    afterCount := ReferencedByCount(e);
+    afterCount := ReferencesCount(e);
+    AddMessage(Format('Before BuildRef: %d, after UpdateRefs: %d', [beforeCount, afterCount]));
 
-    AddMessage(Format('Referenced by count changed from %d to %d',
-      [beforeCount, afterCount]));
+    BuildRef(e);
+    AddMessage(Format('After BuildRef: %d', [ReferencesCount(e)]));
   end;
 end;
 
-// Example 3: Ensure references are tracked before iteration
+// Example 3: Build references before iteration
 var
   refRec: IwbMainRecord;
   i, count: integer;
 begin
   if Assigned(e) then begin
-    // Ensure reference information is current
-    UpdateRefs(e);
+    BuildRef(e);
 
     count := ReferencesCount(e);
     AddMessage(Format('Processing %d outgoing references...', [count]));

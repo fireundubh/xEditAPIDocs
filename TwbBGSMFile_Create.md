@@ -28,18 +28,14 @@ Returns a new `TwbBGSMFile` instance ready for loading or creating BGSM material
 var
   bgsmFile: TwbBGSMFile;
 begin
-  // Create new BGSM handler
   bgsmFile := TwbBGSMFile.Create;
   try
-    // Load existing material file
-    bgsmFile.LoadFromFile('Textures\Materials\MyMaterial.bgsm');
+    bgsmFile.LoadFromFile('materials\MyMaterial.bgsm');
 
-    // Access material properties through TdfElement methods
-    AddMessage('Diffuse texture: ' + bgsmFile.ElementByName('Diffuse Texture', True).EditValue);
+    AddMessage('Diffuse texture: ' + bgsmFile.EditValues['Textures\Diffuse']);
 
-    // Modify and save
-    bgsmFile.ElementByName('Glossiness', True).EditValue := '0.5';
-    bgsmFile.SaveToFile('Textures\Materials\MyMaterial_Modified.bgsm');
+    bgsmFile.EditValues['Smoothness'] := '0.5';
+    bgsmFile.SaveToFile('materials\MyMaterial_Modified.bgsm');
   finally
     bgsmFile.Free;
   end;

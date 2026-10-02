@@ -6,6 +6,8 @@
 property Name: string;
 ```
 
+Access via: `def.Name`
+
 ## Description
 
 Returns the definition's name identifier as specified when the definition was created.

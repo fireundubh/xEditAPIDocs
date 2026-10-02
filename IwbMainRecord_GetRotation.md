@@ -8,7 +8,7 @@ function GetRotation(ARecord: IwbMainRecord): TwbVector;
 
 ## Description
 
-Returns the rotational vector for `ARecord` when the record is a reference
+Returns the rotational vector for `ARecord` when the record is a reference. The `x`, `y`, and `z` members are degrees, the same numbers shown for `DATA\Rotation`.
 
 The `x`, `y`, and `z` members of the return type can be accessed as [Single](https://docwiki.embarcadero.com/Libraries/Rio/en/System.Single) fields.
 
@@ -20,7 +20,7 @@ The `x`, `y`, and `z` members of the return type can be accessed as [Single](htt
 
 ## Returns
 
-Returns a TwbVector containing the X, Y, and Z rotation values.
+Returns a TwbVector containing the X, Y, and Z rotation in degrees.
 
 ## Example
 
@@ -32,9 +32,9 @@ begin
   if Assigned(e) and (Signature(e) = 'REFR') then begin
     rot := GetRotation(e);
     AddMessage(Format('%s rotation:', [Name(e)]));
-    AddMessage(Format('  X (Pitch): %f degrees', [rot.x * 180 / Pi]));
-    AddMessage(Format('  Y (Roll):  %f degrees', [rot.y * 180 / Pi]));
-    AddMessage(Format('  Z (Yaw):   %f degrees', [rot.z * 180 / Pi]));
+    AddMessage(Format('  X (Pitch): %f degrees', [rot.x]));
+    AddMessage(Format('  Y (Roll):  %f degrees', [rot.y]));
+    AddMessage(Format('  Z (Yaw):   %f degrees', [rot.z]));
   end;
 end;
 
@@ -46,9 +46,8 @@ begin
   if Assigned(e) and (Signature(e) = 'REFR') then begin
     rot := GetRotation(e);
 
-    // Convert radians to degrees
-    pitchDeg := rot.x * 180 / Pi;
-    rollDeg := rot.y * 180 / Pi;
+    pitchDeg := rot.x;
+    rollDeg := rot.y;
 
     if (Abs(pitchDeg) < 5) and (Abs(rollDeg) < 5) then
       AddMessage(Format('%s is upright', [Name(e)]))
@@ -83,7 +82,7 @@ begin
                 refRec := ElementByIndex(subBlock, k);
                 if Assigned(refRec) then begin
                   rot := GetRotation(refRec);
-                  yawDeg := rot.z * 180 / Pi;
+                  yawDeg := rot.z;
 
                   // Check if facing north (within 10 degrees)
                   if Abs(yawDeg) < 10 then begin
@@ -110,18 +109,16 @@ begin
   if Assigned(e) and (Signature(e) = 'REFR') then begin
     rot := GetRotation(e);
 
-    // Rotate 90 degrees clockwise (add Pi/2 radians)
-    newYaw := rot.z + (Pi / 2);
+    newYaw := rot.z + 90;
 
-    // Normalize to -Pi to Pi range
-    while newYaw > Pi do
-      newYaw := newYaw - 2*Pi;
-    while newYaw < -Pi do
-      newYaw := newYaw + 2*Pi;
+    while newYaw > 180 do
+      newYaw := newYaw - 360;
+    while newYaw < -180 do
+      newYaw := newYaw + 360;
 
-    SetElementEditValue(e, 'DATA\Rotation\Z', FloatToStr(newYaw));
+    SetElementEditValues(e, 'DATA\Rotation\Z', FloatToStr(newYaw));
     AddMessage(Format('%s rotated from %f to %f degrees',
-      [Name(e), rot.z * 180 / Pi, newYaw * 180 / Pi]));
+      [Name(e), rot.z, newYaw]));
   end;
 end;
 ```

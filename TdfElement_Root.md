@@ -6,6 +6,8 @@
 function Root: TdfElement;
 ```
 
+Access via: `element.Root`
+
 ## Description
 
 Returns the topmost element in the hierarchy that contains this element.

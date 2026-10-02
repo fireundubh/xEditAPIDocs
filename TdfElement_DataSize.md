@@ -6,6 +6,8 @@
 function DataSize: Integer;
 ```
 
+Access via: `element.DataSize`
+
 ## Description
 
 Returns the actual size in bytes that this element occupies when serialized to binary format.

@@ -56,8 +56,8 @@ begin
         lastCondition := LastElement(conditions);
 
         if Assigned(firstCondition) and Assigned(lastCondition) then begin
-          firstValue := GetElementEditValue(firstCondition, 'CTDA\Comparison Value');
-          lastValue := GetElementEditValue(lastCondition, 'CTDA\Comparison Value');
+          firstValue := GetElementEditValues(firstCondition, 'CTDA\Comparison Value');
+          lastValue := GetElementEditValues(lastCondition, 'CTDA\Comparison Value');
           AddMessage(Format('First condition value: %s, Last: %s',
             [firstValue, lastValue]));
         end;

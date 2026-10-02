@@ -8,36 +8,44 @@ function MasterCount(AFile: IwbFile): Integer;
 
 ## Description
 
-Returns the total number of master files that this file depends on.
+Returns how many masters `AFile` currently has.
 
-This function retrieves the MasterCount property with the True parameter (including self), which counts all master file entries in the file header. These are plugins that must be loaded before this file for FormID references to resolve correctly. Returns 0 for files with no masters or invalid inputs. Use with MasterByIndex to iterate through all masters. The master list order matters for FormID resolution.
+The count is the master list after any masters added, removed, or sorted in this session. `AFile` itself is not included. Pair it with [MasterByIndex](IwbFile_MasterByIndex.md).
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to count master files for |
+| AFile | IwbFile | The file whose masters are counted |
 
 ## Returns
 
-Returns the number of master files required by the file.
+The number of masters, or `0` when `AFile` is not a file.
 
 ## Example
 
 ```pascal
-for i := 0 to Pred(MasterCount(e)) do
-  f := MasterByIndex(e, i);
+var
+  f, m: IwbFile;
+  i: Integer;
+begin
+  f := FileByName('Dawnguard.esm');
+  if Assigned(f) then
+    for i := 0 to Pred(MasterCount(f)) do begin
+      m := MasterByIndex(f, i);
+      if Assigned(m) then
+        AddMessage(GetFileName(m));
+    end;
+end;
 ```
 
 ## See Also
 
 - [AddMasterIfMissing](IwbFile_AddMasterIfMissing.md)
-- [AddMasters](IwbFile_AddMasters.md)
 - [CleanMasters](IwbFile_CleanMasters.md)
 - [GetMasters](IwbFile_GetMasters.md)
 - [HasMaster](IwbFile_HasMaster.md)
 - [Master](IwbMainRecord_Master.md)
 - [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
+- [MasterByIndex](IwbFile_MasterByIndex.md)
 - [SortMasters](IwbFile_SortMasters.md)
-
-

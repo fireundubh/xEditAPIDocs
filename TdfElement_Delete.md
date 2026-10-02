@@ -6,13 +6,15 @@
 procedure Delete(Index: Integer);
 ```
 
+Access via: `element.Delete(Index)`
+
 ## Description
 
 Deletes the child element at the specified index from this container.
 
 The Delete method removes a child element at the given zero-based index. The element is properly destroyed and freed from memory. For arrays, this decrements the Count and shifts subsequent elements down by one position.
 
-For structure elements, Delete may raise an exception as structures typically have a fixed set of fields that cannot be removed. Use this method primarily with array elements.
+For structure elements, Delete raises an exception. Fixed-length arrays (definition Size greater than 0) also raise. Use this method with variable-length array elements.
 
 The index must be valid (0 to Count-1), or an exception will be raised.
 

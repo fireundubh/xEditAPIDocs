@@ -6,6 +6,8 @@
 property Enabled: Boolean;
 ```
 
+Access via: `element.Enabled`
+
 ## Description
 
 Gets or sets whether this element is currently active and should be included in serialization.
@@ -14,7 +16,7 @@ The Enabled property controls whether an element participates in binary serializ
 
 Definitions can implement OnGetEnabled callbacks to determine enabled status dynamically based on other field values. For example, a version-specific field might only be enabled if the file version matches certain criteria.
 
-Setting Enabled to False effectively removes the element from the binary output without destroying it, allowing it to be re-enabled later.
+Writing Enabled always clears the enabled flag. The Boolean you assign is ignored, so writing True does not turn the element back on. If the definition has an enabled callback, reading Enabled uses that callback instead of the flag.
 
 This property is read-write.
 
@@ -38,7 +40,7 @@ begin
     else
         AddMessage('Element is disabled');
 
-    // Disable element
+    // Clears the flag. Assigning True does not enable the element.
     element.Enabled := False;
 end;
 ```

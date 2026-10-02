@@ -10,7 +10,7 @@ function FormID(ARecord: IwbMainRecord): Cardinal;
 
 Returns the record's FormID as it appears in the file (file-local FormID).
 
-This function retrieves the FormID property and converts it to a Cardinal. The returned value is the file-local FormID, which includes the file index in the upper byte (load order position at the time the file was saved). This is NOT the same as the current load order FormID. For runtime load order FormIDs, use GetLoadOrderFormID instead. Returns 0 for invalid records.
+This function retrieves the FormID property and converts it to a Cardinal. The module index in that value is the index stored in the file (a master index, or the file's own index for a local record), not the plugin's current load order. This is NOT the same as the current load order FormID. For runtime load order FormIDs, use GetLoadOrderFormID instead. Returns 0 when `ARecord` is not a main record.
 
 ## Parameters
 
@@ -66,7 +66,7 @@ begin
     AddMessage(Format('Load Order FormID: %s (LO index: %d)', [IntToHex(loadOrderFormID, 8), loadOrderIndex]));
 
     if fileIndex <> loadOrderIndex then
-      AddMessage('WARNING: File index differs from current load order position');
+      AddMessage('File index and current load order index differ (they are not the same number)');
   end;
 end;
 ```

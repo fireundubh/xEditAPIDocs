@@ -42,7 +42,7 @@ begin
   try
     nif.LoadFromFile('meshes\furniture\noble\thronenoble01.nif');
 
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
 
     if Assigned(rootNode) then begin
       // Look for BSXFlags

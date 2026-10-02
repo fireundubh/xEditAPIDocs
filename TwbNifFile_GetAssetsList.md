@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function GetAssetsList: string;
+function GetAssetsList: Variant;
 procedure GetAssetsList(AList: TStrings);
 ```
 
@@ -13,13 +13,14 @@ Access via: `nifFile.GetAssetsList` or `nifFile.GetAssetsList(List)`
 
 Retrieves a comprehensive list of all asset file paths referenced by the NIF file. Assets include textures, material files, and other external resources referenced by blocks throughout the file.
 
-When called with no parameters, returns a newline-delimited string of asset paths. When called with a TStrings parameter, adds each asset path to the provided list.
+When called with no parameters, returns a variant array of asset path strings. When called with a TStrings parameter, adds each asset path to the provided list and returns nothing.
 
 This function searches all blocks in the file for asset references including:
 - Texture file paths from shader properties and texture sets
 - Material files (BGSM, BGEM) referenced by shaders
 - Other external resource references
-- Duplicate paths are included if referenced multiple times
+
+Paths that differ only by case are returned once.
 
 Asset paths are typically relative to the game's Data folder and use backslash separators.
 
@@ -31,7 +32,7 @@ Asset paths are typically relative to the game's Data folder and use backslash s
 
 ## Returns
 
-When called without parameters, returns a string with asset paths separated by newlines. When called with a TStrings parameter, returns nothing (procedure).
+When called without parameters, returns a variant array of strings. When called with a TStrings parameter, returns nothing.
 
 ## Example
 

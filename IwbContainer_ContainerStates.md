@@ -3,14 +3,14 @@
 ## Syntax
 
 ```pascal
-function ContainerStates(AContainer: IwbContainer): byte;
+function ContainerStates(AContainer: IwbContainer): Word;
 ```
 
 ## Description
 
 Returns the internal container state flags as a bitmask (e.g., initialized, references built.)
 
-The returned byte value contains bit flags representing various states of the container.
+The result is a Word, not a byte. Flags past bit 7 are preserved. If the argument is not a container, the result is unassigned rather than 0. The constants below are the ones a script can name; other flags may still be set in the mask.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ The returned byte value contains bit flags representing various states of the co
 
 ## Returns
 
-Returns a byte value containing bitmask flags representing the container's state.
+A Word bitmask of container state flags, or unassigned if the argument is not a container.
 
 ## Constants
 
@@ -37,7 +37,7 @@ Returns a byte value containing bitmask flags representing the container's state
 // Example 1: Check if references are built before processing
 var
   plugin: IwbFile;
-  states: byte;
+  states: integer;
 begin
   plugin := GetFile(e);
   if Assigned(plugin) then begin
@@ -56,7 +56,7 @@ end;
 // Example 2: Check multiple state flags
 var
   container: IwbContainer;
-  states: byte;
+  states: integer;
   isInitialized, hasRefs, wasEmpty: boolean;
 begin
   container := e;
@@ -68,16 +68,25 @@ begin
     wasEmpty := (states and (1 shl csAsCreatedEmpty)) <> 0;
 
     AddMessage('Container state:');
-    AddMessage(Format('  Initialized: %s', [BoolToStr(isInitialized, True)]));
-    AddMessage(Format('  References built: %s', [BoolToStr(hasRefs, True)]));
-    AddMessage(Format('  Created empty: %s', [BoolToStr(wasEmpty, True)]));
+    if isInitialized then
+      AddMessage('  Initialized: True')
+    else
+      AddMessage('  Initialized: False');
+    if hasRefs then
+      AddMessage('  References built: True')
+    else
+      AddMessage('  References built: False');
+    if wasEmpty then
+      AddMessage('  Created empty: True')
+    else
+      AddMessage('  Created empty: False');
   end;
 end;
 
 // Example 3: Wait for initialization before accessing container
 var
   container: IwbContainer;
-  states: byte;
+  states: integer;
   isInitializing: boolean;
 begin
   if Assigned(e) then begin

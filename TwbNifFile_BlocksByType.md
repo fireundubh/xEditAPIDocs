@@ -4,10 +4,10 @@
 
 ```pascal
 procedure BlocksByType(ABlockType: string; AList: TList);
-procedure BlocksByType(ABlockType: string; AList: TList; AInherited: Boolean);
+procedure BlocksByType(ABlockType: string; AInherited: Boolean; AList: TList);
 ```
 
-Access via: `nifFile.BlocksByType(BlockType, List)` or `nifFile.BlocksByType(BlockType, List, Inherited)`
+Access via: `nif.BlocksByType(BlockType, List)` or `nif.BlocksByType(BlockType, Inherited, List)`
 
 ## Description
 
@@ -28,8 +28,8 @@ The list must be created before calling this method and should be freed by the c
 | Name | Type | Description |
 |------|------|-------------|
 | ABlockType | string | The block type to search for |
-| AList | TList | The list to populate with matching blocks |
-| AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
+| AInherited | Boolean | Optional. Second argument of the three-argument form. If True, include inherited types. Omitted in the two-argument form (exact match) |
+| AList | TList | The list to populate with matching blocks. Second argument when AInherited is omitted; third argument when it is passed |
 
 ## Returns
 
@@ -52,7 +52,7 @@ begin
     nif.LoadFromFile('meshes\architecture\whiterun\wrbuildings\wrinnsolab01.nif');
 
     // Find all geometry blocks (including derived types)
-    nif.BlocksByType('NiTriBasedGeom', geometryList, True);
+    nif.BlocksByType('NiTriBasedGeom', True, geometryList);
 
     AddMessage('Found ' + IntToStr(geometryList.Count) + ' geometry blocks:');
     for i := 0 to geometryList.Count - 1 do begin
@@ -61,7 +61,7 @@ begin
     end;
 
     // Find all shader properties
-    nif.BlocksByType('BSLightingShaderProperty', shaderList, False);
+    nif.BlocksByType('BSLightingShaderProperty', shaderList);
 
     AddMessage('Found ' + IntToStr(shaderList.Count) + ' shader properties');
   finally

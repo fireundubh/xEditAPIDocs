@@ -8,9 +8,9 @@ function AdditionalElementCount(AContainer: IwbContainer): integer;
 
 ## Description
 
-Returns the number of "fake" elements in `AContainer`.
+Returns how many leading children are not ordinary stored members.
 
-A fake element is one that doesn't actually exist in the record data but is shown in the UI for convenience or special handling purposes.
+For most containers the result is 0. A main record returns 1 for the record header, or 2 when a Contained In element is also present. Those children are already included in [ElementCount](IwbContainer_ElementCount.md); ordinary members start at index `AdditionalElementCount`. Returns 0 if the argument is not a container.
 
 ## Parameters
 
@@ -20,62 +20,36 @@ A fake element is one that doesn't actually exist in the record data but is show
 
 ## Returns
 
-Returns the count of fake elements as an integer.
+An integer. 0 for an ordinary container or when the argument is not a container. 1 or 2 for a main record. These elements are already part of `ElementCount`.
 
 ## Example
 
 ```pascal
-// Example 1: Calculate total element capacity
+// Example 1: Skip the record header when walking a main record
+var
+  i, firstReal: integer;
+  child: IwbElement;
+begin
+  if Assigned(e) then begin
+    firstReal := AdditionalElementCount(e);
+    AddMessage('Leading non-members: ' + IntToStr(firstReal));
+
+    for i := firstReal to Pred(ElementCount(e)) do begin
+      child := ElementByIndex(e, i);
+      if Assigned(child) then
+        AddMessage(Format('  [%d] %s', [i, Name(child)]));
+    end;
+  end;
+end;
+
+// Example 2: An ordinary array has no leading non-members
 var
   keywords: IwbContainer;
-  realCount, additionalCount, totalCapacity: integer;
 begin
   if Assigned(e) then begin
     keywords := ElementByPath(e, 'KWDA');
-    if Assigned(keywords) then begin
-      realCount := ElementCount(keywords);
-      additionalCount := AdditionalElementCount(keywords);
-      totalCapacity := realCount + additionalCount;
-      AddMessage(Format('Container has %d real + %d fake = %d total slots',
-        [realCount, additionalCount, totalCapacity]));
-    end;
-  end;
-end;
-
-// Example 2: Check if container has UI placeholder elements
-var
-  container: IwbContainer;
-  additionalCount: integer;
-begin
-  if Assigned(e) then begin
-    container := e;
-    additionalCount := AdditionalElementCount(container);
-    if additionalCount > 0 then
-      AddMessage(Format('Container shows %d UI placeholder element(s)', [additionalCount]))
-    else
-      AddMessage('Container has no fake elements');
-  end;
-end;
-
-// Example 3: Distinguish real from fake elements during iteration
-var
-  container: IwbContainer;
-  i, realCount, additionalCount: integer;
-  element: IwbElement;
-begin
-  if Assigned(e) then begin
-    container := e;
-    realCount := ElementCount(container);
-    additionalCount := AdditionalElementCount(container);
-
-    AddMessage(Format('Processing %d real elements (skipping %d fake)',
-      [realCount, additionalCount]));
-
-    for i := 0 to realCount - 1 do begin
-      element := ElementByIndex(container, i);
-      if Assigned(element) then
-        AddMessage(Format('  Element %d: %s', [i, Name(element)]));
-    end;
+    if Assigned(keywords) then
+      AddMessage('KWDA additional count: ' + IntToStr(AdditionalElementCount(keywords)));
   end;
 end;
 ```

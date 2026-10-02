@@ -3,37 +3,52 @@
 ## Syntax
 
 ```pascal
-procedure FileWriteToStream(AFile: IwbFile; AStream: TStream; AResetModified: Integer = 1);
+procedure FileWriteToStream(AFile: IwbFile; AStream: TStream; AResetModified: Integer);
 ```
 
 ## Description
 
-Writes the contents of `AFile` to `AStream`
+Writes the plugin in `AFile` to `AStream`.
 
-If `AResetModified` is...
+`AResetModified` is required:
 
-| Arg | Description     |
-|:----|:----------------|
-| `0` | `rmNo`          |
-| `1` | `rmYes`         |
-| `2` | `rmSetInternal` |
+| Value | Effect |
+|-------|--------|
+| 0 | Leave the modified state as it is |
+| 2 | If the file is modified, set the internal modified flag. The modified flag stays set |
+| any other integer | Clear the modified state |
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to write to the stream |
-| AStream | TStream | The stream to write the file contents to |
-| AResetModified | Integer | Reset modified flag (0=rmNo, 1=rmYes, 2=rmSetInternal, defaults to 1) |
+| AFile | IwbFile | The file to write |
+| AStream | TStream | The stream to write to |
+| AResetModified | Integer | How to treat the modified state after the write |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
 ```pascal
-fs := TFileStream.Create(aFileName, fmCreate);
-try
-  FileWriteToStream(f, fs, False);
-finally
-  fs.Free;
+var
+  f: IwbFile;
+  fs: TFileStream;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) then begin
+    fs := TFileStream.Create('C:\Temp\out.esp', fmCreate);
+    try
+      FileWriteToStream(f, fs, 1);
+    finally
+      fs.Free;
+    end;
+  end;
 end;
 ```
 
+## See Also
+
+- [GetFileName](IwbFile_GetFileName.md)

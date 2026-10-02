@@ -8,23 +8,32 @@ function CanBeLight(AFile: IwbFile): Boolean;
 
 ## Description
 
-Returns whether `AFile` can be a Light file.
+Returns whether `AFile`'s current load-order slot is a light slot.
+
+This is the same check as [CanBeESL](IwbFile_CanBeESL.md) and [CanBeSmall](IwbFile_CanBeSmall.md). It does not read the header flag and it does not test whether the file's records would fit in a light plugin. [GetIsLight](IwbFile_GetIsLight.md) reads the flag.
+
+A file that is not an `IwbFile` returns `False`. A file with no load-order slot raises.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to check if it can be Light |
+| AFile | IwbFile | The file whose load-order slot is tested |
 
 ## Returns
 
-Returns `True` if the file can be Light, `False` otherwise.
+`True` when the load-order slot is a light slot, `False` when it is not or when `AFile` is not a file.
 
 ## Example
 
 ```pascal
-if CanBeLight(f) then
-  SetIsLight(f, True);
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) and CanBeLight(f) then
+    AddMessage(GetFileName(f) + ' is in a light slot');
+end;
 ```
 
 ## See Also

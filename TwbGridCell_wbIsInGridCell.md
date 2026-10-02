@@ -3,7 +3,7 @@
 ## Syntax
 
 ```pascal
-function wbIsInGridCell(Position: TwbVector, GridCell: TwbGridCell): Boolean;
+function wbIsInGridCell(Position: TwbVector; GridCell: TwbGridCell): Boolean;
 ```
 
 ## Description
@@ -30,18 +30,15 @@ Returns `True` if the position is within the grid cell boundaries, `False` other
 ```pascal
 var
   RefPos: TwbVector;
-  CellGrid: TwbGridCell;
-  IsInCell: Boolean;
+  Origin: TwbGridCell;
 begin
-  // Get reference position and parent cell grid
-  RefPos := GetPosition(refRecord);
-  CellGrid := GetGridCell(ContainingMainRecord(refRecord));
+  if Assigned(e) and (Signature(e) = 'REFR') then begin
+    RefPos := GetPosition(e);
+    Origin := wbGridCell(0, 0);
 
-  // Check if position is actually in the cell
-  IsInCell := wbIsInGridCell(RefPos, CellGrid);
-
-  if not IsInCell then
-    AddMessage('Warning: Reference position is outside its parent cell grid!');
+    if wbIsInGridCell(RefPos, Origin) then
+      AddMessage(Name(e) + ' is inside cell 0, 0');
+  end;
 end;
 ```
 

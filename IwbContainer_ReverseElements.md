@@ -10,7 +10,7 @@ procedure ReverseElements(AContainer: IwbContainer);
 
 Reverses the order of all elements within the specified container.
 
-This procedure modifies the container in-place, changing the order of elements to be the reverse of their current order. The first element becomes the last, and vice versa.
+This procedure modifies the container in place. The first element becomes the last, and vice versa. The container is marked modified. If the argument is not a container, nothing happens. This procedure returns nothing.
 
 ## Parameters
 
@@ -64,7 +64,7 @@ begin
           condition := ElementByIndex(conditions, i);
           if Assigned(condition) then
             AddMessage(Format('Condition %d: %s',
-              [i, GetElementEditValue(condition, 'CTDA\Function')]));
+              [i, GetElementEditValues(condition, 'CTDA\Function')]));
         end;
       finally
         EndUpdate(conditions);
@@ -73,23 +73,19 @@ begin
   end;
 end;
 
-// Example 3: Reverse array only if not sorted
+// Example 3: Reverse an array only when it is not sorted
 var
-  container: IwbContainer;
-  sortableContainer: IwbSortableContainer;
+  keywords: IwbContainer;
 begin
   if Assigned(e) then begin
-    container := ElementByPath(e, 'KWDA');
-    if Assigned(container) then begin
-      if Supports(container, IwbSortableContainer, sortableContainer) then begin
-        if IsSorted(sortableContainer) then begin
-          AddMessage('Cannot reverse sorted container');
-          Exit;
-        end;
+    keywords := ElementByPath(e, 'KWDA');
+    if Assigned(keywords) then begin
+      if IsSorted(keywords) then
+        AddMessage('Keyword array is sorted')
+      else begin
+        AddMessage('Reversing unsorted container');
+        ReverseElements(keywords);
       end;
-
-      AddMessage('Reversing unsorted container');
-      ReverseElements(container);
     end;
   end;
 end;

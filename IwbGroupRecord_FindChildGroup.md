@@ -10,9 +10,7 @@ function FindChildGroup(AGroup: IwbGroupRecord; AType: integer; AMainRecord: Iwb
 
 Finds and returns a specific child group within another group record.
 
-The function searches for a child group based on its type and associated main record. The aiType parameter should match the group type values defined in the file format specification. Returns nil if no matching group is found.
-
-Warning: Make sure the aiType value matches the expected group type for the given context.
+The search looks at direct children only. A child matches when its group type equals `AType` and its group label equals the FormID of `AMainRecord`. `AType` is the same integer [GroupType](IwbGroupRecord_GroupType.md) uses. Returns nil if either argument is the wrong kind of element, if `AMainRecord` is not assigned, or if no child matches. There is no overload that takes a raw label.
 
 ## Parameters
 
@@ -30,13 +28,19 @@ Returns the matching IwbGroupRecord, or nil if no matching group is found.
 
 ```pascal
 var
-  parentGroup, tempGroup: IwbGroupRecord;
-  cell: IwbMainRecord;
+  cellGroup, tempGroup: IwbGroupRecord;
 begin
-  // Get temporary group within a CELL
-  tempGroup := FindChildGroup(parentGroup, 9, cell);
+  if not Assigned(e) then
+    Exit;
+
+  // e is a CELL. Type 9 is that cell's temporary children.
+  cellGroup := ChildGroup(e);
+  if not Assigned(cellGroup) then
+    Exit;
+
+  tempGroup := FindChildGroup(cellGroup, 9, e);
   if Assigned(tempGroup) then
-    AddMessage('Found temporary group');
+    AddMessage('Found temporary children');
 end;
 ```
 

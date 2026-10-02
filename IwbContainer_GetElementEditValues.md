@@ -19,7 +19,7 @@ Returns the edit value of an element in the container by path as a string. This 
 
 ## Returns
 
-Returns the edit value as a string.
+The edit value as a string. An empty string if the argument is not a container. A path that does not resolve is also an empty string, unless the container can still produce a member edit value for that name.
 
 ## Example
 

@@ -6,13 +6,15 @@
 function Add: TdfElement;
 ```
 
+Access via: `element.Add`
+
 ## Description
 
 Adds a new element to this array and returns the newly created element.
 
 The Add method is primarily used with array elements to append a new entry. The new element is created from the array's element definition and initialized with default values. The array's Count is incremented automatically.
 
-For non-array elements, calling Add will raise an exception. Structures have a fixed set of fields defined by their definition and cannot have elements added dynamically.
+For non-array elements, calling Add raises an exception. Fixed-length arrays (definition Size greater than 0) also raise. Structures have a fixed set of fields and cannot have elements added.
 
 The newly created element is returned so you can immediately set its properties or access its children.
 

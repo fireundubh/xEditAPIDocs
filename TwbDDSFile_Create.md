@@ -12,7 +12,7 @@ Creates a new DDS (DirectDraw Surface) file handler instance.
 
 DDS is Microsoft's texture format widely used in video games for efficient GPU texture storage. In Bethesda games, DDS files store all textures including diffuse maps, normal maps, specular maps, and other texture types. The format supports various compression schemes (DXT1, DXT5, BC7, etc.) and mipmap chains for optimal rendering performance.
 
-The created instance inherits from `TdfElement`, providing access to all data format manipulation methods for reading DDS headers, accessing texture properties, and extracting or modifying texture data. This is useful for texture analysis, conversion, or validation scripts.
+The created instance inherits from `TdfElement`. The definition covers the DDS header (dimensions, mip count, and pixel format under `HEADER`), not the image bytes.
 
 ## Parameters
 
@@ -31,17 +31,14 @@ var
 begin
   ddsFile := TwbDDSFile.Create;
   try
-    // Load existing texture file
     ddsFile.LoadFromFile('Textures\Architecture\Whiterun\WRBuildings01.dds');
 
-    // Read texture properties
-    width := ddsFile.ElementByName('Width', True).NativeValue;
-    height := ddsFile.ElementByName('Height', True).NativeValue;
+    width := ddsFile.NativeValues['HEADER\dwWidth'];
+    height := ddsFile.NativeValues['HEADER\dwHeight'];
     AddMessage(Format('Texture size: %dx%d', [width, height]));
 
-    // Check compression format
-    AddMessage('Format: ' + ddsFile.ElementByName('Format', True).EditValue);
-    AddMessage('Mipmap count: ' + ddsFile.ElementByName('Mipmap Count', True).EditValue);
+    AddMessage('FourCC: ' + ddsFile.EditValues['HEADER\ddspf\dwFourCC']);
+    AddMessage('Mipmap count: ' + ddsFile.EditValues['HEADER\dwMipMapCount']);
   finally
     ddsFile.Free;
   end;

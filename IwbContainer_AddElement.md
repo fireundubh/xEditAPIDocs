@@ -19,6 +19,10 @@ This procedure calls the container's AddElement method, which takes ownership of
 | AContainer | IwbContainer | The container to add the element to |
 | AElement | IwbElement | The element to add to the container |
 
+## Returns
+
+This procedure returns nothing. If either argument is not the expected kind of element, nothing is added.
+
 ## Example
 
 ```pascal

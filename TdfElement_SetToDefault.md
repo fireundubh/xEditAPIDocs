@@ -6,6 +6,8 @@
 procedure SetToDefault;
 ```
 
+Access via: `element.SetToDefault`
+
 ## Description
 
 Resets this element's value to the default specified in its definition.
@@ -42,9 +44,6 @@ begin
     // Reset to default
     element.SetToDefault;
     AddMessage('Default value: ' + element.EditValue);
-
-    // For structures, resets all fields
-    structElement.SetToDefault;
 end;
 ```
 

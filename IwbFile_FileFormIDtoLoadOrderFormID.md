@@ -19,7 +19,7 @@ Converts `AFormID`, relative to `AFile`, to a Form ID relative to the current lo
 
 ## Returns
 
-Returns the load-order-relative form ID as a Cardinal value.
+Returns the load-order FormID as a Cardinal. If `AFile` is not a file, the result is unassigned.
 
 ## Example
 

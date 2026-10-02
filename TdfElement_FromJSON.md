@@ -6,6 +6,8 @@
 procedure FromJSON(const aText: string);
 ```
 
+Access via: `element.FromJSON(Text)`
+
 ## Description
 
 Deserializes JSON text and populates this element with the parsed data.
@@ -34,18 +36,15 @@ This method does not return a value.
 
 ```pascal
 var
-    element: TdfElement;
+    element, child: TdfElement;
     jsonText: string;
 begin
     jsonText := '{"X": 100.0, "Y": 200.0, "Z": 50.0}';
-
-    // Load from JSON string
     element.FromJSON(jsonText);
 
-    // Access loaded data
-    AddMessage('X: ' + element.Elements['X'].EditValue);
-    AddMessage('Y: ' + element.Elements['Y'].EditValue);
-    AddMessage('Z: ' + element.Elements['Z'].EditValue);
+    child := element.Elements['X'];
+    if Assigned(child) then
+        AddMessage('X: ' + child.EditValue);
 end;
 ```
 

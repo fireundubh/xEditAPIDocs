@@ -8,9 +8,9 @@ function WinningOverride(ARecord: IwbMainRecord): IwbMainRecord;
 
 ## Description
 
-Returns the final overriding record in the current load order.
+Returns the winning override of `ARecord`.
 
-This function retrieves the WinningOverride property, which returns the last record in the override chain (the one with the highest load order that modifies this FormID). If the record has no overrides, returns the record itself. This is the "active" version of the record that the game will use. Unlike HighestOverrideOrSelf, this always returns the absolute last override regardless of load order position.
+The winning override is the last non-partial record in load order. If every override is partial, or there are no overrides, the master itself is returned. Calling this on any record in the chain returns that same record. Returns nil when `ARecord` is not a main record.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ This function retrieves the WinningOverride property, which returns the last rec
 
 ## Returns
 
-Returns the last loaded overriding IwbMainRecord, or the record itself if no overrides exist.
+Returns the winning non-partial record, or the master when no such override exists. Returns nil when `ARecord` is not a main record.
 
 ## Example
 
@@ -47,8 +47,8 @@ begin
   if Assigned(e) then begin
     winningRec := WinningOverride(e);
     if Assigned(winningRec) then begin
-      masterValue := GetElementEditValue(e, 'DATA\Value');
-      winningValue := GetElementEditValue(winningRec, 'DATA\Value');
+      masterValue := GetElementEditValues(e, 'DATA\Value');
+      winningValue := GetElementEditValues(winningRec, 'DATA\Value');
 
       if masterValue <> winningValue then
         AddMessage(Format('%s: Value changed from %s to %s',
@@ -65,7 +65,7 @@ begin
     winningRec := WinningOverride(e);
     if Assigned(winningRec) then begin
       // Always modify the winning override, not the master
-      SetElementEditValue(winningRec, 'FULL', 'Modified Display Name');
+      SetElementEditValues(winningRec, 'FULL', 'Modified Display Name');
       AddMessage(Format('Modified winning override in %s',
         [GetFileName(GetFile(winningRec))]));
     end;

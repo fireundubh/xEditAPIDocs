@@ -12,11 +12,12 @@ Access via: `nifFile.Options` (read) or `nifFile.Options := value` (write)
 
 Gets or sets NIF file processing options as a set of flags. Options control various aspects of NIF file serialization and optimization.
 
-Available option flags:
-- **nfoCollapseLinkArrays** (1): Collapse link arrays during save to reduce file size
-- **nfoRemoveUnusedStrings** (2): Remove unused strings from the string palette during save
+The registered constants are ordinals, not bit masks: `nfoCollapseLinkArrays` is 0 and `nfoRemoveUnusedStrings` is 1. The property stores the set as a byte. Bit 0 (value 1) is collapse link arrays. Bit 1 (value 2) is remove unused strings. Assign a set, which shifts those ordinals into bits, or assign the byte directly.
 
-Options are stored as a byte where each bit represents a flag. Multiple options can be combined using bitwise OR.
+- **nfoCollapseLinkArrays**: Collapse link arrays during save to remove None links
+- **nfoRemoveUnusedStrings**: Remove unused strings from the string palette during save
+
+A new file starts with `nfoRemoveUnusedStrings` set (byte value 2). Collapse runs only while `InternalUpdates` is also true.
 
 These options primarily affect save operations and can help optimize the output file size and structure.
 
@@ -41,10 +42,9 @@ begin
     opts := nif.Options;
     AddMessage('Current options: ' + IntToStr(opts));
 
-    // Enable both optimization options
-    // nfoCollapseLinkArrays = 1
-    // nfoRemoveUnusedStrings = 2
-    nif.Options := 1 or 2; // = 3
+    // Set both flags. Do not assign the ordinal constants by themselves:
+    // nfoCollapseLinkArrays is 0, not the bit value 1.
+    nif.Options := [nfoCollapseLinkArrays, nfoRemoveUnusedStrings];
 
     // Save with optimizations
     nif.SaveToFile('meshes\architecture\farmhouse\farmhouse01_optimized.nif');
@@ -54,31 +54,17 @@ begin
 end;
 ```
 
-## Example (Setting Individual Flags)
+## Example (Set both flags)
 
 ```pascal
 var
   nif: TwbNifFile;
-  opts: Byte;
-const
-  nfoCollapseLinkArrays = 1;
-  nfoRemoveUnusedStrings = 2;
 begin
   nif := TwbNifFile.Create;
   try
     nif.LoadFromFile('meshes\clutter\chest\chestcommon.nif');
 
-    // Start with no options
-    opts := 0;
-
-    // Add collapse link arrays option
-    opts := opts or nfoCollapseLinkArrays;
-
-    // Conditionally add unused strings removal
-    if true then
-      opts := opts or nfoRemoveUnusedStrings;
-
-    nif.Options := opts;
+    nif.Options := [nfoCollapseLinkArrays, nfoRemoveUnusedStrings];
 
     nif.SaveToFile('meshes\clutter\chest\chestcommon_optimized.nif');
   finally

@@ -21,7 +21,7 @@ This function accesses the Elements property by index, which provides direct arr
 
 ## Returns
 
-Returns the element at the specified index as an IwbElement interface.
+The element at that index, or nil if the index is out of range. Out-of-range indexes do not raise. If the argument is not a container, the result is unassigned.
 
 ## Example
 
@@ -62,7 +62,7 @@ begin
       // Get second condition (index 1)
       secondCondition := ElementByIndex(conditions, 1);
       if Assigned(secondCondition) then begin
-        functionName := GetElementEditValue(secondCondition, 'CTDA\Function');
+        functionName := GetElementEditValues(secondCondition, 'CTDA\Function');
         AddMessage('Second condition function: ' + functionName);
       end;
     end else
@@ -89,7 +89,7 @@ begin
       for i := 0 to count - 1 do begin
         effect := ElementByIndex(effects, i);
         if Assigned(effect) then begin
-          magnitude := GetElementEditValue(effect, 'EFIT\Magnitude');
+          magnitude := GetElementEditValues(effect, 'EFIT\Magnitude');
           AddMessage(Format('Effect %d magnitude: %s', [i, magnitude]));
         end else
           AddMessage(Format('Warning: Effect at index %d is nil', [i]));

@@ -8,11 +8,7 @@ function FixedFormID(ARecord: IwbMainRecord): Cardinal;
 
 ## Description
 
-Returns the File Form IDof `ARecord`, clamping the Mod ID to the number of master files for the containing file
-
-Local records will not have a load order prefix (e.g., `0x00FFFFFF`) and overrides will have a prefix relative to the record's file's masters.
-
-This function can be used in the resolution of HITME issues.
+Returns the file FormID of `ARecord`. If the stored slot is past the count of masters of the same module type, it is clamped to the file's own module index. Overrides keep a prefix that selects one of that file's masters. For a full plugin, a local record uses the file's own index, which is the number of full masters, not `00` (`00` is the first master, and only a file with no masters stores its own records as `00`). The value does not follow the current load order. This function can be used in the resolution of HITME issues. Returns 0 when `ARecord` is not a main record.
 
 ## Parameters
 
@@ -87,21 +83,26 @@ begin
   end;
 end;
 
-// Example 4: Check if record is local to its file
+// Example 4: Check if a full-plugin record is local to its file
 var
   fixedFormID: Cardinal;
   fileIndex: byte;
+  recFile: IwbFile;
 begin
   if Assigned(e) then begin
+    recFile := GetFile(e);
     fixedFormID := FixedFormID(e);
-    fileIndex := fixedFormID shr 24;
 
-    if fileIndex = 0 then
-      AddMessage(Format('%s is a local record (FormID: %s)',
-        [EditorID(e), IntToHex(fixedFormID, 8)]))
-    else
-      AddMessage(Format('%s references master %d (FormID: %s)',
-        [EditorID(e), fileIndex, IntToHex(fixedFormID, 8)]));
+    if Assigned(recFile) and not GetIsLight(recFile) and not GetIsMedium(recFile) then begin
+      fileIndex := fixedFormID shr 24;
+
+      if fileIndex = MasterCount(recFile) then
+        AddMessage(Format('%s is a local record (FormID: %s)',
+          [EditorID(e), IntToHex(fixedFormID, 8)]))
+      else
+        AddMessage(Format('%s references master %d (FormID: %s)',
+          [EditorID(e), fileIndex, IntToHex(fixedFormID, 8)]));
+    end;
   end;
 end;
 ```

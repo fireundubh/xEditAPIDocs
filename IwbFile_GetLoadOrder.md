@@ -3,44 +3,45 @@
 ## Syntax
 
 ```pascal
-function GetLoadOrder(aeFile: IwbFile): integer;
+function GetLoadOrder(AFile: IwbFile): Integer;
 ```
 
 ## Description
 
-Returns the zero-based load order position of the plugin file.
+Returns the load-order index of `AFile`.
 
-This function retrieves the LoadOrder property, which indicates the file's position in the current plugin load order. Index 0 is the first file loaded (typically the main game master). The load order determines file priority and FormID resolution. Returns -1 for invalid file references. Note that load order can change between sessions if the plugin list is modified.
+Index 0 is the first loaded file. The index is not a FormID module prefix. Use [GetLoadOrderFileID](IwbFile_GetLoadOrderFileID.md) for the slot string, and [FormID](IwbMainRecord_FormID.md) for a file FormID.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| aeFile | IwbFile | The file to get the load order index from |
+| AFile | IwbFile | The file whose load-order index is needed |
 
 ## Returns
 
-Returns the load order index of the file, or -1 if the parameter is not a valid IwbFile.
+The load-order index, or `-1` when `AFile` is not a file.
 
 ## Example
 
 ```pascal
 var
-    f: IwbFile;
-    idx: integer;
+  f: IwbFile;
+  idx: Integer;
 begin
-    f := // ... get file reference
+  f := FileByIndex(0);
+  if Assigned(f) then begin
     idx := GetLoadOrder(f);
     if idx = -1 then
-        AddMessage('Not a valid file')
+      AddMessage('Not a file')
     else
-        AddMessage('Load order index: ' + IntToStr(idx));
+      AddMessage('Load order index: ' + IntToStr(idx));
+  end;
 end;
 ```
 
 ## See Also
 
 - [FileByLoadOrder](Global_FileByLoadOrder.md)
+- [GetLoadOrderFileID](IwbFile_GetLoadOrderFileID.md)
 - [GetLoadOrderFormID](IwbMainRecord_GetLoadOrderFormID.md)
-
-

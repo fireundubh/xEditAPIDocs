@@ -6,6 +6,8 @@
 property Parent: TdfElement;
 ```
 
+Access via: `element.Parent`
+
 ## Description
 
 Gets or sets the parent element that contains this element in the hierarchy.

@@ -28,18 +28,14 @@ Returns a new `TwbBGEMFile` instance ready for loading or creating BGEM effect m
 var
   bgemFile: TwbBGEMFile;
 begin
-  // Create new BGEM handler
   bgemFile := TwbBGEMFile.Create;
   try
-    // Load existing effect material
-    bgemFile.LoadFromFile('Textures\Effects\MyEffect.bgem');
+    bgemFile.LoadFromFile('materials\MyEffect.bgem');
 
-    // Access effect properties
-    AddMessage('Base texture: ' + bgemFile.ElementByName('Base Texture', True).EditValue);
+    AddMessage('Base texture: ' + bgemFile.EditValues['Textures\Base']);
 
-    // Modify blend mode
-    bgemFile.ElementByName('Blend Mode', True).EditValue := 'Additive';
-    bgemFile.SaveToFile('Textures\Effects\MyEffect_Modified.bgem');
+    bgemFile.EditValues['AlphaBlendMode'] := 'Additive';
+    bgemFile.SaveToFile('materials\MyEffect_Modified.bgem');
   finally
     bgemFile.Free;
   end;

@@ -30,15 +30,16 @@ begin
   try
     nif.LoadFromFile('meshes\actors\character\character assets\skeleton.nif');
 
-    // Get a specific block
     block := nif.BlockByType('NiNode');
 
-    // Navigate back to the parent file
-    parentFile := block.NifFile;
+    if Assigned(block) then begin
+      parentFile := block.NifFile;
 
-    // Now we can access file-level properties
-    AddMessage('NIF Version: ' + IntToStr(Ord(parentFile.NifVersion)));
-    AddMessage('Total blocks: ' + IntToStr(parentFile.BlocksCount));
+      if Assigned(parentFile) then begin
+        AddMessage('NIF Version: ' + IntToStr(parentFile.NifVersion));
+        AddMessage('Total blocks: ' + IntToStr(parentFile.BlocksCount));
+      end;
+    end;
   finally
     nif.Free;
   end;

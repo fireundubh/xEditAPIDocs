@@ -3,14 +3,14 @@
 ## Syntax
 
 ```pascal
-function wbGridCellToGroupLabel(GridCell: TwbGridCell): Integer;
+function wbGridCellToGroupLabel(GridCell: TwbGridCell): Cardinal;
 ```
 
 ## Description
 
-Converts a grid cell coordinate to its corresponding group label integer value.
+Converts a grid cell coordinate to the Cardinal label stored on an exterior cell group.
 
-Group labels are used by the game engine to organize exterior CELL records into hierarchical groups for efficient data management and loading. Each grid cell has a unique integer label that identifies it within the worldspace structure. This function performs the conversion from the two-dimensional grid coordinate (X, Y) to the single integer label used in the plugin file format.
+Group labels organize exterior CELL records into hierarchical groups. Each grid cell has one label. This function packs Y in the low 16 bits and X in the high 16 bits. A negative X sets bit 31.
 
 This is particularly useful when working with exterior cell groups, as the group label is stored in the GRUP (group) record header.
 
@@ -22,23 +22,22 @@ This is particularly useful when working with exterior cell groups, as the group
 
 ## Returns
 
-Returns an Integer representing the group label for the specified grid cell.
+Returns a Cardinal group label for the specified grid cell. A negative X sets bit 31, which does not fit in a signed 32-bit Integer.
 
 ## Example
 
 ```pascal
 var
   Cell: TwbGridCell;
-  GroupLabel: Integer;
+  GroupLabel: Cardinal;
 begin
-  // Get grid cell from an exterior cell record
-  Cell := GetGridCell(cellRecord);
+  if Assigned(e) and (Signature(e) = 'CELL') then begin
+    Cell := GetGridCell(e);
+    GroupLabel := wbGridCellToGroupLabel(Cell);
 
-  // Convert to group label
-  GroupLabel := wbGridCellToGroupLabel(Cell);
-
-  AddMessage(Format('Grid cell [%d, %d] has group label: %d',
-    [Cell.x, Cell.y, GroupLabel]));
+    AddMessage(Format('Grid cell [%d, %d] has group label: %u',
+      [Cell.x, Cell.y, GroupLabel]));
+  end;
 end;
 ```
 

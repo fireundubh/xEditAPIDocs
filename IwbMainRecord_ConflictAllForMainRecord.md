@@ -3,31 +3,31 @@
 ## Syntax
 
 ```pascal
-function ConflictAllForMainRecord(aeRecord: IwbMainRecord): TConflictAll;
+function ConflictAllForMainRecord(ARecord: IwbMainRecord): integer;
 ```
 
 ## Description
 
 Gets the overall conflict status for a main record across all plugins.
 
-Returns a `TConflictAll` enumerated value indicating how this record conflicts with its counterparts in other plugins that modify it.
+Returns one of the `ca*` constants (`caUnknown` through `caConflictCritical`), indicating how this record conflicts with its counterparts in other plugins that modify it. Passing a value that is not a main record raises an error.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| aeRecord | IwbMainRecord | The main record to get the overall conflict status for |
+| ARecord | IwbMainRecord | The main record to get the overall conflict status for |
 
 ## Returns
 
-Returns a TConflictAll enumeration value indicating the overall conflict status.
+Returns the integer value of a `ca*` constant. Raises an error when `ARecord` is not a main record.
 
 ## Example
 
 ```pascal
 // Example 1: Check overall conflict status
 var
-  conflictAll: TConflictAll;
+  conflictAll: integer;
   conflictStr: string;
 begin
   if Assigned(e) then begin
@@ -54,7 +54,7 @@ var
   plugin: IwbFile;
   i, count, conflictCount: integer;
   rec: IwbMainRecord;
-  conflictAll: TConflictAll;
+  conflictAll: integer;
 begin
   plugin := FileByIndex(0);
   if Assigned(plugin) then begin
@@ -86,14 +86,13 @@ var
   plugin: IwbFile;
   i, count: integer;
   rec: IwbMainRecord;
-  conflictAll: TConflictAll;
-  stats: array[TConflictAll] of integer;
-  ca: TConflictAll;
+  conflictAll: integer;
+  stats: array[0..6] of integer;
+  ca: integer;
 begin
   plugin := FileByIndex(0);
   if Assigned(plugin) then begin
-    // Initialize counters
-    for ca := Low(TConflictAll) to High(TConflictAll) do
+    for ca := caUnknown to caConflictCritical do
       stats[ca] := 0;
 
     count := RecordCount(plugin);
@@ -120,7 +119,7 @@ end;
 var
   masterRec, overrideRec: IwbMainRecord;
   i, count: integer;
-  conflictAll: TConflictAll;
+  conflictAll: integer;
 begin
   masterRec := MasterOrSelf(e);
   if Assigned(masterRec) then begin
@@ -128,17 +127,23 @@ begin
 
     AddMessage(Format('Conflict analysis for %s:', [EditorID(masterRec)]));
     conflictAll := ConflictAllForMainRecord(masterRec);
-    AddMessage(Format('  Master: %d', [Ord(conflictAll)]));
+    AddMessage(Format('  Master: %d', [conflictAll]));
 
     for i := 0 to count - 1 do begin
       overrideRec := OverrideByIndex(masterRec, i);
       if Assigned(overrideRec) then begin
         conflictAll := ConflictAllForMainRecord(overrideRec);
         AddMessage(Format('  %s: %d',
-          [GetFileName(GetFile(overrideRec)), Ord(conflictAll)]));
+          [GetFileName(GetFile(overrideRec)), conflictAll]));
       end;
     end;
   end;
 end;
 ```
+
+## See Also
+
+- [ConflictThisForMainRecord](IwbMainRecord_ConflictThisForMainRecord.md)
+- [ConflictAllForNode](IwbElement_ConflictAllForNode.md)
+- [ConflictAllForElements](Global_ConflictAllForElements.md)
 

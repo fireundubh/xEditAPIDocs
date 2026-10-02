@@ -6,6 +6,8 @@
 function ToJSON(aCompact: Boolean): string;
 ```
 
+Access via: `element.ToJSON(Compact)`
+
 ## Description
 
 Serializes this element to a JSON string representation.

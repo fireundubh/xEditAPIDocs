@@ -19,7 +19,7 @@ Returns record at `AIndex` in array of records linked to by `ARecord`
 
 ## Returns
 
-Returns the IwbMainRecord at the specified index that this record references.
+Returns the referenced main record at `AIndex`, or nil when the index is out of range, the FormID cannot be resolved, or `ARecord` is not a main record.
 
 ## Example
 
@@ -83,12 +83,11 @@ begin
       refRec := ReferencesByIndex(e, i);
       if Assigned(refRec) then begin
         refFile := GetFile(refRec);
-        if Assigned(refFile) and (refFile <> recFile) then begin
-          // Check if reference file is in current file's masters
-          if IndexOfMaster(recFile, GetFileName(refFile)) = -1 then begin
+        if Assigned(refFile) and not Equals(refFile, recFile) then begin
+          if not HasMaster(recFile, GetFileName(refFile)) then begin
             Inc(missingCount);
             AddMessage(Format('  MISSING MASTER: %s needs %s',
-              [EditorID(refRec), GetFileName(refFile)]));
+              [GetFileName(recFile), GetFileName(refFile)]));
           end;
         end;
       end;

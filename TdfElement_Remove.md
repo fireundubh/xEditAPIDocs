@@ -6,6 +6,8 @@
 procedure Remove;
 ```
 
+Access via: `element.Remove`
+
 ## Description
 
 Removes this element from its parent container.

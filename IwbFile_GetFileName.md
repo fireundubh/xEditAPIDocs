@@ -3,31 +3,37 @@
 ## Syntax
 
 ```pascal
-function GetFileName(AFile: IwbFile): String;
+function GetFileName(AElement: IwbElement): string;
 ```
 
 ## Description
 
-Returns the plugin filename with extension (e.g., "Skyrim.esm", "MyMod.esp").
+Returns the file name of a loaded file.
 
-This function retrieves the FileName property from either an IwbFile or IwbElement interface. For IwbFile, it returns the file's own name. For IwbElement, it traverses to the containing file and returns that file's name. Returns an empty string for invalid inputs. The filename does not include the directory path, only the base name and extension.
+Pass an `IwbFile` to get that file's name. Pass any other element to get the name of the file that contains it. An element that is not in a file, or a value that is not an element, returns an empty string.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to get the name from |
+| AElement | IwbElement | A file, or an element inside a file |
 
 ## Returns
 
-Returns the file name with extension as a string.
+The file name, or an empty string when there is no file.
 
 ## Example
 
 ```pascal
-f := FileByIndex(0);
-sFileName := GetFileName(f);
-AddMessage(sFileName);  // --> 'Skyrim.esm'
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) then
+    AddMessage(GetFileName(f));
+  if Assigned(e) then
+    AddMessage(GetFileName(e));
+end;
 ```
 
 ## See Also
@@ -35,5 +41,3 @@ AddMessage(sFileName);  // --> 'Skyrim.esm'
 - [FileByIndex](Global_FileByIndex.md)
 - [FileByName](Global_FileByName.md)
 - [GetFile](IwbElement_GetFile.md)
-
-

@@ -10,20 +10,13 @@ Access via: `nifFile.Footer`
 
 ## Description
 
-Returns the footer block of the NIF file if one exists. The footer contains additional metadata and root node references in certain NIF versions.
-
-Footers are only present in some NIF versions (primarily Oblivion and later). The footer typically contains:
-- Root node references
-- Number of root nodes
-- Additional metadata
-
-If the NIF file doesn't have a footer (older versions like Morrowind), this may return nil or an empty block. The presence and structure of footers varies by NIF version.
+Returns the footer block. It is not part of `Blocks` and is not nil after the file is created or loaded. The footer stores the `Roots` array of root-node references.
 
 This is a read-only property.
 
 ## Returns
 
-Returns the footer block if present, or nil/empty block if the version doesn't use footers.
+Returns the footer block.
 
 ## Example
 
@@ -31,21 +24,19 @@ Returns the footer block if present, or nil/empty block if the version doesn't u
 var
   nif: TwbNifFile;
   footer: TwbNifBlock;
-  numRoots: Integer;
+  roots: TdfElement;
 begin
   nif := TwbNifFile.Create;
   try
     nif.LoadFromFile('meshes\architecture\whiterun\wrterrain01.nif');
 
-    // Get the footer block
     footer := nif.Footer;
 
     if Assigned(footer) then begin
-      // Read footer information
-      numRoots := footer.NativeValues['Num Roots'];
-      AddMessage('Footer indicates ' + IntToStr(numRoots) + ' root nodes');
-    end else
-      AddMessage('This NIF version does not use a footer');
+      roots := footer.Elements['Roots'];
+      if Assigned(roots) then
+        AddMessage('Footer indicates ' + IntToStr(roots.Count) + ' root nodes');
+    end;
   finally
     nif.Free;
   end;

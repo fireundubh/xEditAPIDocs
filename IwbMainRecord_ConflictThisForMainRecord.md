@@ -3,31 +3,31 @@
 ## Syntax
 
 ```pascal
-function ConflictThisForMainRecord(aeRecord: IwbMainRecord): TConflictThis;
+function ConflictThisForMainRecord(ARecord: IwbMainRecord): integer;
 ```
 
 ## Description
 
 Gets the conflict status for a specific main record instance.
 
-Returns a `TConflictThis` enumerated value indicating how this specific instance of the record relates to other versions of the same record in the load order.
+Returns one of the `ct*` constants (`ctUnknown` through `ctConflictLoses`), indicating how this instance relates to other versions of the same record in the load order. Passing a value that is not a main record raises an error.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| aeRecord | IwbMainRecord | The main record to get the specific conflict status for |
+| ARecord | IwbMainRecord | The main record to get the specific conflict status for |
 
 ## Returns
 
-Returns a TConflictThis enumeration value indicating the specific conflict status.
+Returns the integer value of a `ct*` constant. Raises an error when `ARecord` is not a main record.
 
 ## Example
 
 ```pascal
 // Example 1: Check specific record's conflict role
 var
-  conflictThis: TConflictThis;
+  conflictThis: integer;
   conflictStr: string;
 begin
   if Assigned(e) then begin
@@ -60,7 +60,7 @@ var
   plugin: IwbFile;
   i, count, winsCount, losesCount: integer;
   rec: IwbMainRecord;
-  conflictThis: TConflictThis;
+  conflictThis: integer;
 begin
   plugin := FileByIndex(0);
   if Assigned(plugin) then begin
@@ -90,7 +90,7 @@ end;
 var
   masterRec, overrideRec: IwbMainRecord;
   i, count: integer;
-  conflictThis: TConflictThis;
+  conflictThis: integer;
   statusStr: string;
 begin
   masterRec := MasterOrSelf(e);
@@ -101,7 +101,7 @@ begin
 
     conflictThis := ConflictThisForMainRecord(masterRec);
     AddMessage(Format('  Master in %s: %d',
-      [GetFileName(GetFile(masterRec)), Ord(conflictThis)]));
+      [GetFileName(GetFile(masterRec)), conflictThis]));
 
     for i := 0 to count - 1 do begin
       overrideRec := OverrideByIndex(masterRec, i);
@@ -114,7 +114,7 @@ begin
           statusStr := ' (loses)';
 
         AddMessage(Format('  %s: %d%s',
-          [GetFileName(GetFile(overrideRec)), Ord(conflictThis), statusStr]));
+          [GetFileName(GetFile(overrideRec)), conflictThis, statusStr]));
       end;
     end;
   end;
@@ -125,14 +125,13 @@ var
   plugin: IwbFile;
   i, count: integer;
   rec: IwbMainRecord;
-  conflictThis: TConflictThis;
-  stats: array[TConflictThis] of integer;
-  ct: TConflictThis;
+  conflictThis: integer;
+  stats: array[0..11] of integer;
+  ct: integer;
 begin
   plugin := FileByIndex(0);
   if Assigned(plugin) then begin
-    // Initialize counters
-    for ct := Low(TConflictThis) to High(TConflictThis) do
+    for ct := ctUnknown to ctConflictLoses do
       stats[ct] := 0;
 
     count := RecordCount(plugin);
@@ -155,4 +154,9 @@ begin
   end;
 end;
 ```
+
+## See Also
+
+- [ConflictAllForMainRecord](IwbMainRecord_ConflictAllForMainRecord.md)
+- [ConflictThisForNode](IwbElement_ConflictThisForNode.md)
 

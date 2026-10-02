@@ -8,22 +8,33 @@ procedure SetIsLight(AFile: IwbFile; AValue: Boolean);
 
 ## Description
 
-Sets or clears the Light (ESL) flag in the file header.
+Sets or clears the light flag in `AFile`'s header.
 
-This function assigns to the IsLight property, which modifies the file header flag controlling light plugin status. Setting this to true marks the file as light, enabling the special FE FormID range and allowing it to not consume a full load order slot. Check CanBeLight before setting to ensure the file is eligible. The change takes effect immediately in memory but must be saved to persist.
+[SetIsESL](IwbFile_SetIsESL.md) and [SetIsSmall](IwbFile_SetIsSmall.md) write the same flag. This does not move the file into a light load-order slot. [CanBeLight](IwbFile_CanBeLight.md) only reports the current slot, so it is not a test of whether the flag may be set.
+
+Nothing changes when the game has no light plugins, or when `AFile` is not a plugin. Changing the flag on a file that is not editable raises. The change is in memory until the file is saved. New FormIDs allocated after the flag is set use the light object-id range.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to set the Light flag on |
-| AValue | Boolean | Whether to set (True) or clear (False) the Light flag |
+| AFile | IwbFile | The file to change |
+| AValue | Boolean | `True` sets the light flag, `False` clears it |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
 ```pascal
-if CanBeLight(f) then
-  SetIsLight(f, True);
+var
+  f: IwbFile;
+begin
+  f := FileByName('MyMod.esp');
+  if Assigned(f) then
+    SetIsLight(f, True);
+end;
 ```
 
 ## See Also

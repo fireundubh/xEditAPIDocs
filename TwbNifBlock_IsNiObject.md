@@ -15,14 +15,7 @@ Tests whether a NIF block matches a specific block type or inherits from it. Thi
 
 The method can check for exact type matches or include inheritance checking. When inheritance checking is enabled, it returns True if the block is of the specified type OR inherits from that type. For example, checking if a BSTriShape IsNiObject("NiAVObject", True) returns True because BSTriShape inherits from NiAVObject.
 
-Common NIF inheritance chains:
-- NiObject (base for all blocks)
-  - NiAVObject (base for visible objects)
-    - NiNode (scene graph nodes)
-    - NiTriBasedGeom (base for geometry)
-      - NiTriShape (triangle-based meshes)
-      - NiTriStrips (triangle strip meshes)
-        - BSTriShape (Skyrim SE/FO4 geometry)
+The check walks the block type's ancestors. `NiTriShape` matches `NiTriBasedGeom` and `NiAVObject`. `BSTriShape` matches `NiAVObject`, not `NiTriShape` or `NiTriBasedGeom`. `NiTriStrips` is a separate `NiTriBasedGeom` descendant.
 
 ## Parameters
 
@@ -61,8 +54,8 @@ begin
       if block.IsNiObject('BSTriShape', False) then
         AddMessage('Exact match: BSTriShape');
 
-      if block.IsNiObject('NiTriShape', True) then
-        AddMessage('Inherits from NiTriShape');
+      if block.IsNiObject('NiAVObject', True) then
+        AddMessage('Inherits from NiAVObject');
     end;
   finally
     nif.Free;

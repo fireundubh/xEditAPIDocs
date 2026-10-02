@@ -30,17 +30,19 @@ Returns the parent IwbMainRecord associated with the child group, or nil if not 
 
 ```pascal
 var
-    cell: IwbMainRecord;
+  grp: IwbGroupRecord;
+  owner: IwbMainRecord;
 begin
-    // get CELL record of GRUP record
-    cell := ChildrenOf(cell);
-    
-    if not Assigned(cell) then
-        Exit;
-    
-    // dump reference if matches location type
-    if GetElementNativeValues(cell, 'XLCN') = LCTNRef then
-        AddMessage(Name(e));
+  if not Assigned(e) then
+    Exit;
+
+  grp := ChildGroup(e);
+  if not Assigned(grp) then
+    Exit;
+
+  owner := ChildrenOf(grp);
+  if Assigned(owner) then
+    AddMessage(Name(owner));
 end;
 ```
 

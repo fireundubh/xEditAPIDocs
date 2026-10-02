@@ -4,10 +4,10 @@
 
 ```pascal
 procedure PropertiesByType(ABlockType: string; AList: TList);
-procedure PropertiesByType(ABlockType: string; AList: TList; AInherited: Boolean);
+procedure PropertiesByType(ABlockType: string; AInherited: Boolean; AList: TList);
 ```
 
-**Access via:** `block.PropertiesByType(ABlockType, AList)` or `block.PropertiesByType(ABlockType, AList, Inherited)`
+**Access via:** `block.PropertiesByType(ABlockType, AList)` or `block.PropertiesByType(ABlockType, AInherited, AList)`
 
 ## Description
 
@@ -29,8 +29,8 @@ The list must be created before calling this method and should be freed by the c
 | Name | Type | Description |
 |------|------|-------------|
 | ABlockType | string | The property type to search for |
-| AList | TList | The list to populate with matching properties |
-| AInherited | Boolean | Optional. If True, include inherited types; if False, exact match only. Default is False |
+| AInherited | Boolean | Optional. Second argument of the three-argument form. If True, include inherited types. Omitted in the two-argument form (exact match) |
+| AList | TList | The list to populate with matching properties. Second argument when AInherited is omitted; third argument when it is passed |
 
 ## Returns
 
@@ -55,7 +55,7 @@ begin
 
     if Assigned(geometry) then begin
       // Find all shader properties (including derived types)
-      geometry.PropertiesByType('BSShaderProperty', shaderList, True);
+      geometry.PropertiesByType('BSShaderProperty', True, shaderList);
 
       AddMessage('Found ' + IntToStr(shaderList.Count) + ' shader properties:');
       for i := 0 to shaderList.Count - 1 do begin

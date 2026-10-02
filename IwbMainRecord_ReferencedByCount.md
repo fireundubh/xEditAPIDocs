@@ -10,7 +10,7 @@ function ReferencedByCount(ARecord: IwbMainRecord): integer;
 
 Returns the count of records that reference this record via FormID fields.
 
-This function retrieves the ReferencedByCount property, which counts all records containing FormID fields that point to this record. This includes all reference types (base object references, parent references, etc.). Returns 0 for unreferenced records or invalid inputs. Building the reference list may be slow for heavily-referenced records. Use BuildRef first to ensure references are tracked.
+The count includes every record whose FormID fields point at this record. The list is stored on the master, so an override reports the same count as its master. Returns 0 when nothing references the record, when references have not been built, or when `ARecord` is not a main record. [BuildRef](IwbElement_BuildRef.md) on this record rebuilds its outgoing references, not this incoming list.
 
 ## Parameters
 
@@ -20,7 +20,7 @@ This function retrieves the ReferencedByCount property, which counts all records
 
 ## Returns
 
-Returns the number of records that reference this record as an integer.
+Returns the number of records that reference this record as an integer, or 0 when the list is empty or `ARecord` is not a main record.
 
 ## Example
 

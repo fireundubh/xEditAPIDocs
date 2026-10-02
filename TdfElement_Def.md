@@ -6,6 +6,8 @@
 property Def: TdfDef;
 ```
 
+Access via: `element.Def`
+
 ## Description
 
 Returns the definition object that defines the structure and behavior of this element.

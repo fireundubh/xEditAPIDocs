@@ -58,12 +58,18 @@ begin
 
     if Assigned(keywords) and Assigned(element) then begin
       inKeywords := IndexOf(keywords, element) >= 0;
-      AddMessage(Format('Element is in keywords: %s', [BoolToStr(inKeywords, True)]));
+      if inKeywords then
+        AddMessage('Element is in keywords: True')
+      else
+        AddMessage('Element is in keywords: False');
     end;
 
     if Assigned(conditions) and Assigned(element) then begin
       inConditions := IndexOf(conditions, element) >= 0;
-      AddMessage(Format('Element is in conditions: %s', [BoolToStr(inConditions, True)]));
+      if inConditions then
+        AddMessage('Element is in conditions: True')
+      else
+        AddMessage('Element is in conditions: False');
     end;
   end;
 end;
@@ -101,7 +107,7 @@ begin
         keywordIndex := IndexOf(keywords, targetKeyword);
         if keywordIndex >= 0 then begin
           AddMessage(Format('Removing keyword at position %d', [keywordIndex]));
-          RemoveByIndex(keywords, keywordIndex);
+          RemoveByIndex(keywords, keywordIndex, True);
         end;
       end else
         AddMessage('Target keyword not found');

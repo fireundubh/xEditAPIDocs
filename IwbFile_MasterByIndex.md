@@ -8,32 +8,39 @@ function MasterByIndex(AFile: IwbFile; AIndex: Integer): IwbFile;
 
 ## Description
 
-Returns the master file at the specified zero-based index in the master list.
+Returns the master at `AIndex` in `AFile`'s current master list.
 
-This function accesses the Masters property by index with bounds checking. Returns the IwbFile interface for the master at that position in the file header's master list. Returns nil if the index is >= MasterCount. The order of masters in the list is significant for FormID reference resolution. Master 0 is always the first dependency.
+The index is zero-based. Master 0 is the first dependency. The list is the one after any masters added, removed, or sorted in this session. It does not include `AFile` itself.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to retrieve the master from |
-| AIndex | Integer | The zero-based index of the master file in the master list |
+| AFile | IwbFile | The file whose masters are indexed |
+| AIndex | Integer | Zero-based index, from 0 through `MasterCount(AFile) - 1` |
 
 ## Returns
 
-Returns the IwbFile interface for the master file at the specified index.
+The master file at that index. The result is unassigned when `AIndex` is negative, `AIndex` is not less than [MasterCount](IwbFile_MasterCount.md), or `AFile` is not a file.
 
 ## Example
 
 ```pascal
-f := FileByName('Dawnguard.esm');
-m := MasterByIndex(f, 0);  // Skyrim.esm
+var
+  f, m: IwbFile;
+begin
+  f := FileByName('Dawnguard.esm');
+  if Assigned(f) then begin
+    m := MasterByIndex(f, 0);
+    if Assigned(m) then
+      AddMessage(GetFileName(m));
+  end;
+end;
 ```
 
 ## See Also
 
 - [AddMasterIfMissing](IwbFile_AddMasterIfMissing.md)
-- [AddMasters](IwbFile_AddMasters.md)
 - [CleanMasters](IwbFile_CleanMasters.md)
 - [GetMasters](IwbFile_GetMasters.md)
 - [HasMaster](IwbFile_HasMaster.md)
@@ -41,5 +48,3 @@ m := MasterByIndex(f, 0);  // Skyrim.esm
 - [MasterOrSelf](IwbMainRecord_MasterOrSelf.md)
 - [MasterCount](IwbFile_MasterCount.md)
 - [SortMasters](IwbFile_SortMasters.md)
-
-

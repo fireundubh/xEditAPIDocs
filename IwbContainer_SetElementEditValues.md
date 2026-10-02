@@ -10,7 +10,7 @@ procedure SetElementEditValues(AContainer: IwbContainer; APath: string; AValue: 
 
 Changes the edit value of an element in the container identified by the specified path.
 
-This procedure modifies the human-readable edit value of an element. The path parameter uses slash notation to navigate to nested elements. The value is converted from string to the appropriate type for the target element.
+The path uses backslashes, the same form as ElementByPath, including `\[n]` for an array index. If the path does not exist, nothing changes. If the element exists but cannot be edited, the call raises, unless unsafe scripts are enabled. This procedure returns nothing.
 
 ## Parameters
 
@@ -24,7 +24,6 @@ This procedure modifies the human-readable edit value of an element. The path pa
 
 ```pascal
 // Example 1: Update nested struct values
-var
 begin
   if Assigned(e) then begin
     BeginUpdate(e);
@@ -40,10 +39,9 @@ begin
 end;
 
 // Example 2: Batch update record properties
-var
 begin
   if Assigned(e) then begin
-    BeginUpdate(rec);
+    BeginUpdate(e);
     try
       SetElementEditValues(e, 'EDID', 'MyNewItem');
       SetElementEditValues(e, 'FULL', 'My New Item Name');

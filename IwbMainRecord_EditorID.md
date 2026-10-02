@@ -25,9 +25,15 @@ Returns the Editor ID of the record as a string.
 ## Example
 
 ```pascal
-sEditorID := EditorID(e);
-if Assigned(sEditorID) then
-	AddMessage(sEditorID);
+var
+  sEditorID: string;
+begin
+  if Assigned(e) then begin
+    sEditorID := EditorID(e);
+    if sEditorID <> '' then
+      AddMessage(sEditorID);
+  end;
+end;
 ```
 
 ## See Also

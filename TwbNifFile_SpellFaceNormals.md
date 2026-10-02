@@ -19,7 +19,6 @@ The spell:
 - Recalculates face normals from triangle vertex positions
 - Updates vertex normals by averaging adjacent face normals
 - Adds normal data to geometry that lacks it
-- Updates bounds for each modified geometry block
 
 Proper normals are essential for correct lighting. After modifying vertex positions, always recalculate normals before saving.
 
@@ -44,7 +43,7 @@ begin
     for i := 0 to nif.BlocksCount - 1 do begin
       geometry := nif.Blocks[i];
 
-      if geometry.IsNiObject('NiTriBasedGeom', True) then begin
+      if geometry.IsNiObject('BSTriShape', True) then begin
         // Scale vertices (simplified example)
         vertex := geometry.Elements['Vertex Data\[0]\Vertex'];
         if Assigned(vertex) then begin

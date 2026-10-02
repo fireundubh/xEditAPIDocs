@@ -8,17 +8,19 @@ function PrecombinedMesh(ARecord: IwbMainRecord): string;
 
 ## Description
 
-Returns the precombined mesh file path for `ARecord` if record is a Fallout 4 reference but not a placed actor
+Returns the precombined mesh path for a Fallout 4 or Fallout 76 placed reference that belongs to a cell precombine.
+
+Supported references include `REFR` and several projectile and hazard types. Placed actors (`ACHR`) are not included. Returns an empty string for other games, other signatures, references that are not precombined, and records that are not main records.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ARecord | IwbMainRecord | The Fallout 4 reference record to get the precombined mesh path from |
+| ARecord | IwbMainRecord | The placed reference to look up |
 
 ## Returns
 
-Returns the file path to the precombined mesh as a string.
+Returns the precombined mesh path, or an empty string when the record has none.
 
 ## Example
 
@@ -81,7 +83,9 @@ begin
     if HasPrecombinedMesh(e) then begin
       meshPath := PrecombinedMesh(e);
       dataPath := DataPath; // Get game data directory
-      fullPath := IncludeTrailingPathDelimiter(dataPath) + meshPath;
+      if (Length(dataPath) > 0) and (Copy(dataPath, Length(dataPath), 1) <> '\') then
+        dataPath := dataPath + '\';
+      fullPath := dataPath + meshPath;
 
       if FileExists(fullPath) then
         AddMessage(Format('%s: Precombined mesh exists', [Name(e)]))

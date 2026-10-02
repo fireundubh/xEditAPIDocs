@@ -6,15 +6,15 @@
 procedure BeginUpdate;
 ```
 
+Access via: `element.BeginUpdate`
+
 ## Description
 
-Begins a batch update operation, suspending change notifications and callbacks.
+Begins an update. Value and text callbacks on this element are skipped until EndUpdate.
 
-The BeginUpdate method marks the element as being in an update state, which prevents certain callbacks and validations from firing during bulk modifications. This improves performance when making multiple changes and ensures consistency by deferring validation until EndUpdate is called.
+BeginUpdate sets an updating flag. While that flag is set, the element's value and text callbacks are not invoked. EndUpdate clears the flag. The calls are not counted: one EndUpdate clears the flag even if BeginUpdate ran more than once.
 
-BeginUpdate and EndUpdate calls can be nested. The element only exits the update state when the matching EndUpdate is called for the outermost BeginUpdate.
-
-Always pair BeginUpdate with EndUpdate in a try-finally block to ensure the update state is properly cleared even if an exception occurs.
+Always pair BeginUpdate with EndUpdate in a try-finally block so the flag is cleared if an exception occurs.
 
 This method has no return value.
 
@@ -30,14 +30,15 @@ This method does not return a value.
 
 ```pascal
 var
-    element: TdfElement;
+    element, child: TdfElement;
     i: Integer;
 begin
     element.BeginUpdate;
     try
         // Make multiple changes efficiently
-        for i := 0 to 99 do begin
-            element[i].NativeValue := i * 100;
+        for i := 0 to Pred(element.Count) do begin
+            child := element[i];
+            child.NativeValue := i * 100;
         end;
     finally
         element.EndUpdate;

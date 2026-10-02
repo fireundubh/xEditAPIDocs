@@ -6,6 +6,8 @@
 procedure SaveToFile(const aFileName: string);
 ```
 
+Access via: `element.SaveToFile(FileName)`
+
 ## Description
 
 Serializes this element to binary format and writes it to a file.
@@ -40,9 +42,8 @@ begin
         inputPath := 'C:\Games\Skyrim\Data\Meshes\test.nif';
         outputPath := 'C:\Temp\modified_test.nif';
 
-        // Load, modify, and save
         nifFile.LoadFromFile(inputPath);
-        nifFile.Elements['Header\Creator'].EditValue := 'xEdit Script';
+        nifFile.EditValues['Header\Creator'] := 'xEdit Script';
 
         nifFile.SaveToFile(outputPath);
         AddMessage('Saved modified NIF to: ' + outputPath);

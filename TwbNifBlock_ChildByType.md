@@ -41,7 +41,7 @@ begin
   try
     nif.LoadFromFile('meshes\clutter\ruins\ruinspot02.nif');
 
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
 
     if Assigned(rootNode) then begin
       // Find the first geometry child

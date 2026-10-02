@@ -3,34 +3,27 @@
 ## Syntax
 
 ```pascal
-function GetAssetsList(): string;
+function GetAssetsList: Variant;
 procedure GetAssetsList(AList: TStrings);
 ```
 
-**Access via:** `block.GetAssetsList()` or `block.GetAssetsList(AList)`
+**Access via:** `block.GetAssetsList` or `block.GetAssetsList(AList)`
 
 ## Description
 
-Retrieves the list of asset file paths referenced by this block and its children. Assets include textures, material files, and other external resources.
+Registered on `TwbNifBlock`, but the block implementation returns no paths. The no-argument call does not produce asset paths. The `TStrings` call adds nothing and returns nothing.
 
-When called with no parameters, returns a newline-delimited string of asset paths. When called with a TStrings parameter, adds each asset path to the provided list.
-
-This method searches the block and all its child blocks for asset references including:
-- Texture file paths (diffuse, normal, specular, etc.)
-- Material files (BGSM, BGEM)
-- Other referenced files
-
-Asset paths are typically relative to the game's Data folder.
+Use [TwbNifFile.GetAssetsList](TwbNifFile_GetAssetsList.md) to list textures and other external files in the NIF.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AList | TStrings | Optional. If provided, assets are added to this list |
+| AList | TStrings | Optional. When passed, the call appends to this list. The block implementation appends nothing |
 
 ## Returns
 
-When called without parameters, returns a string with asset paths separated by newlines. When called with a TStrings parameter, returns nothing (procedure).
+The no-argument call returns no asset paths. The `TStrings` call returns nothing.
 
 ## Example
 
@@ -39,8 +32,6 @@ var
   nif: TwbNifFile;
   geometry: TwbNifBlock;
   assets: TStringList;
-  i: Integer;
-  assetStr: string;
 begin
   nif := TwbNifFile.Create;
   assets := TStringList.Create;
@@ -50,15 +41,8 @@ begin
     geometry := nif.BlockByType('BSTriShape');
 
     if Assigned(geometry) then begin
-      // Get assets as a delimited string
-      assetStr := geometry.GetAssetsList();
-      AddMessage('Assets (string): ' + assetStr);
-
-      // Get assets in a list for easier processing
       geometry.GetAssetsList(assets);
-      AddMessage('Found ' + IntToStr(assets.Count) + ' assets:');
-      for i := 0 to assets.Count - 1 do
-        AddMessage('  ' + assets[i]);
+      AddMessage('Block asset count: ' + IntToStr(assets.Count));
     end;
   finally
     assets.Free;

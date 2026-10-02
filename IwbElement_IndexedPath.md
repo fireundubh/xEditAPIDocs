@@ -88,4 +88,4 @@ end;
 - [FullPath](IwbElement_FullPath.md)
 - [PathName](IwbElement_PathName.md)
 - [Name](IwbElement_Name.md)
-- [SortOrderOf](IwbElement_SortOrderOf.md)
+- [SortKey](IwbElement_SortKey.md)

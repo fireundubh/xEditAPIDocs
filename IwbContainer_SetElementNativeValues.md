@@ -10,7 +10,7 @@ procedure SetElementNativeValues(AContainer: IwbContainer; APath: string; AValue
 
 Changes the native value of an element in the container identified by the specified path.
 
-This procedure modifies the internal native value of an element. The path parameter uses dot notation to navigate to nested elements. The value must match the native type expected by the target element.
+The path uses backslashes, the same form as ElementByPath, including `\[n]` for an array index. `AValue` is stored as the element's native value, so it must match that element's type. If the path does not exist, nothing changes. If the element exists but cannot be edited, the call raises, unless unsafe scripts are enabled. This procedure returns nothing.
 
 ## Parameters
 
@@ -24,7 +24,6 @@ This procedure modifies the internal native value of an element. The path parame
 
 ```pascal
 // Example 1: Update numeric values with correct types
-var
 begin
   if Assigned(e) then begin
     BeginUpdate(e);

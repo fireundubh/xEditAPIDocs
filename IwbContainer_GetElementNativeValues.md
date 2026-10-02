@@ -19,7 +19,7 @@ Returns the native value of an element in the container by path. The return type
 
 ## Returns
 
-Returns the native value as a Variant type.
+The native value as a Variant. Unassigned if the argument is not a container. A path that does not resolve is unassigned, unless the container can still produce a member native value for that name. The Variant kind depends on the element (integer, float, string, and so on).
 
 ## Example
 

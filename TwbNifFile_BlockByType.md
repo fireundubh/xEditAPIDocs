@@ -41,8 +41,10 @@ begin
   try
     nif.LoadFromFile('meshes\armor\iron\ironarmor.nif');
 
-    // Find the first geometry block (with inheritance)
-    geometry := nif.BlockByType('NiTriBasedGeom', True);
+    // BSTriShape does not inherit NiTriBasedGeom. Search both.
+    geometry := nif.BlockByType('BSTriShape');
+    if not Assigned(geometry) then
+      geometry := nif.BlockByType('NiTriBasedGeom', True);
 
     if Assigned(geometry) then begin
       AddMessage('Found geometry: ' + geometry.BlockType);

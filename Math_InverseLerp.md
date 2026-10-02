@@ -27,8 +27,12 @@ Returns the interpolation factor (0 to 1) that produces AValue when interpolatin
 ## Example
 
 ```pascal
-f := InverseLerp(10, 20, 15);
-AddMessage(FloatToStr(f)); // Output: 0.5
+var
+  f: Double;
+begin
+  f := InverseLerp(10, 20, 15);
+  AddMessage(FloatToStr(f));
+end;
 ```
 
 ## See Also

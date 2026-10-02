@@ -8,7 +8,9 @@ procedure SetIsVisibleWhenDistant(ARecord: IwbMainRecord; AFlag: boolean);
 
 ## Description
 
-Flags `ARecord` as Visible When Distant when `AFlag` is `True` and otherwise when `AFlag` is `False`
+Flags `ARecord` as Visible When Distant when `AFlag` is `True` and otherwise when `AFlag` is `False`.
+
+A reference that already sits in a cell child group may be moved when the flag changes. A persistent reference stays in the persistent children group. A non-persistent reference is placed in the distant children group when the flag is set, unless distant references are kept with temporary children, and otherwise is placed in the temporary group.
 
 ## Parameters
 
@@ -16,6 +18,10 @@ Flags `ARecord` as Visible When Distant when `AFlag` is `True` and otherwise whe
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to set the Visible When Distant flag on |
 | AFlag | boolean | Whether to set (True) or clear (False) the Visible When Distant flag |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
@@ -106,7 +112,7 @@ begin
                 if Assigned(refRec) and (Signature(refRec) = 'REFR') then begin
                   baseRec := BaseRecord(refRec);
                   if Assigned(baseRec) and (Signature(baseRec) = 'STAT') then begin
-                    scaleStr := GetElementEditValue(refRec, 'XSCL');
+                    scaleStr := GetElementEditValues(refRec, 'XSCL');
                     if scaleStr <> '' then begin
                       scale := StrToFloat(scaleStr);
                       if scale >= 2.0 then begin // Large scaled objects

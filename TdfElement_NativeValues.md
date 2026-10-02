@@ -6,6 +6,8 @@
 property NativeValues[const aPath: string]: Variant;
 ```
 
+Access via: `element.NativeValues['Translation\X']`
+
 ## Description
 
 Gets or sets the native value of a child element specified by path.
@@ -16,7 +18,7 @@ This is equivalent to calling ElementByPath followed by accessing NativeValue, b
 
 If you already have a reference to the specific element, use NativeValue directly instead.
 
-If the path does not resolve to a valid element, reading returns Null and writing has no effect.
+If the path does not resolve to a valid element, reading returns an Unassigned variant and writing has no effect.
 
 This property is read-write.
 
@@ -28,7 +30,7 @@ This property is read-write.
 
 ## Returns
 
-Returns the native value of the element at the specified path as a Variant, or Null if the path is invalid.
+Returns the native value of the element at the specified path as a Variant, or Unassigned if the path is invalid.
 
 ## Example
 

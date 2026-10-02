@@ -6,6 +6,8 @@
 procedure LoadFromJSONFile(const aFileName: string);
 ```
 
+Access via: `element.LoadFromJSONFile(FileName)`
+
 ## Description
 
 Loads element data from a JSON file by reading and deserializing the JSON structure.
@@ -35,17 +37,18 @@ This method does not return a value.
 ```pascal
 var
     materialFile: TwbBGSMFile;
+    diffuse: TdfElement;
     jsonPath: string;
 begin
     materialFile := TwbBGSMFile.Create;
     try
         jsonPath := 'C:\Temp\material_export.json';
 
-        // Load from JSON
         materialFile.LoadFromJSONFile(jsonPath);
 
-        // Access data
-        AddMessage('Diffuse Texture: ' + materialFile.Elements['Diffuse Texture'].EditValue);
+        diffuse := materialFile.Elements['Diffuse Texture'];
+        if Assigned(diffuse) then
+            AddMessage('Diffuse Texture: ' + diffuse.EditValue);
     finally
         materialFile.Free;
     end;

@@ -8,7 +8,7 @@ function ChildGroup(AWorldspace: IwbMainRecord): IwbGroupRecord;
 
 ## Description
 
-Returns the group contained by `AWorldspace`
+Returns the child group of a worldspace, cell, or dialogue topic. When visible-when-distant records are stored as quest children, a quest has one too. Returns nil when the record has no child group.
 
 ## Parameters
 
@@ -80,7 +80,7 @@ begin
   end;
 end;
 
-// Example 3: Process all topics in a dialogue quest
+// Example 3: Process INFO records under a dialogue topic
 var
   childGroup: IwbGroupRecord;
   i, count: integer;
@@ -90,12 +90,12 @@ begin
     childGroup := ChildGroup(e);
     if Assigned(childGroup) then begin
       count := ElementCount(childGroup);
-      AddMessage(Format('%s has %d topic(s):', [EditorID(e), count]));
+      AddMessage(Format('%s has %d response(s):', [EditorID(e), count]));
 
       for i := 0 to count - 1 do begin
         topicRec := ElementByIndex(childGroup, i);
         if Assigned(topicRec) and (Signature(topicRec) = 'INFO') then
-          AddMessage(Format('  Topic %d: %s', [i, EditorID(topicRec)]));
+          AddMessage(Format('  Response %d: %s', [i, EditorID(topicRec)]));
       end;
     end;
   end;

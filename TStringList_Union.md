@@ -3,8 +3,10 @@
 ## Syntax
 
 ```pascal
-procedure AList1.Union(AList2: TStringList);
+procedure Union(AList2: TStringList);
 ```
+
+Access via: `list.Union(Other)`
 
 ## Description
 
@@ -20,10 +22,30 @@ The list is automatically sorted and duplicates are set to ignore before the ope
 |------|------|-------------|
 | AList2 | TStringList | The string list to union with the current list |
 
+## Returns
+
+Returns nothing. The list is modified in place.
+
 ## Example
 
 ```pascal
-list1.Union(list2);
+var
+  list1, list2: TStringList;
+begin
+  list1 := TStringList.Create;
+  try
+    list2 := TStringList.Create;
+    try
+      list1.Add('Alpha');
+      list2.Add('Beta');
+      list1.Union(list2);
+    finally
+      list2.Free;
+    end;
+  finally
+    list1.Free;
+  end;
+end;
 ```
 
 ## See Also

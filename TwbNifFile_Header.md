@@ -12,13 +12,12 @@ Access via: `nifFile.Header`
 
 Returns the header block of the NIF file. The header contains metadata about the file including version information, block count, string tables, and other file-level data.
 
-The header is always the first block in a NIF file (index 0) and contains essential information:
+The header is not part of `Blocks`. `Blocks[0]` is the first block after the header. The header contains:
 - NIF version numbers
 - Block type names table
 - Block count
 - String palette (in newer versions)
 - Export info and metadata
-- Root node references
 
 You typically don't need to modify the header directly as it's automatically managed by the TwbNifFile class, but you can read its values to understand the file structure.
 
@@ -26,7 +25,7 @@ This is a read-only property.
 
 ## Returns
 
-Returns the header block (always block index 0).
+Returns the header block. It is not `Blocks[0]`.
 
 ## Example
 

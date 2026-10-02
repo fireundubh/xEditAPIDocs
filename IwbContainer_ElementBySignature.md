@@ -8,7 +8,7 @@ function ElementBySignature(AContainer: IwbContainer; ASignature: string): IwbEl
 
 ## Description
 
-Returns an element by its signature (record type) from the container. The signature is typically a 4-character identifier.
+Returns the first direct child whose signature matches `ASignature`. The comparison is exact. When the argument is a container, a string shorter than 4 characters raises; a longer string uses its first four characters. Returns nil if no child matches. If the argument is not a container, the result is unassigned and a short signature does not raise.
 
 ## Parameters
 
@@ -19,7 +19,7 @@ Returns an element by its signature (record type) from the container. The signat
 
 ## Returns
 
-Returns the element with the specified signature as an IwbElement interface.
+The first matching child, or nil if none matches. If the argument is not a container, the result is unassigned. A signature shorter than 4 characters raises only when the argument is a container.
 
 ## Example
 
@@ -61,7 +61,7 @@ end;
 // Example 3: Access model data by signature
 var
   modelContainer: IwbContainer;
-  modlElement, modb Element, modtElement: IwbElement;
+  modlElement, modbElement, modtElement: IwbElement;
   modelPath, bounds, textureHash: string;
 begin
   if Assigned(e) then begin

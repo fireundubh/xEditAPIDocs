@@ -35,7 +35,6 @@ var
   nif: TwbNifFile;
   geometry: TwbNifBlock;
   shader: TwbNifBlock;
-  texSet: TwbNifBlock;
   alphaProp: TwbNifBlock;
 begin
   nif := TwbNifFile.Create;
@@ -48,14 +47,8 @@ begin
       // Get the shader property
       shader := geometry.PropertyByType('BSLightingShaderProperty', False);
 
-      if Assigned(shader) then begin
+      if Assigned(shader) then
         AddMessage('Shader Flags 1: ' + IntToStr(shader.NativeValues['Shader Flags 1']));
-
-        // Many shaders have a texture set as a child property
-        texSet := shader.PropertyByType('BSShaderTextureSet', False);
-        if Assigned(texSet) then
-          AddMessage('Diffuse: ' + texSet.EditValues['Textures\[0]']);
-      end;
 
       // Check for alpha property
       alphaProp := geometry.PropertyByType('NiAlphaProperty', False);

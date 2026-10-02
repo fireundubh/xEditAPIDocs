@@ -8,26 +8,35 @@ function RecordByIndex(AFile: IwbFile; AIndex: Integer): IwbMainRecord;
 
 ## Description
 
-Returns the main record at the specified zero-based index within the file.
+Returns the main record at `AIndex` in `AFile`.
 
-This function accesses the Records property by index, providing array-style access to all main records in the file. The implementation includes a bounds check and returns nil if the index is >= RecordCount. Index order is determined by the file's internal record organization. Use RecordCount to get the valid index range (0 to RecordCount-1).
+The index is zero-based and runs through [RecordCount](IwbFile_RecordCount.md). The records are the file's own main records, ordered by FormID. Groups and the file header are not in this list.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to retrieve the record from |
-| AIndex | Integer | The zero-based index of the record in the file |
+| AFile | IwbFile | The file to read |
+| AIndex | Integer | Zero-based index, from 0 through `RecordCount(AFile) - 1` |
 
 ## Returns
 
-Returns the IwbMainRecord at the specified index.
+The main record at that index. The result is unassigned when `AIndex` is negative, `AIndex` is not less than [RecordCount](IwbFile_RecordCount.md), or `AFile` is not a file.
 
 ## Example
 
 ```pascal
-f := FileByName('Skyrim.esm');
-r := RecordByIndex(f, 0);   // --> DoorMarker [STAT:00000001]
+var
+  f: IwbFile;
+  r: IwbMainRecord;
+begin
+  f := FileByName('Skyrim.esm');
+  if Assigned(f) then begin
+    r := RecordByIndex(f, 0);
+    if Assigned(r) then
+      AddMessage(Name(r));
+  end;
+end;
 ```
 
 ## See Also
@@ -36,5 +45,3 @@ r := RecordByIndex(f, 0);   // --> DoorMarker [STAT:00000001]
 - [RecordByFormID](IwbFile_RecordByFormID.md)
 - [RecordFromFileByFormID](IwbFile_RecordFromFileByFormID.md)
 - [RecordCount](IwbFile_RecordCount.md)
-
-

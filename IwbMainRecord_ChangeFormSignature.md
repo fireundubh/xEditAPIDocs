@@ -19,6 +19,10 @@ The procedure modifies only the 4-character signature of the record while preser
 | ARecord | IwbMainRecord | The main record to change the signature of |
 | ANewSignature | string | The new 4-character signature to assign to the record |
 
+## Returns
+
+This procedure returns nothing. A signature shorter than 4 characters raises an error.
+
 ## Example
 
 ```pascal

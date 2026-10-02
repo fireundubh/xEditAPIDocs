@@ -8,7 +8,7 @@ function HighestOverrideOrSelf(ARecord: IwbMainRecord; AMaxLoadOrder: integer): 
 
 ## Description
 
-Returns an overriding record for `ARecord` that loads last nearest to `AMaxLoadOrder`, or the record itself
+Returns the last override of `ARecord` whose file load order is less than or equal to `AMaxLoadOrder`, skipping partial forms. If none qualify, returns `ARecord` itself, even when its own load order is higher than `AMaxLoadOrder`.
 
 ## Parameters
 
@@ -19,7 +19,7 @@ Returns an overriding record for `ARecord` that loads last nearest to `AMaxLoadO
 
 ## Returns
 
-Returns the highest override record up to the specified load order, or the record itself if no override exists.
+Returns the last override of `ARecord` whose file load order is less than or equal to `AMaxLoadOrder`. Partial forms are skipped. If no override qualifies, returns `ARecord` itself, even when that record's own load order is higher than `AMaxLoadOrder`.
 
 ## Example
 

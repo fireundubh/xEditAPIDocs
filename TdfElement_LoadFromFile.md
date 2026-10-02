@@ -6,13 +6,15 @@
 procedure LoadFromFile(const aFileName: string);
 ```
 
+Access via: `element.LoadFromFile(FileName)`
+
 ## Description
 
 Loads binary data into this element by reading and deserializing from a file.
 
 The LoadFromFile method reads the entire contents of the specified file and parses it according to the element's definition structure. This is the most common way to load binary format files (NIF, BGSM, BGEM, DDS, etc.) into a structured element tree.
 
-The file is read completely into memory before parsing begins. Any existing data in the element is replaced with the newly loaded data.
+The file is opened and parsed from its bytes. Any existing data in the element is replaced with the newly loaded data.
 
 If the file does not exist or cannot be read, an exception is raised.
 
@@ -33,17 +35,17 @@ This method does not return a value.
 ```pascal
 var
     nifFile: TwbNifFile;
+    headerVersion: TdfElement;
     filePath: string;
 begin
     nifFile := TwbNifFile.Create;
     try
         filePath := 'C:\Games\Skyrim\Data\Meshes\Actors\Character\Character.nif';
-
-        // Load NIF file
         nifFile.LoadFromFile(filePath);
 
-        // Access parsed structure
-        AddMessage('NIF Version: ' + nifFile.Elements['Header\Version'].EditValue);
+        headerVersion := nifFile.Elements['Header\Version'];
+        if Assigned(headerVersion) then
+            AddMessage('NIF Version: ' + headerVersion.EditValue);
         AddMessage('Block Count: ' + IntToStr(nifFile.BlocksCount));
     finally
         nifFile.Free;

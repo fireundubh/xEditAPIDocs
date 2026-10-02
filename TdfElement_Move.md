@@ -6,6 +6,8 @@
 procedure Move(CurIndex, NewIndex: Integer);
 ```
 
+Access via: `element.Move(CurIndex, NewIndex)`
+
 ## Description
 
 Moves a child element from one position to another within this container.

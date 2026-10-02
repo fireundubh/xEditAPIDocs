@@ -6,6 +6,8 @@
 property Name: string;
 ```
 
+Access via: `element.Name`
+
 ## Description
 
 Returns the element's name as defined by its definition.

@@ -10,7 +10,7 @@ procedure SetFormVCS2(ARecord: IwbMainRecord; AValue: Cardinal);
 
 Changes the native value of the `VCS2` property of `ARecord` to `AValue`
 
-The `VCS2` property corresponds to the `Version Control Info 2` element in the Record Header.
+The `VCS2` property corresponds to the `Version Control Info 2` element in the Record Header. Games before Fallout 3 ignore this call.
 
 ## Parameters
 
@@ -18,6 +18,10 @@ The `VCS2` property corresponds to the `Version Control Info 2` element in the R
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to set the version control info on |
 | AValue | Cardinal | The new Version Control Info 2 value |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
@@ -33,41 +37,32 @@ begin
   end;
 end;
 
-// Example 2: Copy both VCS values from source to target
+// Example 2: Copy both VCS values from the master
 var
-  sourceRec: IwbMainRecord;
-  sourceFile: IwbFile;
-  fixedFormID: Cardinal;
+  masterRec: IwbMainRecord;
   sourceVCS1, sourceVCS2: Cardinal;
 begin
   if Assigned(e) then begin
-    sourceFile := FileByIndex(0);
-    if Assigned(sourceFile) then begin
-      fixedFormID := FixedFormID(e);
-      sourceRec := RecordByFormID(sourceFile, fixedFormID, false);
-
-      if Assigned(sourceRec) then begin
-        sourceVCS1 := GetFormVCS1(sourceRec);
-        sourceVCS2 := GetFormVCS2(sourceRec);
-
-        SetFormVCS1(e, sourceVCS1);
-        SetFormVCS2(e, sourceVCS2);
-
-        AddMessage(Format('Copied VCS stamps: VCS1=%d, VCS2=%d',
-          [sourceVCS1, sourceVCS2]));
-      end;
+    masterRec := Master(e);
+    if Assigned(masterRec) then begin
+      sourceVCS1 := GetFormVCS1(masterRec);
+      sourceVCS2 := GetFormVCS2(masterRec);
+      SetFormVCS1(e, sourceVCS1);
+      SetFormVCS2(e, sourceVCS2);
+      AddMessage(Format('Copied VCS stamps: VCS1=%d, VCS2=%d',
+        [sourceVCS1, sourceVCS2]));
     end;
   end;
 end;
 
-// Example 3: Set timestamp-like VCS2 value
+// Example 3: Set an arbitrary VCS2 stamp
 var
-  timestamp: Cardinal;
+  stamp: Cardinal;
 begin
   if Assigned(e) then begin
-    timestamp := DateTimeToUnix(Now);
-    SetFormVCS2(e, timestamp);
-    AddMessage(Format('%s: Set VCS2 timestamp to %d', [EditorID(e), timestamp]));
+    stamp := 20261001;
+    SetFormVCS2(e, stamp);
+    AddMessage(Format('%s: Set VCS2 to %d', [EditorID(e), stamp]));
   end;
 end;
 

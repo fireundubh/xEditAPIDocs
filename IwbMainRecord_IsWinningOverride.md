@@ -8,7 +8,9 @@ function IsWinningOverride(ARecord: IwbMainRecord): boolean;
 
 ## Description
 
-Returns whether `ARecord` loads last in the current load order
+Returns whether `ARecord` is the winning record in its override chain.
+
+A partial form returns `False`. A master returns `True` only when it has no non-partial override. Any other record returns `True` when it is that master's winning override. Returns `False` when `ARecord` is not a main record.
 
 ## Parameters
 
@@ -18,7 +20,7 @@ Returns whether `ARecord` loads last in the current load order
 
 ## Returns
 
-Returns `True` if the record loads last in the current load order, `False` otherwise.
+Returns `True` when `ARecord` is the winning non-partial record, `False` otherwise.
 
 ## Example
 
@@ -88,18 +90,19 @@ end;
 
 // Example 4: Find which plugin wins for a FormID
 var
-  overrideRec: IwbMainRecord;
+  masterRec, overrideRec: IwbMainRecord;
   i, count: integer;
   winningFile: string;
 begin
   if Assigned(e) then begin
-    count := OverrideCount(e);
-    AddMessage(Format('Checking %d overrides for %s...', [count, EditorID(e)]));
-
-    for i := 0 to count - 1 do begin
-      overrideRec := OverrideByIndex(e, i);
-      if Assigned(overrideRec) then begin
-        if IsWinningOverride(overrideRec) then begin
+    masterRec := MasterOrSelf(e);
+    if IsWinningOverride(masterRec) then
+      AddMessage(Format('Winner: %s', [GetFileName(GetFile(masterRec))]))
+    else begin
+      count := OverrideCount(masterRec);
+      for i := 0 to count - 1 do begin
+        overrideRec := OverrideByIndex(masterRec, i);
+        if Assigned(overrideRec) and IsWinningOverride(overrideRec) then begin
           winningFile := GetFileName(GetFile(overrideRec));
           AddMessage(Format('Winner: %s', [winningFile]));
           Break;

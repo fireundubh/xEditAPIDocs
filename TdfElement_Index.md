@@ -6,6 +6,8 @@
 function Index: Integer;
 ```
 
+Access via: `element.Index`
+
 ## Description
 
 Returns the position of this element within its parent's child collection.

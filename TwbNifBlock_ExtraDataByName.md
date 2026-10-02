@@ -44,7 +44,7 @@ begin
   try
     nif.LoadFromFile('meshes\armor\iron\ironarmor.nif');
 
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
 
     if Assigned(rootNode) then begin
       // Look for BSX flags

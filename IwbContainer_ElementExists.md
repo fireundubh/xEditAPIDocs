@@ -32,7 +32,7 @@ var
 begin
   if Assigned(e) then begin
     if ElementExists(e, 'Model\MODL') then begin
-      modelPath := GetElementEditValue(e, 'Model\MODL');
+      modelPath := GetElementEditValues(e, 'Model\MODL');
       AddMessage('Model path: ' + modelPath);
     end else
       AddMessage('No model data');
@@ -83,7 +83,7 @@ begin
   if Assigned(e) then begin
     // Check if script data exists before accessing
     if ElementExists(e, 'VMAD\Scripts\[0]\scriptName') then begin
-      scriptName := GetElementEditValue(e, 'VMAD\Scripts\[0]\scriptName');
+      scriptName := GetElementEditValues(e, 'VMAD\Scripts\[0]\scriptName');
       AddMessage('First script: ' + scriptName);
     end else if ElementExists(e, 'VMAD') then
       AddMessage('Has VMAD but no scripts')

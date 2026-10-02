@@ -6,6 +6,8 @@
 procedure Assign(const aElement: TdfElement);
 ```
 
+Access via: `element.Assign(source)`
+
 ## Description
 
 Copies all data from another element into this element.
@@ -16,7 +18,7 @@ For value types, this copies the binary data. For containers (structures and arr
 
 This is useful for duplicating elements, creating backups before modifications, or transferring data between similar structures.
 
-If the elements have incompatible structures, the behavior depends on the specific element types - some assignments may partially succeed or raise exceptions.
+Assign does not raise for a type mismatch. It returns without copying when the source is nil, this element is disabled, or the source class does not match: a struct copies only from a struct, an array only from an array, and a value or union only from a value or a union. A value copies bytes only when the source is a value with the same data type and data size; otherwise a value or union copies EditValue.
 
 This method has no return value.
 
@@ -36,19 +38,9 @@ This method does not return a value.
 var
     source, destination: TdfElement;
 begin
-    // Copy data from source to destination
     destination.Assign(source);
-
-    // Verify copy
     AddMessage('Source value: ' + source.EditValue);
     AddMessage('Destination value: ' + destination.EditValue);
-
-    // Useful for backing up before modification
-    backup := TdfElement.Create(element.Def, nil);
-    backup.Assign(element);
-    // Modify element...
-    // Restore if needed:
-    element.Assign(backup);
 end;
 ```
 

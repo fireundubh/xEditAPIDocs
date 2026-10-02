@@ -8,15 +8,15 @@ function OverrideCount(ARecord: IwbMainRecord): integer;
 
 ## Description
 
-Returns the total number of records overriding this record.
+Returns how many records override `ARecord`.
 
-This function retrieves the OverrideCount property, which counts all records in lower-priority files that modify the same FormID. Returns 0 for records with no overrides or invalid inputs. Use with OverrideByIndex to iterate through all overrides. The count includes all overrides regardless of load order, but the master record must have been loaded first.
+The override list is stored on the master only. Calling this on an override returns 0. Pass the master, or [MasterOrSelf](IwbMainRecord_MasterOrSelf.md), to count the chain. The master itself is not included. Returns 0 when `ARecord` is not a main record.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| ARecord | IwbMainRecord | The master record to count overrides for |
+| ARecord | IwbMainRecord | The master record whose overrides are counted. An override returns 0 |
 
 ## Returns
 
@@ -31,11 +31,11 @@ var
   i, count: integer;
 begin
   if Assigned(e) then begin
-    count := OverrideCount(e);
+    count := OverrideCount(MasterOrSelf(e));
     AddMessage(Format('%s has %d override(s):', [EditorID(e), count]));
 
     for i := 0 to count - 1 do begin
-      overrideRec := OverrideByIndex(e, i);
+      overrideRec := OverrideByIndex(MasterOrSelf(e), i);
       if Assigned(overrideRec) then
         AddMessage(Format('  [%d] %s', [i, GetFileName(GetFile(overrideRec))]));
     end;
@@ -77,7 +77,7 @@ var
   count: integer;
 begin
   if Assigned(e) then begin
-    count := OverrideCount(e);
+    count := OverrideCount(MasterOrSelf(e));
 
     if count = 0 then
       AddMessage(Format('%s: No overrides - safe to edit', [EditorID(e)]))
@@ -101,14 +101,14 @@ var
 begin
   if Assigned(e) then begin
     newValue := 'Updated Description';
-    count := OverrideCount(e);
+    count := OverrideCount(MasterOrSelf(e));
 
     AddMessage(Format('Updating %d override(s)...', [count]));
 
     for i := 0 to count - 1 do begin
-      overrideRec := OverrideByIndex(e, i);
+      overrideRec := OverrideByIndex(MasterOrSelf(e), i);
       if Assigned(overrideRec) then begin
-        SetElementEditValue(overrideRec, 'DESC', newValue);
+        SetElementEditValues(overrideRec, 'DESC', newValue);
         AddMessage(Format('  Updated: %s', [GetFileName(GetFile(overrideRec))]));
       end;
     end;

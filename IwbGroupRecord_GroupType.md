@@ -34,19 +34,27 @@ Possible values:
 
 ## Returns
 
-Returns the group type as an integer value (0-10).
+The group type as an integer from 0 to 10, or -1 if the argument is not a group.
 
 ## Example
 
 ```pascal
 var
-    childGroup: IwbGroupRecord;
-    groupType: integer;
+  cellGroup, tempGroup: IwbGroupRecord;
+  grpType: integer;
 begin
-    childGroup := FindChildGroup(ChildGroup(cell), 9, cell);
-    groupType  := GroupType(child);
+  if not Assigned(e) then
+    Exit;
 
-    AddMessage(IntToStr(groupType));  // Output: 9
+  cellGroup := ChildGroup(e);
+  if not Assigned(cellGroup) then
+    Exit;
+
+  tempGroup := FindChildGroup(cellGroup, 9, e);
+  if Assigned(tempGroup) then begin
+    grpType := GroupType(tempGroup);
+    AddMessage(IntToStr(grpType));
+  end;
 end;
 ```
 

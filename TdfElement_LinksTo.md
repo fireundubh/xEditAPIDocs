@@ -6,6 +6,8 @@
 function LinksTo: TdfElement;
 ```
 
+Access via: `element.LinksTo`
+
 ## Description
 
 Returns the element that this element links to, if it represents a reference or pointer.

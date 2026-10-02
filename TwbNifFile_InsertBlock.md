@@ -42,15 +42,19 @@ begin
   try
     nif.LoadFromFile('meshes\clutter\bucket01.nif');
 
-    rootNode := nif.RootNode;
+    rootNode := nif.BlockByType('NiNode', True);
 
-    // Insert a new node right after the root node
-    insertPos := rootNode.Index + 1;
-    newNode := nif.InsertBlock(insertPos, 'NiNode');
-    newNode.EditValues['Name'] := 'Inserted Node';
+    if Assigned(rootNode) then begin
+      // Index is a Blocks index (0 is the first block after the header)
+      insertPos := rootNode.Index + 1;
+      if insertPos >= nif.BlocksCount then
+        insertPos := rootNode.Index;
+      newNode := nif.InsertBlock(insertPos, 'NiNode');
+      newNode.EditValues['Name'] := 'Inserted Node';
 
-    AddMessage(Format('Inserted block at position %d', [insertPos]));
-    AddMessage('New block count: ' + IntToStr(nif.BlocksCount));
+      AddMessage(Format('Inserted block at position %d', [insertPos]));
+      AddMessage('New block count: ' + IntToStr(nif.BlocksCount));
+    end;
 
     nif.SaveToFile('meshes\clutter\bucket01_inserted.nif');
   finally

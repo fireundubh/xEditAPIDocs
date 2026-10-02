@@ -3,16 +3,16 @@
 ## Syntax
 
 ```pascal
-property DefaultValue: string;
+property DefaultValue: Integer;
 ```
+
+Access via: `def.DefaultValue`
 
 ## Description
 
-Returns the default value that elements created from this definition will be initialized with.
+Returns the same integer as DefaultDataSize.
 
-The DefaultValue property specifies what value new elements should have when created or when reset to defaults using SetToDefault. This is stored as a string representation but will be converted to the appropriate native type when applied to elements. For example, a float definition might have "0.0" as its default value, while an integer might have "0" or "-1".
-
-This property is read-only from script context and is configured when the definition is created.
+The script property does not return the definition's default string. Reading it yields the default data size in bytes. To see the string default applied to an element, call SetToDefault and read EditValue.
 
 ## Parameters
 
@@ -20,17 +20,17 @@ This property has no parameters.
 
 ## Returns
 
-Returns the default value as a string. May be an empty string if no default is specified.
+Returns the default data size in bytes as an integer, the same value as DefaultDataSize.
 
 ## Example
 
 ```pascal
 var
     def: TdfDef;
-    defaultVal: string;
+    dataSize: Integer;
 begin
-    defaultVal := def.DefaultValue;
-    AddMessage('Default value: ' + defaultVal);
+    dataSize := def.DefaultValue;
+    AddMessage('Default data size: ' + IntToStr(dataSize));
 end;
 ```
 

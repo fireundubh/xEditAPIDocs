@@ -10,7 +10,7 @@ function BaseRecord(AReference: IwbMainRecord): IwbMainRecord;
 
 Returns the main record linked to the `NAME` subrecord for `AReference`
 
-**Note:** `AReference` must be a main record with the signature `ACHR` (Placed NPC) or `REFR` (Placed Object).
+**Note:** A result is returned only when the record has a base-object subrecord. That covers placed references (`REFR`, `ACHR`, and the other placed types for the current game). Other records return nil.
 
 ## Parameters
 

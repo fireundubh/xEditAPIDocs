@@ -10,9 +10,7 @@ Access via: `nifFile.BlocksCount`
 
 ## Description
 
-Returns the total number of blocks in the NIF file. This includes the header, footer (if present), and all scene graph blocks.
-
-The block count represents all blocks in the file's linear block list. Blocks are indexed from 0 to BlocksCount-1. The first block (index 0) is always the header, and subsequent blocks contain nodes, geometry, properties, and other NIF data.
+Returns the number of blocks in the NIF file, excluding the header and the footer. Blocks are indexed from 0 to BlocksCount-1. Index 0 is the first scene block, not the header.
 
 This count is automatically maintained by the TwbNifFile class when blocks are added, inserted, or removed.
 

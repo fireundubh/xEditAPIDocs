@@ -10,7 +10,7 @@ procedure SetFormVersion(ARecord: IwbMainRecord; AVersion: Cardinal);
 
 Changes the native value of the `Version` property of `ARecord` to `AVersion`
 
-The `Version` property corresponds to the `Form Version` element in the Record Header.
+The `Version` property corresponds to the `Form Version` element in the Record Header. Games before Fallout 3 ignore this call.
 
 ## Parameters
 
@@ -18,6 +18,10 @@ The `Version` property corresponds to the `Form Version` element in the Record H
 |------|------|-------------|
 | ARecord | IwbMainRecord | The main record to set the form version on |
 | AVersion | Cardinal | The new form version value |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 

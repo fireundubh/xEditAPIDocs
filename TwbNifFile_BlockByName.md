@@ -20,7 +20,7 @@ This is particularly useful for:
 - Finding specific collision objects
 - Accessing named markers or attachment points
 
-The search is case-sensitive and matches the exact string.
+The search is case-sensitive and matches the Name field exactly. An empty name raises an exception instead of returning nil.
 
 ## Parameters
 

@@ -8,21 +8,30 @@ procedure CleanMasters(AFile: IwbFile);
 
 ## Description
 
-Removes master file entries that are not referenced by any records in the file.
+Removes master entries that no record in `AFile` references. For Oblivion and later, FormIDs whose master index changed are updated.
 
-This function calls the file's CleanMasters method, which scans all records to identify which masters are actually used and removes unused entries from the master list. This reduces the file's dependency footprint and can resolve load order conflicts. The operation may be slow for large files. Master order is preserved for remaining masters. Changes take effect immediately but must be saved to persist.
+The game master stays even when nothing references it. If the session requires every master of a used master, those stay too. Remaining masters keep their relative order. The change is in memory until the file is saved. Large files can take a while.
 
 ## Parameters
 
 | Name | Type | Description |
 |------|------|-------------|
-| AFile | IwbFile | The file to clean master files from |
+| AFile | IwbFile | The file whose master list is cleaned |
+
+## Returns
+
+Returns nothing.
 
 ## Example
 
 ```pascal
-f := FileByName('MyMod.esp');
-CleanMasters(f);
+var
+  f: IwbFile;
+begin
+  f := FileByIndex(0);
+  if Assigned(f) then
+    CleanMasters(f);
+end;
 ```
 
 ## See Also
@@ -30,5 +39,3 @@ CleanMasters(f);
 - [HasMaster](IwbFile_HasMaster.md)
 - [MasterCount](IwbFile_MasterCount.md)
 - [SortMasters](IwbFile_SortMasters.md)
-
-

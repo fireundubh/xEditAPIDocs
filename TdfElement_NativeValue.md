@@ -6,6 +6,8 @@
 property NativeValue: Variant;
 ```
 
+Access via: `element.NativeValue`
+
 ## Description
 
 Gets or sets the element's value in its native binary representation.

@@ -27,8 +27,12 @@ Returns the interpolated value between A and B.
 ## Example
 
 ```pascal
-f := Lerp(10, 20, 0.5);
-AddMessage(FloatToStr(f)); // Output: 15
+var
+  f: Double;
+begin
+  f := Lerp(10, 20, 0.5);
+  AddMessage(FloatToStr(f));
+end;
 ```
 
 ## See Also
